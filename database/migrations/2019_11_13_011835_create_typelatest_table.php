@@ -13,18 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cash', function (Blueprint $table) {
+        Schema::create('typelatest', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->double('buy');
-            $table->double('sell');
-            $table->double('oficial');
-            $table->unsignedBigInteger('photo_id')->default(1);
-            $table->foreign('photo_id')->references('id')->on('photos');
+            $table->string('type')->default('tipo');
+            $table->string('status')->default(1);
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cash');
+        Schema::dropIfExists('typelatest');
     }
 };

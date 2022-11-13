@@ -13,8 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('latest', function (Blueprint $table) {
-            $table->id();
+        Schema::create('latests', function (Blueprint $table) {
+            $table->id()->unique();
+            $table->string('name')->nullable();
+            $table->string('author')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('date_publication')->nullable();
+            $table->string('url')->nullable();
+            $table->unsignedBigInteger('photo_id')->default(1);
+            $table->foreign('photo_id')->references('id')->on('photos');
+            $table->unsignedBigInteger('type_id')->default(1);
+            $table->foreign('type_id')->references('id')->on('typelatest')->default(1);
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('latest');
+        Schema::dropIfExists('latests');
     }
 };

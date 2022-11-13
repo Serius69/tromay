@@ -303,7 +303,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="protect-img">
-                    <img data-cfsrc="{{ url('') }}" alt="Image" style="display:none;visibility:hidden;"><noscript><img src="{{ url('') }}" alt="Image"></noscript>
+                    <img src="{{ url('assets\img\index\cambio.jpg') }}" alt="Image">
                 </div>
             </div>
 
@@ -311,7 +311,7 @@
                 <div class="protect-content">
                     <div class="protect-title">
                         <span>Cybersecurity Protect</span>
-                        <h2>Protect your website, web server, and web application for helping you being threats from the hacker</h2>
+                        <h2>Recomendaciones al realizar cualquier transaccion</h2>
                     </div>
 
                     <div class="row">
@@ -319,8 +319,8 @@
                             <div class="single-challenges overly-one">
                                 <div class="overly-two">
                                     <i class="flaticon-database"></i>
-                                    <h3>Database Security</h3>
-                                    <p>Lorem ipsum dolor sit amet, con sectetur adipiscing elit sed do.</p>
+                                    <h3>Revisa tu cambio</h3>
+                                    <p>La empr.</p>
                                     <span class="flaticon-database"></span>
                                 </div>
                             </div>
@@ -367,7 +367,7 @@
 <!-- Eed Protect Area -->
 
 <!-- Start Testimonials Area -->
-<section class="testimonials-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
+{{-- <section class="testimonials-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
     <div class="container">
         <div class="testimonials">
             <span>What Our Customers Say</span>
@@ -426,7 +426,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- Eed Testimonials Area -->
 
 <!-- Start Partner Area -->
@@ -476,34 +476,4 @@
     </div>
 </section>
 <!-- End Blog Area -->
-
-<!-- Start Subscribe Area -->
-<section class="subscribe-area pb-100">
-    <div class="container">
-        <div class="subscribe-bg">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-sm-6">
-                    <div class="subscribe-content">
-                        <img data-cfsrc="{{ url('') }}" alt="Image" style="display:none;visibility:hidden;"><noscript><img src="{{ url('') }}" alt="Image"></noscript>
-                        <h3>Sing up for newsletter</h3>
-                        <span>Subscribe to the newsletter for all the latest updates</span>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-sm-6">
-                    <form class="newsletter-form" data-toggle="validator">
-                        <input type="email" class="form-control" placeholder="Enter email address" name="EMAIL" required autocomplete="off">
-
-                        <button class="default-btn" type="submit">
-                            Subscribe
-                        </button>
-
-                        <div id="validator-newsletter" class="form-result"></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Subscribe Area -->
 @endsection

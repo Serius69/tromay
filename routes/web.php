@@ -25,6 +25,12 @@ Route::get('/contact', function () {
 Route::get('/quote', function () {
     return view('quote');
 });
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+Route::get('/terms', function () {
+    return view('terms');
+});
 
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
 

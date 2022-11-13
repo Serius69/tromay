@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Photo;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class Cash extends Model
+class Latest extends Model
 {
     use HasFactory;
 
-    protected $table = "cash";
+    protected $table = "latests";
+
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +21,12 @@ class Cash extends Model
      */
     protected $fillable = [
         'name',
-        'buy',
-        'sell',
-        'oficial',
+        'author',
+        'description',
+        'date_publication',
+        'url',
+        'photo_id',
+        'type_id',
         'status'
     ];
 
@@ -35,4 +41,9 @@ class Cash extends Model
     {
     return $this->belongsTo(Photo::class, 'photo_id');
     }
+    public function type()
+    {
+    return $this->belongsTo(Typelatest::class, 'type_id');
+    }
+
 }
