@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Crud;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Latest;
+use DataTables;
 
-class LatestControllerCRUD extends Controller
+
+class LatestCRUDController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +19,15 @@ class LatestControllerCRUD extends Controller
 
         if ($request->ajax()) {
 
-            $data = cash::latest()->get();
+            $data = Latest::latest()->get();
 
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editcash">Edit</a>';
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editlatest">Edit</a>';
 
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deletecash">Delete</a>';
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deletelatest">Delete</a>';
 
                             return $btn;
                     })
@@ -32,7 +35,7 @@ class LatestControllerCRUD extends Controller
                     ->make(true);
         }
 
-        return view('cash.crud');
+        return view('latest.crud');
     }
 
     /**
@@ -43,8 +46,8 @@ class LatestControllerCRUD extends Controller
      */
     public function store(Request $request)
     {
-        cash::updateOrCreate([
-                    'id' => $request->cash_id
+        latest::updateOrCreate([
+                    'id' => $request->latest_id
                 ],
                 [
                     'fullname' => $request->name,
@@ -54,30 +57,30 @@ class LatestControllerCRUD extends Controller
                     'ocupation' => $request->inventory
                 ]);
 
-        return response()->json(['success'=>'cash saved successfully.']);
+        return response()->json(['success'=>'latest saved successfully.']);
     }
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\cash  $cash
+     * @param  \App\latest  $latest
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $cash = cash::find($id);
-        return response()->json($cash);
+        $latest = latest::find($id);
+        return response()->json($latest);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\cash  $cash
+     * @param  \App\latest  $latest
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        cash::find($id)->delete();
+        latest::find($id)->delete();
 
-        return response()->json(['success'=>'cash deleted successfully.']);
+        return response()->json(['success'=>'latest deleted successfully.']);
     }
 }

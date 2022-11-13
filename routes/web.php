@@ -54,4 +54,4 @@ Route::resource('noticia', LatestController::class);
 Route::resource('dinero', CashController::class);
 //CRUD
 Route::resource('latests', LatestCRUDController::class);
-Route::resource('events', EventCRUDController::class);
+Route::resource('cashs', CashCRUDController::class);

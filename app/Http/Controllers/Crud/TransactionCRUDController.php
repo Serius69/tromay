@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Crud;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Cash;
+use App\Models\Transaction;
 use DataTables;
 
-class CashControllerCRUD extends Controller
+
+class TransactionCRUDController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +19,15 @@ class CashControllerCRUD extends Controller
 
         if ($request->ajax()) {
 
-            $data = cash::latest()->get();
+            $data = Transaction::latest()->get();
 
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editcash">Edit</a>';
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm edittransaction">Edit</a>';
 
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deletecash">Delete</a>';
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deletetransaction">Delete</a>';
 
                             return $btn;
                     })
@@ -34,7 +35,7 @@ class CashControllerCRUD extends Controller
                     ->make(true);
         }
 
-        return view('cash.crud');
+        return view('transaction.crud');
     }
 
     /**
@@ -45,8 +46,8 @@ class CashControllerCRUD extends Controller
      */
     public function store(Request $request)
     {
-        cash::updateOrCreate([
-                    'id' => $request->cash_id
+        transaction::updateOrCreate([
+                    'id' => $request->transaction_id
                 ],
                 [
                     'fullname' => $request->name,
@@ -56,30 +57,30 @@ class CashControllerCRUD extends Controller
                     'ocupation' => $request->inventory
                 ]);
 
-        return response()->json(['success'=>'cash saved successfully.']);
+        return response()->json(['success'=>'transaction saved successfully.']);
     }
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\cash  $cash
+     * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $cash = cash::find($id);
-        return response()->json($cash);
+        $transaction = Transaction::find($id);
+        return response()->json($transaction);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\cash  $cash
+     * @param  \App\transaction  $transaction
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        cash::find($id)->delete();
+        transaction::find($id)->delete();
 
-        return response()->json(['success'=>'cash deleted successfully.']);
+        return response()->json(['success'=>'transaction deleted successfully.']);
     }
 }

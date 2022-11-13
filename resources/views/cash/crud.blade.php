@@ -1,160 +1,130 @@
-@extends('layout.master')
+@extends('layout.masteradmin')
 @section('body')
 
 
-<div class="row">
-    <div class="col-md-12">
-      <h1>Simple Laravel CRUD Ajax</h1>
-    </div>
-  </div>
+<div class="page-content">
+    <div class="container-fluid">
 
-  <div class="row">
-    <div class="table table-responsive">
-      <table class="table table-bordered" id="table">
-        <tr>
-          <th width="150px">No</th>
-          <th>Title</th>
-          <th>Body</th>
-          <th>Create At</th>
-          <th class="text-center" width="150px">
-            <a href="#" class="create-modal btn btn-success btn-sm">
-              <i class="glyphicon glyphicon-plus"></i>
-            </a>
-          </th>
-        </tr>
-        {{ csrf_field() }}
-        <?php  $no=1; ?>
-        @foreach ($post as $value)
-          <tr class="post{{$value->id}}">
-            <td>{{ $no++ }}</td>
-            <td>{{ $value->title }}</td>
-            <td>{{ $value->body }}</td>
-            <td>{{ $value->created_at }}</td>
-            <td>
-              <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-title="{{$value->title}}" data-body="{{$value->body}}">
-                <i class="fa fa-eye"></i>
-              </a>
-              <a href="#" class="edit-modal btn btn-warning btn-sm" data-id="{{$value->id}}" data-title="{{$value->title}}" data-body="{{$value->body}}">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </a>
-              <a href="#" class="delete-modal btn btn-danger btn-sm" data-id="{{$value->id}}" data-title="{{$value->title}}" data-body="{{$value->body}}">
-                <i class="glyphicon glyphicon-trash"></i>
-              </a>
-            </td>
-          </tr>
-        @endforeach
-      </table>
-    </div>
-    {{$post->links()}}
-  </div>
-  {{-- Modal Form Create Post --}}
-  <div id="create" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Listjs</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                    <li class="breadcrumb-item active">Listjs</li>
+                </ol>
+            </div>
+
         </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="form">
-            <div class="form-group row add">
-              <label class="control-label col-sm-2" for="title">Title :</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="title" name="title"
-                placeholder="Your Title Here" required>
-                <p class="error text-center alert alert-danger hidden"></p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-2" for="body">Body :</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="body" name="body"
-                placeholder="Your Body Here" required>
-                <p class="error text-center alert alert-danger hidden"></p>
-              </div>
-            </div>
-          </form>
-        </div>
-            <div class="modal-footer">
-              <button class="btn btn-warning" type="submit" id="add">
-                <span class="glyphicon glyphicon-plus"></span>Save Post
-              </button>
-              <button class="btn btn-warning" type="button" data-dismiss="modal">
-                <span class="glyphicon glyphicon-remobe"></span>Close
-              </button>
-            </div>
-      </div>
     </div>
-  </div></div>
-  {{-- Modal Form Show POST --}}
-  <div id="show" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title"></h4>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Add, Edit & Remove</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+                            <div>
+                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add</button>
+                                <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="d-flex justify-content-sm-end">
+                                <div class="search-box ms-2">
+                                    <input type="text" class="form-control search" placeholder="Search...">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                      <div class="modal-body">
-                      <div class="form-group">
-                        <label for="">ID :</label>
-                        <b id="i"/>
-                      </div>
-                      <div class="form-group">
-                        <label for="">Title :</label>
-                        <b id="ti"/>
-                      </div>
-                      <div class="form-group">
-                        <label for="">Body :</label>
-                        <b id="by"/>
-                      </div>
-                      </div>
-                      </div>
+
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table align-middle table-nowrap" id="customerTable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" style="width: 50px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="checkAll" value="option">
+                                        </div>
+                                    </th>
+                                    <th class="sort" data-sort="customer_name">Customer</th>
+                                    <th class="sort" data-sort="email">Email</th>
+                                    <th class="sort" data-sort="phone">Phone</th>
+                                    <th class="sort" data-sort="date">Joining Date</th>
+                                    <th class="sort" data-sort="status">Delivery Status</th>
+                                    <th class="sort" data-sort="action">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list form-check-all">
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
+                                        </div>
+                                    </th>
+                                    <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                    <td class="customer_name">Mary Cousar</td>
+                                    <td class="email">marycousar@velzon.com</td>
+                                    <td class="phone">580-464-4694</td>
+                                    <td class="date">06 Apr, 2021</td>
+                                    <td class="status"><span class="badge badge-soft-success text-uppercase">Active</span></td>
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            <div class="edit">
+                                                <button class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
+                                            </div>
+                                            <div class="remove">
+                                                <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Remove</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="noresult" style="display: none">
+                            <div class="text-center">
+                                <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px">
+                                </lord-icon>
+                                <h5 class="mt-2">Sorry! No Result Found</h5>
+                                <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any
+                                    orders for you search.</p>
+                            </div>
+                        </div>
                     </div>
-  </div>
-  {{-- Modal Form Edit and Delete Post --}}
-  <div id="myModal"class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
+
+                    <div class="d-flex justify-content-end">
+                        <div class="pagination-wrap hstack gap-2">
+                            <a class="page-item pagination-prev disabled" href="#">
+                                Previous
+                            </a>
+                            <ul class="pagination listjs-pagination mb-0"></ul>
+                            <a class="page-item pagination-next" href="#">
+                                Next
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end card -->
         </div>
-        <div class="modal-body">
-          <form class="form-horizontal" role="modal">
-            <div class="form-group">
-              <label class="control-label col-sm-2"for="id">ID</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="fid" disabled>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-2"for="title">Title</label>
-              <div class="col-sm-10">
-              <input type="name" class="form-control" id="t">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-2"for="body">Body</label>
-              <div class="col-sm-10">
-              <textarea type="name" class="form-control" id="b"></textarea>
-              </div>
-            </div>
-          </form>
-                  {{-- Form Delete Post --}}
-          <div class="deleteContent">
-            Are You sure want to delete <span class="title"></span>?
-            <span class="hidden id"></span>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn actionBtn" data-dismiss="modal">
-            <span id="footer_action_button" class="glyphicon"></span>
-          </button>
-          <button type="button" class="btn btn-warning" data-dismiss="modal">
-            <span class="glyphicon glyphicon"></span>close
-          </button>
-        </div>
-      </div>
+        <!-- end col -->
     </div>
-  </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+    </div>
+</div>
+
+
 @endsection
