@@ -199,31 +199,36 @@
 <section class="services-area pt-100 pb-70">
     <div class="container">
         <div class="section-title">
-            <span>Cybersecurity Services</span>
+            <span>Cotizaciones divisas</span>
             <h2>Monedas extranjeras que puedes cambiar en una de nuestras sucursales.</h2>
         </div>
 
         <div class="row">
             <div class="col-lg-3 col-sm-6">
+                @foreach ($cashs as $cash )
+                @if(($cash->status)==1)
                 <div class="single-services">
                     <div class="services-img">
-                        <a href="{{ url('') }}">
-                            <img src="{{ url('assets\img\cash\dolar.jpg') }}" alt="Image" ></noscript>
+                        <a href="{{ route('dinero.show',$cash->id) }}">
+                            <img src="{{ url('img/noticias/'.$cash->photo->path) }}" alt="Image" ></noscript>
                         </a>
                     </div>
 
                     <div class="services-content">
-                        <h3><a href="{{ url('') }}">Dolar Estadounidense</a></h3>
+                        <h3><a href="{{ route('dinero.show',$cash->id) }}">{{ $cash->name }}</a></h3>
                         <div class="content">
-                            <p>Tipo de Cambio</p>
-
-                            <a href="{{ url('') }}" class="read-more">
+                            <p>Compra: {{ $cash->buy }}</p>
+                            <p>Venta: {{ $cash->sell }}</p>
+                            <p>Oficial: {{ $cash->oficial }}</p>
+                            <a href="{{ route('dinero.show',$cash->id) }}" class="read-more">
                                 Saber Mas
                                 <i class="flaticon-right-arrow"></i>
                             </a>
                         </div>
                     </div>
                 </div>
+                @endif
+                @endforeach
             </div>
         </div>
     </div>
@@ -453,24 +458,57 @@
 
         <div class="row">
             <div class="col-lg-4 col-md-6">
+                @foreach ($latests as $latest )
+                    @if(($latest->status)==1)
                 <div class="single-blog">
                     <div class="blog-img">
-                        <a href="{{ url('') }}">
-                            <img src="{{ url('') }}" alt="Image"></noscript>
+                        <a href="{{ route('noticia.show',$latest->id) }}">
+                            <img src="{{ url('img/noticias/'.$latest->photo->path) }}" alt="Image"></noscript>
                         </a>
                     </div>
 
                     <div class="blog-content">
-                        <span>January 20, 2021</span>
-                        <h3><a href="{{ url('') }}">Secure The Network</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <span>
+                            <?php $mes = date('m', strtotime($latest->date_publication)); ?>
+                                    @if ($mes == '01')
+                                        Ene
+                                    @elseif($mes == '02')
+                                        Feb
+                                    @elseif($mes == '03')
+                                        Mar
+                                    @elseif($mes == '04')
+                                        Abr
+                                    @elseif($mes == '05')
+                                        May
+                                    @elseif($mes == '06')
+                                        Jun
+                                    @elseif($mes == '07')
+                                        Jul
+                                    @elseif($mes == '08')
+                                        Ago
+                                    @elseif($mes == '09')
+                                        Sep
+                                    @elseif($mes == '10')
+                                        Oct
+                                    @elseif($mes == '11')
+                                        Nov
+                                    @elseif($mes == '12')
+                                        Dic
+                                    @else
+                                    @endif
 
-                        <a href="{{ url('') }}" class="read-more">
+                        </span>
+                        <h3><a href="{{ route('noticia.show',$latest->id) }}">{{ $latest->name }}</a></h3>
+                        <p>{{ $latest->description }}</p>
+
+                        <a href="{{ route('noticia.show',$latest->id) }}" class="read-more">
                             Saber Mas
                             <i class="flaticon-right-arrow"></i>
                         </a>
                     </div>
                 </div>
+                @endif
+                @endforeach
             </div>
         </div>
     </div>

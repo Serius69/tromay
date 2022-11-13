@@ -1,21 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CashController;
+use App\Http\Controllers\LatestController;
 /*
 |--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| CRUD
 |
 */
+use App\Http\Controllers\Crud\LatestCRUDController;
+use App\Http\Controllers\Crud\CashCRUDController;
+use App\Http\Controllers\Crud\TransactionCRUDController;
 
-Route::get('/', function () {
-    return view('index');
+
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/',  '__invoke');
+    Route::get('/admin',  'admin');
 });
+
 Route::get('/about', function () {
     return view('about');
 });
@@ -32,17 +35,22 @@ Route::get('/terms', function () {
     return view('terms');
 });
 
-    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    // Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
 
-     Route::controller(CashController::class)->group(function(){
-         Route::get('cash', 'crud');
-     });
+     Route::controller(CashCRUDController::class)->group(function(){
+        Route::get('admin/cash', 'index');
+    });
+    Route::controller(TransactionCRUDController::class)->group(function(){
+        Route::get('admin/transaction', 'index');
+    });
+    Route::controller(LatestCRUDController::class)->group(function(){
+        Route::get('admin/latest', 'index');
+    });
 
 
 //Para vista del usuario
 Route::resource('noticia', LatestController::class);
-Route::resource('proyecto', CashController::class);
-Route::resource('evento', EventController::class);
+Route::resource('dinero', CashController::class);
 //CRUD
 Route::resource('latests', LatestCRUDController::class);
 Route::resource('events', EventCRUDController::class);

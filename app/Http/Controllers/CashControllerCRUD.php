@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Cash;
+use DataTables;
 
 class CashControllerCRUD extends Controller
 {
@@ -17,15 +18,15 @@ class CashControllerCRUD extends Controller
 
         if ($request->ajax()) {
 
-            $data = Client::latest()->get();
+            $data = cash::latest()->get();
 
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editClient">Edit</a>';
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editcash">Edit</a>';
 
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteClient">Delete</a>';
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deletecash">Delete</a>';
 
                             return $btn;
                     })
@@ -33,7 +34,7 @@ class CashControllerCRUD extends Controller
                     ->make(true);
         }
 
-        return view('client.crud');
+        return view('cash.crud');
     }
 
     /**
@@ -44,8 +45,8 @@ class CashControllerCRUD extends Controller
      */
     public function store(Request $request)
     {
-        Client::updateOrCreate([
-                    'id' => $request->Client_id
+        cash::updateOrCreate([
+                    'id' => $request->cash_id
                 ],
                 [
                     'fullname' => $request->name,
@@ -55,30 +56,30 @@ class CashControllerCRUD extends Controller
                     'ocupation' => $request->inventory
                 ]);
 
-        return response()->json(['success'=>'Client saved successfully.']);
+        return response()->json(['success'=>'cash saved successfully.']);
     }
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Client  $Client
+     * @param  \App\cash  $cash
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $Client = Client::find($id);
-        return response()->json($Client);
+        $cash = cash::find($id);
+        return response()->json($cash);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Client  $Client
+     * @param  \App\cash  $cash
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
+        cash::find($id)->delete();
 
-        return response()->json(['success'=>'Client deleted successfully.']);
+        return response()->json(['success'=>'cash deleted successfully.']);
     }
 }
