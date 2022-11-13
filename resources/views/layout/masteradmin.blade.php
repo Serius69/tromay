@@ -1108,7 +1108,7 @@
     <script src="{{ url('assets2/libs/node-waves/waves.min.js')}}"></script>
     <script src="{{ url('assets2/libs/feather-icons/feather.min.js')}}"></script>
     <script src="{{ url('assets2/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
-    <script src="{{ url('assets2/js/plugins.js')}}"></script>
+    <script src="{{ url('assets2/js/plugins.js')}}"></script> 
 
     <!-- prismjs plugin -->
     <script src="{{ url('assets2/libs/prismjs/prism.js')}}"></script>
