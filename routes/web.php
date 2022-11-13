@@ -19,14 +19,15 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/admin',  'admin');
 });
 
+Route::controller(CashController::class)->group(function(){
+    Route::get('/quote',  'quote');
+});
+
 Route::get('/about', function () {
     return view('about');
 });
 Route::get('/contact', function () {
     return view('contact');
-});
-Route::get('/quote', function () {
-    return view('quote');
 });
 Route::get('/privacy', function () {
     return view('privacy');

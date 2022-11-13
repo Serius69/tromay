@@ -16,7 +16,8 @@ class HomeController extends Controller
     public function __invoke(){
         $data = [
             'cashs'  => Cash::orderBy('id','asc')->paginate(10),
-            'latests'   => Latest::orderBy('date_publication','desc')->paginate(3)        ];
+            'latests'   => Latest::orderBy('date_publication','desc')->paginate(3)
+        ];
 
         return view('index',$data);
    }

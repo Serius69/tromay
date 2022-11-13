@@ -2,23 +2,23 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
 <head>
     <meta charset="utf-8" />
-    <title>CRM | Velzon - Admin & Dashboard Template</title>
+    <title>Tromay | ADMIN </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets2/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ url('assets2/images/favicon.ico') }}">
 
     <!-- Layout config Js -->
     <script src="assets2/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="assets2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets2/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="assets2/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets2/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets2/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets2/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
-    <link href="assets2/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets2/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -32,7 +32,7 @@
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box horizontal-logo">
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="index.') }}" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="assets2/images/logo-sm.png" alt="" height="22">
                         </span>
@@ -41,7 +41,7 @@
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light">
+                    <a href="index.') }}" class="logo logo-light">
                         <span class="logo-sm">
                             <img src="assets2/images/logo-sm.png" alt="" height="22">
                         </span>
@@ -74,8 +74,8 @@
                             </div>
 
                             <div class="dropdown-item bg-transparent text-wrap">
-                                <a href="index.html" class="btn btn-soft-secondary btn-sm btn-rounded">how to setup <i class="mdi mdi-magnify ms-1"></i></a>
-                                <a href="index.html" class="btn btn-soft-secondary btn-sm btn-rounded">buttons <i class="mdi mdi-magnify ms-1"></i></a>
+                                <a href="index.') }}" class="btn btn-soft-secondary btn-sm btn-rounded">how to setup <i class="mdi mdi-magnify ms-1"></i></a>
+                                <a href="index.') }}" class="btn btn-soft-secondary btn-sm btn-rounded">buttons <i class="mdi mdi-magnify ms-1"></i></a>
                             </div>
                             <!-- item-->
                             <div class="dropdown-header mt-2">
@@ -140,7 +140,7 @@
                         </div>
 
                         <div class="text-center pt-3 pb-1">
-                            <a href="pages-search-results.html" class="btn btn-primary btn-sm">View All Results <i class="ri-arrow-right-line ms-1"></i></a>
+                            <a href="pages-search-results.') }}" class="btn btn-primary btn-sm">View All Results <i class="ri-arrow-right-line ms-1"></i></a>
                         </div>
                     </div>
                 </form>
@@ -302,14 +302,14 @@
                                         </div>
                                     </div>
                                     <h5 class="mb-3">Your Cart is Empty!</h5>
-                                    <a href="apps-ecommerce-products.html" class="btn btn-success w-md mb-3">Shop Now</a>
+                                    <a href="{{ url('') }}" class="btn btn-success w-md mb-3">Shop Now</a>
                                 </div>
                                 <div class="d-block dropdown-item dropdown-item-cart text-wrap px-3 py-2">
                                     <div class="d-flex align-items-center">
                                         <img src="assets2/images/products/img-1.png" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-1">
                                             <h6 class="mt-0 mb-1 fs-14">
-                                                <a href="apps-ecommerce-product-details.html" class="text-reset">Branded
+                                                <a href="{{ url('') }}" class="text-reset">Branded
                                                     T-Shirts</a>
                                             </h6>
                                             <p class="mb-0 fs-12 text-muted">
@@ -330,7 +330,7 @@
                                         <img src="assets2/images/products/img-2.png" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-1">
                                             <h6 class="mt-0 mb-1 fs-14">
-                                                <a href="apps-ecommerce-product-details.html" class="text-reset">Bentwood Chair</a>
+                                                <a href="{{ url('') }}" class="text-reset">Bentwood Chair</a>
                                             </h6>
                                             <p class="mb-0 fs-12 text-muted">
                                                 Quantity: <span>5 x $18</span>
@@ -350,7 +350,7 @@
                                         <img src="assets2/images/products/img-3.png" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-1">
                                             <h6 class="mt-0 mb-1 fs-14">
-                                                <a href="apps-ecommerce-product-details.html" class="text-reset">
+                                                <a href="{{ url('') }}" class="text-reset">
                                                     Borosil Paper Cup</a>
                                             </h6>
                                             <p class="mb-0 fs-12 text-muted">
@@ -371,7 +371,7 @@
                                         <img src="assets2/images/products/img-6.png" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-1">
                                             <h6 class="mt-0 mb-1 fs-14">
-                                                <a href="apps-ecommerce-product-details.html" class="text-reset">Gray
+                                                <a href="{{ url('') }}" class="text-reset">Gray
                                                     Styled T-Shirt</a>
                                             </h6>
                                             <p class="mb-0 fs-12 text-muted">
@@ -392,7 +392,7 @@
                                         <img src="assets2/images/products/img-5.png" class="me-3 rounded-circle avatar-sm p-2 bg-light" alt="user-pic">
                                         <div class="flex-1">
                                             <h6 class="mt-0 mb-1 fs-14">
-                                                <a href="apps-ecommerce-product-details.html" class="text-reset">Stillbird Helmet</a>
+                                                <a href="{{ url('') }}" class="text-reset">Stillbird Helmet</a>
                                             </h6>
                                             <p class="mb-0 fs-12 text-muted">
                                                 Quantity: <span>2 x $495</span>
@@ -416,7 +416,7 @@
                                 </div>
                             </div>
 
-                            <a href="apps-ecommerce-checkout.html" class="btn btn-success text-center w-100">
+                            <a href="{{ url('apps-ecommerce-checkout.') }}" class="btn btn-success text-center w-100">
                                 Checkout
                             </a>
                         </div>
@@ -713,15 +713,15 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
                         <h6 class="dropdown-header">Welcome Anna!</h6>
-                        <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
-                        <a class="dropdown-item" href="apps-chat.html"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a>
-                        <a class="dropdown-item" href="apps-tasks-kanban.html"><i class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a>
-                        <a class="dropdown-item" href="pages-faqs.html"><i class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Help</span></a>
+                        <a class="dropdown-item" href="pages-profile.') }}"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
+                        <a class="dropdown-item" href="{{ url('apps-chat.html') }}"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a>
+                        <a class="dropdown-item" href="{{ url('apps-tasks-kanban.html') }}"><i class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a>
+                        <a class="dropdown-item" href="pages-faqs.') }}"><i class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Help</span></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$5971.67</b></span></a>
-                        <a class="dropdown-item" href="pages-profile-settings.html"><span class="badge bg-soft-success text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a>
-                        <a class="dropdown-item" href="auth-lockscreen-basic.html"><i class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Lock screen</span></a>
-                        <a class="dropdown-item" href="auth-logout-basic.html"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+                        <a class="dropdown-item" href="pages-profile.') }}"><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$5971.67</b></span></a>
+                        <a class="dropdown-item" href="pages-profile-settings.') }}"><span class="badge bg-soft-success text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a>
+                        <a class="dropdown-item" href="{{ url('auth-lockscreen-basic.') }}"><i class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Lock screen</span></a>
+                        <a class="dropdown-item" href="{{ url('auth-logout-basic.') }}"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
                     </div>
                 </div>
             </div>
@@ -734,7 +734,7 @@
             <!-- LOGO -->
             <div class="navbar-brand-box">
                 <!-- Dark Logo-->
-                <a href="index.html" class="logo logo-dark">
+                <a href="index.') }}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="assets2/images/logo-sm.png" alt="" height="22">
                     </span>
@@ -743,7 +743,7 @@
                     </span>
                 </a>
                 <!-- Light Logo-->
-                <a href="index.html" class="logo logo-light">
+                <a href="index.') }}" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="assets2/images/logo-sm.png" alt="" height="22">
                     </span>
@@ -770,22 +770,22 @@
                             <div class="collapse menu-dropdown" id="sidebarDashboards">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics"> Analytics </a>
+                                        <a href="dashboard-analytics.') }}" class="nav-link" data-key="t-analytics"> Analytics </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> CRM </a>
+                                        <a href="dashboard-crm.') }}" class="nav-link" data-key="t-crm"> CRM </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.html" class="nav-link" data-key="t-ecommerce"> Ecommerce </a>
+                                        <a href="index.') }}" class="nav-link" data-key="t-ecommerce"> Ecommerce </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="dashboard-crypto.html" class="nav-link" data-key="t-crypto"> Crypto </a>
+                                        <a href="dashboard-crypto.') }}" class="nav-link" data-key="t-crypto"> Crypto </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="dashboard-projects.html" class="nav-link" data-key="t-projects"> Projects </a>
+                                        <a href="dashboard-projects.') }}" class="nav-link" data-key="t-projects"> Projects </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="dashboard-nft.html" class="nav-link" data-key="t-nft"> NFT</a>
+                                        <a href="dashboard-nft.') }}" class="nav-link" data-key="t-nft"> NFT</a>
                                     </li>
                                 </ul>
                             </div>
@@ -797,10 +797,10 @@
                             <div class="collapse menu-dropdown" id="sidebarApps">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="apps-calendar.html" class="nav-link" data-key="t-calendar"> Calendar </a>
+                                        <a href="{{ url('apps-calendar.') }}" class="nav-link" data-key="t-calendar"> Calendar </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="apps-chat.html" class="nav-link" data-key="t-chat"> Chat </a>
+                                        <a href="{{ url('apps-chat.') }}" class="nav-link" data-key="t-chat"> Chat </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarEmail" data-key="t-email">
@@ -809,7 +809,7 @@
                                         <div class="collapse menu-dropdown" id="sidebarEmail">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="apps-mailbox.html" class="nav-link" data-key="t-mailbox"> Mailbox </a>
+                                                    <a href="{{ url('apps-mailbox.') }}" class="nav-link" data-key="t-mailbox"> Mailbox </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="#sidebaremailTemplates" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebaremailTemplates" data-key="t-email-templates">
@@ -818,10 +818,10 @@
                                                     <div class="collapse menu-dropdown" id="sidebaremailTemplates">
                                                         <ul class="nav nav-sm flex-column">
                                                             <li class="nav-item">
-                                                                <a href="apps-email-basic.html" class="nav-link" data-key="t-basic-action"> Basic Action </a>
+                                                                <a href="{{ url('apps-email-basic.') }}" class="nav-link" data-key="t-basic-action"> Basic Action </a>
                                                             </li>
                                                             <li class="nav-item">
-                                                                <a href="apps-email-ecommerce.html" class="nav-link" data-key="t-ecommerce-action"> Ecommerce Action </a>
+                                                                <a href="{{ url('apps-email-ecommerce.') }}" class="nav-link" data-key="t-ecommerce-action"> Ecommerce Action </a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -835,34 +835,34 @@
                                         <div class="collapse menu-dropdown" id="sidebarEcommerce">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-products.html" class="nav-link" data-key="t-products"> Products </a>
+                                                    <a href="{{ url('apps-ecommerce-products.') }}" class="nav-link" data-key="t-products"> Products </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-product-details.html" class="nav-link" data-key="t-product-Details"> Product Details </a>
+                                                    <a href="{{ url('') }}" class="nav-link" data-key="t-product-Details"> Product Details </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-add-product.html" class="nav-link" data-key="t-create-product"> Create Product </a>
+                                                    <a href="{{ url('apps-ecommerce-add-product.') }}" class="nav-link" data-key="t-create-product"> Create Product </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-orders.html" class="nav-link" data-key="t-orders"> Orders </a>
+                                                    <a href="{{ url('apps-ecommerce-orders.') }}" class="nav-link" data-key="t-orders"> Orders </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-order-details.html" class="nav-link" data-key="t-order-details"> Order Details </a>
+                                                    <a href="{{ url('apps-ecommerce-order-details.') }}" class="nav-link" data-key="t-order-details"> Order Details </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-customers.html" class="nav-link" data-key="t-customers"> Customers </a>
+                                                    <a href="{{ url('apps-ecommerce-customers.') }}" class="nav-link" data-key="t-customers"> Customers </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-cart.html" class="nav-link" data-key="t-shopping-cart"> Shopping Cart </a>
+                                                    <a href="{{ url('apps-ecommerce-cart.') }}" class="nav-link" data-key="t-shopping-cart"> Shopping Cart </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-checkout.html" class="nav-link" data-key="t-checkout"> Checkout </a>
+                                                    <a href="{{ url('apps-ecommerce-checkout.') }}" class="nav-link" data-key="t-checkout"> Checkout </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-sellers.html" class="nav-link" data-key="t-sellers"> Sellers </a>
+                                                    <a href="{{ url('apps-ecommerce-sellers.') }}" class="nav-link" data-key="t-sellers"> Sellers </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-ecommerce-seller-details.html" class="nav-link" data-key="t-sellers-details"> Seller Details </a>
+                                                    <a href="{{ url('apps-ecommerce-seller-details.') }}" class="nav-link" data-key="t-sellers-details"> Seller Details </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -873,13 +873,13 @@
                                         <div class="collapse menu-dropdown" id="sidebarProjects">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="apps-projects-list.html" class="nav-link" data-key="t-list"> List </a>
+                                                    <a href="{{ url('apps-projects-list.') }}" class="nav-link" data-key="t-list"> List </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-projects-overview.html" class="nav-link" data-key="t-overview"> Overview </a>
+                                                    <a href="{{ url('apps-projects-overview.') }}" class="nav-link" data-key="t-overview"> Overview </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-projects-create.html" class="nav-link" data-key="t-create-project"> Create Project </a>
+                                                    <a href="{{ url('apps-projects-create.') }}" class="nav-link" data-key="t-create-project"> Create Project </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -890,13 +890,13 @@
                                         <div class="collapse menu-dropdown" id="sidebarTasks">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="apps-tasks-kanban.html" class="nav-link" data-key="t-kanbanboard"> Kanban Board </a>
+                                                    <a href="{{ url('apps-tasks-kanban.') }}" class="nav-link" data-key="t-kanbanboard"> Kanban Board </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-tasks-list-view.html" class="nav-link" data-key="t-list-view"> List View </a>
+                                                    <a href="{{ url('apps-tasks-list-view.') }}" class="nav-link" data-key="t-list-view"> List View </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-tasks-details.html" class="nav-link" data-key="t-task-details"> Task Details </a>
+                                                    <a href="{{ url('apps-tasks-details.') }}" class="nav-link" data-key="t-task-details"> Task Details </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -907,16 +907,16 @@
                                         <div class="collapse menu-dropdown" id="sidebarCRM">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="apps-crm-contacts.html" class="nav-link" data-key="t-contacts"> Contacts </a>
+                                                    <a href="{{ url('apps-crm-contacts.') }}" class="nav-link" data-key="t-contacts"> Contacts </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-crm-companies.html" class="nav-link" data-key="t-companies"> Companies </a>
+                                                    <a href="{{ url('apps-crm-companies.') }}" class="nav-link" data-key="t-companies"> Companies </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-crm-deals.html" class="nav-link" data-key="t-deals"> Deals </a>
+                                                    <a href="{{ url('apps-crm-deals.') }}" class="nav-link" data-key="t-deals"> Deals </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-crm-leads.html" class="nav-link" data-key="t-leads"> Leads </a>
+                                                    <a href="{{ url('apps-crm-leads.') }}" class="nav-link" data-key="t-leads"> Leads </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -927,22 +927,22 @@
                                         <div class="collapse menu-dropdown" id="sidebarCrypto">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="apps-crypto-transactions.html" class="nav-link" data-key="t-transactions"> Transactions </a>
+                                                    <a href="{{ url('apps-crypto-transactions.') }}" class="nav-link" data-key="t-transactions"> Transactions </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-crypto-buy-sell.html" class="nav-link" data-key="t-buy-sell"> Buy & Sell </a>
+                                                    <a href="{{ url('apps-crypto-buy-sell.') }}" class="nav-link" data-key="t-buy-sell"> Buy & Sell </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-crypto-orders.html" class="nav-link" data-key="t-orders"> Orders </a>
+                                                    <a href="{{ url('apps-crypto-orders.') }}" class="nav-link" data-key="t-orders"> Orders </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-crypto-wallet.html" class="nav-link" data-key="t-my-wallet"> My Wallet </a>
+                                                    <a href="{{ url('apps-crypto-wallet.') }}" class="nav-link" data-key="t-my-wallet"> My Wallet </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-crypto-ico.html" class="nav-link" data-key="t-ico-list"> ICO List </a>
+                                                    <a href="{{ url('apps-crypto-ico.') }}" class="nav-link" data-key="t-ico-list"> ICO List </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-crypto-kyc.html" class="nav-link" data-key="t-kyc-application"> KYC Application </a>
+                                                    <a href="{{ url('apps-crypto-kyc.') }}" class="nav-link" data-key="t-kyc-application"> KYC Application </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -953,13 +953,13 @@
                                         <div class="collapse menu-dropdown" id="sidebarInvoices">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="apps-invoices-list.html" class="nav-link" data-key="t-list-view"> List View </a>
+                                                    <a href="{{ url('apps-invoices-list.') }}" class="nav-link" data-key="t-list-view"> List View </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-invoices-details.html" class="nav-link" data-key="t-details"> Details </a>
+                                                    <a href="{{ url('apps-invoices-details.') }}" class="nav-link" data-key="t-details"> Details </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-invoices-create.html" class="nav-link" data-key="t-create-invoice"> Create Invoice </a>
+                                                    <a href="{{ url('apps-invoices-create.') }}" class="nav-link" data-key="t-create-invoice"> Create Invoice </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -970,10 +970,10 @@
                                         <div class="collapse menu-dropdown" id="sidebarTickets">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="apps-tickets-list.html" class="nav-link" data-key="t-list-view"> List View </a>
+                                                    <a href="{{ url('apps-tickets-list.') }}" class="nav-link" data-key="t-list-view"> List View </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-tickets-details.html" class="nav-link" data-key="t-ticket-details"> Ticket Details </a>
+                                                    <a href="{{ url('apps-tickets-details.') }}" class="nav-link" data-key="t-ticket-details"> Ticket Details </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -985,40 +985,40 @@
                                         <div class="collapse menu-dropdown" id="sidebarnft">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="apps-nft-marketplace.html" class="nav-link" data-key="t-marketplace"> Marketplace </a>
+                                                    <a href="{{ url('apps-nft-marketplace.') }}" class="nav-link" data-key="t-marketplace"> Marketplace </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-nft-explore.html" class="nav-link" data-key="t-explore-now"> Explore Now </a>
+                                                    <a href="{{ url('apps-nft-explore.') }}" class="nav-link" data-key="t-explore-now"> Explore Now </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-nft-auction.html" class="nav-link" data-key="t-live-auction"> Live Auction </a>
+                                                    <a href="{{ url('apps-nft-auction.') }}" class="nav-link" data-key="t-live-auction"> Live Auction </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-nft-item-details.html" class="nav-link" data-key="t-item-details"> Item Details </a>
+                                                    <a href="{{ url('apps-nft-item-details.') }}" class="nav-link" data-key="t-item-details"> Item Details </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-nft-collections.html" class="nav-link" data-key="t-collections"> Collections </a>
+                                                    <a href="{{ url('apps-nft-collections.') }}" class="nav-link" data-key="t-collections"> Collections </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-nft-creators.html" class="nav-link" data-key="t-creators"> Creators </a>
+                                                    <a href="{{ url('apps-nft-creators.') }}" class="nav-link" data-key="t-creators"> Creators </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-nft-ranking.html" class="nav-link" data-key="t-ranking"> Ranking </a>
+                                                    <a href="{{ url('apps-nft-ranking.') }}" class="nav-link" data-key="t-ranking"> Ranking </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-nft-wallet.html" class="nav-link" data-key="t-wallet-connect"> Wallet Connect </a>
+                                                    <a href="{{ url('apps-nft-wallet.') }}" class="nav-link" data-key="t-wallet-connect"> Wallet Connect </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="apps-nft-create.html" class="nav-link" data-key="t-create-nft"> Create NFT </a>
+                                                    <a href="{{ url('apps-nft-create.') }}" class="nav-link" data-key="t-create-nft"> Create NFT </a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="apps-file-manager.html" class="nav-link"> <span data-key="t-file-manager">File Manager</span> <span class="badge badge-pill bg-danger" data-key="t-new">New</span></a>
+                                        <a href="{{ url('apps-file-manager.') }}" class="nav-link"> <span data-key="t-file-manager">File Manager</span> <span class="badge badge-pill bg-danger" data-key="t-new">New</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="apps-todo.html" class="nav-link"> <span data-key="t-to-do">To Do</span> <span class="badge badge-pill bg-danger" data-key="t-new">New</span></a>
+                                        <a href="{{ url('apps-todo.') }}" class="nav-link"> <span data-key="t-to-do">To Do</span> <span class="badge badge-pill bg-danger" data-key="t-new">New</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -1031,16 +1031,16 @@
                             <div class="collapse menu-dropdown" id="sidebarLayouts">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="layouts-horizontal.html" class="nav-link" target="_blank" data-key="t-horizontal">Horizontal</a>
+                                        <a href="layouts-horizontal.') }}" class="nav-link" target="_blank" data-key="t-horizontal">Horizontal</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="layouts-detached.html" class="nav-link" target="_blank" data-key="t-detached">Detached</a>
+                                        <a href="layouts-detached.') }}" class="nav-link" target="_blank" data-key="t-detached">Detached</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="layouts-two-column.html" class="nav-link" target="_blank" data-key="t-two-column">Two Column</a>
+                                        <a href="layouts-two-column.') }}" class="nav-link" target="_blank" data-key="t-two-column">Two Column</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="layouts-vertical-hovered.html" class="nav-link" target="_blank" data-key="t-hovered">Hovered</a>
+                                        <a href="layouts-vertical-hovered.') }}" class="nav-link" target="_blank" data-key="t-hovered">Hovered</a>
                                     </li>
                                 </ul>
                             </div>
@@ -1060,10 +1060,10 @@
                                         <div class="collapse menu-dropdown" id="sidebarSignIn">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="auth-signin-basic.html" class="nav-link" data-key="t-basic"> Basic </a>
+                                                    <a href="{{ url('auth-signin-basic.') }}" class="nav-link" data-key="t-basic"> Basic </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-signin-cover.html" class="nav-link" data-key="t-cover"> Cover </a>
+                                                    <a href="{{ url('auth-signin-cover.') }}" class="nav-link" data-key="t-cover"> Cover </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1074,10 +1074,10 @@
                                         <div class="collapse menu-dropdown" id="sidebarSignUp">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="auth-signup-basic.html" class="nav-link" data-key="t-basic"> Basic </a>
+                                                    <a href="{{ url('auth-signup-basic.') }}" class="nav-link" data-key="t-basic"> Basic </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-signup-cover.html" class="nav-link" data-key="t-cover"> Cover </a>
+                                                    <a href="{{ url('auth-signup-cover.') }}" class="nav-link" data-key="t-cover"> Cover </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1089,10 +1089,10 @@
                                         <div class="collapse menu-dropdown" id="sidebarResetPass">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="auth-pass-reset-basic.html" class="nav-link" data-key="t-basic"> Basic </a>
+                                                    <a href="{{ url('auth-pass-reset-basic.') }}" class="nav-link" data-key="t-basic"> Basic </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-pass-reset-cover.html" class="nav-link" data-key="t-cover"> Cover </a>
+                                                    <a href="{{ url('auth-pass-reset-cover.') }}" class="nav-link" data-key="t-cover"> Cover </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1105,11 +1105,11 @@
                                         <div class="collapse menu-dropdown" id="sidebarchangePass">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="auth-pass-change-basic.html" class="nav-link" data-key="t-basic">
+                                                    <a href="{{ url('auth-pass-change-basic.') }}" class="nav-link" data-key="t-basic">
                                                         Basic </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-pass-change-cover.html" class="nav-link" data-key="t-cover">
+                                                    <a href="{{ url('auth-pass-change-cover.') }}" class="nav-link" data-key="t-cover">
                                                         Cover </a>
                                                 </li>
                                             </ul>
@@ -1122,10 +1122,10 @@
                                         <div class="collapse menu-dropdown" id="sidebarLockScreen">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="auth-lockscreen-basic.html" class="nav-link" data-key="t-basic"> Basic </a>
+                                                    <a href="{{ url('auth-lockscreen-basic.') }}" class="nav-link" data-key="t-basic"> Basic </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-lockscreen-cover.html" class="nav-link" data-key="t-cover"> Cover </a>
+                                                    <a href="{{ url('auth-lockscreen-cover.') }}" class="nav-link" data-key="t-cover"> Cover </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1137,10 +1137,10 @@
                                         <div class="collapse menu-dropdown" id="sidebarLogout">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="auth-logout-basic.html" class="nav-link" data-key="t-basic"> Basic </a>
+                                                    <a href="{{ url('auth-logout-basic.') }}" class="nav-link" data-key="t-basic"> Basic </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-logout-cover.html" class="nav-link" data-key="t-cover"> Cover </a>
+                                                    <a href="{{ url('auth-logout-cover.') }}" class="nav-link" data-key="t-cover"> Cover </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1151,10 +1151,10 @@
                                         <div class="collapse menu-dropdown" id="sidebarSuccessMsg">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="auth-success-msg-basic.html" class="nav-link" data-key="t-basic"> Basic </a>
+                                                    <a href="{{ url('auth-success-msg-basic.') }}" class="nav-link" data-key="t-basic"> Basic </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-success-msg-cover.html" class="nav-link" data-key="t-cover"> Cover </a>
+                                                    <a href="{{ url('auth-success-msg-cover.') }}" class="nav-link" data-key="t-cover"> Cover </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1165,10 +1165,10 @@
                                         <div class="collapse menu-dropdown" id="sidebarTwoStep">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="auth-twostep-basic.html" class="nav-link" data-key="t-basic"> Basic </a>
+                                                    <a href="{{ url('auth-twostep-basic.') }}" class="nav-link" data-key="t-basic"> Basic </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-twostep-cover.html" class="nav-link" data-key="t-cover"> Cover </a>
+                                                    <a href="{{ url('auth-twostep-cover.') }}" class="nav-link" data-key="t-cover"> Cover </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1179,19 +1179,19 @@
                                         <div class="collapse menu-dropdown" id="sidebarErrors">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="auth-404-basic.html" class="nav-link" data-key="t-404-basic"> 404 Basic </a>
+                                                    <a href="{{ url('auth-404-basic.') }}" class="nav-link" data-key="t-404-basic"> 404 Basic </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-404-cover.html" class="nav-link" data-key="t-404-cover"> 404 Cover </a>
+                                                    <a href="{{ url('auth-404-cover.') }}" class="nav-link" data-key="t-404-cover"> 404 Cover </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-404-alt.html" class="nav-link" data-key="t-404-alt"> 404 Alt </a>
+                                                    <a href="{{ url('auth-404-alt.') }}" class="nav-link" data-key="t-404-alt"> 404 Alt </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-500.html" class="nav-link" data-key="t-500"> 500 </a>
+                                                    <a href="{{ url('auth-500.') }}" class="nav-link" data-key="t-500"> 500 </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="auth-offline.html" class="nav-link" data-key="t-offline-page"> Offline Page </a>
+                                                    <a href="{{ url('auth-offline.') }}" class="nav-link" data-key="t-offline-page"> Offline Page </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1207,7 +1207,7 @@
                             <div class="collapse menu-dropdown" id="sidebarPages">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="pages-starter.html" class="nav-link" data-key="t-starter"> Starter </a>
+                                        <a href="pages-starter.') }}" class="nav-link" data-key="t-starter"> Starter </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#sidebarProfile" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarProfile" data-key="t-profile"> Profile
@@ -1215,40 +1215,40 @@
                                         <div class="collapse menu-dropdown" id="sidebarProfile">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="pages-profile.html" class="nav-link" data-key="t-simple-page"> Simple Page </a>
+                                                    <a href="pages-profile.') }}" class="nav-link" data-key="t-simple-page"> Simple Page </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="pages-profile-settings.html" class="nav-link" data-key="t-settings"> Settings </a>
+                                                    <a href="pages-profile-settings.') }}" class="nav-link" data-key="t-settings"> Settings </a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-team.html" class="nav-link" data-key="t-team"> Team </a>
+                                        <a href="pages-team.') }}" class="nav-link" data-key="t-team"> Team </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-timeline.html" class="nav-link" data-key="t-timeline"> Timeline </a>
+                                        <a href="pages-timeline.') }}" class="nav-link" data-key="t-timeline"> Timeline </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-faqs.html" class="nav-link" data-key="t-faqs"> FAQs </a>
+                                        <a href="pages-faqs.') }}" class="nav-link" data-key="t-faqs"> FAQs </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-pricing.html" class="nav-link" data-key="t-pricing"> Pricing </a>
+                                        <a href="pages-pricing.') }}" class="nav-link" data-key="t-pricing"> Pricing </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-gallery.html" class="nav-link" data-key="t-gallery"> Gallery </a>
+                                        <a href="pages-gallery.') }}" class="nav-link" data-key="t-gallery"> Gallery </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-maintenance.html" class="nav-link" data-key="t-maintenance"> Maintenance </a>
+                                        <a href="pages-maintenance.') }}" class="nav-link" data-key="t-maintenance"> Maintenance </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-coming-soon.html" class="nav-link" data-key="t-coming-soon"> Coming Soon </a>
+                                        <a href="pages-coming-soon.') }}" class="nav-link" data-key="t-coming-soon"> Coming Soon </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-sitemap.html" class="nav-link" data-key="t-sitemap"> Sitemap </a>
+                                        <a href="pages-sitemap.') }}" class="nav-link" data-key="t-sitemap"> Sitemap </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages-search-results.html" class="nav-link" data-key="t-search-results"> Search Results </a>
+                                        <a href="pages-search-results.') }}" class="nav-link" data-key="t-search-results"> Search Results </a>
                                     </li>
                                 </ul>
                             </div>
@@ -1261,10 +1261,10 @@
                             <div class="collapse menu-dropdown" id="sidebarLanding">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="landing.html" class="nav-link" data-key="t-one-page"> One Page </a>
+                                        <a href="landing.') }}" class="nav-link" data-key="t-one-page"> One Page </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="nft-landing.html" class="nav-link" data-key="t-nft-landing"> NFT Landing</a>
+                                        <a href="nft-landing.') }}" class="nav-link" data-key="t-nft-landing"> NFT Landing</a>
                                     </li>
                                 </ul>
                             </div>
@@ -1281,81 +1281,81 @@
                                     <div class="col-lg-4">
                                         <ul class="nav nav-sm flex-column">
                                             <li class="nav-item">
-                                                <a href="ui-alerts.html" class="nav-link" data-key="t-alerts">Alerts</a>
+                                                <a href="ui-alerts.') }}" class="nav-link" data-key="t-alerts">Alerts</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-badges.html" class="nav-link" data-key="t-badges">Badges</a>
+                                                <a href="ui-badges.') }}" class="nav-link" data-key="t-badges">Badges</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-buttons.html" class="nav-link" data-key="t-buttons">Buttons</a>
+                                                <a href="ui-buttons.') }}" class="nav-link" data-key="t-buttons">Buttons</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-colors.html" class="nav-link" data-key="t-colors">Colors</a>
+                                                <a href="ui-colors.') }}" class="nav-link" data-key="t-colors">Colors</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-cards.html" class="nav-link" data-key="t-cards">Cards</a>
+                                                <a href="ui-cards.') }}" class="nav-link" data-key="t-cards">Cards</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-carousel.html" class="nav-link" data-key="t-carousel">Carousel</a>
+                                                <a href="ui-carousel.') }}" class="nav-link" data-key="t-carousel">Carousel</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-dropdowns.html" class="nav-link" data-key="t-dropdowns">Dropdowns</a>
+                                                <a href="ui-dropdowns.') }}" class="nav-link" data-key="t-dropdowns">Dropdowns</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-grid.html" class="nav-link" data-key="t-grid">Grid</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <ul class="nav nav-sm flex-column">
-                                            <li class="nav-item">
-                                                <a href="ui-images.html" class="nav-link" data-key="t-images">Images</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="ui-tabs.html" class="nav-link" data-key="t-tabs">Tabs</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="ui-accordions.html" class="nav-link" data-key="t-accordion-collapse">Accordion & Collapse</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="ui-modals.html" class="nav-link" data-key="t-modals">Modals</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="ui-offcanvas.html" class="nav-link" data-key="t-offcanvas">Offcanvas</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="ui-placeholders.html" class="nav-link" data-key="t-placeholders">Placeholders</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="ui-progress.html" class="nav-link" data-key="t-progress">Progress</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="ui-notifications.html" class="nav-link" data-key="t-notifications">Notifications</a>
+                                                <a href="ui-grid.') }}" class="nav-link" data-key="t-grid">Grid</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-4">
                                         <ul class="nav nav-sm flex-column">
                                             <li class="nav-item">
-                                                <a href="ui-media.html" class="nav-link" data-key="t-media-object">Media object</a>
+                                                <a href="ui-images.') }}" class="nav-link" data-key="t-images">Images</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-embed-video.html" class="nav-link" data-key="t-embed-video">Embed Video</a>
+                                                <a href="ui-tabs.') }}" class="nav-link" data-key="t-tabs">Tabs</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-typography.html" class="nav-link" data-key="t-typography">Typography</a>
+                                                <a href="ui-accordions.') }}" class="nav-link" data-key="t-accordion-collapse">Accordion & Collapse</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-lists.html" class="nav-link" data-key="t-lists">Lists</a>
+                                                <a href="ui-modals.') }}" class="nav-link" data-key="t-modals">Modals</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-general.html" class="nav-link" data-key="t-general">General</a>
+                                                <a href="ui-offcanvas.') }}" class="nav-link" data-key="t-offcanvas">Offcanvas</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-ribbons.html" class="nav-link" data-key="t-ribbons">Ribbons</a>
+                                                <a href="ui-placeholders.') }}" class="nav-link" data-key="t-placeholders">Placeholders</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="ui-utilities.html" class="nav-link" data-key="t-utilities">Utilities</a>
+                                                <a href="ui-progress.') }}" class="nav-link" data-key="t-progress">Progress</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="ui-notifications.') }}" class="nav-link" data-key="t-notifications">Notifications</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <ul class="nav nav-sm flex-column">
+                                            <li class="nav-item">
+                                                <a href="ui-media.') }}" class="nav-link" data-key="t-media-object">Media object</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="ui-embed-video.') }}" class="nav-link" data-key="t-embed-video">Embed Video</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="ui-typography.') }}" class="nav-link" data-key="t-typography">Typography</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="ui-lists.') }}" class="nav-link" data-key="t-lists">Lists</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="ui-general.') }}" class="nav-link" data-key="t-general">General</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="ui-ribbons.') }}" class="nav-link" data-key="t-ribbons">Ribbons</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="ui-utilities.') }}" class="nav-link" data-key="t-utilities">Utilities</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -1370,38 +1370,38 @@
                             <div class="collapse menu-dropdown" id="sidebarAdvanceUI">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="advance-ui-sweetalerts.html" class="nav-link" data-key="t-sweet-alerts">Sweet Alerts</a>
+                                        <a href="{{ url('advance-ui-sweetalerts.') }}" class="nav-link" data-key="t-sweet-alerts">Sweet Alerts</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="advance-ui-nestable.html" class="nav-link" data-key="t-nestable-list">Nestable List</a>
+                                        <a href="{{ url('advance-ui-nestable.') }}" class="nav-link" data-key="t-nestable-list">Nestable List</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="advance-ui-scrollbar.html" class="nav-link" data-key="t-scrollbar">Scrollbar</a>
+                                        <a href="{{ url('advance-ui-scrollbar.') }}" class="nav-link" data-key="t-scrollbar">Scrollbar</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="advance-ui-animation.html" class="nav-link" data-key="t-animation">Animation</a>
+                                        <a href="{{ url('advance-ui-animation.') }}" class="nav-link" data-key="t-animation">Animation</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="advance-ui-tour.html" class="nav-link" data-key="t-tour">Tour</a>
+                                        <a href="{{ url('advance-ui-tour.') }}" class="nav-link" data-key="t-tour">Tour</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="advance-ui-swiper.html" class="nav-link" data-key="t-swiper-slider">Swiper Slider</a>
+                                        <a href="{{ url('advance-ui-swiper.') }}" class="nav-link" data-key="t-swiper-slider">Swiper Slider</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="advance-ui-ratings.html" class="nav-link" data-key="t-ratings">Ratings</a>
+                                        <a href="{{ url('advance-ui-ratings.') }}" class="nav-link" data-key="t-ratings">Ratings</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="advance-ui-highlight.html" class="nav-link" data-key="t-highlight">Highlight</a>
+                                        <a href="{{ url('advance-ui-highlight.') }}" class="nav-link" data-key="t-highlight">Highlight</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="advance-ui-scrollspy.html" class="nav-link" data-key="t-scrollSpy">ScrollSpy</a>
+                                        <a href="{{ url('advance-ui-scrollspy.') }}" class="nav-link" data-key="t-scrollSpy">ScrollSpy</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="widgets.html">
+                            <a class="nav-link menu-link" href="widgets.') }}">
                                 <i class="mdi mdi-puzzle-outline"></i> <span data-key="t-widgets">Widgets</span>
                             </a>
                         </li>
@@ -1413,43 +1413,43 @@
                             <div class="collapse menu-dropdown" id="sidebarForms">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="forms-elements.html" class="nav-link" data-key="t-basic-elements">Basic Elements</a>
+                                        <a href="forms-elements.') }}" class="nav-link" data-key="t-basic-elements">Basic Elements</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-select.html" class="nav-link" data-key="t-form-select"> Form Select </a>
+                                        <a href="forms-select.') }}" class="nav-link" data-key="t-form-select"> Form Select </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-checkboxs-radios.html" class="nav-link" data-key="t-checkboxs-radios">Checkboxs & Radios</a>
+                                        <a href="forms-checkboxs-radios.') }}" class="nav-link" data-key="t-checkboxs-radios">Checkboxs & Radios</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-pickers.html" class="nav-link" data-key="t-pickers"> Pickers </a>
+                                        <a href="forms-pickers.') }}" class="nav-link" data-key="t-pickers"> Pickers </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-masks.html" class="nav-link" data-key="t-input-masks">Input Masks</a>
+                                        <a href="forms-masks.') }}" class="nav-link" data-key="t-input-masks">Input Masks</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-advanced.html" class="nav-link" data-key="t-advanced">Advanced</a>
+                                        <a href="forms-advanced.') }}" class="nav-link" data-key="t-advanced">Advanced</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-range-sliders.html" class="nav-link" data-key="t-range-slider"> Range Slider </a>
+                                        <a href="forms-range-sliders.') }}" class="nav-link" data-key="t-range-slider"> Range Slider </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-validation.html" class="nav-link" data-key="t-validation">Validation</a>
+                                        <a href="forms-validation.') }}" class="nav-link" data-key="t-validation">Validation</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-wizard.html" class="nav-link" data-key="t-wizard">Wizard</a>
+                                        <a href="forms-wizard.') }}" class="nav-link" data-key="t-wizard">Wizard</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-editors.html" class="nav-link" data-key="t-editors">Editors</a>
+                                        <a href="forms-editors.') }}" class="nav-link" data-key="t-editors">Editors</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-file-uploads.html" class="nav-link" data-key="t-file-uploads">File Uploads</a>
+                                        <a href="forms-file-uploads.') }}" class="nav-link" data-key="t-file-uploads">File Uploads</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-layouts.html" class="nav-link" data-key="t-form-layouts">Form Layouts</a>
+                                        <a href="forms-layouts.') }}" class="nav-link" data-key="t-form-layouts">Form Layouts</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="forms-select2.html" class="nav-link" data-key="t-select2">Select2</a>
+                                        <a href="forms-select2.') }}" class="nav-link" data-key="t-select2">Select2</a>
                                     </li>
                                 </ul>
                             </div>
@@ -1462,16 +1462,16 @@
                             <div class="collapse menu-dropdown" id="sidebarTables">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="tables-basic.html" class="nav-link" data-key="t-basic-tables">Basic Tables</a>
+                                        <a href="tables-basic.') }}" class="nav-link" data-key="t-basic-tables">Basic Tables</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="tables-gridjs.html" class="nav-link" data-key="t-grid-js">Grid Js</a>
+                                        <a href="tables-gridjs.') }}" class="nav-link" data-key="t-grid-js">Grid Js</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="tables-listjs.html" class="nav-link" data-key="t-list-js">List Js</a>
+                                        <a href="tables-listjs.') }}" class="nav-link" data-key="t-list-js">List Js</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="tables-datatables.html" class="nav-link" data-key="t-datatables">Datatables</a>
+                                        <a href="tables-datatables.') }}" class="nav-link" data-key="t-datatables">Datatables</a>
                                     </li>
                                 </ul>
                             </div>
@@ -1489,61 +1489,61 @@
                                         <div class="collapse menu-dropdown" id="sidebarApexcharts">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-line.html" class="nav-link" data-key="t-line"> Line </a>
+                                                    <a href="charts-apex-line.') }}" class="nav-link" data-key="t-line"> Line </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-area.html" class="nav-link" data-key="t-area"> Area </a>
+                                                    <a href="charts-apex-area.') }}" class="nav-link" data-key="t-area"> Area </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-column.html" class="nav-link" data-key="t-column"> Column </a>
+                                                    <a href="charts-apex-column.') }}" class="nav-link" data-key="t-column"> Column </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-bar.html" class="nav-link" data-key="t-bar"> Bar </a>
+                                                    <a href="charts-apex-bar.') }}" class="nav-link" data-key="t-bar"> Bar </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-mixed.html" class="nav-link" data-key="t-mixed"> Mixed </a>
+                                                    <a href="charts-apex-mixed.') }}" class="nav-link" data-key="t-mixed"> Mixed </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-timeline.html" class="nav-link" data-key="t-timeline"> Timeline </a>
+                                                    <a href="charts-apex-timeline.') }}" class="nav-link" data-key="t-timeline"> Timeline </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-candlestick.html" class="nav-link" data-key="t-candlstick"> Candlstick </a>
+                                                    <a href="charts-apex-candlestick.') }}" class="nav-link" data-key="t-candlstick"> Candlstick </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-boxplot.html" class="nav-link" data-key="t-boxplot"> Boxplot </a>
+                                                    <a href="charts-apex-boxplot.') }}" class="nav-link" data-key="t-boxplot"> Boxplot </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-bubble.html" class="nav-link" data-key="t-bubble"> Bubble </a>
+                                                    <a href="charts-apex-bubble.') }}" class="nav-link" data-key="t-bubble"> Bubble </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-scatter.html" class="nav-link" data-key="t-scatter"> Scatter </a>
+                                                    <a href="charts-apex-scatter.') }}" class="nav-link" data-key="t-scatter"> Scatter </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-heatmap.html" class="nav-link" data-key="t-heatmap"> Heatmap </a>
+                                                    <a href="charts-apex-heatmap.') }}" class="nav-link" data-key="t-heatmap"> Heatmap </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-treemap.html" class="nav-link" data-key="t-treemap"> Treemap </a>
+                                                    <a href="charts-apex-treemap.') }}" class="nav-link" data-key="t-treemap"> Treemap </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-pie.html" class="nav-link" data-key="t-pie"> Pie </a>
+                                                    <a href="charts-apex-pie.') }}" class="nav-link" data-key="t-pie"> Pie </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-radialbar.html" class="nav-link" data-key="t-radialbar"> Radialbar </a>
+                                                    <a href="charts-apex-radialbar.') }}" class="nav-link" data-key="t-radialbar"> Radialbar </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-radar.html" class="nav-link" data-key="t-radar"> Radar </a>
+                                                    <a href="charts-apex-radar.') }}" class="nav-link" data-key="t-radar"> Radar </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="charts-apex-polar.html" class="nav-link" data-key="t-polar-area"> Polar Area </a>
+                                                    <a href="charts-apex-polar.') }}" class="nav-link" data-key="t-polar-area"> Polar Area </a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="charts-chartjs.html" class="nav-link" data-key="t-chartjs"> Chartjs </a>
+                                        <a href="charts-chartjs.') }}" class="nav-link" data-key="t-chartjs"> Chartjs </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="charts-echarts.html" class="nav-link" data-key="t-echarts"> Echarts </a>
+                                        <a href="charts-echarts.') }}" class="nav-link" data-key="t-echarts"> Echarts </a>
                                     </li>
                                 </ul>
                             </div>
@@ -1556,22 +1556,22 @@
                             <div class="collapse menu-dropdown" id="sidebarIcons">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="icons-remix.html" class="nav-link" data-key="t-remix">Remix</a>
+                                        <a href="icons-remix.') }}" class="nav-link" data-key="t-remix">Remix</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="icons-boxicons.html" class="nav-link" data-key="t-boxicons">Boxicons</a>
+                                        <a href="icons-boxicons.') }}" class="nav-link" data-key="t-boxicons">Boxicons</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="icons-materialdesign.html" class="nav-link" data-key="t-material-design">Material Design</a>
+                                        <a href="icons-materialdesign.') }}" class="nav-link" data-key="t-material-design">Material Design</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="icons-lineawesome.html" class="nav-link" data-key="t-line-awesome">Line Awesome</a>
+                                        <a href="icons-lineawesome.') }}" class="nav-link" data-key="t-line-awesome">Line Awesome</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="icons-feather.html" class="nav-link" data-key="t-feather">Feather</a>
+                                        <a href="icons-feather.') }}" class="nav-link" data-key="t-feather">Feather</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="icons-crypto.html" class="nav-link"> <span data-key="t-crypto-svg">Crypto SVG</span> <span class="badge badge-pill bg-danger" data-key="t-new">New</span></a>
+                                        <a href="icons-crypto.') }}" class="nav-link"> <span data-key="t-crypto-svg">Crypto SVG</span> <span class="badge badge-pill bg-danger" data-key="t-new">New</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -1584,17 +1584,17 @@
                             <div class="collapse menu-dropdown" id="sidebarMaps">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="maps-google.html" class="nav-link" data-key="t-google">
+                                        <a href="maps-google.') }}" class="nav-link" data-key="t-google">
                                             Google
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="maps-vector.html" class="nav-link" data-key="t-vector">
+                                        <a href="maps-vector.') }}" class="nav-link" data-key="t-vector">
                                             Vector
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="maps-leaflet.html" class="nav-link" data-key="t-leaflet">
+                                        <a href="maps-leaflet.') }}" class="nav-link" data-key="t-leaflet">
                                             Leaflet
                                         </a>
                                     </li>
