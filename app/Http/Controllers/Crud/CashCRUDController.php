@@ -17,23 +17,10 @@ class CashCRUDController extends Controller
     {
         $cash = cash::latest()->get();
         if ($request->ajax()) {
-
-
-
             return Datatables::of($data)
                     ->addIndexColumn()
-                    ->addColumn('action', function($row){
-
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editcash">Edit</a>';
-
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deletecash">Delete</a>';
-
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
                     ->make(true);
         }
-
         return view('cash.crud',$cash);
     }
 
@@ -49,11 +36,11 @@ class CashCRUDController extends Controller
                     'id' => $request->cash_id
                 ],
                 [
-                    'fullname' => $request->name,
-                    'nationality' => $request->price,
-                    'city' => $request->inventory,
-                    'maritalstatus' => $request->inventory,
-                    'ocupation' => $request->inventory
+                    'name' => $request->name,
+                    'buy' => $request->buy,
+                    'sell' => $request->sell,
+                    'oficial' => $request->oficial,
+                    'status' => $request->status
                 ]);
 
         return response()->json(['success'=>'cash saved successfully.']);

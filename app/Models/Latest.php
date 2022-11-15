@@ -13,7 +13,6 @@ class Latest extends Model
 
     protected $table = "latests";
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +25,6 @@ class Latest extends Model
         'date_publication',
         'url',
         'photo_id',
-        'type_id',
         'status'
     ];
 
@@ -40,10 +38,6 @@ class Latest extends Model
     public function photo()
     {
     return $this->belongsTo(Photo::class, 'photo_id');
-    }
-    public function type()
-    {
-    return $this->belongsTo(Typelatest::class, 'type_id');
     }
 
 }

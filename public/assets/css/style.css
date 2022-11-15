@@ -1140,20 +1140,9 @@ Banner Area Style
   padding-bottom: 120px;
 }
 
-.banner-area.bg-1 {
-  background: transparent url(../img/banner/banner-bg-1.jpg) left top no-repeat;
-}
-
-.banner-area.bg-2 {
-  background-image: url(../img/banner/banner-bg-2.jpg);
-}
 
 .banner-area.bg-4 {
-  background-image: url(../img/banner/banner.webp);
-}
-
-.banner-area.bg-5 {
-  background-image: url(../img/banner/banner-bg-5.jpg);
+  background-image: url(../img/banner/banner.png);
 }
 
 .banner-area.banner-area-two {
@@ -1910,7 +1899,7 @@ Solution Area Style
 }
 
 .solution-img {
-  background-image: url(../img/solution-img.png);
+  background-image: url(../img/index/exchange.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;

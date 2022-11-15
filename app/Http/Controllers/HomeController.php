@@ -27,11 +27,6 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function admin(){
-        // $data['events'] = Event::orderBy('id','asc')->paginate(3);
-        // $data2['latests'] = Latest::orderBy('id','asc')->paginate(3);
-        // $data3['projects'] = Project::orderBy('id','asc')->paginate(3);
-
-        //  Bug en el index para mandar banners
         $data = [
             'cashs'  => Cash::orderBy('id','asc')->paginate(3),
             'latests'   => Latest::orderBy('id','asc')->paginate(5),

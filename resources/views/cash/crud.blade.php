@@ -1,7 +1,9 @@
 
 @extends('layout.masteradmin')
+@section('token')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('body')
-
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
@@ -58,38 +60,16 @@
                                                                 <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                                             </div>
                                                         </th>
-                                                        <th class="sort" data-sort="name">Customer</th>
-                                                        <th class="sort" data-sort="email">Email</th>
-                                                        <th class="sort" data-sort="phone">Phone</th>
-                                                        <th class="sort" data-sort="date">Joining Date</th>
-                                                        <th class="sort" data-sort="status">Delivery Status</th>
+                                                        <th class="sort" data-sort="name">Moneda</th>
+                                                        <th class="sort" data-sort="email">Compra</th>
+                                                        <th class="sort" data-sort="phone">Venta</th>
+                                                        <th class="sort" data-sort="date">Oficial</th>
+                                                        <th class="sort" data-sort="status">Estado</th>
                                                         <th class="sort" data-sort="action">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="list form-check-all">
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
-                                                            </div>
-                                                        </th>
-                                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
-                                                        <td class="name">Mary Cousar</td>
-                                                        <td class="email">marycousar@velzon.com</td>
-                                                        <td class="phone">580-464-4694</td>
-                                                        <td class="date">06 Apr, 2021</td>
-                                                        <td class="status"><span class="badge badge-soft-success text-uppercase">Active</span></td>
-                                                        <td>
-                                                            <div class="d-flex gap-2">
-                                                                <div class="edit">
-                                                                    <button class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Editar</button>
-                                                                </div>
-                                                                <div class="remove">
-                                                                    <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Eliminar</button>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+
                                                 </tbody>
                                             </table>
                                             <div class="noresult" style="display: none">
@@ -106,11 +86,11 @@
                                         <div class="d-flex justify-content-end">
                                             <div class="pagination-wrap hstack gap-2">
                                                 <a class="page-item pagination-prev disabled" href="#">
-                                                    Previous
+                                                    Anterior
                                                 </a>
                                                 <ul class="pagination listjs-pagination mb-0"></ul>
                                                 <a class="page-item pagination-next" href="#">
-                                                    Next
+                                                    Siguiente
                                                 </a>
                                             </div>
                                         </div>
@@ -130,32 +110,32 @@
                                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
                                 </div>
-                                <form>
+                                <form id="cashForm" name="cashForm" class="form-horizontal">
                                     <div class="modal-body">
 
                                         <div class="mb-3" id="modal-id" style="display: none;">
                                             <label for="id-field" class="form-label">ID</label>
-                                            <input type="text" id="id-field" class="form-control" placeholder="ID" readonly />
+                                            <input type="text" id="id" name="id" class="form-control" placeholder="ID" readonly />
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="customername-field" class="form-label">Customer Name</label>
-                                            <input type="text" id="customername-field" class="form-control" placeholder="Enter Name" required />
+                                            <label for="customername-field" class="form-label">Cotizacion</label>
+                                            <input type="text" id="id_name" name="name" class="form-control" placeholder="Ingresa el nombre" required />
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="email-field" class="form-label">Email</label>
-                                            <input type="email" id="email-field" class="form-control" placeholder="Enter Email" required />
+                                            <label for="email-field" class="form-label">Compra</label>
+                                            <input type="number" id="id_buy" name="buy" class="form-control" placeholder="Ingresa el valor de compra" required />
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="phone-field" class="form-label">Phone</label>
-                                            <input type="text" id="phone-field" class="form-control" placeholder="Enter Phone no." required />
+                                            <label for="phone-field" class="form-label">Venta</label>
+                                            <input type="number" id="id_sell" name="sell" class="form-control" placeholder="Ingresa el valor de venta" required />
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="date-field" class="form-label">Joining Date</label>
-                                            <input type="text" id="date-field" class="form-control" placeholder="Select Date" required />
+                                            <label for="date-field" class="form-label">Oficial</label>
+                                            <input type="number" id="id_oficial" name="oficial" class="form-control" placeholder="Ingresa el valor del oficial" required />
                                         </div>
 
                                         <div>

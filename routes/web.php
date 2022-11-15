@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CashController;
 use App\Http\Controllers\LatestController;
+use App\Http\Controllers\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | CRUD
@@ -43,6 +44,9 @@ Route::get('/terms', function () {
     });
     Route::controller(TransactionCRUDController::class)->group(function(){
         Route::get('admin/transaction', 'index');
+    });
+    Route::controller(TransactionController::class)->group(function(){
+        Route::get('admin/buy', 'buy');
     });
     Route::controller(LatestCRUDController::class)->group(function(){
         Route::get('admin/latest', 'index');

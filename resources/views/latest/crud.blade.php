@@ -9,12 +9,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">Listjs</h4>
+                                <h4 class="mb-sm-0">ADMIN NOTICIAS</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                        <li class="breadcrumb-item active">Listjs</li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">INICIO ADMIN</a></li>
+                                        <li class="breadcrumb-item active">ADMIN NOTICIAS</li>
                                     </ol>
                                 </div>
 
@@ -27,7 +27,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title mb-0">Add, Edit & Remove</h4>
+                                    <h4 class="card-title mb-0">Aniadir Modificar, Eliminar</h4>
                                 </div><!-- end card header -->
 
                                 <div class="card-body">
@@ -58,11 +58,12 @@
                                                                 <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                                             </div>
                                                         </th>
-                                                        <th class="sort" data-sort="customer_name">Noticia</th>
-                                                        <th class="sort" data-sort="email">Email</th>
-                                                        <th class="sort" data-sort="phone">Phone</th>
-                                                        <th class="sort" data-sort="date">Joining Date</th>
-                                                        <th class="sort" data-sort="status">Delivery Status</th>
+                                                        <th class="sort" data-sort="name">Noticia</th>
+                                                        <th class="sort" data-sort="author">Autor</th>
+                                                        <th class="sort" data-sort="description">Descripcion</th>
+                                                        <th class="sort" data-sort="date">Fecha Publicacion</th>
+                                                        <th class="sort" data-sort="status">URL externa</th>
+                                                        <th class="sort" data-sort="image">Imagen</th>
                                                         <th class="sort" data-sort="action">Action</th>
                                                     </tr>
                                                 </thead>
@@ -74,9 +75,9 @@
                                                             </div>
                                                         </th>
                                                         <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
-                                                        <td class="customer_name">Mary Cousar</td>
-                                                        <td class="email">marycousar@velzon.com</td>
-                                                        <td class="phone">580-464-4694</td>
+                                                        <td class="name">Mary Cousar</td>
+                                                        <td class="author">marycousar@velzon.com</td>
+                                                        <td class="description">580-464-4694</td>
                                                         <td class="date">06 Apr, 2021</td>
                                                         <td class="status"><span class="badge badge-soft-success text-uppercase">Active</span></td>
                                                         <td>
@@ -130,7 +131,7 @@
                                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
                                 </div>
-                                <form>
+                                <form id="latestForm" name="latestForm">
                                     <div class="modal-body">
 
                                         <div class="mb-3" id="modal-id" style="display: none;">
@@ -139,23 +140,69 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="customername-field" class="form-label">Customer Name</label>
-                                            <input type="text" id="customername-field" class="form-control" placeholder="Enter Name" required />
+                                            <label for="name-field" class="form-label">Noticia</label>
+                                            <input type="text" id="name-field" class="form-control" placeholder="Enter Name" required />
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="email-field" class="form-label">Email</label>
-                                            <input type="email" id="email-field" class="form-control" placeholder="Enter Email" required />
+                                            <label for="author-field" class="form-label">Autor</label>
+                                            <input type="author" id="author-field" class="form-control" placeholder="Enter author" required />
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="phone-field" class="form-label">Phone</label>
-                                            <input type="text" id="phone-field" class="form-control" placeholder="Enter Phone no." required />
+                                            <label for="description-field" class="form-label">Descripcion</label>
+                                            <input type="text" id="description-field" class="form-control" placeholder="Enter description no." required />
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="date-field" class="form-label">Joining Date</label>
-                                            <input type="text" id="date-field" class="form-control" placeholder="Select Date" required />
+                                            <label for="date-field" class="form-label">Fecha Publicacion</label>
+                                            <input type="date" id="date-field" class="form-control" required />
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="url-field" class="form-label">URL externa</label>
+                                            <input type="text" id="url-field" class="form-control" placeholder="Ingresa la URL" required />
+                                        </div>
+                                        <div>
+                                            <label for="url-field" class="form-label">Imagen</label>
+                                                <div class="dropzone">
+                                                    <div class="fallback">
+                                                        <input name="file" type="file" multiple="multiple">
+                                                    </div>
+                                                    <div class="dz-message needsclick">
+                                                        <div class="mb-3">
+                                                            <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
+                                                        </div>
+
+                                                        <h4>Drop files here or click to upload.</h4>
+                                                    </div>
+                                                </div>
+
+                                                <ul class="list-unstyled mb-0" id="dropzone-preview">
+                                                    <li class="mt-2" id="dropzone-preview-list">
+                                                        <!-- This is used as the file preview template -->
+                                                        <div class="border rounded">
+                                                            <div class="d-flex p-2">
+                                                                <div class="flex-shrink-0 me-3">
+                                                                    <div class="avatar-sm bg-light rounded">
+                                                                        <img data-dz-thumbnail class="img-fluid rounded d-block" src="#" alt="Dropzone-Image" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-grow-1">
+                                                                    <div class="pt-1">
+                                                                        <h5 class="fs-14 mb-1" data-dz-name>&nbsp;</h5>
+                                                                        <p class="fs-13 text-muted mb-0" data-dz-size></p>
+                                                                        <strong class="error text-danger" data-dz-errormessage></strong>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-shrink-0 ms-3">
+                                                                    <button data-dz-remove class="btn btn-sm btn-danger">Delete</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <!-- end dropzon-preview -->
                                         </div>
 
                                         <div>
@@ -170,7 +217,7 @@
                                     <div class="modal-footer">
                                         <div class="hstack gap-2 justify-content-end">
                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success" id="add-btn">Add Customer</button>
+                                            <button type="submit" class="btn btn-success" id="add-btn">Agregar Noticia</button>
                                             <button type="button" class="btn btn-success" id="edit-btn">Update</button>
                                         </div>
                                     </div>
@@ -207,4 +254,129 @@
             </div>
         </div>
  <!-- container-fluid -->
+@endsection
+
+
+@section('script')
+<script type="text/javascript">
+  $(function () {
+
+    /*------------------------------------------
+     --------------------------------------------
+     Pass Header Token
+     --------------------------------------------
+     --------------------------------------------*/
+    $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    Render DataTable
+    --------------------------------------------
+    --------------------------------------------*/
+    var table = $('.table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('latests.index') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'name', name: 'name'},
+            {data: 'author', name: 'author'},
+            {data: 'description', name: 'description'},
+            {data: 'url', name: 'url'},
+            {data: 'photo_id', name: 'photo_id'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    Click to Button
+    --------------------------------------------
+    --------------------------------------------*/
+    $('#create-btn').click(function () {
+        $('#add-btn').val("create-latest");
+        $('#latest_id').val('');
+        $('#latestForm').trigger("reset");
+        $('#showModal').html("Crear nueva Noticia");
+        $('#showModal').modal('show');
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    Click to Edit Button
+    --------------------------------------------
+    --------------------------------------------*/
+    $('body').on('click', '.editlatest', function () {
+      var latest_id = $(this).data('id');
+      $.get("{{ route('latests.index') }}" +'/' + latest_id +'/edit', function (data) {
+          $('#exampleModalLabel').html("Editar Noticia");
+          $('#add-btn').val("edit-user");
+          $('#showModal').modal('show');
+          $('#latest_id').val(data.id);
+          $('#name').val(data.name);
+          $('#author').val(data.author);
+          $('#description').val(data.description);
+          $('#url').val(data.url);
+          $('#photo_id').val(data.photo_id);
+          $('#status').val(data.status);
+      })
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    Create latest Code
+    --------------------------------------------
+    --------------------------------------------*/
+    $('#add-btn').click(function (e) {
+        e.preventDefault();
+        $(this).html('Guardando..');
+
+        $.ajax({
+          data: $('#latestForm').serialize(),
+          url: "{{ route('latests.store') }}",
+          type: "POST",
+          dataType: 'json',
+          success: function (data) {
+
+              $('#latestForm').trigger("reset");
+              $('#showModal').modal('hide');
+              table.draw();
+
+          },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#add-btn').html('Save Changes');
+          }
+      });
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    Delete latest Code
+    --------------------------------------------
+    --------------------------------------------*/
+    $('body').on('click', '.deletelatest', function () {
+
+        var latest_id = $(this).data("id");
+        confirm("Are You sure want to delete !");
+
+        $.ajax({
+            type: "DELETE",
+            url: "{{ route('latests.store') }}"+'/'+latest_id,
+            success: function (data) {
+                table.draw();
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    });
+
+  });
+</script>
 @endsection

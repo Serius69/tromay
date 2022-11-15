@@ -50,11 +50,12 @@ class LatestCRUDController extends Controller
                     'id' => $request->latest_id
                 ],
                 [
-                    'fullname' => $request->name,
-                    'nationality' => $request->price,
-                    'city' => $request->inventory,
-                    'maritalstatus' => $request->inventory,
-                    'ocupation' => $request->inventory
+                    'name' => $request->name,
+                    'author' => $request->author,
+                    'description' => $request->description,
+                    'date_publication' => $request->date_publication,
+                    'url' => $request->url,
+                    'photo_id' => $request->photo_id
                 ]);
 
         return response()->json(['success'=>'latest saved successfully.']);
@@ -67,7 +68,7 @@ class LatestCRUDController extends Controller
      */
     public function edit($id)
     {
-        $latest = latest::find($id);
+        $latest = Latest::find($id);
         return response()->json($latest);
     }
 
@@ -79,8 +80,7 @@ class LatestCRUDController extends Controller
      */
     public function destroy($id)
     {
-        latest::find($id)->delete();
-
+        Latest::find($id)->delete();
         return response()->json(['success'=>'latest deleted successfully.']);
     }
 }

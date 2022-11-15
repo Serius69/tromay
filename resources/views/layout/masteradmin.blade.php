@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Tromay | ADMIN </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @yield('token')
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
@@ -21,6 +22,8 @@
     <link href="{{ url('assets2/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Sweet Alert css-->
     <link href="{{ url('assets2/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- dropzone css -->
+    <link rel="stylesheet" href="{{ url('assets2/libs/dropzone/dropzone.css') }}" type="text/css" />
 </head>
 
 
@@ -119,26 +122,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <!-- item -->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
-                                    <div class="d-flex">
-                                        <img src="{{ url('assets2/images/users/avatar-3.jpg')}}" class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="flex-1">
-                                            <h6 class="m-0">David Grasso</h6>
-                                            <span class="fs-11 mb-0 text-muted">Web Designer</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <!-- item -->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
-                                    <div class="d-flex">
-                                        <img src="{{ url('assets2/images/users/avatar-5.jpg')}}" class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="flex-1">
-                                            <h6 class="m-0">Mike Bunch</h6>
-                                            <span class="fs-11 mb-0 text-muted">React Developer</span>
-                                        </div>
-                                    </div>
-                                </a>
+
                             </div>
                         </div>
 
@@ -370,7 +354,7 @@
                         </li> <!-- end Dashboard Menu -->
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
-                                <i class="mdi mdi-view-grid-plus-outline"></i> <span data-key="t-apps">Transaccion</span>
+                                <i class="mdi mdi-abugida-devanagari"></i> <span data-key="t-apps">Transaccion</span>
                             </a>
                             <div class="collapse menu-dropdown" id="sidebarApps">
                                 <ul class="nav nav-sm flex-column">
@@ -380,14 +364,17 @@
                                     <li class="nav-item">
                                         <a href="{{ url('admin/sell') }}" class="nav-link" data-key="t-chat"> Venta </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('admin/transaction') }}" class="nav-link" data-key="t-chat"> Editar Transacciones </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
-                                <i class="mdi mdi-view-grid-plus-outline"></i> <span data-key="t-apps">Noticias</span>
+                            <a class="nav-link menu-link" href="#sidebarNews" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarNews">
+                                <i class="mdi mdi-newspaper-variant-multiple"></i> <span data-key="t-news">Noticias</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="sidebarApps">
+                            <div class="collapse menu-dropdown" id="sidebarNews">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
                                         <a href="{{ url('admin/latest') }}" class="nav-link" data-key="t-calendar"> Editar Noticias </a>
@@ -396,7 +383,16 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('admin/cash') }}" class="nav-link" data-key="t-chat"> Cotizaciones </a>
+                            <a class="nav-link menu-link" href="#sidebarCash" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarNews">
+                                <i class="mdi mdi-access-point-check"></i> <span data-key="t-news">Cotizaciones</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sidebarCash">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ url('admin/cash') }}" class="nav-link" data-key="t-calendar"> Editar Cotizaciones </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
 
                     </ul>
@@ -1108,7 +1104,7 @@
     <script src="{{ url('assets2/libs/node-waves/waves.min.js')}}"></script>
     <script src="{{ url('assets2/libs/feather-icons/feather.min.js')}}"></script>
     <script src="{{ url('assets2/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
-    <script src="{{ url('assets2/js/plugins.js')}}"></script> 
+    <script src="{{ url('assets2/js/plugins.js')}}"></script>
 
     <!-- prismjs plugin -->
     <script src="{{ url('assets2/libs/prismjs/prism.js')}}"></script>
@@ -1133,6 +1129,17 @@
     <!-- Modal Js -->
     <script src="{{ url('assets2/js/pages/modal.init.js')}}"></script>
 
+    <!-- dropzone min -->
+    <script src="{{ url('assets2/libs/dropzone/dropzone-min.js')}}"></script>
+    <!-- filepond js -->
+    <script src="{{ url('assets2/libs/filepond/filepond.min.js')}}"></script>
+    <script src="{{ url('assets2/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js')}}"></script>
+    <script src="{{ url('assets2/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js')}}"></script>
+    <script src="{{ url('assets2/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js')}}"></script>
+    <script src="{{ url('assets2/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js')}}"></script>
+
+    <script src="{{ url('assets2/js/pages/form-file-upload.init.js')}}"></script>
+    <script src="{{ url('assets2/js/pages/form-file-upload.init.js')}}"></script>
 </body>
 
 </html>

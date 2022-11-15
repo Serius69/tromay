@@ -1,12 +1,12 @@
 @extends('layout.master')
 @section('body')
-<div class="page-title-area">
+<div class="page-title-area page-title-style-two">
     <div class="container">
         <div class="page-title-content">
             <h2>Nosotros</h2>
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="{{ url('') }}">
                         <i class="bx bx-home"></i>
                         Inicio
                     </a>
@@ -32,8 +32,8 @@
             <div class="col-lg-6">
                 <div class="about-content">
                     <div class="about-title">
-                        <span>Nosotros</span>
-                        <h2>Algunas de las caracteristicas de</h2>
+                        <span>Caracteristicas</span>
+                        <h2>Caracteristicas</h2>
                     </div>
 
                     <div class="tab">
@@ -44,9 +44,7 @@
                             <li>
                                 Por que nosotros?
                             </li>
-                            <li>
-                                Our Approach
-                            </li>
+
                         </ul>
 
                         <div class="tab_content">
@@ -96,28 +94,6 @@
                                 </ul>
                             </div>
 
-                            <div class="tabs_item">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat atque quibusdam fuga natus non necessitatibus eveniet maiores nostrum esse ut voluptates sint dolores, voluptatum consequatur ad est enim perferendis reprehenderit.</p>
-
-                                <ul>
-                                    <li>
-                                        <i class="bx bx-check-circle"></i>
-                                        Trusted Partner
-                                    </li>
-                                    <li>
-                                        <i class="bx bx-check-circle"></i>
-                                        Product Security
-                                    </li>
-                                    <li>
-                                        <i class="bx bx-check-circle"></i>
-                                        System Security
-                                    </li>
-                                    <li>
-                                        <i class="bx bx-check-circle"></i>
-                                        Operational Security
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,194 +103,73 @@
 </section>
 <!-- End Nosotros Area -->
 
-<!-- Start Our Challenges Area -->
-<section class="challenges-area pt-100 pb-70 jarallax" data-jarallax='{"speed": 0.3}'>
-    <div class="container">
-        <div class="section-title white-title">
-            <span>Our Challenges</span>
-            <h2>You can protect your organization’s cybersecurity by us</h2>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-challenges overly-one">
-                    <div class="overly-two">
-                        <i class="flaticon-threat"></i>
-                        <h3>Identifying Threats</h3>
-                        <p>Lorem ipsum dolor sit amet, con sectetur adipiscing elit sed do.</p>
-                        <span class="flaticon-threat"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-challenges overly-one">
-                    <div class="overly-two">
-                        <i class="flaticon-cyber"></i>
-                        <h3>Cyber Risk Assessment</h3>
-                        <p>Lorem ipsum dolor sit amet, con sectetur adipiscing elit sed do.</p>
-                        <span class="flaticon-cyber"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-challenges overly-one">
-                    <div class="overly-two">
-                        <i class="flaticon-cyber-security-1"></i>
-                        <h3>Testing Cyber Security</h3>
-                        <p>Lorem ipsum dolor sit amet, con sectetur adipiscing elit sed do.</p>
-                        <span class="flaticon-cyber-security-1"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-challenges overly-one">
-                    <div class="overly-two">
-                        <i class="flaticon-password"></i>
-                        <h3>Managing Cloud Security</h3>
-                        <p>Lorem ipsum dolor sit amet, con sectetur adipiscing elit sed do.</p>
-                        <span class="flaticon-password"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Our Challenges Area -->
-
-<!-- Start Protect Area -->
-<section class="protect-area pt-100 pb-70">
-    <div class="container">
+<!-- Start About Area -->
+<section class="solution-area pb-70">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6">
-                <div class="protect-img">
-                    <img data-cfsrc="assets/img/protect-img.jpg" alt="Image" style="display:none;visibility:hidden;"><noscript><img src="assets/img/protect-img.jpg" alt="Image"></noscript>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="protect-content">
-                    <div class="protect-title">
-                        <span>Cyber Security Protect</span>
-                        <h2>Protect your website, web server, and web application for helping you being threats from the hacker</h2>
+                <div class="solution-content">
+                    <div class="solution-title">
+                        <span>Mision y Vision</span>
+                        <h2></h2>
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single-challenges overly-one">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="single-solution overly-one">
                                 <div class="overly-two">
-                                    <i class="flaticon-database"></i>
-                                    <h3>Database Security</h3>
-                                    <p>Lorem ipsum dolor sit amet, con sectetur adipiscing elit sed do.</p>
-                                    <span class="flaticon-database"></span>
+                                    <h3>
+                                        <a href="{{ url('') }}">
+                                            Historia
+                                        </a>
+                                    </h3>
+                                    <p>Desde nuestra fundación en 1999, Tromay, empresa de cambio de moneda extranjera, ha superado varios hitos históricos en el mercado cambiario. Utilizando esa experiencia, nos hemos ganado la confianza de una amplia gama de clientes.
+                                        Bajo tales circunstancias, el método de cambio de moneda extranjera está cambiando con los tiempos, pero entre ellos, el cambio de moneda extranjera por transacción por correo se está convirtiendo en la corriente principal..</p>
+                                    <span></span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single-challenges overly-one">
+                        <div class="col-lg-12 col-md-6">
+                            <div class="single-solution overly-one">
                                 <div class="overly-two">
-                                    <i class="flaticon-application"></i>
-                                    <h3>Database Security</h3>
-                                    <p>Lorem ipsum dolor sit amet, con sectetur adipiscing elit sed do.</p>
-                                    <span class="flaticon-application"></span>
+                                    <h3>
+                                        <a href="{{ url('') }}">
+                                            Mision
+                                        </a>
+                                    </h3>
+                                    <p>  Proveer atencion de calidad en el cambio de moneda extranjera.</p>
+                                    <span>Mision</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single-challenges overly-one">
+                        <div class="col-lg-12 col-md-6 offset-md-3 offset-lg-0">
+                            <div class="single-solution overly-one">
                                 <div class="overly-two">
-                                    <i class="flaticon-security"></i>
-                                    <h3>Web Security</h3>
-                                    <p>Lorem ipsum dolor sit amet, con sectetur adipiscing elit sed do.</p>
-                                    <span class="flaticon-security"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="single-challenges overly-one">
-                                <div class="overly-two">
-                                    <i class="flaticon-security-1"></i>
-                                    <h3>Server Security</h3>
-                                    <p>Lorem ipsum dolor sit amet, con sectetur adipiscing elit sed do.</p>
-                                    <span class="flaticon-security-1"></span>
+                                    <h3>
+                                        <a href="{{ url('') }}">
+                                            Vision
+                                        </a>
+                                    </h3>
+                                    <p>Ser una empresa lider en el cambio de moneda extranjera.</p>
+                                    <span>Vision</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- Eed Protect Area -->
 
-<!-- Start Testimonials Area -->
-{{-- <section class="testimonials-area ptb-100 jarallax" data-jarallax='{"speed": 0.3}'>
-    <div class="container">
-        <div class="testimonials">
-            <span>What our customers say</span>
-
-            <div class="testimonials-slider owl-carousel owl-theme">
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>“Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.”</p>
-
-                    <ul>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                    </ul>
-
-                    <h3>Jastin Anderson</h3>
-                    <span>CEO</span>
-                </div>
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>“Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.”</p>
-
-                    <ul>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                        <li>
-                            <i class="bx bxs-star"></i>
-                        </li>
-                    </ul>
-
-                    <h3>Juhon Anderson</h3>
-                    <span>Manager</span>
+            <div class="col-lg-6 pr-0">
+                <div class="solution-img">
+                    <img src="{{ url('') }}" alt="Image"></noscript>
                 </div>
             </div>
         </div>
     </div>
-</section> --}}
-<!-- Eed Testimonials Area -->
+</section>
+<!-- End About Area -->
 
 <!-- Start Partner Area -->
 <div class="partner-area bg-color ptb-70">
