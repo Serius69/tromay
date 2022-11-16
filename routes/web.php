@@ -17,27 +17,16 @@ use App\Http\Controllers\Crud\TransactionCRUDController;
 
 Route::controller(HomeController::class)->group(function(){
     Route::get('/',  '__invoke');
-    Route::get('/admin',  'admin');
+    Route::get('admin',  'admin');
+    Route::get('about',  'about');
+    Route::get('contact',  'contact');
+    Route::get('privacy',  'privacy');
+    Route::get('terms',  'terms');
+
 });
 
 Route::controller(CashController::class)->group(function(){
     Route::get('/quote',  'quote');
-});
-
-
-
-
-Route::get('/about', function () {
-    return view('about');
-});
-Route::get('/contact', function () {
-    return view('contact');
-});
-Route::get('/privacy', function () {
-    return view('privacy');
-});
-Route::get('/terms', function () {
-    return view('terms');
 });
 
     // Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home');

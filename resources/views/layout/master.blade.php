@@ -96,7 +96,7 @@
                             window.__mirage2 = {petok:"ib5wGw2lIsIXjsmAaMgGEUF8N4._2ykkEywDvhV6Wb4-1800-0"};
                             //]]>
                             </script>
-                            <script type="text/javascript" src="../../../ajax.cloudflare.com/cdn-cgi/scripts/04b3eb47/cloudflare-static/mirage2.min.js') }}"></script>
+                            {{-- <script type="text/javascript" src="{{('../../../ajax.cloudflare.com/cdn-cgi/scripts/04b3eb47/cloudflare-static/mirage2.min.js') }}"></script> --}}
                             <img src="{{ url('assets/img/logo.png') }}" alt="Logo"></noscript>
 						</a>
 					</div>
@@ -130,15 +130,20 @@
 
 								<div class="others-option">
 									<div class="get-quote">
-										<a href="{{ url('') }}" class="default-btn">
+										<a href="{{ url('quote') }}" class="default-btn">
 											<span>Tener una cotizacion</span>
 										</a>
 									</div>
-
-									{{-- <div class="cart-icon">
-										<a href="{{ url('') }}">
-											<i class="bx bx-cart"></i>
-											<span>0</span>
+                                    <div class="get-quote">
+                                        @foreach ($dollars as $dolar)
+                                        <a class="default-btn">
+											<span>Dolar Venta: {{$dolar->sell}} Compra: {{$dolar->buy}}</span>
+										</a>
+                                        @endforeach
+									</div>
+                                    {{-- <div class="get-quote">
+										<a href="{{ url('') }}" class="default-btn">
+											<span>Euro: Venta: {{$euro->sell}} Compra: {{$euro->buy}}</span>
 										</a>
 									</div> --}}
 								</div>
@@ -197,7 +202,7 @@
 								<img src="{{ url('assets/img/logo.png') }}" alt="Image"></noscript>
 							</a>
 
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d239.12006879739513!2d-68.1210681!3d-16.4795323!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbo!4v1668615366092!5m2!1sen!2sbo" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d239.12006879739513!2d-68.1210681!3d-16.4795323!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbo!4v1668615366092!5m2!1sen!2sbo" width="70%" height="60%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 							{{-- <ul class="social-icon">
 								<li>
 									<a href="{{ url('') }}">
@@ -234,8 +239,9 @@
 								</li>
 								<li>
 									<i class="bx bxs-envelope"></i>
-									<a href="{{ url('https://templates.envytheme.com/cdn-cgi/l/email-protection#f69e939a9a99b6859387828fd895999b') }}"><span class="__cf_email__" data-cfemail="0e666b6262614e7d6b7f7a77206d6163">[email&#160;protected]</span></a>
-									{{-- <a href="{{ url('') }}">skype: example</a> --}}
+									{{-- <a href="{{ url('https://templates.envytheme.com/cdn-cgi/l/email-protection#f69e939a9a99b6859387828fd895999b') }}"><span class="__cf_email__" data-cfemail="0e666b6262614e7d6b7f7a77206d6163">[email&#160;protected]</span></a> --}}
+
+                                    <a href="{{ url('mailto: tromay@gmail.com') }}">tromay@gmail.com</a>
 								</li>
 								<li>
 									<i class="bx bxs-phone-call"></i>
@@ -251,9 +257,11 @@
 
 							<ul class="import-link">
                                 @foreach ($cashs as $cash)
+                                @if(($cash->status)==1)
                                 <li>
 									<a href="{{ route('dinero.show',$cash->id) }}">{{$cash->name}}</a>
 								</li>
+                                @endif
                                 @endforeach
 
 							</ul>
@@ -327,7 +335,6 @@
 		<script src="{{ url('assets/js/odometer.min.js') }}"></script>
 		<script src="{{ url('assets/js/smoothscroll.min.js') }}"></script>
 		<script src="{{ url('assets/js/form-validator.min.js') }}"></script>
-		<script src="{{ url('assets/js/Contactanos-form-script.js') }}"></script>
 		<script src="{{ url('assets/js/ajaxchimp.min.js') }}"></script>
         <script src="{{ url('assets/js/wow.min.js') }}"></script>
 		<script src="{{ url('assets/js/custom.js') }}"></script>

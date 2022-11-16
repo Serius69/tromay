@@ -104,7 +104,7 @@
                             <p>Venta: {{ $cash->sell }}</p>
                             <p>Oficial: {{ $cash->oficial }}</p>
                             <a href="{{ route('dinero.show',$cash->id) }}" class="read-more">
-                                Saber Mas
+                                Saber Masc
                                 <i class="flaticon-right-arrow"></i>
                             </a>
                         </div>
@@ -177,7 +177,7 @@
 
             <div class="col-lg-6 pr-0">
                 <div class="solution-img">
-                    <img src="{{ url('') }}" alt="Image"></noscript>
+                    <img src="{{ url('assets/img/index/exchange.jpg') }}" alt="Image"></noscript>
                 </div>
             </div>
         </div>
@@ -337,7 +337,8 @@
 
 <!-- Start Map Area -->
 <div class="section-title">
-    <span>Puede Encontrarnos en la siguiente direccion</span>
+    <span>Donde nos encontramos?</span>
+    <h2>Puede Encontrarnos en la siguiente direccion</h2>
 </div>
 <div class="map-area">
     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d239.12006877689288!2d-68.1210681488008!3d-16.479532316606306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbo!4v1668611773954!5m2!1sen!2sbo""></iframe>

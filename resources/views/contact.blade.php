@@ -1,7 +1,5 @@
 @extends('layout.master')
 @section('body')
-
-
 <!-- Start Page Title Area -->
 <div class="page-title-area page-title-style-two">
     <div class="container">
@@ -27,7 +25,11 @@
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <div class="contact-wrap">
-
+                    <!-- Start Map Area -->
+                    <div class="map-area">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d239.12006877689288!2d-68.1210681488008!3d-16.479532316606306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbo!4v1668611773954!5m2!1sen!2sbo""></iframe>
+                    </div>
+                    <!-- End Map Area -->
                 </div>
             </div>
 
@@ -88,9 +90,5 @@
 </section>
 <!-- End Contact Area -->
 
-<!-- Start Map Area -->
-<div class="map-area">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d239.12006877689288!2d-68.1210681488008!3d-16.479532316606306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbo!4v1668611773954!5m2!1sen!2sbo""></iframe>
-</div>
-<!-- End Map Area -->
+
 @endsection

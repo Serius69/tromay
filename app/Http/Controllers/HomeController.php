@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Cash;
 use App\Models\Latest;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
     /**
@@ -16,7 +18,9 @@ class HomeController extends Controller
     public function __invoke(){
         $data = [
             'cashs'  => Cash::orderBy('id','asc')->paginate(10),
-            'latests'   => Latest::orderBy('date_publication','desc')->paginate(3)
+            'latests'   => Latest::orderBy('date_publication','desc')->paginate(3),
+            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            // 'euro' =>  DB::select('select sell from cashs where id = 2')
         ];
 
         return view('index',$data);
@@ -30,9 +34,70 @@ class HomeController extends Controller
         $data = [
             'cashs'  => Cash::orderBy('id','asc')->paginate(3),
             'latests'   => Latest::orderBy('id','asc')->paginate(5),
+            'dollars' =>  DB::select('select * from cashs where id = 1'),
             // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
         ];
 
         return view('admin.home',$data);
+        }
+        /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function about(){
+        $data = [
+            'cashs'  => Cash::orderBy('id','asc')->paginate(3),
+            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            // 'latests'   => Latest::orderBy('id','asc')->paginate(5),
+            // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
+        ];
+
+        return view('about',$data);
+        }
+        /**
+     * Show the application terms.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function privacy(){
+        $data = [
+            'cashs'  => Cash::orderBy('id','asc')->paginate(3),
+            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            // 'latests'   => Latest::orderBy('id','asc')->paginate(5),
+            // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
+        ];
+
+        return view('privacy',$data);
+        }
+    /**
+     * Show the application terms.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function terms(){
+        $data = [
+            'cashs'  => Cash::orderBy('id','asc')->paginate(3),
+            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            // 'latests'   => Latest::orderBy('id','asc')->paginate(5),
+            // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
+        ];
+
+        return view('terms',$data);
+        }
+         /**
+     * Show the application terms.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function contact(){
+        $data = [
+            'cashs'  => Cash::orderBy('id','asc')->paginate(3),
+            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            // 'latests'   => Latest::orderBy('id','asc')->paginate(5),
+            // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
+        ];
+
+        return view('contact',$data);
         }
 }
