@@ -25,7 +25,7 @@
             <div class="col-lg-6">
                 <div class="about-img">
                     {{-- <img data-cfsrc="{{ url('img/cash/dolar.jpg') }}" alt="Image" style="display:none;visibility:hidden;"><noscript> --}}
-                        <img src="{{ url('assets/img/cash/dolar.jpg') }}" alt="Image"></noscript>
+                        <img src="{{ url('assets/img/cash/dolar.jpg') }}" alt="Image" width="500" height="500">
                 </div>
             </div>
 
@@ -54,42 +54,26 @@
                                 <ul>
                                     <li>
                                         <i class="bx bx-check-circle"></i>
-                                        30 anios
+                                        Mas de 30 anios atendiendo al publico en general.
                                     </li>
                                     <li>
                                         <i class="bx bx-check-circle"></i>
                                         Product Security
-                                    </li>
-                                    <li>
-                                        <i class="bx bx-check-circle"></i>
-                                        System Security
-                                    </li>
-                                    <li>
-                                        <i class="bx bx-check-circle"></i>
-                                        Operational Security
                                     </li>
                                 </ul>
                             </div>
 
                             <div class="tabs_item">
-                                <p>.</p>
+                                <p>Confiabilidad a la hora de realizar transacciones.</p>
 
                                 <ul>
                                     <li>
                                         <i class="bx bx-check-circle"></i>
-                                        Transacciones seguras
+                                        Transacciones seguras.
                                     </li>
                                     <li>
                                         <i class="bx bx-check-circle"></i>
-                                        Product Security
-                                    </li>
-                                    <li>
-                                        <i class="bx bx-check-circle"></i>
-                                        System Security
-                                    </li>
-                                    <li>
-                                        <i class="bx bx-check-circle"></i>
-                                        Operational Security
+                                        Manejo correcto de las divisas.
                                     </li>
                                 </ul>
                             </div>
@@ -123,9 +107,8 @@
                                             Historia
                                         </a>
                                     </h3>
-                                    <p>Desde nuestra fundación en 1999, Tromay, empresa de cambio de moneda extranjera, ha superado varios hitos históricos en el mercado cambiario. Utilizando esa experiencia, nos hemos ganado la confianza de una amplia gama de clientes.
-                                        Bajo tales circunstancias, el método de cambio de moneda extranjera está cambiando con los tiempos, pero entre ellos, el cambio de moneda extranjera por transacción por correo se está convirtiendo en la corriente principal..</p>
-                                    <span></span>
+                                    <p>Desde nuestra fundación en 1999, Tromay, empresa de cambio de moneda extranjera, ha superado varios hitos históricos en el mercado cambiario. Utilizando esa experiencia, nos hemos ganado la confianza de una amplia gama de clientes.</p>
+                                    <span>Historia</span>
                                 </div>
                             </div>
                         </div>
@@ -170,6 +153,9 @@
     </div>
 </section>
 <!-- End About Area -->
+
+
+
 
 <!-- Start Partner Area -->
 <div class="partner-area bg-color ptb-70">

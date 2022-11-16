@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Photo;
+use App\Models\Client;
+use App\Models\User;
+use App\Models\Quotation;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Transaction extends Model
 {
     use HasFactory;
 
-    protected $table = "transaction";
+    protected $table = "transactions";
 
     /**
      * The attributes that are mass assignable.
@@ -19,25 +21,27 @@ class Transaction extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'author',
-        'description',
-        'date_publication',
-        'url',
-        'photo_id',
+        'user_id',
+        'client_id',
+        'quotation_id',
+        'ammount',
+        'date',
         'status'
     ];
 
-    protected function name(): Attribute {
-        return new Attribute (
-            get: fn($value) => ucwords($value),
-            set: fn($value) => strtolower($value)
-        );
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function photo()
+    public function client()
     {
-    return $this->belongsTo(Photo::class, 'photo_id');
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function quotation()
+    {
+        return $this->belongsTo(Quotation::class, 'quotation_id');
     }
 
 }

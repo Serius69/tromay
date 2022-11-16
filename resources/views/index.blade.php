@@ -14,20 +14,20 @@
                             <p class="wow fadeInLeft" data-wow-delay="1s">Casa de cambios dedicada a la atencion al cliente en general.</p>
 
                             <div class="banner-btn wow fadeInUp" data-wow-delay="1s">
-                                <a href="{{ url('') }}" class="default-btn">
+                                <a href="{{ url('contact') }}" class="default-btn">
                                     <span>Contactanos</span>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    {{-- <div class="col-lg-3">
                         <div class="banner-video wow zoomIn" data-wow-delay="1s" style="visibility: visible; animation-delay: 1s; animation-name: zoomIn;">
                             <a href="{{ url('') }}" class="video-btn popup-youtube">
                                 <i class="bx bx-play"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
                                         </a>
                                     </h3>
                                     <p>Desde nuestra fundación en 1999, Tromay, empresa de cambio de moneda extranjera, ha superado varios hitos históricos en el mercado cambiario. Utilizando esa experiencia, nos hemos ganado la confianza de una amplia gama de clientes.</p>
-                                    <span></span>
+                                    <span>Historia</span>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                                     <i class="flaticon-database"></i>
                                     <h3>Horario de atencion</h3>
                                     <p>Lunes a Viernes 8:00 - 12:30 13:00 - 19:00<br>
-                                    Domingos 8:00 - 12:30 13:00 - 19:00</p>
+                                    Domingos 8:00 - 12:30</p>
                                     <span class="flaticon-database"></span>
                                 </div>
                             </div>
@@ -255,7 +255,7 @@
 </section>
 <!-- Eed Protect Area -->
 <!-- Start Partner Area -->
-<div class="partner-area ptb-100">
+{{-- <div class="partner-area ptb-100">
     <div class="container">
         <div class="partner-slider owl-theme owl-carousel">
             <div class="partner-item">
@@ -265,7 +265,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- End Partner Area -->
 
 <!-- Start Blog Area -->
@@ -334,4 +334,13 @@
     </div>
 </section>
 <!-- End Blog Area -->
+
+<!-- Start Map Area -->
+<div class="section-title">
+    <span>Puede Encontrarnos en la siguiente direccion</span>
+</div>
+<div class="map-area">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d239.12006877689288!2d-68.1210681488008!3d-16.479532316606306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbo!4v1668611773954!5m2!1sen!2sbo""></iframe>
+</div>
+<!-- End Map Area -->
 @endsection

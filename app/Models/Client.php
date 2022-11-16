@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cash extends Model
+class Client extends Model
 {
     use HasFactory;
 
-    protected $table = "cashs";
+    protected $table = "clients";
 
     /**
      * The attributes that are mass assignable.
@@ -17,11 +17,9 @@ class Cash extends Model
      * @var string[]
      */
     protected $fillable = [
+        'ci',
         'name',
-        'buy',
-        'sell',
-        'oficial',
-        'photo_id',
+        'lastname',
         'status'
     ];
 
@@ -32,8 +30,10 @@ class Cash extends Model
         );
     }
 
-    public function photo()
-    {
-        return $this->belongsTo(Photo::class, 'photo_id');
+    protected function lastname(): Attribute {
+        return new Attribute (
+            get: fn($value) => ucwords($value),
+            set: fn($value) => strtolower($value)
+        );
     }
 }

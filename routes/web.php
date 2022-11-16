@@ -24,6 +24,9 @@ Route::controller(CashController::class)->group(function(){
     Route::get('/quote',  'quote');
 });
 
+
+
+
 Route::get('/about', function () {
     return view('about');
 });
@@ -39,6 +42,11 @@ Route::get('/terms', function () {
 
     // Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
 
+
+    Route::controller(DashboardController::class)->group(function(){
+        Route::get('admin/analytics',  'analytics');
+    });
+
      Route::controller(CashCRUDController::class)->group(function(){
         Route::get('admin/cash', 'index');
     });
@@ -47,6 +55,7 @@ Route::get('/terms', function () {
     });
     Route::controller(TransactionController::class)->group(function(){
         Route::get('admin/buy', 'buy');
+        Route::get('admin/sell', 'sell');
     });
     Route::controller(LatestCRUDController::class)->group(function(){
         Route::get('admin/latest', 'index');

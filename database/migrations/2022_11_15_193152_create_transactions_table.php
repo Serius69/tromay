@@ -15,14 +15,19 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id()->unique();
+
+            $table->unsignedBigInteger('user_id')->default(1);
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->unsignedBigInteger('client_id')->default(1);
+            $table->foreign('client_id')->references('id')->on('clients');
+
+            $table->unsignedBigInteger('quotation_id')->default(1);
+            $table->foreign('quotation_id')->references('id')->on('quotations');
+
             $table->double('ammount')->nullable();
-            $table->string('type')->nullable();
-            $table->unsignedBigInteger('photo_id')->default(1);
-            $table->foreign('photo_id')->references('id')->on('photos');
-            $table->unsignedBigInteger('cash_id')->default(1);
-            $table->foreign('cash_id')->references('id')->on('cashs');
-            $table->unsignedBigInteger('cash_id')->default(1);
-            $table->foreign('cash_id')->references('id')->on('cashs');
+            $table->date('date')->nullable();
+
             $table->integer('status')->default(1);
             $table->timestamps();
         });

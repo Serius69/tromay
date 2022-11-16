@@ -7,7 +7,7 @@
 					<h2>404 Error</h2>
 					<ul>
 						<li>
-							<a href="index.html">
+							<a href="{{ url('/') }}">
 								<i class="bx bx-home"></i>
 								Home
 							</a>
@@ -28,7 +28,7 @@
 						<h3>Oops! Page Not Found</h3>
 						<p>The page you were looking for could not be found.</p>
 
-						<a href="index.html" class="default-btn two">
+						<a href="{{ url('/') }}" class="default-btn two">
 							<span>Return to home page</span>
 						</a>
 					</div>

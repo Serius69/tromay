@@ -1,415 +1,277 @@
-<!Doctype html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
-<head>
-    <meta charset="utf-8" />
-    <title>Tromay | ADMIN </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @yield('token')
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ url('assets2/images/favicon.ico') }}">
 
-    <!-- Layout config Js -->
-    <script src="{{ url('assets2/js/layout.js') }}"></script>
-    <!-- Bootstrap Css -->
-    <link href="{{ url('assets2/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="{{ url('assets2/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="{{ url('assets2/css/app.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- custom Css-->
-    <link href="{{ url('assets2/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- Sweet Alert css-->
-    <link href="{{ url('assets2/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- dropzone css -->
-    <link rel="stylesheet" href="{{ url('assets2/libs/dropzone/dropzone.css') }}" type="text/css" />
-</head>
+@extends('layout.masteradmin')
+@section('token')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+@section('body')
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
 
+            <div class="page-content">
+                <div class="container-fluid">
 
-<body>
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Transacciones</h4>
 
-    <!-- Begin page -->
-    <div id="layout-wrapper">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Inicio</a></li>
+                                        <li class="breadcrumb-item active">Tansacciones</li>
+                                    </ol>
+                                </div>
 
-        <header id="page-topbar">
-    <div class="layout-width">
-        <div class="navbar-header">
-            <div class="d-flex">
-                <!-- LOGO -->
-                <div class="navbar-brand-box horizontal-logo">
-                    <a href="{{ url('') }}" class="logo logo-dark">
-                        <span class="logo-sm">
-                            <img src="{{ url('assets2/images/logo-sm.png') }}" alt="" height="22">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="{{ url('assets2/images/logo-dark.png') }}" alt="" height="17">
-                        </span>
-                    </a>
-
-                    <a href="{{ url('') }}" class="logo logo-light">
-                        <span class="logo-sm">
-                            <img src="{{ url('assets2/images/logo-sm.png') }}" alt="" height="22">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="{{ url('assets2/images/logo-light.png') }}" alt="" height="17">
-                        </span>
-                    </a>
-                </div>
-
-                <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger shadow-none" id="topnav-hamburger-icon">
-                    <span class="hamburger-icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-                </button>
-
-                <!-- App Search-->
-                <form class="app-search d-none d-md-block">
-                    <div class="position-relative">
-                        <input type="text" class="form-control" placeholder="Search..." autocomplete="off" id="search-options" value="">
-                        <span class="mdi mdi-magnify search-widget-icon"></span>
-                        <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
-                        <div data-simplebar style="max-height: 320px;">
-                            <!-- item-->
-                            <div class="dropdown-header">
-                                <h6 class="text-overflow text-muted mb-0 text-uppercase">Recent Searches</h6>
-                            </div>
+                    <!-- end page title -->
 
-                            <div class="dropdown-item bg-transparent text-wrap">
-                                <a href="{{ url('') }}" class="btn btn-soft-secondary btn-sm btn-rounded">how to setup <i class="mdi mdi-magnify ms-1"></i></a>
-                                <a href="{{ url('') }}" class="btn btn-soft-secondary btn-sm btn-rounded">buttons <i class="mdi mdi-magnify ms-1"></i></a>
-                            </div>
-                            <!-- item-->
-                            <div class="dropdown-header mt-2">
-                                <h6 class="text-overflow text-muted mb-1 text-uppercase">Pages</h6>
-                            </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card" id="customerList">
+                                <div class="card-header border-bottom-dashed">
 
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="ri-bubble-chart-line align-middle fs-18 text-muted me-2"></i>
-                                <span>Analytics Dashboard</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="ri-lifebuoy-line align-middle fs-18 text-muted me-2"></i>
-                                <span>Help Center</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="ri-user-settings-line align-middle fs-18 text-muted me-2"></i>
-                                <span>My account settings</span>
-                            </a>
-
-                            <!-- item-->
-                            <div class="dropdown-header mt-2">
-                                <h6 class="text-overflow text-muted mb-2 text-uppercase">Members</h6>
-                            </div>
-
-                            <div class="notification-list">
-                                <!-- item -->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
-                                    <div class="d-flex">
-                                        <img src="{{ url('assets2/images/users/avatar-2.jpg')}}" class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="flex-1">
-                                            <h6 class="m-0">Angela Bernier</h6>
-                                            <span class="fs-11 mb-0 text-muted">Manager</span>
+                                    <div class="row g-4 align-items-center">
+                                        <div class="col-sm">
+                                            <div>
+                                                <h5 class="card-title mb-0">Lista de Transac</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-auto">
+                                            <div>
+                                                <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
+                                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Customer</button>
+                                                <button type="button" class="btn btn-info"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </a>
-
-                            </div>
-                        </div>
-
-                        <div class="text-center pt-3 pb-1">
-                            <a href="pages-search-results.') }}" class="btn btn-primary btn-sm">View All Results <i class="ri-arrow-right-line ms-1"></i></a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="d-flex align-items-center">
-
-                <div class="dropdown d-md-none topbar-head-dropdown header-item">
-                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bx bx-search fs-22"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
-                        <form class="p-3">
-                            <div class="form-group m-0">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
-                                    <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="dropdown ms-1 topbar-head-dropdown header-item">
-                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img id="header-lang-img" src="{{ url('assets2/images/flags/us.svg')}}" alt="Header Language" height="20" class="rounded">
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language py-2" data-lang="en" title="English">
-                            <img src="{{ url('assets2/images/flags/us.svg')}}" alt="user-image" class="me-2 rounded" height="18">
-                            <span class="align-middle">English</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp" title="Spanish">
-                            <img src="{{ url('assets2/images/flags/spain.svg')}}" alt="user-image" class="me-2 rounded" height="18">
-                            <span class="align-middle">Español</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="ms-1 header-item d-none d-sm-flex">
-                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none" data-toggle="fullscreen">
-                        <i class='bx bx-fullscreen fs-22'></i>
-                    </button>
-                </div>
-
-                <div class="ms-1 header-item d-none d-sm-flex">
-                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode shadow-none">
-                        <i class='bx bx-moon fs-22'></i>
-                    </button>
-                </div>
-
-                <div class="dropdown topbar-head-dropdown ms-1 header-item">
-                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle shadow-none" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class='bx bx-bell fs-22'></i>
-                        <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">3<span class="visually-hidden">unread messages</span></span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
-
-                        <div class="dropdown-head bg-primary bg-pattern rounded-top">
-                            <div class="p-3">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h6 class="m-0 fs-16 fw-semibold text-white"> Notifications </h6>
-                                    </div>
-                                    <div class="col-auto dropdown-tabs">
-                                        <span class="badge badge-soft-light fs-13"> 4 New</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="px-2 pt-2">
-                                <ul class="nav nav-tabs dropdown-tabs nav-tabs-custom" data-dropdown-tabs="true" id="notificationItemsTab" role="tablist">
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#all-noti-tab" role="tab" aria-selected="true">
-                                            All (4)
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#messages-tab" role="tab" aria-selected="false">
-                                            Messages
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#alerts-tab" role="tab" aria-selected="false">
-                                            Alerts
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                        <div class="tab-content" id="notificationItemsTabContent">
-                            <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
-                                <div data-simplebar style="max-height: 300px;" class="pe-2">
-                                    <div class="text-reset notification-item d-block dropdown-item position-relative">
-                                        <div class="d-flex">
-                                            <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-soft-info text-info rounded-circle fs-16">
-                                                    <i class="bx bx-badge-check"></i>
-                                                </span>
+                                <div class="card-body border-bottom-dashed border-bottom">
+                                    <form>
+                                        <div class="row g-3">
+                                            <div class="col-xl-6">
+                                                <div class="search-box">
+                                                    <input type="text" class="form-control search" placeholder="Search for customer, email, phone, status or something...">
+                                                    <i class="ri-search-line search-icon"></i>
+                                                </div>
                                             </div>
-                                            <div class="flex-1">
-                                                <a href="#!" class="stretched-link">
-                                                    <h6 class="mt-0 mb-2 lh-base">Your <b>Elite</b> author Graphic
-                                                        Optimization <span class="text-secondary">reward</span> is
-                                                        ready!
-                                                    </h6>
+                                            <!--end col-->
+                                            <div class="col-xl-6">
+                                                <div class="row g-3">
+                                                    <div class="col-sm-4">
+                                                        <div class="">
+                                                            <input type="text" class="form-control" id="datepicker-range" data-provider="flatpickr" data-date-format="d M, Y" data-range-date="true" placeholder="Select date">
+                                                        </div>
+                                                    </div>
+                                                    <!--end col-->
+                                                    <div class="col-sm-4">
+                                                        <div>
+                                                            <select class="form-control" data-plugin="choices" data-choices data-choices-search-false name="choices-single-default" id="idStatus">
+                                                                <option value="">Status</option>
+                                                                <option value="all" selected>All</option>
+                                                                <option value="Active">Active</option>
+                                                                <option value="Block">Block</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!--end col-->
+
+                                                    <div class="col-sm-4">
+                                                        <div>
+                                                            <button type="button" class="btn btn-primary w-100" onclick="SearchData();"> <i class="ri-equalizer-fill me-2 align-bottom"></i>Filters</button>
+                                                        </div>
+                                                    </div>
+                                                    <!--end col-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end row-->
+                                    </form>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <div class="table-responsive table-card mb-1">
+                                            <table class="table align-middle" id="customerTable">
+                                                <thead class="table-light text-muted">
+                                                    <tr>
+                                                        <th scope="col" style="width: 50px;">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="checkAll" value="option">
+                                                            </div>
+                                                        </th>
+
+                                                        <th class="sort" data-sort="customer_name">Nombre</th>
+                                                        <th class="sort" data-sort="email">Email</th>
+                                                        <th class="sort" data-sort="phone">Phone</th>
+                                                        <th class="sort" data-sort="date">Joining Date</th>
+                                                        <th class="sort" data-sort="status">Status</th>
+                                                        <th class="sort" data-sort="action">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="list form-check-all">
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
+                                                            </div>
+                                                        </th>
+                                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
+                                                        <td class="customer_name">Mary Cousar</td>
+                                                        <td class="email">marycousar@velzon.com</td>
+                                                        <td class="phone">580-464-4694</td>
+                                                        <td class="date">06 Apr, 2021</td>
+                                                        <td class="status"><span class="badge badge-soft-success text-uppercase">Active</span>
+                                                        </td>
+                                                        <td>
+                                                            <ul class="list-inline hstack gap-2 mb-0">
+                                                                <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                                                                    <a href="#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
+                                                                        <i class="ri-pencil-fill fs-16"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                                                                    <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal">
+                                                                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="noresult" style="display: none">
+                                                <div class="text-center">
+                                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
+                                                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                    <p class="text-muted mb-0">We've searched more than 150+ customer We did not find any customer for you search.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <div class="pagination-wrap hstack gap-2">
+                                                <a class="page-item pagination-prev disabled" href="#">
+                                                    Previous
                                                 </a>
-                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                    <span><i class="mdi mdi-clock-outline"></i> Just 30 sec ago</span>
-                                                </p>
+                                                <ul class="pagination listjs-pagination mb-0"></ul>
+                                                <a class="page-item pagination-next" href="#">
+                                                    Next
+                                                </a>
                                             </div>
-                                            <div class="px-2 fs-15">
-                                                <div class="form-check notification-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="all-notification-check01">
-                                                    <label class="form-check-label" for="all-notification-check01"></label>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="showModal" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-light p-3">
+                                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+                                                </div>
+                                                <form action="#">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" id="id-field" />
+
+                                                        <div class="mb-3" id="modal-id" style="display: none;">
+                                                            <label for="id-field1" class="form-label">ID</label>
+                                                            <input type="text" id="id-field1" class="form-control" placeholder="ID" readonly />
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="customername-field" class="form-label">Customer Name</label>
+                                                            <input type="text" id="customername-field" class="form-control" placeholder="Enter name" required />
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="email-field" class="form-label">Email</label>
+                                                            <input type="email" id="email-field" class="form-control" placeholder="Enter email" required />
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="phone-field" class="form-label">Phone</label>
+                                                            <input type="text" id="phone-field" class="form-control" placeholder="Enter phone no." required />
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="date-field" class="form-label">Joining Date</label>
+                                                            <input type="date" id="date-field" class="form-control" data-provider="flatpickr" data-date-format="d M, Y" required placeholder="Select date" />
+                                                        </div>
+
+                                                        <div>
+                                                            <label for="status-field" class="form-label">Status</label>
+                                                            <select class="form-control" data-choices data-choices-search-false name="status-field" id="status-field">
+                                                                <option value="">Status</option>
+                                                                <option value="Active">Active</option>
+                                                                <option value="Block">Block</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="hstack gap-2 justify-content-end">
+                                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-success" id="add-btn">Add Customer</button>
+                                                            <button type="button" class="btn btn-success" id="edit-btn">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" id="deleteRecord-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mt-2 text-center">
+                                                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                                                        <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                                                            <h4>Are you sure ?</h4>
+                                                            <p class="text-muted mx-4 mb-0">Are you sure you want to remove this record ?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                                        <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn w-sm btn-danger" id="delete-record">Yes, Delete It!</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="my-3 text-center">
-                                        <button type="button" class="btn btn-soft-success waves-effect waves-light">View
-                                            All Notifications <i class="ri-arrow-right-line align-middle"></i></button>
-                                    </div>
+                                    <!--end modal -->
                                 </div>
-
                             </div>
 
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
 
-                            <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel" aria-labelledby="alerts-tab">
-                                <div class="w-25 w-sm-50 pt-3 mx-auto">
-                                    <img src="{{ url('assets2/images/svg/bell.svg')}}" class="img-fluid" alt="user-pic">
-                                </div>
-                                <div class="text-center pb-5 mt-2">
-                                    <h6 class="fs-18 fw-semibold lh-base">Hey! You have no any notifications </h6>
-                                </div>
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <script>document.write(new Date().getFullYear())</script> © Velzon.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-end d-none d-sm-block">
+                                Design & Develop by Themesbrand
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="dropdown ms-sm-3 header-item topbar-user">
-                    <button type="button" class="btn shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="{{ url('assets2/images/users/avatar-1.jpg') }}" alt="Header Avatar">
-                            <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna Adame</span>
-                                <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
-                            </span>
-                        </span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <h6 class="dropdown-header">Welcome Anna!</h6>
-                        <a class="dropdown-item" href="pages-profile.') }}"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Profile</span></a>
-                        <a class="dropdown-item" href="{{ url('apps-chat.html') }}"><i class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Messages</span></a>
-                        <a class="dropdown-item" href="{{ url('apps-tasks-kanban.html') }}"><i class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Taskboard</span></a>
-                        <a class="dropdown-item" href="pages-faqs.') }}"><i class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Help</span></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="pages-profile.') }}"><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$5971.67</b></span></a>
-                        <a class="dropdown-item" href="pages-profile-settings.') }}"><span class="badge bg-soft-success text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a>
-                        <a class="dropdown-item" href="{{ url('auth-lockscreen-basic.') }}"><i class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Lock screen</span></a>
-                        <a class="dropdown-item" href="{{ url('auth-logout-basic.') }}"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
-                    </div>
-                </div>
-            </div>
+            </footer>
         </div>
-    </div>
-</header>
-
-        <!-- ========== App Menu ========== -->
-        <div class="app-menu navbar-menu">
-            <!-- LOGO -->
-            <div class="navbar-brand-box">
-                <!-- Dark Logo-->
-                <a href="{{ url('') }}" class="logo logo-dark">
-                    <span class="logo-sm">
-                        <img src="{{ url('assets2/images/logo-sm.png') }}" alt="" height="22">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="{{ url('assets2/images/logo-dark.png') }}" alt="" height="17">
-                    </span>
-                </a>
-                <!-- Light Logo-->
-                <a href="{{ url('') }}" class="logo logo-light">
-                    <span class="logo-sm">
-                        <img src="{{ url('assets2/images/logo-sm.png') }}" alt="" height="22">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="{{ url('assets2/images/logo-light.png') }}" alt="" height="17">
-                    </span>
-                </a>
-                <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
-                    <i class="ri-record-circle-line"></i>
-                </button>
-            </div>
-
-            <div id="scrollbar">
-                <div class="container-fluid">
-
-                    <div id="two-column-menu">
-                    </div>
-                    <ul class="navbar-nav" id="navbar-nav">
-                        <li class="menu-title"><span data-key="t-menu">Menu</span></li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                <i class="mdi mdi-speedometer"></i> <span data-key="t-dashboards">Dashboards</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="sidebarDashboards">
-                                <ul class="nav nav-sm flex-column">
-                                    {{-- <li class="nav-item">
-                                        <a href="{{ url('admin/analytics') }}" class="nav-link" data-key="t-analytics"> Analytics </a>
-                                    </li> --}}
-                                    <li class="nav-item">
-                                        <a href="{{ url('admin') }}" class="nav-link" data-key="t-crm"> CRM </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li> <!-- end Dashboard Menu -->
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarApps">
-                                <i class="mdi mdi-abugida-devanagari"></i> <span data-key="t-apps">Transaccion</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="sidebarApps">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{ url('admin/buy') }}" class="nav-link" data-key="t-calendar"> Compra </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ url('admin/sell') }}" class="nav-link" data-key="t-chat"> Venta </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ url('admin/transaction') }}" class="nav-link" data-key="t-chat"> Editar Transacciones </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarNews" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarNews">
-                                <i class="mdi mdi-newspaper-variant-multiple"></i> <span data-key="t-news">Noticias</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="sidebarNews">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{ url('admin/latest') }}" class="nav-link" data-key="t-calendar"> Editar Noticias </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarCash" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarNews">
-                                <i class="mdi mdi-access-point-check"></i> <span data-key="t-news">Cotizaciones</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="sidebarCash">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{ url('admin/cash') }}" class="nav-link" data-key="t-calendar"> Editar Cotizaciones </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
-                <!-- Sidebar -->
-            </div>
-
-            <div class="sidebar-background"></div>
-        </div>
-        <!-- Left Sidebar End -->
-        <!-- Vertical Overlay-->
-        <div class="vertical-overlay"></div>
-
-        <!-- ============================================================== -->
-        <!-- Start right Content here -->
-        <!-- ============================================================== -->
-        @yield('body')
         <!-- end main content-->
 
     </div>
@@ -995,26 +857,26 @@
                             <div class="form-check sidebar-setting card-radio">
                                 <input class="form-check-input" type="radio" name="data-sidebar-image" id="sidebarimg-01" value="img-1">
                                 <label class="form-check-label p-0 avatar-sm h-auto" for="sidebarimg-01">
-                                    <img src="{{ url('assets2/images/sidebar/img-1.jpg') }}" alt="" class="avatar-md w-auto object-cover">
+                                    <img src="assets/images/sidebar/img-1.jpg" alt="" class="avatar-md w-auto object-cover">
                                 </label>
                             </div>
 
                             <div class="form-check sidebar-setting card-radio">
                                 <input class="form-check-input" type="radio" name="data-sidebar-image" id="sidebarimg-02" value="img-2">
                                 <label class="form-check-label p-0 avatar-sm h-auto" for="sidebarimg-02">
-                                    <img src="{{ url('assets2/images/sidebar/img-2.jpg') }}" alt="" class="avatar-md w-auto object-cover">
+                                    <img src="assets/images/sidebar/img-2.jpg" alt="" class="avatar-md w-auto object-cover">
                                 </label>
                             </div>
                             <div class="form-check sidebar-setting card-radio">
                                 <input class="form-check-input" type="radio" name="data-sidebar-image" id="sidebarimg-03" value="img-3">
                                 <label class="form-check-label p-0 avatar-sm h-auto" for="sidebarimg-03">
-                                    <img src="{{ url('assets2/images/sidebar/img-3.jpg') }}" alt="" class="avatar-md w-auto object-cover">
+                                    <img src="assets/images/sidebar/img-3.jpg" alt="" class="avatar-md w-auto object-cover">
                                 </label>
                             </div>
                             <div class="form-check sidebar-setting card-radio">
                                 <input class="form-check-input" type="radio" name="data-sidebar-image" id="sidebarimg-04" value="img-4">
                                 <label class="form-check-label p-0 avatar-sm h-auto" for="sidebarimg-04">
-                                    <img src="{{ url('assets2/images/sidebar/img-4.jpg') }}" alt="" class="avatar-md w-auto object-cover">
+                                    <img src="assets/images/sidebar/img-4.jpg" alt="" class="avatar-md w-auto object-cover">
                                 </label>
                             </div>
                         </div>
@@ -1094,52 +956,155 @@
                 <div class="col-6">
                     <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
                 </div>
+                <div class="col-6">
+                    <a href="https://1.envato.market/velzon-admin" target="_blank" class="btn btn-primary w-100">Buy Now</a>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- JAVASCRIPT -->
-    <script src="{{ url('assets2/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ url('assets2/libs/simplebar/simplebar.min.js')}}"></script>
-    <script src="{{ url('assets2/libs/node-waves/waves.min.js')}}"></script>
-    <script src="{{ url('assets2/libs/feather-icons/feather.min.js')}}"></script>
-    <script src="{{ url('assets2/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
-    <script src="{{ url('assets2/js/plugins.js')}}"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+    <script src="assets/libs/feather-icons/feather.min.js"></script>
+    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+    <script src="assets/js/plugins.js"></script>
 
-    <!-- prismjs plugin -->
-    <script src="{{ url('assets2/libs/prismjs/prism.js')}}"></script>
-    <script src="{{ url('assets2/libs/list.js/list.min.js')}}"></script>
-    <script src="{{ url('assets2/libs/list.pagination.js/list.pagination.min.js')}}"></script>
+    <!-- list.js min js -->
+    <script src="assets/libs/list.js/list.min.js"></script>
+    <script src="assets/libs/list.pagination.js/list.pagination.min.js"></script>
 
-    <!-- apexcharts -->
-    <script src="{{ url('assets2/libs/apexcharts/apexcharts.min.js')}}"></script>
-
-    <!-- Dashboard init -->
-    <script src="{{ url('assets2/js/pages/dashboard-crm.init.js')}}"></script>
-
-    <!-- App js -->
-    <script src="{{ url('assets2/js/app.js')}}"></script>
-
-    <!-- listjs init -->
-    <script src="{{ url('assets2/js/pages/listjs.init.js')}}"></script>
+    <!--ecommerce-customer init js -->
+    <script src="assets/js/pages/ecommerce-customer-list.init.js"></script>
 
     <!-- Sweet Alerts js -->
-    <script src="{{ url('assets2/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
 
-    <!-- Modal Js -->
-    <script src="{{ url('assets2/js/pages/modal.init.js')}}"></script>
-
-    <!-- dropzone min -->
-    <script src="{{ url('assets2/libs/dropzone/dropzone-min.js')}}"></script>
-    <!-- filepond js -->
-    <script src="{{ url('assets2/libs/filepond/filepond.min.js')}}"></script>
-    <script src="{{ url('assets2/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js')}}"></script>
-    <script src="{{ url('assets2/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js')}}"></script>
-    <script src="{{ url('assets2/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js')}}"></script>
-    <script src="{{ url('assets2/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js')}}"></script>
-
-    <script src="{{ url('assets2/js/pages/form-file-upload.init.js')}}"></script>
-    <script src="{{ url('assets2/js/pages/form-file-upload.init.js')}}"></script>
+    <!-- App js -->
+    <script src="assets/js/app.js"></script>
 </body>
 
 </html>
+ <!-- container-fluid -->
+@endsection
+
+
+@section('script')
+<script type="text/javascript">
+    $(function () {
+
+      /*------------------------------------------
+       --------------------------------------------
+       Pass Header Token
+       --------------------------------------------
+       --------------------------------------------*/
+      $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+      });
+
+      /*------------------------------------------
+      --------------------------------------------
+      Render DataTable
+      --------------------------------------------
+      --------------------------------------------*/
+      var table = $('.table').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('cashs.index') }}",
+          columns: [
+              {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+              {data: 'name', name: 'name'},
+              {data: 'buy', name: 'buy'},
+              {data: 'sell', name: 'sell'},
+              {data: 'oficial', name: 'oficial'},
+              {data: 'status', name: 'status'},
+              {data: 'action', name: 'action', orderable: false, searchable: false},
+          ]
+      });
+
+      /*------------------------------------------
+      --------------------------------------------
+      Click to Button
+      --------------------------------------------
+      --------------------------------------------*/
+      $('#createNewcash').click(function () {
+          $('#saveBtn').val("create-cash");
+          $('#cash_id').val('');
+          $('#cashForm').trigger("reset");
+          $('#modelHeading').html("Crear nueva Cotizacion");
+          $('#ajaxModel').modal('show');
+      });
+
+      /*------------------------------------------
+      --------------------------------------------
+      Click to Edit Button
+      --------------------------------------------
+      --------------------------------------------*/
+      $('body').on('click', '.editcash', function () {
+        var cash_id = $(this).data('id');
+        $.get("{{ route('cashs.index') }}" +'/' + cash_id +'/edit', function (data) {
+            $('#modelHeading').html("Editar Cotizacion");
+            $('#saveBtn').val("edit-user");
+            $('#ajaxModel').modal('show');
+            $('#cash_id').val(data.id);
+            $('#name').val(data.name);
+            $('#buy').val(data.buy);
+        })
+      });
+
+      /*------------------------------------------
+      --------------------------------------------
+      Create cash Code
+      --------------------------------------------
+      --------------------------------------------*/
+      $('#saveBtn').click(function (e) {
+          e.preventDefault();
+          $(this).html('Guardando..');
+
+          $.ajax({
+            data: $('#cashForm').serialize(),
+            url: "{{ route('cashs.store') }}",
+            type: "POST",
+            dataType: 'json',
+            success: function (data) {
+
+                $('#cashForm').trigger("reset");
+                $('#ajaxModel').modal('hide');
+                table.draw();
+
+            },
+            error: function (data) {
+                console.log('Error:', data);
+                $('#saveBtn').html('Save Changes');
+            }
+        });
+      });
+
+      /*------------------------------------------
+      --------------------------------------------
+      Delete cash Code
+      --------------------------------------------
+      --------------------------------------------*/
+      $('body').on('click', '.deletecash', function () {
+
+          var cash_id = $(this).data("id");
+          confirm("Are You sure want to delete !");
+
+          $.ajax({
+              type: "DELETE",
+              url: "{{ route('cashs.store') }}"+'/'+cash_id,
+              success: function (data) {
+                  table.draw();
+              },
+              error: function (data) {
+                  console.log('Error:', data);
+              }
+          });
+      });
+
+    });
+  </script>
+  @endsection

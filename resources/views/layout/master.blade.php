@@ -90,7 +90,7 @@
 			<div class="navbar-area navbar-area-four">
 				<div class="mobile-nav">
 					<div class="container">
-						<a href="index.html" class="logo">
+						<a href="{{ url('/') }}" class="logo">
 							<script type="text/javascript" style="display:none">
                             //<![CDATA[
                             window.__mirage2 = {petok:"ib5wGw2lIsIXjsmAaMgGEUF8N4._2ykkEywDvhV6Wb4-1800-0"};
@@ -105,7 +105,7 @@
 				<div class="main-nav">
 					<div class="container">
 						<nav class="navbar navbar-expand-md">
-							<a class="navbar-brand" href="index.html">
+							<a class="navbar-brand" href="{{ url('/') }}">
 								<img src="{{ url('assets/img/logo.png') }}" alt="Logo"></noscript>
 							</a>
 
@@ -193,13 +193,12 @@
 				<div class="row">
 					<div class="col-lg-3 col-md-6">
 						<div class="single-footer-widget">
-							<a href="index.html" class="logo">
-								<img data-cfsrc="{{ url('assets/img/logo.png') }}" alt="Image" style="display:none;visibility:hidden;"><noscript><img src="{{ url('assets/img/logo.png') }}" alt="Image"></noscript>
+							<a href="{{ url('/') }}" class="logo">
+								<img src="{{ url('assets/img/logo.png') }}" alt="Image"></noscript>
 							</a>
 
-							<p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua consec tetur adipiscing.</p>
-
-							<ul class="social-icon">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d239.12006879739513!2d-68.1210681!3d-16.4795323!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbo!4v1668615366092!5m2!1sen!2sbo" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+							{{-- <ul class="social-icon">
 								<li>
 									<a href="{{ url('') }}">
 										<i class="bx bxl-facebook"></i>
@@ -220,13 +219,13 @@
 										<i class="bx bxl-twitter"></i>
 									</a>
 								</li>
-							</ul>
+							</ul> --}}
 						</div>
 					</div>
 
 					<div class="col-lg-3 col-md-6">
 						<div class="single-footer-widget">
-							<h3>Address</h3>
+							<h3>Direccion</h3>
 
 							<ul class="address">
 								<li class="location">
@@ -251,9 +250,12 @@
 							<h3>Monedas</h3>
 
 							<ul class="import-link">
-								<li>
-									<a href="{{ url('') }}">name</a>
+                                @foreach ($cashs as $cash)
+                                <li>
+									<a href="{{ route('dinero.show',$cash->id) }}">{{$cash->name}}</a>
 								</li>
+                                @endforeach
+
 							</ul>
 						</div>
 					</div>
@@ -288,12 +290,12 @@
 					<div class="col-lg-6 col-md-6">
 						<ul class="footer-menu">
 							<li>
-								<a href="{{ url('') }}" target="_blank">
+								<a href="{{ url('privacy') }}" >
 									Politica de Privacidad
 								</a>
 							</li>
 							<li>
-								<a href="{{ url('') }}" target="_blank">
+								<a href="{{ url('terms') }}" >
 									Terminos y condiciones
 								</a>
 							</li>

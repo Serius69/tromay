@@ -7,7 +7,7 @@
 					<h2>Pricing</h2>
 					<ul>
 						<li>
-							<a href="index.html">
+							<a href="{{ url('/') }}">
 								<i class="bx bx-home"></i>
 								Home
 							</a>

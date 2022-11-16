@@ -6,15 +6,15 @@
 <div class="page-title-area page-title-style-two">
     <div class="container">
         <div class="page-title-content">
-            <h2>Contact Us</h2>
+            <h2>Contactanos</h2>
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="{{ url('') }}">
                         <i class="bx bx-home"></i>
-                        Home
+                        Inicio
                     </a>
                 </li>
-                <li class="active">Contact</li>
+                <li class="active">Contacto</li>
             </ul>
         </div>
     </div>
@@ -27,84 +27,35 @@
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <div class="contact-wrap">
-                    <div class="contact-form">
-                        <div class="contact-title">
-                            <h2>Write Us</h2>
-                        </div>
 
-                        <form id="contactForm">
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        <input type="text" name="name" id="name" class="form-control" required data-error="Please enter your name">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Email Address</label>
-                                        <input type="email" name="email" id="email" class="form-control" required data-error="Please enter your email">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label>Subject</label>
-                                        <input type="text" name="msg_subject" id="msg_subject" class="form-control" required data-error="Please enter your subject">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label>Message</label>
-                                        <textarea name="message" class="form-control" id="message" cols="30" rows="10" required data-error="Write your message"></textarea>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 col-md-12">
-                                    <button type="submit" class="default-btn btn-two">
-                                        <span>Send Message</span>
-                                    </button>
-                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
 
             <div class="col-lg-4">
                 <div class="contact-info">
-                    <h3>Our contact details</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+                    <h3>Informacion de contacto</h3>
+                    <p></p>
 
                     <ul class="address">
                         <li class="location">
                             <i class="bx bxs-location-plus"></i>
-                            <span>Address</span>
-                            6890 Blvd, The Bronx, NY  1058 New York, USA
+                            <span>Direccion</span>
+                            137 Avenida las Americas, Zona Villa Fatima, BO
                         </li>
                         <li>
                             <i class="bx bxs-phone-call"></i>
-                            <span>Phone</span>
-                            <a href="tel:+1-(514)-312-5678">+1 (514) 312-5678</a>
-                            <a href="tel:+1-(514)-312-6677">+1 (514) 312-6677</a>
+                            <span>Telefono</span>
+                            <a href="tel:+1-(514)-312-5678">+591 2218312</a>
+                            <a href="tel:+1-(514)-312-6677">+591 78939071</a>
                         </li>
                         <li>
                             <i class="bx bxs-envelope"></i>
-                            <span>Email</span>
-                            <a href="https://templates.envytheme.com/cdn-cgi/l/email-protection#620a070e0e0d22110713161b4c010d0f"><span class="__cf_email__" data-cfemail="1d75787171725d6e786c6964337e7270">[email&#160;protected]</span></a>
-                            <a href="#">skype: example</a>
+                            <span>Correo Electronico</span>
+                            <a href="">tromay@gmail.com</a>
                         </li>
                     </ul>
 
-                    <div class="sidebar-follow-us">
+                    {{-- <div class="sidebar-follow-us">
                         <h3>Follow us:</h3>
 
                         <ul class="social-wrap">
@@ -129,7 +80,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -139,7 +90,7 @@
 
 <!-- Start Map Area -->
 <div class="map-area">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96573.31103674119!2d-73.91097366523668!3d40.85176866829554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c28b553a697cb1%3A0x556e43a78ff15c77!2sThe%20Bronx%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1600202608808!5m2!1sen!2sbd"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d239.12006877689288!2d-68.1210681488008!3d-16.479532316606306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbo!4v1668611773954!5m2!1sen!2sbo""></iframe>
 </div>
 <!-- End Map Area -->
 @endsection
