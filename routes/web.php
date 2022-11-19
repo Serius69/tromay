@@ -49,6 +49,9 @@ Route::controller(CashController::class)->group(function(){
     Route::controller(LatestCRUDController::class)->group(function(){
         Route::get('admin/latest', 'index');
     });
+    Route::controller(LatestCRUDController::class)->group(function(){
+        Route::get('admin/quotation', 'index');
+    });
 
 
 //Para vista del usuario
@@ -56,4 +59,5 @@ Route::resource('noticia', LatestController::class);
 Route::resource('dinero', CashController::class);
 //CRUD
 Route::resource('latests', LatestCRUDController::class);
-Route::resource('cashs', CashCRUDController::class);
+Route::resource('cashes', CashCRUDController::class);
+Route::resource('transactions', LatestCRUDController::class);

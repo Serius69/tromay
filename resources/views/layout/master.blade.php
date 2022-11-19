@@ -256,7 +256,7 @@
 							<h3>Monedas</h3>
 
 							<ul class="import-link">
-                                @foreach ($cashs as $cash)
+                                @foreach ($cashes as $cash)
                                 @if(($cash->status)==1)
                                 <li>
 									<a href="{{ route('dinero.show',$cash->id) }}">{{$cash->name}}</a>

@@ -14,27 +14,36 @@ class TransactionCRUDController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-
+    public function index(Request $request)   {
         if ($request->ajax()) {
-
             $data = Transaction::latest()->get();
-
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm edittransaction">Edit</a>';
-
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deletetransaction">Delete</a>';
-
-                            return $btn;
+                        $btn ='
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
+                        /div>
+                        ';
+                        $btn = $btn.'
+                        <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
+                            <a href="#showModal" data-bs-toggle="modal" data-id="'.$row->id.' class="text-primary d-inline-block edit-item-btn">
+                                <i class="ri-pencil-fill fs-16"></i>
+                            </a>
+                        </li>
+                        '       ;
+                        $btn = $btn.'
+                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
+                        <a class="text-danger d-inline-block remove-item-btn" data-id="'.$row->id.' data-bs-toggle="modal" href="#deleteRecordModal">
+                        <i class="ri-delete-bin-5-fill fs-16"></i>
+                        </a>
+                        </li>
+                        ';
+                        return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-
         return view('transaction.crud');
     }
 
@@ -44,8 +53,7 @@ class TransactionCRUDController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request)   {
         transaction::updateOrCreate([
                     'id' => $request->transaction_id
                 ],
@@ -65,8 +73,7 @@ class TransactionCRUDController extends Controller
      * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id)    {
         $transaction = Transaction::find($id);
         return response()->json($transaction);
     }
@@ -77,10 +84,8 @@ class TransactionCRUDController extends Controller
      * @param  \App\transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id)    {
         transaction::find($id)->delete();
-
         return response()->json(['success'=>'transaction deleted successfully.']);
     }
 }

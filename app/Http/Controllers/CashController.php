@@ -16,9 +16,9 @@ class CashController extends Controller
     public function quote(){
 
         $data = [
-            'cashs'  => Cash::orderBy('id','asc')->paginate(10),
+            'cashes'  => Cash::orderBy('id','asc')->paginate(10),
             'quotation'  => Cash::orderBy('id','asc')->paginate(10),
-            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            'dollars' =>  DB::select('select * from cashes where id = 1'),
         ];
 
         return view('quote',$data);

@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function analytics(){
 
         $data = [
-            'cashs'  => Cash::orderBy('id','asc')->paginate(10),
+            'cashes'  => Cash::orderBy('id','asc')->paginate(10),
         ];
 
         return view('admin.analytics_dashboard',$data);

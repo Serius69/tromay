@@ -37,7 +37,7 @@
                                         <div class="row g-4 mb-3">
                                             <div class="col-sm-auto">
                                                 <div>
-                                                    <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add</button>
+                                                    <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="createNewroom" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add</button>
                                                     <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
                                                 </div>
                                             </div>
@@ -103,6 +103,7 @@
                     </div>
                     <!-- end row -->
 
+                    {{-- POPUP FORM --}}
                     <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -112,7 +113,6 @@
                                 </div>
                                 <form id="cashForm" name="cashForm" class="form-horizontal">
                                     <div class="modal-body">
-
                                         <div class="mb-3" id="modal-id" style="display: none;">
                                             <label for="id-field" class="form-label">ID</label>
                                             <input type="text" id="id" name="id" class="form-control" placeholder="ID" readonly />
@@ -213,7 +213,7 @@
       var table = $('.table').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "{{ route('cashs.index') }}",
+          ajax: "{{ route('cashes.index') }}",
           columns: [
               {data: 'DT_RowIndex', name: 'DT_RowIndex'},
               {data: 'name', name: 'name'},
@@ -245,7 +245,7 @@
       --------------------------------------------*/
       $('body').on('click', '.editcash', function () {
         var cash_id = $(this).data('id');
-        $.get("{{ route('cashs.index') }}" +'/' + cash_id +'/edit', function (data) {
+        $.get("{{ route('cashes.index') }}" +'/' + cash_id +'/edit', function (data) {
             $('#modelHeading').html("Editar Cotizacion");
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
@@ -266,7 +266,7 @@
 
           $.ajax({
             data: $('#cashForm').serialize(),
-            url: "{{ route('cashs.store') }}",
+            url: "{{ route('cashes.store') }}",
             type: "POST",
             dataType: 'json',
             success: function (data) {
@@ -295,7 +295,7 @@
 
           $.ajax({
               type: "DELETE",
-              url: "{{ route('cashs.store') }}"+'/'+cash_id,
+              url: "{{ route('cashes.store') }}"+'/'+cash_id,
               success: function (data) {
                   table.draw();
               },

@@ -9,7 +9,7 @@ class Cash extends Model
 {
     use HasFactory;
 
-    protected $table = "cashs";
+    protected $table = "cashes";
 
     /**
      * The attributes that are mass assignable.

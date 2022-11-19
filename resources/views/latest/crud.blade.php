@@ -1,7 +1,11 @@
 
 @extends('layout.masteradmin')
-@section('body')
 
+@section('token')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
+@section('body')
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
@@ -35,7 +39,7 @@
                                         <div class="row g-4 mb-3">
                                             <div class="col-sm-auto">
                                                 <div>
-                                                    <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add</button>
+                                                    <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="createNewroom" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add</button>
                                                     <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
                                                 </div>
                                             </div>
@@ -64,33 +68,11 @@
                                                         <th class="sort" data-sort="date">Fecha Publicacion</th>
                                                         <th class="sort" data-sort="status">URL externa</th>
                                                         <th class="sort" data-sort="image">Imagen</th>
-                                                        <th class="sort" data-sort="action">Action</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="list form-check-all">
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
-                                                            </div>
-                                                        </th>
-                                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a></td>
-                                                        <td class="name">Mary Cousar</td>
-                                                        <td class="author">marycousar@velzon.com</td>
-                                                        <td class="description">580-464-4694</td>
-                                                        <td class="date">06 Apr, 2021</td>
-                                                        <td class="status"><span class="badge badge-soft-success text-uppercase">Active</span></td>
-                                                        <td>
-                                                            <div class="d-flex gap-2">
-                                                                <div class="edit">
-                                                                    <button class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
-                                                                </div>
-                                                                <div class="remove">
-                                                                    <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Remove</button>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+
                                                 </tbody>
                                             </table>
                                             <div class="noresult" style="display: none">
@@ -124,50 +106,63 @@
                     </div>
                     <!-- end row -->
 
-                    <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    {{-- POP UP FORM --}}
+                    <div class="modal fade" id="showModal"
+                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
-                                <div class="modal-header bg-light p-3">
-                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modelHeading"></h5>
                                 </div>
-                                <form id="latestForm" name="latestForm">
+
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                <strong>Whoops!</strong> Hay un error.<br><br>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                                </div>
+                                @endif
+
+                                <form id="Form" name="Form">
                                     <div class="modal-body">
 
                                         <div class="mb-3" id="modal-id" style="display: none;">
                                             <label for="id-field" class="form-label">ID</label>
-                                            <input type="text" id="id-field" class="form-control" placeholder="ID" readonly />
+                                            <input type="text" id="id" class="form-control" placeholder="ID" readonly />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="name-field" class="form-label">Noticia</label>
-                                            <input type="text" id="name-field" class="form-control" placeholder="Enter Name" required />
+                                            <input type="text" id="name" class="form-control" placeholder="Enter Name" required />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="author-field" class="form-label">Autor</label>
-                                            <input type="author" id="author-field" class="form-control" placeholder="Enter author" required />
+                                            <input type="author" id="author" class="form-control" placeholder="Enter author" required />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="description-field" class="form-label">Descripcion</label>
-                                            <input type="text" id="description-field" class="form-control" placeholder="Enter description no." required />
+                                            <input type="text" id="description" class="form-control" placeholder="Enter description no." required />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="date-field" class="form-label">Fecha Publicacion</label>
-                                            <input type="date" id="date-field" class="form-control" required />
+                                            <input type="date" id="date_publication" class="form-control" required />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="url-field" class="form-label">URL externa</label>
-                                            <input type="text" id="url-field" class="form-control" placeholder="Ingresa la URL" required />
+                                            <input type="text" id="url" class="form-control" placeholder="Ingresa la URL" required />
                                         </div>
                                         <div>
                                             <label for="url-field" class="form-label">Imagen</label>
                                                 <div class="dropzone">
                                                     <div class="fallback">
-                                                        <input name="file" type="file" multiple="multiple">
+                                                        <input name="file" type="file" id="path" multiple="multiple">
                                                     </div>
                                                     <div class="dz-message needsclick">
                                                         <div class="mb-3">
@@ -205,20 +200,19 @@
                                                 <!-- end dropzon-preview -->
                                         </div>
 
-                                        <div>
+                                        {{-- <div>
                                             <label for="status-field" class="form-label">Status</label>
                                             <select class="form-control" data-trigger name="status-field" id="status-field">
                                                 <option value="">Status</option>
                                                 <option value="Active">Active</option>
                                                 <option value="Block">Block</option>
                                             </select>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="modal-footer">
                                         <div class="hstack gap-2 justify-content-end">
-                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success" id="add-btn">Agregar Noticia</button>
-                                            <button type="button" class="btn btn-success" id="edit-btn">Update</button>
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-success" id="saveBtn">Guardar Cambios</button>
                                         </div>
                                     </div>
                                 </form>
@@ -298,11 +292,11 @@
     Click to Button
     --------------------------------------------
     --------------------------------------------*/
-    $('#create-btn').click(function () {
-        $('#add-btn').val("create-latest");
+    $('#createNewroom').click(function () {
+        $('#saveBtn').val("create-latest");
         $('#latest_id').val('');
-        $('#latestForm').trigger("reset");
-        $('#showModal').html("Crear nueva Noticia");
+        $('#Form').trigger("reset");
+        $('#modelHeading').html("Crear nueva Noticia");
         $('#showModal').modal('show');
     });
 
@@ -314,16 +308,16 @@
     $('body').on('click', '.editlatest', function () {
       var latest_id = $(this).data('id');
       $.get("{{ route('latests.index') }}" +'/' + latest_id +'/edit', function (data) {
-          $('#exampleModalLabel').html("Editar Noticia");
-          $('#add-btn').val("edit-user");
+        //   $('#exampleModalLabel').html("Editar Noticia");
+          $('#saveBtn').val("edit-user");
           $('#showModal').modal('show');
           $('#latest_id').val(data.id);
           $('#name').val(data.name);
           $('#author').val(data.author);
           $('#description').val(data.description);
           $('#url').val(data.url);
-          $('#photo_id').val(data.photo_id);
-          $('#status').val(data.status);
+        //   $('#photo_id').val(data.photo_id);
+        //   $('#status').val(data.status);
       })
     });
 
@@ -332,25 +326,24 @@
     Create latest Code
     --------------------------------------------
     --------------------------------------------*/
-    $('#add-btn').click(function (e) {
+    $('#saveBtn').click(function (e) {
         e.preventDefault();
         $(this).html('Guardando..');
 
         $.ajax({
-          data: $('#latestForm').serialize(),
+          data: $('#Form').serialize(),
           url: "{{ route('latests.store') }}",
           type: "POST",
           dataType: 'json',
           success: function (data) {
-
-              $('#latestForm').trigger("reset");
+              $('#Form').trigger("reset");
               $('#showModal').modal('hide');
               table.draw();
 
           },
           error: function (data) {
               console.log('Error:', data);
-              $('#add-btn').html('Save Changes');
+              $('#saveBtn').html('Save Changes');
           }
       });
     });

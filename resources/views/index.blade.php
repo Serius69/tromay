@@ -14,7 +14,7 @@
                             <p class="wow fadeInLeft" data-wow-delay="1s">Casa de cambios dedicada a la atencion al cliente en general.</p>
 
                             <div class="banner-btn wow fadeInUp" data-wow-delay="1s">
-                                <a href="{{ url('contact') }}" class="default-btn">
+                                <a href=     class="default-btn">
                                     <span>Contactanos</span>
                                 </a>
                             </div>
@@ -88,7 +88,7 @@
 
         <div class="row">
             <div class="col-lg-3 col-sm-6">
-                @foreach ($cashs as $cash )
+                @foreach ($cashes as $cash )
                 @if(($cash->status)==1)
                 <div class="single-services">
                     <div class="services-img">

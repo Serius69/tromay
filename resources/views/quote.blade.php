@@ -28,7 +28,7 @@
 				</div>
 
 				<div class="row">
-                    @foreach ($cashs as $exchange )
+                    @foreach ($cashes as $exchange )
                     @if(($exchange->status)==1)
 					<div class="col-lg-4 col-md-6">
 						<div class="single-pricing overly-one">

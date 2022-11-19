@@ -44,7 +44,7 @@
                                         <div class="col-sm-auto">
                                             <div>
                                                 <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Customer</button>
+                                                <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="createNewroom" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Customer</button>
                                                 <button type="button" class="btn btn-info"><i class="ri-file-download-line align-bottom me-1"></i> Import</button>
                                             </div>
                                         </div>
@@ -124,22 +124,8 @@
                                                         <td class="email">marycousar@velzon.com</td>
                                                         <td class="phone">580-464-4694</td>
                                                         <td class="date">06 Apr, 2021</td>
-                                                        <td class="status"><span class="badge badge-soft-success text-uppercase">Active</span>
-                                                        </td>
-                                                        <td>
-                                                            <ul class="list-inline hstack gap-2 mb-0">
-                                                                <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                                    <a href="#showModal" data-bs-toggle="modal" class="text-primary d-inline-block edit-item-btn">
-                                                                        <i class="ri-pencil-fill fs-16"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
-                                                                    <a class="text-danger d-inline-block remove-item-btn" data-bs-toggle="modal" href="#deleteRecordModal">
-                                                                        <i class="ri-delete-bin-5-fill fs-16"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
+                                                        <td class="status"><span class="badge badge-soft-success text-uppercase">Active</span></td>
+
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -246,38 +232,18 @@
                                     <!--end modal -->
                                 </div>
                             </div>
-
                         </div>
                         <!--end col-->
                     </div>
                     <!--end row-->
-
                 </div>
                 <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
-
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> © Velzon.
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by Themesbrand
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
         <!-- end main content-->
-
     </div>
     <!-- END layout-wrapper -->
-
-
 
     <!--start back-to-top-->
     <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
@@ -1013,7 +979,7 @@
       var table = $('.table').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "{{ route('cashs.index') }}",
+          ajax: "{{ route('cashes.index') }}",
           columns: [
               {data: 'DT_RowIndex', name: 'DT_RowIndex'},
               {data: 'name', name: 'name'},
@@ -1045,7 +1011,7 @@
       --------------------------------------------*/
       $('body').on('click', '.editcash', function () {
         var cash_id = $(this).data('id');
-        $.get("{{ route('cashs.index') }}" +'/' + cash_id +'/edit', function (data) {
+        $.get("{{ route('cashes.index') }}" +'/' + cash_id +'/edit', function (data) {
             $('#modelHeading').html("Editar Cotizacion");
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
@@ -1066,7 +1032,7 @@
 
           $.ajax({
             data: $('#cashForm').serialize(),
-            url: "{{ route('cashs.store') }}",
+            url: "{{ route('cashes.store') }}",
             type: "POST",
             dataType: 'json',
             success: function (data) {
@@ -1095,7 +1061,7 @@
 
           $.ajax({
               type: "DELETE",
-              url: "{{ route('cashs.store') }}"+'/'+cash_id,
+              url: "{{ route('cashes.store') }}"+'/'+cash_id,
               success: function (data) {
                   table.draw();
               },

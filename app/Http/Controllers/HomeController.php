@@ -17,10 +17,10 @@ class HomeController extends Controller
      */
     public function __invoke(){
         $data = [
-            'cashs'  => Cash::orderBy('id','asc')->paginate(10),
+            'cashes'  => Cash::orderBy('id','asc')->paginate(10),
             'latests'   => Latest::orderBy('date_publication','desc')->paginate(3),
-            'dollars' =>  DB::select('select * from cashs where id = 1'),
-            // 'euro' =>  DB::select('select sell from cashs where id = 2')
+            'dollars' =>  DB::select('select * from cashes where id = 1'),
+            // 'euro' =>  DB::select('select sell from cashes where id = 2')
         ];
 
         return view('index',$data);
@@ -32,9 +32,9 @@ class HomeController extends Controller
      */
     public function admin(){
         $data = [
-            'cashs'  => Cash::orderBy('id','asc')->paginate(3),
+            'cashes'  => Cash::orderBy('id','asc')->paginate(3),
             'latests'   => Latest::orderBy('id','asc')->paginate(5),
-            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            'dollars' =>  DB::select('select * from cashes where id = 1'),
             // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
         ];
 
@@ -47,8 +47,8 @@ class HomeController extends Controller
      */
     public function about(){
         $data = [
-            'cashs'  => Cash::orderBy('id','asc')->paginate(3),
-            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            'cashes'  => Cash::orderBy('id','asc')->paginate(3),
+            'dollars' =>  DB::select('select * from cashes where id = 1'),
             // 'latests'   => Latest::orderBy('id','asc')->paginate(5),
             // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
         ];
@@ -62,8 +62,8 @@ class HomeController extends Controller
      */
     public function privacy(){
         $data = [
-            'cashs'  => Cash::orderBy('id','asc')->paginate(3),
-            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            'cashes'  => Cash::orderBy('id','asc')->paginate(3),
+            'dollars' =>  DB::select('select * from cashes where id = 1'),
             // 'latests'   => Latest::orderBy('id','asc')->paginate(5),
             // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
         ];
@@ -77,8 +77,8 @@ class HomeController extends Controller
      */
     public function terms(){
         $data = [
-            'cashs'  => Cash::orderBy('id','asc')->paginate(3),
-            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            'cashes'  => Cash::orderBy('id','asc')->paginate(3),
+            'dollars' =>  DB::select('select * from cashes where id = 1'),
             // 'latests'   => Latest::orderBy('id','asc')->paginate(5),
             // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
         ];
@@ -92,8 +92,8 @@ class HomeController extends Controller
      */
     public function contact(){
         $data = [
-            'cashs'  => Cash::orderBy('id','asc')->paginate(3),
-            'dollars' =>  DB::select('select * from cashs where id = 1'),
+            'cashes'  => Cash::orderBy('id','asc')->paginate(3),
+            'dollars' =>  DB::select('select * from cashes where id = 1'),
             // 'latests'   => Latest::orderBy('id','asc')->paginate(5),
             // 'transactions' => Transaction::orderBy('id','asc')->paginate(3)
         ];
