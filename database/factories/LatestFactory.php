@@ -28,8 +28,8 @@ class LatestFactory extends Factory
             'author' => $this->faker->name(),
             'description' => $this->faker->sentence(),
             'date_publication' => $this->faker->date(),
-            'url' => $this->faker->date(),
-            'photo_id' => 1,
+            'url' => $this->faker->name(),
+            'photo_id' => 2,
             'type_id' => 1,
             'status' => 1
         ];

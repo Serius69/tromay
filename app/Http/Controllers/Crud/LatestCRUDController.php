@@ -12,19 +12,23 @@ class LatestCRUDController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)   {
-        if ($request->ajax()) {
+        
+        if ($request->ajax()) {            
             $data = Latest::latest()->get();
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $btn ='
+            return DataTables::of($data)
+                    ->addColumn('check', function($row){
+                        $check ='
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="chk_child" value="option1">
-                        /div>
+                        </div>
                         ';
-                        $btn = $btn.'
+                        return $check;
+                    })
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){                        
+                        $btn ='
                         <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                            <a href="#showModal" data-bs-toggle="modal" data-id="'.$row->id.' class="text-primary d-inline-block edit-item-btn">
+                            <a href="#showModal" a-bs-toggle="modal" data-id="'.$row->id.' class="text-primary d-inline-block edit-item-btn">
                                 <i class="ri-pencil-fill fs-16"></i>
                             </a>
                         </li>
@@ -38,7 +42,15 @@ class LatestCRUDController extends Controller{
                         ';
                         return $btn;
                     })
-                    ->rawColumns(['action'])
+                    // ->addColumn('action', function($row){
+
+                    //     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editRoom">Editar</a>';
+
+                    //     $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteRoom">Eliminar</a>';
+
+                    //      return $btn;
+                    // })
+                    // ->rawColumns(['action'])
                     ->make(true);
         }
         return view('latest.crud');

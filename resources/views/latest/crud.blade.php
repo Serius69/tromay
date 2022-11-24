@@ -3,8 +3,7 @@
 
 @section('token')
 <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
-
+@endsection 
 @section('body')
         <div class="main-content">
             <div class="page-content">
@@ -54,34 +53,44 @@
                                         </div>
 
                                         <div class="table-responsive table-card mt-3 mb-1">
-                                            <table class="table align-middle table-nowrap" id="customerTable">
+                                            <table id="DataTables_Table_CRUD" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
                                                 <thead class="table-light">
                                                     <tr>
-                                                        <th scope="col" style="width: 50px;">
+                                                        <th scope="col" style="width: 10px;">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="checkAll" value="option">
+                                                                <input class="form-check-input fs-15" type="checkbox" id="checkAll" value="option">
                                                             </div>
                                                         </th>
-                                                        <th class="sort" data-sort="name">Noticia</th>
-                                                        <th class="sort" data-sort="author">Autor</th>
+                                                        <th class="sort" data-sort="description">Noticia</th>
+                                                        <th class="sort" data-sort="description">Autor</th>
                                                         <th class="sort" data-sort="description">Descripcion</th>
-                                                        <th class="sort" data-sort="date">Fecha Publicacion</th>
+                                                        <th class="sort" data-sort="date_publication">Fecha Publicacion</th>
+                                                        <th class="sort" data-sort="url">Fecha Publicacion</th>
+                                                        <th class="sort" data-sort="photo_id">Imagen</th>
+                                                        <th class="sort" data-sort="type_id">Estado</th>
                                                         <th class="sort" data-sort="status">URL externa</th>
-                                                        <th class="sort" data-sort="image">Imagen</th>
-                                                        <th>Action</th>
+                                                        {{--  <th>Noticia</th>
+                                                        <th>Autor</th>
+                                                        <th>Descripcion</th>
+                                                        <th>Fecha Publicacion</th>
+                                                        <th>Fecha Publicacion</th>
+                                                        <th>Fecha Publicacion</th>
+                                                        <th>Fecha Publicacion</th>
+                                                        <th>URL externa</th>
+                                                        <th>Action</th>  --}}
                                                     </tr>
                                                 </thead>
-                                                <tbody class="list form-check-all">
-
-                                                </tbody>
+                                                    <tbody>
+                                                    </tbody>
                                             </table>
                                             <div class="noresult" style="display: none">
                                                 <div class="text-center">
                                                     <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px">
                                                     </lord-icon>
-                                                    <h5 class="mt-2">Sorry! No Result Found</h5>
-                                                    <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any
-                                                        orders for you search.</p>
+                                                    <h5 class="mt-2">Perdon no encontramos resultados</h5>
+                                                    <p class="text-muted mb-0">
+                                                        Buscamos entre los registros y no se encontro un resultado
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -131,38 +140,38 @@
 
                                         <div class="mb-3" id="modal-id" style="display: none;">
                                             <label for="id-field" class="form-label">ID</label>
-                                            <input type="text" id="id" class="form-control" placeholder="ID" readonly />
+                                            <input type="text" id="id" name="id" class="form-control" placeholder="ID" readonly />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="name-field" class="form-label">Noticia</label>
-                                            <input type="text" id="name" class="form-control" placeholder="Enter Name" required />
+                                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" required />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="author-field" class="form-label">Autor</label>
-                                            <input type="author" id="author" class="form-control" placeholder="Enter author" required />
+                                            <input type="author" id="author" name="author" class="form-control" placeholder="Enter author" required />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="description-field" class="form-label">Descripcion</label>
-                                            <input type="text" id="description" class="form-control" placeholder="Enter description no." required />
+                                            <input type="text" id="description" name="description" class="form-control" placeholder="Enter description no." required />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="date-field" class="form-label">Fecha Publicacion</label>
-                                            <input type="date" id="date_publication" class="form-control" required />
+                                            <input type="date" id="date_publication" name="date_publication" class="form-control" required />
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="url-field" class="form-label">URL externa</label>
-                                            <input type="text" id="url" class="form-control" placeholder="Ingresa la URL" required />
+                                            <input type="text" id="url" name="url" class="form-control" placeholder="Ingresa la URL" required />
                                         </div>
                                         <div>
                                             <label for="url-field" class="form-label">Imagen</label>
                                                 <div class="dropzone">
                                                     <div class="fallback">
-                                                        <input name="file" type="file" id="path" multiple="multiple">
+                                                        <input name="path" type="file" id="path" multiple="multiple">
                                                     </div>
                                                     <div class="dz-message needsclick">
                                                         <div class="mb-3">
@@ -199,15 +208,6 @@
                                                 </ul>
                                                 <!-- end dropzon-preview -->
                                         </div>
-
-                                        {{-- <div>
-                                            <label for="status-field" class="form-label">Status</label>
-                                            <select class="form-control" data-trigger name="status-field" id="status-field">
-                                                <option value="">Status</option>
-                                                <option value="Active">Active</option>
-                                                <option value="Block">Block</option>
-                                            </select>
-                                        </div> --}}
                                     </div>
                                     <div class="modal-footer">
                                         <div class="hstack gap-2 justify-content-end">
@@ -249,8 +249,6 @@
         </div>
  <!-- container-fluid -->
 @endsection
-
-
 @section('script')
 <script type="text/javascript">
   $(function () {
@@ -280,8 +278,14 @@
             {data: 'name', name: 'name'},
             {data: 'author', name: 'author'},
             {data: 'description', name: 'description'},
+            {data: 'date_publication', name: 'date_publication'},
             {data: 'url', name: 'url'},
-            {data: 'photo_id', name: 'photo_id'},
+            {
+                data: 'photo_id', name: 'photo_id' , 
+                render: function (data, type, full, meta) {
+                    return "<img src=\"assets2/img/noticias/" + data + "\" height=\"50\"/>";
+                }
+            },
             {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
@@ -305,7 +309,7 @@
     Click to Edit Button
     --------------------------------------------
     --------------------------------------------*/
-    $('body').on('click', '.editlatest', function () {
+    $('body').on('click', '.edit', function () {
       var latest_id = $(this).data('id');
       $.get("{{ route('latests.index') }}" +'/' + latest_id +'/edit', function (data) {
         //   $('#exampleModalLabel').html("Editar Noticia");
@@ -315,8 +319,9 @@
           $('#name').val(data.name);
           $('#author').val(data.author);
           $('#description').val(data.description);
+          $('#data_publication').val(data.data_publication);
           $('#url').val(data.url);
-        //   $('#photo_id').val(data.photo_id);
+          $('#photo_id').val(data.photo_id);
         //   $('#status').val(data.status);
       })
     });

@@ -14,7 +14,7 @@
                             <p class="wow fadeInLeft" data-wow-delay="1s">Casa de cambios dedicada a la atencion al cliente en general.</p>
 
                             <div class="banner-btn wow fadeInUp" data-wow-delay="1s">
-                                <a href=     class="default-btn">
+                                <a href="" class="default-btn">
                                     <span>Contactanos</span>
                                 </a>
                             </div>
@@ -86,17 +86,16 @@
             <h2>Monedas extranjeras que puedes cambiar en una de nuestras sucursales.</h2>
         </div>
 
-        <div class="row">
+        <div class="row">@foreach ($cashes as $cash )
+            @if(($cash->status)==1)
             <div class="col-lg-3 col-sm-6">
-                @foreach ($cashes as $cash )
-                @if(($cash->status)==1)
+
                 <div class="single-services">
                     <div class="services-img">
                         <a href="{{ route('dinero.show',$cash->id) }}">
-                            <img src="{{ url('img/noticias/'.$cash->photo->path) }}" alt="Image" ></noscript>
+                            <img src="{{ url('assets/img/cash/'.$cash->photo->path) }}" alt="Image" ></noscript>
                         </a>
                     </div>
-
                     <div class="services-content">
                         <h3><a href="{{ route('dinero.show',$cash->id) }}">{{ $cash->name }}</a></h3>
                         <div class="content">
@@ -104,15 +103,16 @@
                             <p>Venta: {{ $cash->sell }}</p>
                             <p>Oficial: {{ $cash->oficial }}</p>
                             <a href="{{ route('dinero.show',$cash->id) }}" class="read-more">
-                                Saber Masc
+                                Saber Mas
                                 <i class="flaticon-right-arrow"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                @endif
-                @endforeach
+
             </div>
+            @endif
+            @endforeach
         </div>
     </div>
 </section>
@@ -277,16 +277,15 @@
         </div>
 
         <div class="row">
+            @foreach ($latests as $latest )
+            @if(($latest->status)==1)
             <div class="col-lg-4 col-md-6">
-                @foreach ($latests as $latest )
-                    @if(($latest->status)==1)
                 <div class="single-blog">
                     <div class="blog-img">
                         <a href="{{ route('noticia.show',$latest->id) }}">
-                            <img src="{{ url('img/noticias/'.$latest->photo->path) }}" alt="Image"></noscript>
+                            <img src="{{ url('assets/img/latest/'.$latest->photo->path) }}" alt="Image"></noscript>
                         </a>
                     </div>
-
                     <div class="blog-content">
                         <span>
                             <?php $mes = date('m', strtotime($latest->date_publication)); ?>
@@ -327,9 +326,9 @@
                         </a>
                     </div>
                 </div>
-                @endif
-                @endforeach
             </div>
+            @endif
+            @endforeach
         </div>
     </div>
 </section>

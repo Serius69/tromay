@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Photo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class Latest extends Model
+class Typelatest extends Model
 {
     use HasFactory;
 
-    protected $table = "latests";
+    protected $table = "typelatest";
+
 
     /**
      * The attributes that are mass assignable.
@@ -19,30 +19,15 @@ class Latest extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'author',
-        'description',
-        'date_publication',
-        'url',
-        'photo_id',
-        'type_id',
+        'type',
         'status'
     ];
 
-    protected function name(): Attribute {
+    protected function type(): Attribute {
         return new Attribute (
             get: fn($value) => ucwords($value),
             set: fn($value) => strtolower($value)
         );
-    }
-
-    public function photo()
-    {
-    return $this->belongsTo(Photo::class, 'photo_id');
-    }
-    public function type()
-    {
-    return $this->belongsTo(Typelatest::class, 'type_id');
     }
 
 }

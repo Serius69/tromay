@@ -18,7 +18,8 @@
 		<link rel="stylesheet" href="{{ url('assets/css/odometer.min.css') }}">
 		<link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
 		<link rel="stylesheet" href="{{ url('assets/css/responsive.css') }}">
-
+        {{-- WP--}}
+        <link rel="stylesheet" type="text/css" href="{{ url('assets/css/wp.css') }}" />
 		<!-- Favicon -->
 		<link rel="icon" type="image/png" href="{{ url('assets/img/favicon.png') }}">
 		<!-- Title -->
@@ -321,9 +322,11 @@
 		</div>
 		<!-- End Go Top Area -->
 
+        <a href="{{ url('https://api.whatsapp.com/send?phone=59178780775') }}" class="btn-wsp" target="_blank">
+            <i class="fa fa-whatsapp icono"></i>
+        </a>
 
        <!-- Links of JS files -->
-        <script data-cfasync="false" src="{{ url('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script>
         <script src="{{ url('assets/js/jquery.min.js') }}"></script>
         <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
 		<script src="{{ url('assets/js/meanmenu.min.js') }}"></script>

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('photo_id')->default(1);
             $table->foreign('photo_id')->references('id')->on('photos');
             $table->unsignedBigInteger('type_id')->default(1);
-            $table->foreign('type_id')->references('id')->on('typelatest')->default(1);
+            $table->foreign('type_id')->references('id')->on('typelatest');
             $table->integer('status')->default(1);
             $table->timestamps();
         });

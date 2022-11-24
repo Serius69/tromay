@@ -26,7 +26,7 @@ Route::controller(HomeController::class)->group(function(){
 });
 
 Route::controller(CashController::class)->group(function(){
-    Route::get('/quote',  'quote');
+    Route::get('quote',  'quote');
 });
 
     // Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home');

@@ -15,8 +15,9 @@ class CashCRUDController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Cash::latest()->get();
+        
         if ($request->ajax()) {
+            $data = Cash::latest()->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -55,7 +56,7 @@ class CashCRUDController extends Controller
                  })
                     ->make(true);
         }
-        return view('cash.crud',$cash);
+        return view('cash.crud');
     }
 
     /**

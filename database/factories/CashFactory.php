@@ -3,18 +3,18 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Client;
+use App\Models\Cash;
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Client>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cash>
  */
-class ClientFactory extends Factory
+class CashFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Client::class;
+    protected $model = Cash::class;
     /**
      * Define the model's default state.
      *
@@ -23,9 +23,11 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
-            'ci' => $this->faker->numberBetween(3333333,8888888),
             'name' => $this->faker->name(),
-            'lastname' => $this->faker->name(),
+            'buy' => $this->faker->numberBetween(6,10),
+            'sell' => $this->faker->numberBetween(6,10),
+            'oficial' => $this->faker->numberBetween(6,10),
+            'photo_id' => 1,
             'status' => 1
 
         ];
