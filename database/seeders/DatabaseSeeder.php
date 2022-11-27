@@ -20,30 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-        $photos = [
-            [
-               'path'=>'dolar.jpg',
-               'status'=>1,
-            ],
-            [
-                'path'=>'noticia.jpg',
-                'status'=>1,
-             ]
-        ];
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         User::factory(5)->create();
-        Typelatest::factory(5)->create();
-        //  Photo::factory(5)->create();
-
-        foreach ($photos as $key => $photo) {
-            Photo::create($photo);
-        }
          Cash::factory(5)->create();
          Latest::factory(5)->create();
          Client::factory(5)->create();

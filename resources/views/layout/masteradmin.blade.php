@@ -279,7 +279,21 @@
                                 </ul>
                             </div>
                         </li>
+                        {{--    --}}
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#sidebarClient" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarNews">
+                                <i class="mdi mdi-access-point-check"></i> <span data-key="t-news">Clientes</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sidebarClient">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="{{ url('admin/client') }}" class="nav-link" data-key="t-calendar"> Editar Clientes </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 
+                        
                     </ul>
                 </div>
                 <!-- Sidebar -->

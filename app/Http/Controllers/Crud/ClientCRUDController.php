@@ -3,30 +3,32 @@
 namespace App\Http\Controllers\Crud;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Transaction;
+use App\Models\Client;
 use DataTables;
 
-
-class TransactionCRUDController extends Controller
+class ClientCRUDController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)   {
+    public function index(Request $request)
+    {
+        
         if ($request->ajax()) {
-            $data = Transaction::latest()->get();
+            $data = Client::latest()->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = $btn.'
+                        $btn = '
                         <li class="list-inline-item edit" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Edit">
                             <a href="#showModal" data-bs-toggle="modal" data-id="'.$row->id.' class="text-primary d-inline-block edit-item-btn">
                                 <i class="ri-pencil-fill fs-16"></i>
                             </a>
                         </li>
-                        '       ;
+                        '
+                        ;
                         $btn = $btn.'
                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Remove">
                         <a class="text-danger d-inline-block remove-item-btn" data-id="'.$row->id.' data-bs-toggle="modal" href="#deleteRecordModal">
@@ -34,12 +36,11 @@ class TransactionCRUDController extends Controller
                         </a>
                         </li>
                         ';
-                        return $btn;
-                    })
-                    ->rawColumns(['action'])
+                         return $btn;
+                 })
                     ->make(true);
         }
-        return view('transaction.crud');
+        return view('client.crud');
     }
 
     /**
@@ -48,41 +49,42 @@ class TransactionCRUDController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // modificar el store
-    public function store(Request $request)   {
-        transaction::updateOrCreate([
-                    'id' => $request->transaction_id
+    public function store(Request $request)
+    {
+        Client::updateOrCreate([
+                    'id' => $request->Client_id
                 ],
                 [
-                    'user_id' => $request->name,
-                    'client_id' => $request->price,
-                    'quotation_id' => $request->quotation_id,
-                    'ammount' => $request->ammount,
-                    'date' => $request->date,
+                    'ci' => $request->ci,
+                    'name' => $request->name,
+                    'lastname' => $request->lastname,
                     'status' => $request->status
                 ]);
 
-        return response()->json(['success'=>'transaction saved successfully.']);
+        return response()->json(['success'=>'Client saved successfully.']);
     }
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Transaction  $transaction
+     * @param  \App\Client  $Client
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)    {
-        $transaction = Transaction::find($id);
-        return response()->json($transaction);
+    public function edit($id)
+    {
+        $Client = Client::find($id);
+        return response()->json($Client);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\transaction  $transaction
+     * @param  \App\Client  $Client
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)    {
-        transaction::find($id)->delete();
-        return response()->json(['success'=>'transaction deleted successfully.']);
+    public function destroy($id)
+    {
+        Client::find($id)->delete();
+
+        return response()->json(['success'=>'Client deleted successfully.']);
     }
 }

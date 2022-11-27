@@ -19,8 +19,7 @@ return new class extends Migration
             $table->double('buy')->nullable();;
             $table->double('sell')->nullable();
             $table->double('oficial')->nullable();
-            $table->unsignedBigInteger('photo_id')->default(1);
-            $table->foreign('photo_id')->references('id')->on('photos');
+            $table->string('path')->nullable();
             $table->double('status')->default(1);
             $table->timestamps();
         });

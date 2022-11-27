@@ -27,7 +27,7 @@ class CashFactory extends Factory
             'buy' => $this->faker->numberBetween(6,10),
             'sell' => $this->faker->numberBetween(6,10),
             'oficial' => $this->faker->numberBetween(6,10),
-            'photo_id' => 1,
+            'path' => 'dolar.jpg',
             'status' => 1
 
         ];

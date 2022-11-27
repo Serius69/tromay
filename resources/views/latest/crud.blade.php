@@ -281,15 +281,16 @@
             {data: 'date_publication', name: 'date_publication'},
             {data: 'url', name: 'url'},
             {
-                data: 'photo_id', name: 'photo_id' , 
+                data: 'path', name: 'path' , 
                 render: function (data, type, full, meta) {
-                    return "<img src=\"assets2/img/noticias/" + data + "\" height=\"50\"/>";
+                    return "<img src=\"../assets/img/latest/" + data + "\" height=\"50\"/>";
                 }
             },
             {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
+
 
     /*------------------------------------------
     --------------------------------------------

@@ -24,8 +24,7 @@ class Latest extends Model
         'description',
         'date_publication',
         'url',
-        'photo_id',
-        'type_id',
+        'path',
         'status'
     ];
 
@@ -35,14 +34,4 @@ class Latest extends Model
             set: fn($value) => strtolower($value)
         );
     }
-
-    public function photo()
-    {
-    return $this->belongsTo(Photo::class, 'photo_id');
-    }
-    public function type()
-    {
-    return $this->belongsTo(Typelatest::class, 'type_id');
-    }
-
 }

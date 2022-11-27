@@ -29,8 +29,7 @@ class LatestFactory extends Factory
             'description' => $this->faker->sentence(),
             'date_publication' => $this->faker->date(),
             'url' => $this->faker->name(),
-            'photo_id' => 2,
-            'type_id' => 1,
+            'path' => 'noticia.jpg',
             'status' => 1
         ];
     }

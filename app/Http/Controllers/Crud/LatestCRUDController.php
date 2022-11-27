@@ -93,7 +93,7 @@ class LatestCRUDController extends Controller{
                     'description' => $request->description,
                     'date_publication' => $request->date_publication,
                     'url' => $request->url,
-                    'photo_id' => $photo->id
+                    'path' => $photo->id
                 ]);
 
         return response()->json(['success'=>'latest saved successfully.']);

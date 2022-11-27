@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CashController;
 use App\Http\Controllers\LatestController;
 use App\Http\Controllers\TransactionController;
+
 /*
 |--------------------------------------------------------------------------
 | CRUD
@@ -13,7 +14,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\Crud\LatestCRUDController;
 use App\Http\Controllers\Crud\CashCRUDController;
 use App\Http\Controllers\Crud\TransactionCRUDController;
-
+use App\Http\Controllers\Crud\ClientCRUDController;
 
 Route::controller(HomeController::class)->group(function(){
     Route::get('/',  '__invoke');
@@ -36,8 +37,11 @@ Route::controller(CashController::class)->group(function(){
         Route::get('admin/analytics',  'analytics');
     });
 
-     Route::controller(CashCRUDController::class)->group(function(){
+    Route::controller(CashCRUDController::class)->group(function(){
         Route::get('admin/cash', 'index');
+    });
+    Route::controller(ClientCRUDController::class)->group(function(){
+        Route::get('admin/client', 'index');
     });
     Route::controller(TransactionCRUDController::class)->group(function(){
         Route::get('admin/transaction', 'index');
@@ -61,3 +65,4 @@ Route::resource('dinero', CashController::class);
 Route::resource('latests', LatestCRUDController::class);
 Route::resource('cashes', CashCRUDController::class);
 Route::resource('transactions', LatestCRUDController::class);
+Route::resource('clients', LatestCRUDController::class);

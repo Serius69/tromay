@@ -21,7 +21,7 @@ class Cash extends Model
         'buy',
         'sell',
         'oficial',
-        'photo_id',
+        'path',
         'status'
     ];
 
@@ -34,6 +34,6 @@ class Cash extends Model
 
     public function photo()
     {
-        return $this->belongsTo(Photo::class, 'photo_id');
+        return $this->belongsTo(Photo::class, 'path');
     }
 }

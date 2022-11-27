@@ -93,7 +93,7 @@
                 <div class="single-services">
                     <div class="services-img">
                         <a href="{{ route('dinero.show',$cash->id) }}">
-                            <img src="{{ url('assets/img/cash/'.$cash->photo->path) }}" alt="Image" ></noscript>
+                            <img src="{{ url('assets/img/cash/'.$cash->path) }}" alt="Image" ></noscript>
                         </a>
                     </div>
                     <div class="services-content">
@@ -283,7 +283,7 @@
                 <div class="single-blog">
                     <div class="blog-img">
                         <a href="{{ route('noticia.show',$latest->id) }}">
-                            <img src="{{ url('assets/img/latest/'.$latest->photo->path) }}" alt="Image"></noscript>
+                            <img src="{{ url('assets/img/latest/'.$latest->path) }}" alt="Image"></noscript>
                         </a>
                     </div>
                     <div class="blog-content">

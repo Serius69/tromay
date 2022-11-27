@@ -31,26 +31,28 @@
                             <div class="row row-cols-xxl-5 row-cols-md-3 row-cols-1 g-0">
                                 <div class="col">
                                     <div class="py-4 px-3">
-                                        <h5 class="text-muted text-uppercase fs-13">Campaign Sent <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
+                                        <h5 class="text-muted text-uppercase fs-13">Numero de transacciones en el mes <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
                                                 <i class="ri-space-ship-line display-6 text-muted"></i>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
-                                                <h2 class="mb-0"><span class="counter-value" data-target="197">0</span></h2>
+                                                <h2 class="mb-0"><span class="counter-value" data-target={{$query1}}>0</span></h2>
+                                                {{--  {{ $d['drug_id'] }}  --}}
+                                               
                                             </div>
                                         </div>
                                     </div>
                                 </div><!-- end col -->
                                 <div class="col">
                                     <div class="mt-3 mt-md-0 py-4 px-3">
-                                        <h5 class="text-muted text-uppercase fs-13">Annual Profit <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
+                                        <h5 class="text-muted text-uppercase fs-13">Ingreso Anual <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
                                                 <i class="ri-exchange-dollar-line display-6 text-muted"></i>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
-                                                <h2 class="mb-0">$<span class="counter-value" data-target="489.4">0</span>k</h2>
+                                                <h2 class="mb-0">$<span class="counter-value" data-target={{$query2}}>0</span>k</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +65,7 @@
                                                 <i class="ri-pulse-line display-6 text-muted"></i>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
-                                                <h2 class="mb-0"><span class="counter-value" data-target="32.89">0</span>%</h2>
+                                                <h2 class="mb-0"><span class="counter-value" data-target={{$query3}}>0</span>%</h2>
                                             </div>
                                         </div>
                                     </div>
@@ -76,20 +78,20 @@
                                                 <i class="ri-trophy-line display-6 text-muted"></i>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
-                                                <h2 class="mb-0">$<span class="counter-value" data-target="1596.5">0</span></h2>
+                                                <h2 class="mb-0">$<span class="counter-value" data-target={{$query4}}>0</span></h2>
                                             </div>
                                         </div>
                                     </div>
                                 </div><!-- end col -->
                                 <div class="col">
                                     <div class="mt-3 mt-lg-0 py-4 px-3">
-                                        <h5 class="text-muted text-uppercase fs-13">Annual Deals <i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i></h5>
+                                        <h5 class="text-muted text-uppercase fs-13">Transacciones Anuales<i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i></h5>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
                                                 <i class="ri-service-line display-6 text-muted"></i>
                                             </div>
                                             <div class="flex-grow-1 ms-3">
-                                                <h2 class="mb-0"><span class="counter-value" data-target="2659">0</span></h2>
+                                                <h2 class="mb-0"><span class="counter-value" data-target={{$query5}}>0</span></h2>
                                             </div>
                                         </div>
                                     </div>
@@ -111,10 +113,9 @@
                                         <span class="fw-semibold text-uppercase fs-12">Sort by: </span><span class="text-muted">Nov 2021<i class="mdi mdi-chevron-down ms-1"></i></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
+                                        {{--  @foreach ($monthtransactions as $monthtransaction)  --}}
                                         <a class="dropdown-item" href="#">Oct 2021</a>
-                                        <a class="dropdown-item" href="#">Nov 2021</a>
-                                        <a class="dropdown-item" href="#">Dec 2021</a>
-                                        <a class="dropdown-item" href="#">Jan 2022</a>
+                                     {{--  @endforeach  --}}
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +125,7 @@
                         </div>
                     </div><!-- end card -->
                 </div><!-- end col -->
-
+                {{--    --}}
                 <div class="col-xxl-3 col-md-6">
                     <div class="card card-height-100">
                         <div class="card-header align-items-center d-flex">
@@ -148,7 +149,7 @@
                         </div><!-- end card body -->
                     </div><!-- end card -->
                 </div><!-- end col -->
-
+            {{--    --}}
                 <div class="col-xxl-6">
                     <div class="card card-height-100">
                         <div class="card-header align-items-center d-flex">
@@ -191,7 +192,7 @@
                 <div class="col-xl-7">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Deals Status</h4>
+                            <h4 class="card-title mb-0 flex-grow-1">Ultimas transacciones</h4>
                             <div class="flex-shrink-0">
                                 <div class="dropdown card-header-dropdown">
                                     <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -213,14 +214,19 @@
                                     <thead class="table-light">
                                         <tr class="text-muted">
                                             <th scope="col">Name</th>
-                                            <th scope="col" style="width: 20%;">Last Contacted</th>
-                                            <th scope="col">Sales Representative</th>
-                                            <th scope="col" style="width: 16%;">Status</th>
-                                            <th scope="col" style="width: 12%;">Deal Value</th>
+                                            <th scope="col" style="width: 20%;">Fecha de la transaccion</th>
+                                            <th scope="col" style="width: 20%;">Hora de la transaccion</th>
+                                            <th scope="col">Usuario</th>
+                                            <th scope="col" style="width: 16%;">Tipo</th>
+                                            <th scope="col" style="width: 16%;">Moneda 1</th>
+                                            <th scope="col" style="width: 16%;">Moneda 2</th>
+                                            <th scope="col" style="width: 16%;">Estado</th>
+                                            <th scope="col" style="width: 12%;">Ganancia</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
+                                        @foreach ($transactions as $transaction)
                                         <tr>
                                             <td>Absternet LLC</td>
                                             <td>Sep 20, 2021</td>
@@ -232,50 +238,9 @@
                                                 <div class="text-nowrap">$100.1K</div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Raitech Soft</td>
-                                            <td>Sep 23, 2021</td>
-                                            <td><img src="assets2/images/users/avatar-2.jpg" alt="" class="avatar-xs rounded-circle me-2 shadow">
-                                                <a href="#javascript: void(0);" class="text-body fw-medium">Sofia Cunha</a>
-                                            </td>
-                                            <td><span class="badge badge-soft-warning p-2">Intro Call</span></td>
-                                            <td>
-                                                <div class="text-nowrap">$150K</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>William PVT</td>
-                                            <td>Sep 27, 2021</td>
-                                            <td><img src="assets2/images/users/avatar-3.jpg" alt="" class="avatar-xs rounded-circle me-2 shadow">
-                                                <a href="#javascript: void(0);" class="text-body fw-medium">Luis Rocha</a>
-                                            </td>
-                                            <td><span class="badge badge-soft-danger p-2">Stuck</span></td>
-                                            <td>
-                                                <div class="text-nowrap">$78.18K</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Loiusee LLP</td>
-                                            <td>Sep 30, 2021</td>
-                                            <td><img src="assets2/images/users/avatar-4.jpg" alt="" class="avatar-xs rounded-circle me-2 shadow">
-                                                <a href="#javascript: void(0);" class="text-body fw-medium">Vitoria Rodrigues</a>
-                                            </td>
-                                            <td><span class="badge badge-soft-success p-2">Deal Won</span></td>
-                                            <td>
-                                                <div class="text-nowrap">$180K</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Apple Inc.</td>
-                                            <td>Sep 30, 2021</td>
-                                            <td><img src="assets2/images/users/avatar-6.jpg" alt="" class="avatar-xs rounded-circle me-2 shadow">
-                                                <a href="#javascript: void(0);" class="text-body fw-medium">Vitoria Rodrigues</a>
-                                            </td>
-                                            <td><span class="badge badge-soft-info p-2">New Lead</span></td>
-                                            <td>
-                                                <div class="text-nowrap">$78.9K</div>
-                                            </td>
-                                        </tr>
+                                        @endforeach
+                                        
+                                    
                                     </tbody><!-- end tbody -->
                                 </table><!-- end table -->
                             </div><!-- end table responsive -->
@@ -283,7 +248,7 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
 
-                <div class="col-xl-5">
+                {{--  <div class="col-xl-5">
                     <div class="card card-height-100">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">My Tasks</h4>
@@ -396,7 +361,8 @@
                             </div>
                         </div><!-- end card body -->
                     </div><!-- end card -->
-                </div><!-- end col -->
+                </div><!-- end col -->  --}}
+            
             </div><!-- end row -->
 
             <div class="row">

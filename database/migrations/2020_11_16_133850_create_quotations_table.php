@@ -14,9 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('quotations', function (Blueprint $table) {
+            
             $table->id();
-            $table->unsignedBigInteger('photo_id')->default(1);
-            $table->foreign('photo_id')->references('id')->on('photos');
             $table->timestamps();
         });
     }

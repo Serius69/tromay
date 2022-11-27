@@ -20,10 +20,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->string('date_publication')->nullable();
             $table->string('url')->nullable();
-            $table->unsignedBigInteger('photo_id')->default(1);
-            $table->foreign('photo_id')->references('id')->on('photos');
-            $table->unsignedBigInteger('type_id')->default(1);
-            $table->foreign('type_id')->references('id')->on('typelatest');
+            $table->string('path')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });

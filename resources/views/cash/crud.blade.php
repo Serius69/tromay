@@ -55,17 +55,19 @@
                                             <table class="table align-middle table-nowrap">
                                                 <thead class="table-light">
                                                     <tr>
-                                                        <th scope="col" style="width: 50px;">
+                                                        {{--  <th scope="col" style="width: 50px;">
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                                             </div>
-                                                        </th>
+                                                        </th>  --}}
+                                                        <th>Nro</th>
                                                         <th class="sort" data-sort="name">Moneda</th>
-                                                        <th class="sort" data-sort="email">Compra</th>
-                                                        <th class="sort" data-sort="phone">Venta</th>
-                                                        <th class="sort" data-sort="date">Oficial</th>
+                                                        <th class="sort" data-sort="buy">Compra</th>
+                                                        <th class="sort" data-sort="sell">Venta</th>
+                                                        <th class="sort" data-sort="oficial">Oficial</th>
+                                                        <th class="sort" data-sort="path">Imagen</th>
                                                         <th class="sort" data-sort="status">Estado</th>
-                                                        <th class="sort" data-sort="action">Action</th>
+                                                        <th>Accion</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="list form-check-all">
@@ -220,7 +222,15 @@
               {data: 'buy', name: 'buy'},
               {data: 'sell', name: 'sell'},
               {data: 'oficial', name: 'oficial'},
-              {data: 'status', name: 'status'},
+              {
+                data: 'path', name: 'path' , 
+                render: function (data, type, full, meta) {
+                    return "<img src=\"../assets/img/cash/" + data + "\" height=\"50\"/>";
+                }
+              },
+              {
+                data: 'status', name: 'status'
+                },
               {data: 'action', name: 'action', orderable: false, searchable: false},
           ]
       });
