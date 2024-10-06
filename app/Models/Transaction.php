@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Client;
 use App\Models\User;
-use App\Models\Quotation;
+use App\Models\Cash;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Transaction extends Model
@@ -23,9 +23,12 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'client_id',
-        'quotation_id',
-        'ammount',
+        'cash1_id',
+        'cash2_id',
+        'amount1',
+        'amount2',
         'date',
+        'type',
         'status'
     ];
 
@@ -39,9 +42,13 @@ class Transaction extends Model
         return $this->belongsTo(Client::class, 'client_id');
     }
 
-    public function quotation()
+    public function cash1()
     {
-        return $this->belongsTo(Quotation::class, 'quotation_id'); 
+        return $this->belongsTo(Cash::class, 'cash1_id'); 
+    }
+    public function cash2()
+    {
+        return $this->belongsTo(Cash::class, 'cash2_id'); 
     }
 
 }

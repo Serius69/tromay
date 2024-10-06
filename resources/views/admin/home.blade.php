@@ -136,7 +136,7 @@
                                         <span class="fw-semibold text-uppercase fs-12">Sort by: </span><span class="text-muted">Monthly<i class="mdi mdi-chevron-down ms-1"></i></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">Today</a>
+                                        <a class="dropdown-item" href="#">Hoy</a>
                                         <a class="dropdown-item" href="#">Weekly</a>
                                         <a class="dropdown-item" href="#">Monthly</a>
                                         <a class="dropdown-item" href="#">Yearly</a>
@@ -160,10 +160,12 @@
                                         <span class="fw-semibold text-uppercase fs-12">Sort by: </span><span class="text-muted">Current Year<i class="mdi mdi-chevron-down ms-1"></i></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">Today</a>
-                                        <a class="dropdown-item" href="#">Last Week</a>
-                                        <a class="dropdown-item" href="#">Last Month</a>
-                                        <a class="dropdown-item" href="#">Current Year</a>
+
+                                        <a class="dropdown-item" href="#">Hoy</a>
+                                        <a class="dropdown-item" href="#">Ultima Semana</a>
+                                        <a class="dropdown-item" href="#">Ultimo Mes</a>
+                                        <a class="dropdown-item" href="#">Anio actual</a>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -171,14 +173,14 @@
                         <div class="card-body px-0">
                             <ul class="list-inline main-chart text-center mb-0">
                                 <li class="list-inline-item chart-border-left me-0 border-0">
-                                    <h4 class="text-primary">$584k <span class="text-muted d-inline-block fs-13 align-middle ms-2">Revenue</span></h4>
+                                    <h4 class="text-primary">{{$query5}}<span class="text-muted d-inline-block fs-13 align-middle ms-2">Revenue</span></h4>
                                 </li>
                                 <li class="list-inline-item chart-border-left me-0">
-                                    <h4>$497k<span class="text-muted d-inline-block fs-13 align-middle ms-2">Expenses</span>
+                                    <h4>{{$query5}}<span class="text-muted d-inline-block fs-13 align-middle ms-2">Gastos</span>
                                     </h4>
                                 </li>
                                 <li class="list-inline-item chart-border-left me-0">
-                                    <h4><span data-plugin="counterup">3.6</span>%<span class="text-muted d-inline-block fs-13 align-middle ms-2">Profit Ratio</span></h4>
+                                    <h4><span data-plugin="counterup">{{$query5}}</span>%<span class="text-muted d-inline-block fs-13 align-middle ms-2">Profit Ratio</span></h4>
                                 </li>
                             </ul>
 
@@ -189,7 +191,7 @@
             </div><!-- end row -->
 
             <div class="row">
-                <div class="col-xl-7">
+                <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Ultimas transacciones</h4>
@@ -199,10 +201,7 @@
                                         <span class="text-muted">02 Nov 2021 to 31 Dec 2021<i class="mdi mdi-chevron-down ms-1"></i></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">Today</a>
-                                        <a class="dropdown-item" href="#">Last Week</a>
-                                        <a class="dropdown-item" href="#">Last Month</a>
-                                        <a class="dropdown-item" href="#">Current Year</a>
+                                        <a class="dropdown-item" href="#">Hoy</a>
                                     </div>
                                 </div>
                             </div>
@@ -213,13 +212,12 @@
                                 <table class="table table-borderless table-hover table-nowrap align-middle mb-0">
                                     <thead class="table-light">
                                         <tr class="text-muted">
-                                            <th scope="col">Name</th>
                                             <th scope="col" style="width: 20%;">Fecha de la transaccion</th>
                                             <th scope="col" style="width: 20%;">Hora de la transaccion</th>
                                             <th scope="col">Usuario</th>
                                             <th scope="col" style="width: 16%;">Tipo</th>
-                                            <th scope="col" style="width: 16%;">Moneda 1</th>
-                                            <th scope="col" style="width: 16%;">Moneda 2</th>
+                                            <th scope="col" style="width: 16%;">Moneda 1 - Monto</th>
+                                            <th scope="col" style="width: 16%;">Moneda 2 - Monto</th>
                                             <th scope="col" style="width: 16%;">Estado</th>
                                             <th scope="col" style="width: 12%;">Ganancia</th>
                                         </tr>
@@ -228,14 +226,21 @@
                                     <tbody>
                                         @foreach ($transactions as $transaction)
                                         <tr>
-                                            <td>Absternet LLC</td>
-                                            <td>Sep 20, 2021</td>
+                                            <td>{{$transaction->date}}</td>
+                                            <td>{{$transaction->date}}</td>
                                             <td><img src="assets2/images/users/avatar-1.jpg" alt="" class="avatar-xs rounded-circle me-2 shadow">
                                                 <a href="#javascript: void(0);" class="text-body fw-medium">Donald Risher</a>
                                             </td>
+                                            @if(($transaction->type)==1)
+                                            <td>Compra</td>
+                                            @else
+                                            <td>Venta</td>
+                                            @endif                 
+                                            <td>{{$transaction->cash1->name}} - {{$transaction->amount1}}</td>
+                                            <td>{{$transaction->cash2->name}} - {{$transaction->amount2}}</td>
                                             <td><span class="badge badge-soft-success p-2">Deal Won</span></td>
                                             <td>
-                                                <div class="text-nowrap">$100.1K</div>
+                                                <div class="text-nowrap">Bs{{$transaction->amount2}}</div>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -365,7 +370,7 @@
             
             </div><!-- end row -->
 
-            <div class="row">
+            {{--  <div class="row">
                 <div class="col-xxl-5">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
@@ -632,7 +637,7 @@
                                                 <a href="#javascript: void(0);" class="text-body fw-medium">Donald Risher</a>
                                             </td>
                                             <td>$96k</td>
-                                            <td>Today</td>
+                                            <td>Hoy</td>
                                         </tr>
                                         <tr>
                                             <td>Save lots Stores</td>
@@ -672,7 +677,7 @@
                         </div><!-- end card body -->
                     </div><!-- end card -->
                 </div><!-- end col -->
-            </div><!-- end row -->
+            </div><!-- end row -->  --}}
 
         </div>
         <!-- container-fluid -->

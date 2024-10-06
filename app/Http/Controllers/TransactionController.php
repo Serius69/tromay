@@ -15,7 +15,8 @@ class TransactionController extends Controller
      */
     public function  buy(){
         $data = [
-            'quotations'  => Cash::orderBy('id','asc')->paginate(10)
+            'cash1'  => Cash::orderBy('id','asc')->paginate(10),
+            'cash2'  => Cash::orderBy('id','asc')->paginate(10)
         ];
 
         return view('transaction.buy',$data);
@@ -28,7 +29,8 @@ class TransactionController extends Controller
      */
     public function  sell(){
         $data = [
-            'quotations'  => Cash::orderBy('id','asc')->paginate(10)
+            'cash1'  => Cash::orderBy('id','asc')->paginate(10),
+            'cash2'  => Cash::orderBy('id','asc')->paginate(10)
         ];
 
         return view('transaction.sell',$data);

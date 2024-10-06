@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">ADMIN NOTICIAS</h4>
+                                <h4 class="mb-sm-0">ADMIN USUARIOS</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
@@ -69,6 +69,15 @@
                                                         <th class="sort" data-sort="photo_id">Imagen</th>
                                                         <th class="sort" data-sort="type_id">Estado</th>
                                                         <th class="sort" data-sort="status">URL externa</th>
+                                                        {{--  <th>Noticia</th>
+                                                        <th>Autor</th>
+                                                        <th>Descripcion</th>
+                                                        <th>Fecha Publicacion</th>
+                                                        <th>Fecha Publicacion</th>
+                                                        <th>Fecha Publicacion</th>
+                                                        <th>Fecha Publicacion</th>
+                                                        <th>URL externa</th>
+                                                        <th>Action</th>  --}}
                                                     </tr>
                                                 </thead>
                                                     <tbody>

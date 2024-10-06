@@ -63,10 +63,12 @@
                                                         </th>
                                                         <th class="sort" data-sort="user_id">Usuario</th>
                                                         <th class="sort" data-sort="client_id">CI Cliente</th>
-                                                        <th class="sort" data-sort="quotation_id">Tipo de Cambio</th>
-                                                        <th class="sort" data-sort="date_publication">Monto de Cambio</th>
-                                                        <th class="sort" data-sort="url">Monto Final</th>
-                                                        <th class="sort" data-sort="photo_id">Fecha de emision</th>
+                                                        <th class="sort" data-sort="cash1_id">Moneda 1</th>
+                                                        <th class="sort" data-sort="cash2_id">Moneda 2</th>
+                                                        <th class="sort" data-sort="amount1">Monto inicial</th>
+                                                        <th class="sort" data-sort="amount2">Monto final</th>
+                                                        <th class="sort" data-sort="date">Fecha de transaccion</th>
+                                                        <th class="sort" data-sort="type">Tipo de transaccion</th>
                                                         <th class="sort" data-sort="status">Estado</th>
                                                         <th>Accion</th>
                                                     </tr>
@@ -86,7 +88,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="d-flex justify-content-end">
+                                        {{--  <div class="d-flex justify-content-end">
                                             <div class="pagination-wrap hstack gap-2">
                                                 <a class="page-item pagination-prev disabled" href="#">
                                                     Previous
@@ -96,7 +98,7 @@
                                                     Next
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div>  --}}
                                     </div>
                                 </div><!-- end card -->
                             </div>
@@ -267,20 +269,34 @@
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {
-                data: 'user_id', name: 'user_id'
+                //data: 'user_id', name: 'user_id'
+                data: 'user', name: 'user'
+                //render: function( data, type, full, meta ) {
+                  //  Utils.formatString(buttonTemplate, data)
+                //}
                 
             },
             {
                 data: 'client_id', name: 'client_id'
+               
             },
             {
-                data: 'quotation_id', name: 'quotation_id'
+                data: 'cash1_id', name: 'cash1_id'
             },
             {
-                data: 'ammount', name: 'ammount'
+                data: 'cash2_id', name: 'cash2_id'
+            },
+            {
+                data: 'amount1', name: 'amount1'
+            },
+            {
+                data: 'amount2', name: 'amount2'
             },
             {
                 data: 'date', name: 'date'
+            },
+            {
+                data: 'type', name: 'type'
             },
             {   data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},

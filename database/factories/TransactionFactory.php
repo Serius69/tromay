@@ -25,9 +25,13 @@ class TransactionFactory extends Factory
         return [
             'user_id' => 1,
             'client_id' => 1,
-            'quotation_id' => 1,
-            'ammount' => $this->faker->numberBetween(10,1000),
+            'cash1_id' => 1,
+            'cash2_id' => 2,
+            'amount1' => $this->faker->numberBetween(10,1000),
+            'amount2' => $this->faker->numberBetween(10,1000),
             'date' => $this->faker->date(),
+            // 0 sell 1 buy
+            'type' => 1,
             'status' => 1
 
         ];

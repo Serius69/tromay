@@ -48,20 +48,20 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="firstNameinput" class="form-label">CI</label>
-                                            <input type="text" class="form-control" placeholder="Enter your firstname" id="firstNameinput">
+                                            <input type="text" class="form-control" placeholder="Ingresa el carnet de identidad del cliente" id="firstNameinput">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="firstNameinput" class="form-label">Nombre</label>
-                                            <input type="text" class="form-control" placeholder="Enter your firstname" id="firstNameinput">
+                                            <input type="text" class="form-control" placeholder="Ingresa el nombre del cliente" id="firstNameinput">
                                         </div>
                                     </div>
                                     <!--end col-->
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="lastNameinput" class="form-label">Apellido</label>
-                                            <input type="text" class="form-control" placeholder="Enter your lastname" id="lastNameinput">
+                                            <input type="text" class="form-control" placeholder="Ingresa el apellido del cliente" id="lastNameinput">
                                         </div>
                                     </div>
                                     <!--end col-->
@@ -72,16 +72,19 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="firstNameinput" class="form-label">Monto</label>
-                                            <input type="number" class="form-control" placeholder="Enter your firstname" id="firstNameinput">
+                                            <input type="number" class="form-control" placeholder="Ingresa el monto que se cambiara" id="firstNameinput">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
+                                            <label for="firstNameinput" class="form-label">Moneda 1</label>
                                             <div data-input-flag data-option-flag-img-name>
                                                 <select class="form-select mb-3" aria-label="Default select example">
-                                                    <option selected>Tipo de transaccion</option>
-                                                    @foreach ($quotations as $quotation)
-                                                        <option value={{$quotation->$name}}>{{$quotation->$name}}</option>
+                                                    <option selected>Moneda 1</option>
+                                                    @foreach ($cash1 as $cash)
+                                                    @if(($cash->status)==1)
+                                                        {{--  <option value={{$cash->$id}}>{{$cash->$name}}</option>  --}}
+                                                    @endif                                                        
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -90,12 +93,28 @@
                                     <!--end col-->
                                     <div class="col-md-6">
                                         <div class="mb-6">
-
                                             <label for="lastNameinput" class="form-label">Monto Final</label>
                                                 <input type="text" class="form-control" id="disabledInput" value="Disabled input" disabled>
                                                 <button type="calculate" class="btn btn-secondary" onclick="calculate()">Calcular</button>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="firstNameinput" class="form-label">Moneda 2</label>
+                                            <div data-input-flag data-option-flag-img-name>
+                                                <select class="form-select mb-3" aria-label="Default select example">
+                                                    <option selected>Moneda 2</option>
+                                                    @foreach ($cash1 as $cash)
+                                                    @if(($cash->status)==1)
+                                                        {{--  <option value={{$cash->$id}}>{{$cash->$name}}</option>  --}}
+                                                    @endif
+                                                        
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
                                     <div class="col-lg-12">
                                         <div class="text-end">
                                             <button type="submit" class="btn btn-primary">Submit</button>
