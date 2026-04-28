@@ -1,0 +1,68 @@
+# Production VPS — uses pre-built image from GHCR
+# Usage: docker compose -f docker-compose.prod.yml up -d
+#
+# Required: /srv/kapitalya/.env  (copy from .env.example, fill secrets)
+services:
+  app:
+    image: ghcr.io/${GITHUB_REPOSITORY}:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      LOG_CHANNEL: daily
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      REDIS_HOST: redis
+    volumes:
+      - app_storage:/var/www/html/storage
+      - app_logs:/var/www/html/storage/logs
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    # Only expose to Caddy/Traefik reverse proxy, NOT to the internet directly
+    ports:
+      - "127.0.0.1:8080:80"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost/api/rates"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    # Never expose MySQL to external network
+    expose:
+      - "3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save 60 1 --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    expose:
+      - "6379"
+
+volumes:
+  app_storage:
+  app_logs:
+  mysql_data:
+  redis_data:

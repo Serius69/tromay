@@ -3,66 +3,63 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CashController;
-use App\Http\Controllers\LatestController;
 use App\Http\Controllers\TransactionController;
-
-/*
-|--------------------------------------------------------------------------
-| CRUD
-|
-*/
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LatestController;
+use App\Http\Controllers\Api\RatesController;
 use App\Http\Controllers\Crud\LatestCRUDController;
 use App\Http\Controllers\Crud\CashCRUDController;
 use App\Http\Controllers\Crud\TransactionCRUDController;
 use App\Http\Controllers\Crud\ClientCRUDController;
+use App\Http\Controllers\Crud\QuotationCRUDController;
 
-Route::controller(HomeController::class)->group(function(){
-    Route::get('/',  '__invoke');
-    Route::get('admin',  'admin');
-    Route::get('about',  'about');
-    Route::get('contact',  'contact');
-    Route::get('privacy',  'privacy');
-    Route::get('terms',  'terms');
-
+/*
+|--------------------------------------------------------------------------
+| PUBLIC ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/',        '__invoke')->name('home');
+    Route::get('about',    'about')->name('about');
+    Route::get('contact',  'contact')->name('contact');
+    Route::get('privacy',  'privacy')->name('privacy');
+    Route::get('terms',    'terms')->name('terms');
+    Route::get('quote',    'quote')->name('quote');
 });
 
-Route::controller(CashController::class)->group(function(){
-    Route::get('quote',  'quote');
+// Public detail pages
+Route::get('dinero/{cash}',   [CashController::class,  'show'])->name('dinero.show');
+Route::get('noticia/{latest}', [LatestController::class, 'show'])->name('noticia.show');
+
+/*
+|--------------------------------------------------------------------------
+| PUBLIC API — Exchange Rates (rate-limited, no auth required)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('throttle:60,1')->prefix('api')->name('api.')->group(function () {
+    Route::get('rates',      [RatesController::class, 'index'])->name('rates.index');
+    Route::get('rates/{cash}', [RatesController::class, 'show'])->name('rates.show');
 });
 
-    // Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+/*
+|--------------------------------------------------------------------------
+| ADMIN ROUTES — authentication required
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
+    Route::get('/',           [HomeController::class,       'admin'])->name('home');
+    Route::get('analytics',   [DashboardController::class,  'analytics'])->name('analytics');
 
-    Route::controller(DashboardController::class)->group(function(){
-        Route::get('admin/analytics',  'analytics');
-    });
+    // Buy / Sell transaction forms
+    Route::get('buy',  [TransactionController::class, 'buy'])->name('buy');
+    Route::get('sell', [TransactionController::class, 'sell'])->name('sell');
+    Route::post('transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
 
-    Route::controller(CashCRUDController::class)->group(function(){
-        Route::get('admin/cash', 'index');
-    });
-    Route::controller(ClientCRUDController::class)->group(function(){
-        Route::get('admin/client', 'index');
-    });
-    Route::controller(TransactionCRUDController::class)->group(function(){
-        Route::get('admin/transaction', 'index');
-    });
-    Route::controller(TransactionController::class)->group(function(){
-        Route::get('admin/buy', 'buy');
-        Route::get('admin/sell', 'sell');
-    });
-    Route::controller(LatestCRUDController::class)->group(function(){
-        Route::get('admin/latest', 'index');
-    });
-    Route::controller(LatestCRUDController::class)->group(function(){
-        Route::get('admin/quotation', 'index');
-    });
-
-
-//Para vista del usuario
-Route::resource('noticia', LatestController::class);
-Route::resource('dinero', CashController::class);
-//CRUD
-Route::resource('latests', LatestCRUDController::class);
-Route::resource('cashes', CashCRUDController::class);
-Route::resource('transactions', LatestCRUDController::class);
-Route::resource('clients', LatestCRUDController::class);
+    // Resource CRUD
+    Route::resource('cash',        CashCRUDController::class);
+    Route::resource('client',      ClientCRUDController::class);
+    Route::resource('transaction', TransactionCRUDController::class);
+    Route::resource('latest',      LatestCRUDController::class);
+    Route::resource('quotation',   QuotationCRUDController::class);
+});
