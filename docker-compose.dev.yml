@@ -1,0 +1,104 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  ENTORNO: DESARROLLO (DEV)
+#  Uso: docker compose -f docker-compose.dev.yml up -d
+#       → o simplemente ejecuta scripts\setup-dev.bat
+#
+#  Características:
+#  - Código fuente montado como volumen (cambios en tiempo real)
+#  - Xdebug habilitado
+#  - Mailpit para captura de emails (http://localhost:8025)
+#  - MySQL en puerto 33060 (acceso directo desde host)
+#  - Redis en puerto 6379
+# ══════════════════════════════════════════════════════════════════════════
+
+services:
+
+  # ── Aplicación Laravel ─────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      target: production
+    ports:
+      - "8080:80"
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8080
+      DB_HOST: mysql
+      DB_DATABASE: kapitalya_dev
+      DB_USERNAME: kapitalya_dev
+      DB_PASSWORD: dev_secret
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      REDIS_HOST: redis
+      REDIS_PASSWORD: "null"
+      LOG_CHANNEL: stack
+      LOG_LEVEL: debug
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+    volumes:
+      # Código fuente montado para desarrollo sin rebuild
+      - .:/var/www/html
+      # Preserva vendor y assets compilados del build
+      - dev_vendor:/var/www/html/vendor
+      - dev_assets:/var/www/html/public/build
+      - dev_storage:/var/www/html/storage
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - kapitalya_dev
+
+  # ── MySQL — kapitalya_dev ──────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: kapitalya_dev
+      MYSQL_USER: kapitalya_dev
+      MYSQL_PASSWORD: dev_secret
+      MYSQL_ROOT_PASSWORD: root_dev_secret
+    volumes:
+      - mysql_dev:/var/lib/mysql
+    ports:
+      - "33060:3306"        # Acceso directo desde host (TablePlus, DBeaver, etc.)
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kapitalya_dev
+
+  # ── Redis ──────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_dev:/data
+    ports:
+      - "6379:6379"         # Acceso directo desde host
+    command: redis-server --save 60 1 --loglevel debug
+    networks:
+      - kapitalya_dev
+
+  # ── Mailpit — captura todos los emails en DEV ──────────────────────
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"         # UI web: http://localhost:8025
+      - "1025:1025"         # SMTP
+    networks:
+      - kapitalya_dev
+
+volumes:
+  mysql_dev:
+  redis_dev:
+  dev_vendor:
+  dev_assets:
+  dev_storage:
+
+networks:
+  kapitalya_dev:
+    driver: bridge

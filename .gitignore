@@ -16,3 +16,11 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# ── Archivos de entorno (generados por scripts .bat) ──────────────────
+# env/.env.dev y env/.env.test son SEGUROS para git (sin secretos reales)
+# env/.env.prod NUNCA debe tener secretos reales — solo usar como template
+# El .env en raiz siempre ignorado (lo genera setup-*.bat)
+
+# Si en algún momento copias secretos reales a env/.env.prod, agrégalo:
+# /env/.env.prod

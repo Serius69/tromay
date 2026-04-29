@@ -1,10 +1,16 @@
 name: Kapitalya CI/CD
 
+# ══════════════════════════════════════════════════════════════════════
+#  Estrategia de branches:
+#   dev     →  Solo tests (feedback rapido)
+#   staging →  Tests completos + build imagen
+#   main    →  Tests + Build + Deploy a produccion
+# ══════════════════════════════════════════════════════════════════════
 on:
   push:
-    branches: [main]
+    branches: [main, staging, dev]
   pull_request:
-    branches: [main]
+    branches: [main, staging]
 
 env:
   PHP_VERSION: '8.2'
@@ -13,7 +19,7 @@ env:
   IMAGE: ghcr.io/${{ github.repository }}
 
 # ──────────────────────────────────────────────────────────────────────
-# JOB 1 — Tests & Security
+# JOB 1 — Tests (corre en TODOS los branches)
 # ──────────────────────────────────────────────────────────────────────
 jobs:
   test:
@@ -65,8 +71,8 @@ jobs:
 
       - name: Prepare test environment
         run: |
-          cp .env.example .env.testing
-          php artisan key:generate --env=testing
+          cp env/.env.test .env
+          php artisan key:generate --force
         env:
           APP_ENV: testing
           DB_HOST: 127.0.0.1
@@ -75,7 +81,7 @@ jobs:
           DB_PASSWORD: secret
 
       - name: Run migrations
-        run: php artisan migrate --env=testing --force
+        run: php artisan migrate:fresh --force
         env:
           APP_ENV: testing
           DB_HOST: 127.0.0.1
@@ -96,13 +102,15 @@ jobs:
         run: composer audit
 
   # ──────────────────────────────────────────────────────────────────────
-  # JOB 2 — Build Docker image (only on main)
+  # JOB 2 — Build Docker (staging + main solamente)
   # ──────────────────────────────────────────────────────────────────────
   build:
     name: Build & Push Docker Image
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: |
+      (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging') &&
+      github.event_name == 'push'
 
     outputs:
       image_tag: ${{ steps.meta.outputs.version }}
@@ -120,8 +128,9 @@ jobs:
         with:
           images: ${{ env.IMAGE }}
           tags: |
+            type=ref,event=branch
             type=sha,prefix=sha-,format=short
-            type=raw,value=latest
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
@@ -136,22 +145,57 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          # Layer cache via GitHub Actions cache
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
             APP_VERSION=${{ github.sha }}
 
   # ──────────────────────────────────────────────────────────────────────
-  # JOB 3 — Deploy (zero-downtime)
+  # JOB 3 — Deploy a Staging (branch: staging)
   # ──────────────────────────────────────────────────────────────────────
-  deploy:
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/staging' && github.event_name == 'push'
+    environment: staging
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy Staging via SSH
+        uses: appleboy/ssh-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          IMAGE: ${{ env.IMAGE }}
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          envs: GITHUB_TOKEN,GITHUB_ACTOR,IMAGE
+          script: |
+            set -e
+            cd /srv/kapitalya-staging
+
+            echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+            docker compose -f docker-compose.test.yml pull app
+
+            docker compose -f docker-compose.test.yml up -d --no-deps --wait app
+            docker compose -f docker-compose.test.yml exec -T app php artisan migrate --force
+            docker compose -f docker-compose.test.yml exec -T app php artisan config:cache
+
+            docker image prune -f
+
+  # ──────────────────────────────────────────────────────────────────────
+  # JOB 4 — Deploy a Produccion (branch: main)
+  # ──────────────────────────────────────────────────────────────────────
+  deploy-production:
     name: Deploy to Production
     runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment: production
-    # Prevent concurrent deploys — new push waits for current deploy to finish
     concurrency:
       group: production
       cancel-in-progress: false
@@ -174,41 +218,33 @@ jobs:
             set -e
             cd /srv/kapitalya
 
-            # Store current image tag for potential rollback
             PREVIOUS_TAG=$(docker inspect kapitalya_app --format='{{.Config.Image}}' 2>/dev/null || echo "")
 
-            # Pull latest image
             echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
             docker compose -f docker-compose.prod.yml pull app
 
-            # Rolling update — new container starts before old one stops
             docker compose -f docker-compose.prod.yml up -d --no-deps --wait app
 
-            # Run migrations (safe — Laravel migrations are idempotent)
             docker compose -f docker-compose.prod.yml exec -T app php artisan migrate --force
-
-            # Warm all caches
             docker compose -f docker-compose.prod.yml exec -T app php artisan config:cache
             docker compose -f docker-compose.prod.yml exec -T app php artisan route:cache
             docker compose -f docker-compose.prod.yml exec -T app php artisan view:cache
 
-            # Health check — wait up to 30s
             for i in {1..6}; do
               STATUS=$(curl -sf -o /dev/null -w "%{http_code}" http://localhost/api/rates || echo "000")
               if [ "$STATUS" = "200" ]; then
-                echo "Health check OK (attempt $i)"
+                echo "Health check OK (intento $i)"
                 break
               fi
-              echo "Health check attempt $i — got $STATUS, retrying..."
+              echo "Intento $i — HTTP $STATUS, reintentando..."
               sleep 5
               if [ $i -eq 6 ]; then
-                echo "Health check failed — rolling back to $PREVIOUS_TAG"
+                echo "Health check fallo — rollback a $PREVIOUS_TAG"
                 docker compose -f docker-compose.prod.yml up -d --no-deps app
                 exit 1
               fi
             done
 
-            # Cleanup dangling images
             docker image prune -f
 
       - name: Verify production endpoint
@@ -216,5 +252,5 @@ jobs:
           sleep 5
           STATUS=$(curl -sf -o /dev/null -w "%{http_code}" \
             "https://${{ secrets.DEPLOY_HOST }}/api/rates" || echo "000")
-          echo "Production health: HTTP $STATUS"
+          echo "Produccion health: HTTP $STATUS"
           [ "$STATUS" = "200" ] || exit 1
