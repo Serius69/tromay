@@ -23,6 +23,8 @@
   --kap-gold-dim:     rgba(245, 166, 35, 0.10);
   --kap-red:          #FF4757;
   --kap-red-dim:      rgba(255, 71, 87, 0.10);
+  --kap-blue:         #3B82F6;
+  --kap-blue-dim:     rgba(59, 130, 246, 0.10);
 
   /* Text */
   --kap-text:         #F0F2F5;
@@ -101,8 +103,8 @@ a { transition: var(--transition); }
 .top-header,
 .top-header-four {
   background: rgba(10,10,15,0.97) !important;
-  backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
+  backdrop-filter: blur(16px) !important;
   border-bottom: 1px solid var(--kap-border) !important;
   padding: 8px 0 !important;
 }
@@ -122,8 +124,8 @@ a { transition: var(--transition); }
 .navbar-area,
 .navbar-area-four {
   background: rgba(10,10,15,0.97) !important;
-  backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
+  backdrop-filter: blur(20px) !important;
   border-bottom: 1px solid var(--kap-border) !important;
   box-shadow: 0 1px 0 rgba(0,200,150,0.05) !important;
 }
@@ -226,6 +228,7 @@ a { transition: var(--transition); }
     linear-gradient(90deg, var(--kap-border) 1px, transparent 1px);
   background-size: 64px 64px;
   opacity: 0.35;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 100%);
   mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 100%);
   pointer-events: none;
 }
@@ -997,7 +1000,541 @@ a { transition: var(--transition); }
 }
 
 /* ----------------------------------------------------------------
-   20. LAST-UPDATED TIMESTAMP
+   20. ABOUT PAGE SYSTEM
+   ---------------------------------------------------------------- */
+
+/* Hero */
+.kap-about-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--kap-black);
+  padding: 100px 0 80px;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+.kap-about-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--kap-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--kap-border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.3;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 30%, transparent 100%);
+}
+.kap-about-hero-glow {
+  position: absolute;
+  top: -20%; left: 50%;
+  transform: translateX(-50%);
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(0,200,150,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+.kap-about-hero-logo {
+  height: 64px;
+  width: auto;
+  margin-bottom: 28px;
+  filter: drop-shadow(0 0 24px rgba(0,200,150,0.2));
+}
+.kap-about-hero-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.kap-about-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--kap-surface-2);
+  border: 1px solid var(--kap-border-s);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--kap-text-sec);
+}
+.kap-about-pill i { color: var(--kap-text-muted); font-size: 13px; }
+.kap-about-pill--green {
+  background: var(--kap-green-dim);
+  border-color: rgba(0,200,150,0.2);
+  color: var(--kap-green);
+}
+.kap-about-pill--green i { color: var(--kap-green); }
+.kap-about-hero-sub {
+  font-size: 17px !important;
+  color: var(--kap-text-sec) !important;
+  line-height: 1.75 !important;
+  max-width: 560px;
+  margin: 0 auto !important;
+}
+
+/* Section headings */
+.kap-about-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--kap-green);
+  background: var(--kap-green-dim);
+  border: 1px solid rgba(0,200,150,0.2);
+  border-radius: 100px;
+  padding: 5px 12px;
+  margin-bottom: 12px;
+}
+.kap-about-h2 {
+  font-family: var(--font-display) !important;
+  font-size: clamp(28px, 3.5vw, 44px) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+  color: var(--kap-text) !important;
+  line-height: 1.15 !important;
+  margin-bottom: 16px !important;
+}
+
+/* Stat cards in description section */
+.kap-stat-card {
+  background: var(--kap-surface);
+  border: 1px solid var(--kap-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: var(--transition);
+}
+.kap-stat-card:hover {
+  border-color: var(--kap-border-s);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.kap-stat-icon { font-size: 22px; margin-bottom: 8px; }
+.kap-stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--kap-text-muted);
+  margin-bottom: 6px;
+}
+.kap-stat-value {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--kap-text);
+  line-height: 1.3;
+}
+
+/* Misión & Visión cards */
+.kap-mv-card {
+  background: var(--kap-surface-2);
+  border: 1px solid var(--kap-border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  height: 100%;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.kap-mv-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.kap-mv-card--mission::before { background: linear-gradient(90deg, var(--kap-green), transparent); }
+.kap-mv-card--vision::before  { background: linear-gradient(90deg, var(--kap-gold), transparent);  }
+.kap-mv-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+.kap-mv-icon { margin-bottom: 16px; }
+.kap-mv-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 4px 12px; border-radius: 100px;
+  border: 1px solid;
+  margin-bottom: 16px;
+}
+.kap-mv-text {
+  font-size: 15px !important;
+  color: var(--kap-text-sec) !important;
+  line-height: 1.75 !important;
+  margin-bottom: 20px !important;
+}
+.kap-mv-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kap-mv-list li {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; color: var(--kap-text-sec) !important;
+}
+.kap-mv-list li i { font-size: 16px; }
+
+/* Valores cards */
+.kap-value-card {
+  background: var(--kap-surface);
+  border: 1px solid var(--kap-border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  height: 100%;
+  transition: var(--transition);
+}
+.kap-value-card:hover {
+  border-color: var(--kap-green);
+  transform: translateY(-5px);
+  box-shadow: var(--glow);
+}
+.kap-value-card i { font-size: 32px; margin-bottom: 14px; display: block; }
+.kap-value-card h3 {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: var(--kap-text) !important;
+  margin-bottom: 10px !important;
+}
+.kap-value-card p { font-size: 14px !important; color: var(--kap-text-sec) !important; margin: 0 !important; }
+
+/* Service cards */
+.kap-service-card {
+  background: var(--kap-surface-2);
+  border: 1px solid var(--kap-border);
+  border-radius: var(--radius);
+  padding: 26px;
+  height: 100%;
+  transition: var(--transition);
+}
+.kap-service-card:hover {
+  border-color: var(--kap-border-s);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.kap-service-letter {
+  width: 36px; height: 36px;
+  border-radius: 8px; border: 1px solid;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 800; font-family: var(--font-display);
+  margin-bottom: 14px;
+}
+.kap-service-card h4 {
+  font-size: 16px !important; font-weight: 700 !important;
+  color: var(--kap-text) !important; margin-bottom: 14px !important;
+}
+.kap-service-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kap-service-list li {
+  font-size: 14px !important;
+  color: var(--kap-text-sec) !important;
+  padding-left: 14px;
+  position: relative;
+}
+.kap-service-list li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--kap-text-muted);
+  font-size: 12px;
+}
+
+/* Audience tags */
+.kap-audience-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.kap-audience-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  background: var(--kap-surface);
+  border: 1px solid var(--kap-border);
+  border-radius: 8px;
+  font-size: 13px; font-weight: 500; color: var(--kap-text-sec);
+  transition: var(--transition);
+}
+.kap-audience-tag:hover {
+  border-color: var(--kap-green);
+  color: var(--kap-text);
+}
+.kap-audience-tag i { color: var(--kap-green); font-size: 15px; }
+
+/* Differentiators */
+.kap-differentiators { display: flex; flex-direction: column; gap: 14px; }
+.kap-diff-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 16px;
+  background: var(--kap-surface);
+  border: 1px solid var(--kap-border);
+  border-radius: 10px;
+  transition: var(--transition);
+}
+.kap-diff-item:hover {
+  border-color: var(--kap-border-s);
+  transform: translateX(4px);
+}
+.kap-diff-num {
+  font-size: 18px; font-weight: 800;
+  font-family: var(--font-mono);
+  width: 36px; height: 36px;
+  border-radius: 8px; border: 1px solid;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; line-height: 1;
+}
+.kap-diff-item h5 {
+  font-size: 14px !important; font-weight: 700 !important;
+  color: var(--kap-text) !important; margin-bottom: 4px !important;
+}
+.kap-diff-item p {
+  font-size: 13px !important; color: var(--kap-text-sec) !important; margin: 0 !important;
+}
+
+/* Operational area cards */
+.kap-area-card {
+  background: var(--kap-surface-2);
+  border: 1px solid var(--kap-border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  text-align: center;
+  height: 100%;
+  transition: var(--transition);
+}
+.kap-area-card:hover {
+  border-color: var(--kap-border-s);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.kap-area-icon {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  background: var(--kap-surface-3);
+  border: 1px solid var(--kap-border);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 24px;
+}
+.kap-area-card h4 {
+  font-size: 17px !important; font-weight: 700 !important;
+  color: var(--kap-text) !important; margin-bottom: 14px !important;
+}
+.kap-area-card ul {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kap-area-card ul li {
+  font-size: 13px !important; color: var(--kap-text-sec) !important;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--kap-border);
+}
+.kap-area-card ul li:last-child { border-bottom: none; }
+
+/* Infrastructure grid */
+.kap-infra-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+.kap-infra-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  background: var(--kap-surface);
+  border: 1px solid var(--kap-border);
+  border-radius: 8px;
+  font-size: 13px; color: var(--kap-text-sec);
+  transition: var(--transition);
+}
+.kap-infra-item:hover { border-color: var(--kap-border-s); }
+.kap-infra-item i { font-size: 18px; flex-shrink: 0; }
+
+/* Roadmap items */
+.kap-roadmap-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  background: var(--kap-surface-2);
+  border: 1px solid var(--kap-border);
+  border-radius: 10px;
+  transition: var(--transition);
+}
+.kap-roadmap-item:hover {
+  border-color: var(--kap-border-s);
+  transform: translateX(4px);
+}
+.kap-roadmap-num {
+  font-size: 13px; font-weight: 800;
+  font-family: var(--font-mono);
+  width: 34px; height: 34px;
+  border-radius: 8px; border: 1px solid;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Brand identity words */
+.kap-brand-word {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--kap-surface);
+  border: 1px solid var(--kap-border);
+  border-radius: 8px;
+  font-size: 13px; font-weight: 500;
+  color: var(--kap-text-sec);
+  transition: var(--transition);
+}
+.kap-brand-word:hover {
+  background: var(--kap-green-dim);
+  border-color: rgba(0,200,150,.3);
+  color: var(--kap-green);
+}
+
+/* Legal data table */
+.kap-legal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--kap-border);
+  gap: 16px;
+}
+.kap-legal-row:last-child { border-bottom: none; }
+.kap-legal-key {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--kap-text-muted);
+  font-weight: 500; flex-shrink: 0; min-width: 180px;
+}
+.kap-legal-key i { font-size: 16px; }
+.kap-legal-val {
+  font-family: var(--font-body);
+  font-size: 14px; font-weight: 600;
+  color: var(--kap-text);
+  text-align: right;
+}
+
+/* ----------------------------------------------------------------
+   ABOUT — TIMELINE
+   ---------------------------------------------------------------- */
+.kap-timeline { position: relative; }
+
+.kap-tl-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0 20px;
+  margin-bottom: 32px;
+}
+.kap-tl-item:last-child { margin-bottom: 0; }
+
+.kap-tl-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
+.kap-tl-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--kap-surface-3);
+  border: 2px solid var(--kap-border-s);
+  flex-shrink: 0;
+  z-index: 1;
+  transition: var(--transition);
+}
+.kap-tl-dot--mid {
+  background: var(--kap-surface-3);
+  border-color: var(--kap-green);
+}
+.kap-tl-dot--active {
+  background: var(--kap-green);
+  border-color: var(--kap-green);
+  box-shadow: 0 0 0 4px var(--kap-green-dim), 0 0 16px rgba(0,200,150,0.4);
+  animation: kap-pulse 2.5s infinite;
+}
+
+.kap-tl-line {
+  width: 2px;
+  flex: 1;
+  min-height: 24px;
+  margin-top: 6px;
+  background: linear-gradient(to bottom, var(--kap-border-s), var(--kap-border));
+}
+
+.kap-tl-content { padding-bottom: 8px; }
+
+.kap-tl-year {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--kap-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  padding-top: 0;
+}
+
+.kap-tl-card {
+  background: var(--kap-surface-2);
+  border: 1px solid var(--kap-border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  transition: var(--transition);
+}
+.kap-tl-card:hover { border-color: var(--kap-border-s); }
+
+.kap-tl-card--active {
+  border-color: rgba(0,200,150,0.25) !important;
+  background: rgba(0,200,150,0.04) !important;
+  position: relative;
+  overflow: hidden;
+}
+.kap-tl-card--active::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--kap-green), transparent);
+}
+
+.kap-tl-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid;
+  margin-bottom: 10px;
+}
+.kap-tl-tag i { font-size: 12px; }
+
+.kap-tl-title {
+  font-family: var(--font-display) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--kap-text) !important;
+  margin-bottom: 8px !important;
+}
+
+.kap-tl-desc {
+  font-size: 14px !important;
+  color: var(--kap-text-sec) !important;
+  line-height: 1.7 !important;
+  margin: 0 !important;
+}
+
+/* About responsive */
+@media (max-width: 767px) {
+  .kap-about-hero { padding: 70px 0 60px; min-height: 0; }
+  .kap-about-hero-logo { height: 46px; }
+  .kap-about-hero-pills { gap: 8px; }
+  .kap-infra-grid { grid-template-columns: 1fr; }
+  .kap-legal-row { flex-direction: column; align-items: flex-start; }
+  .kap-legal-key { min-width: auto; }
+  .kap-legal-val { text-align: left; }
+  .kap-mv-card { padding: 22px; }
+  .kap-roadmap-item { padding: 12px; }
+  .kap-tl-item { grid-template-columns: 20px 1fr; gap: 0 14px; }
+  .kap-tl-card { padding: 16px; }
+}
+
+/* ----------------------------------------------------------------
+   21. LAST-UPDATED TIMESTAMP
    ---------------------------------------------------------------- */
 .kap-last-updated {
   font-size: 11px;
@@ -1043,3 +1580,257 @@ a { transition: var(--transition); }
   .kap-live-panel { padding: 20px; }
   .kap-trust-bar { padding: 12px 14px; }
 }
+
+/* ----------------------------------------------------------------
+   22. SERVICES GRID — Servicios Integrales section
+   ---------------------------------------------------------------- */
+.kap-svc-card {
+  background: var(--kap-surface-2);
+  border: 1px solid var(--kap-border);
+  border-radius: var(--radius);
+  padding: 26px;
+  height: 100%;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.kap-svc-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.kap-svc-card:hover { border-color: rgba(0,200,150,0.3); transform: translateY(-4px); box-shadow: var(--glow); }
+.kap-svc-card:hover::before { opacity: 1; }
+.kap-svc-card--green::before { background: linear-gradient(90deg, var(--kap-green), transparent); }
+.kap-svc-card--gold::before  { background: linear-gradient(90deg, var(--kap-gold),  transparent); }
+
+.kap-svc-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  font-size: 22px;
+}
+.kap-svc-icon--green { background: var(--kap-green-dim); border: 1px solid rgba(0,200,150,.2); color: var(--kap-green); }
+.kap-svc-icon--gold  { background: var(--kap-gold-dim);  border: 1px solid rgba(245,166,35,.2); color: var(--kap-gold); }
+
+.kap-svc-title {
+  font-family: var(--font-display) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--kap-text) !important;
+  margin-bottom: 10px !important;
+}
+.kap-svc-desc {
+  font-size: 13px !important;
+  color: var(--kap-text-sec) !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+}
+
+/* Digital vision cards */
+.kap-vision-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+  background: var(--kap-surface);
+  border: 1px solid var(--kap-border);
+  border-radius: 12px;
+  transition: var(--transition);
+}
+.kap-vision-item:hover { border-color: rgba(0,200,150,0.3); }
+
+.kap-vision-icon {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+/* Brand message block */
+.kap-brand-message {
+  text-align: center;
+  padding: 60px 40px;
+  background: var(--kap-surface-2);
+  border: 1px solid var(--kap-border-s);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+.kap-brand-message::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--kap-green), var(--kap-gold), var(--kap-green));
+  background-size: 200% 100%;
+  animation: kap-shimmer 5s linear infinite;
+}
+.kap-brand-message-text {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--kap-text);
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+.kap-brand-message-sub {
+  font-size: 15px !important;
+  color: var(--kap-text-sec) !important;
+  max-width: 520px;
+  margin: 0 auto !important;
+  line-height: 1.7 !important;
+}
+
+@media (max-width: 767px) {
+  .kap-brand-message { padding: 40px 24px; }
+  .kap-svc-card { padding: 20px; }
+}
+
+/* ----------------------------------------------------------------
+   23. FLOATING CONTACT BUTTONS — WhatsApp + Telegram
+   ---------------------------------------------------------------- */
+.kap-float-btns {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+}
+
+.kap-float-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.kap-float-btn:hover { transform: scale(1.12); }
+.kap-float-btn:active { transform: scale(0.96); }
+
+.kap-float-wsp {
+  background: #25D366;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45);
+}
+.kap-float-wsp:hover { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6); }
+
+.kap-float-tg {
+  background: #0088cc;
+  box-shadow: 0 4px 16px rgba(0, 136, 204, 0.45);
+}
+.kap-float-tg:hover { box-shadow: 0 8px 28px rgba(0, 136, 204, 0.6); }
+
+.kap-float-btn svg { display: block; }
+
+@media (max-width: 576px) {
+  .kap-float-btns { bottom: 16px; right: 16px; gap: 10px; }
+  .kap-float-btn  { width: 46px; height: 46px; }
+}
+
+/* ----------------------------------------------------------------
+   24. LIGHT THEME — tokens & structural overrides
+   ---------------------------------------------------------------- */
+[data-theme="light"] {
+  --kap-black:      #F4F6F8;
+  --kap-surface:    #FFFFFF;
+  --kap-surface-2:  #EEF0F4;
+  --kap-surface-3:  #E3E6EC;
+  --kap-border:     rgba(0, 0, 0, 0.07);
+  --kap-border-s:   rgba(0, 0, 0, 0.13);
+  --kap-text:       #0D1117;
+  --kap-text-sec:   #4A5568;
+  --kap-text-muted: #9BA3AF;
+  --shadow:         0 4px 24px rgba(0,0,0,0.10);
+  --glow:           0 0 40px rgba(0,200,150,0.12);
+}
+
+/* Hardcoded dark backgrounds that need explicit overrides */
+[data-theme="light"] .top-header,
+[data-theme="light"] .top-header-four {
+  background: rgba(244,246,248,0.97) !important;
+  border-bottom-color: var(--kap-border) !important;
+}
+
+[data-theme="light"] .navbar-area,
+[data-theme="light"] .navbar-area-four {
+  background: rgba(255,255,255,0.97) !important;
+  border-bottom-color: var(--kap-border) !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06), 0 1px 0 rgba(0,200,150,0.06) !important;
+}
+
+[data-theme="light"] .mobile-nav { background: var(--kap-surface) !important; }
+
+[data-theme="light"] .kap-rate-row:hover {
+  background: rgba(0,0,0,0.025) !important;
+}
+
+[data-theme="light"] .kap-ticker-bar::before {
+  background: linear-gradient(90deg, var(--kap-surface), transparent) !important;
+}
+[data-theme="light"] .kap-ticker-bar::after {
+  background: linear-gradient(-90deg, var(--kap-surface), transparent) !important;
+}
+
+[data-theme="light"] .banner-area,
+[data-theme="light"] .banner-area-four {
+  background: var(--kap-black) !important;
+}
+
+[data-theme="light"] .preloader {
+  background: var(--kap-black) !important;
+}
+
+[data-theme="light"] .map-area iframe {
+  filter: none !important;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track { background: var(--kap-surface-2); }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: #CBD5E0; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #9BA3AF; }
+
+/* Logo variants — CSS-driven swap, no JS src change needed */
+.kap-logo-for-dark  { display: block; }
+.kap-logo-for-light { display: none;  }
+[data-theme="light"] .kap-logo-for-dark  { display: none;  }
+[data-theme="light"] .kap-logo-for-light { display: block; }
+
+/* ----------------------------------------------------------------
+   25. THEME TOGGLE BUTTON
+   ---------------------------------------------------------------- */
+.kap-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--kap-surface-2);
+  border: 1px solid var(--kap-border-s);
+  color: var(--kap-text-sec);
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0;
+  flex-shrink: 0;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.kap-theme-toggle:hover {
+  background: var(--kap-surface-3);
+  color: var(--kap-green);
+  border-color: rgba(0,200,150,0.35);
+}
+
+.kap-theme-toggle .icon-sun  { display: none;  }
+.kap-theme-toggle .icon-moon { display: block; }
+[data-theme="light"] .kap-theme-toggle .icon-sun  { display: block; }
+[data-theme="light"] .kap-theme-toggle .icon-moon { display: none;  }

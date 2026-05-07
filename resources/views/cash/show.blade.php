@@ -38,9 +38,18 @@
             <div class="col-lg-4 col-md-6">
                 <div class="kap-sim-card h-100">
                     <div class="text-center mb-24" style="padding-bottom:20px;border-bottom:1px solid var(--kap-border);">
-                        <img src="{{ url('assets/img/cash/' . $cash->path) }}"
+                        @php
+                        $showFlagMap=['usd'=>'estados unidos.png','eur'=>'union europea.png','clp'=>'chile.png','pen'=>'peru.png','brl'=>'brazil.png','ars'=>'argentina.png'];
+                        $showFlag = $showFlagMap[strtolower($cash->name)] ?? null;
+                        @endphp
+                        @if($showFlag)
+                        <img src="{{ url('assets/images/' . $showFlag) }}"
                              alt="{{ e($cash->name) }}"
                              style="width:80px;height:80px;object-fit:cover;border-radius:12px;border:1px solid var(--kap-border);margin-bottom:16px;">
+                        @else
+                        <div style="width:80px;height:80px;border-radius:12px;border:1px solid var(--kap-border);margin:0 auto 16px;
+                                    background:var(--kap-surface-2);display:flex;align-items:center;justify-content:center;font-size:32px;">💱</div>
+                        @endif
                         <h3 style="font-size:22px!important;margin-bottom:4px!important;">{{ e($cash->name) }}</h3>
                         <span class="kap-live-badge">Actualizado</span>
                     </div>
@@ -122,13 +131,19 @@
             <div class="col-lg-4">
                 <div class="kap-sim-card h-100">
                     <h3 style="font-size:18px!important;margin-bottom:16px!important;">Otras divisas</h3>
+                    @php $otherFlagMap=['usd'=>'estados unidos.png','eur'=>'union europea.png','clp'=>'chile.png','pen'=>'peru.png','brl'=>'brazil.png','ars'=>'argentina.png']; @endphp
                     @foreach($cashes->where('id', '!=', $cash->id)->take(6) as $other)
+                    @php $otherFlag=$otherFlagMap[strtolower($other->name)]??null; @endphp
                     <div class="kap-rate-row" data-kap-id="{{ $other->id }}">
                         <div class="kap-rc">
                             <div class="kap-rc-flag" style="width:28px;height:28px;font-size:16px;">
-                                <img src="{{ url('assets/img/cash/' . $other->path) }}"
+                                @if($otherFlag)
+                                <img src="{{ url('assets/images/' . $otherFlag) }}"
                                      alt="{{ e($other->name) }}"
-                                     onerror="this.style.display='none';this.parentElement.textContent='💱'">
+                                     style="width:100%;height:100%;object-fit:cover;border-radius:5px;">
+                                @else
+                                <span>💱</span>
+                                @endif
                             </div>
                             <span class="kap-rc-code" style="font-size:13px;">{{ e($other->name) }}</span>
                         </div>

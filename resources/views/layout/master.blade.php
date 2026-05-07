@@ -1,11 +1,18 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
+    <script>
+        (function(){var t=localStorage.getItem('kap-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}());
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Kapitalya — Plataforma financiera inteligente. Optimización de capital, tasas en tiempo real y análisis de mercado.">
+    <meta name="description" content="Kapitalya Servicios Integrales — Empresa boliviana con más de 30 años de trayectoria. Servicios comerciales, financieros, tecnológicos y administrativos para personas, emprendedores y microempresas en La Paz, Bolivia.">
+    <meta name="keywords" content="Kapitalya, servicios integrales, Bolivia, La Paz, recargas, giros nacionales, consultoría, tecnología, emprendedores, microempresas, casa de cambios, divisas">
+    <meta property="og:title" content="Kapitalya Servicios Integrales — Bolivia">
+    <meta property="og:description" content="Más de 30 años evolucionando hacia el futuro. Servicios comerciales, financieros, tecnológicos y administrativos en La Paz, Bolivia.">
+    <meta property="og:type" content="website">
 
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,9 +39,9 @@
     <link rel="stylesheet" href="{{ url('assets/css/kapitalya.css') }}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ url('assets/img/favicon.png') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ url('assets/images/kapitalya-icon.svg') }}">
 
-    <title>Kapitalya — @yield('title', 'Plataforma Financiera Inteligente')</title>
+    <title>Kapitalya — @yield('title', 'Servicios Integrales | La Paz, Bolivia')</title>
 </head>
 
 <body>
@@ -65,7 +72,7 @@
                         <ul class="header-left-content">
                             <li>
                                 <i class="bx bx-phone-call"></i>
-                                <a href="tel:+591-78939071">+591 78939071</a>
+                                <a href="tel:+591-64082967">+591 64082967</a>
                             </li>
                         </ul>
                     </div>
@@ -89,7 +96,8 @@
             <div class="mobile-nav">
                 <div class="container">
                     <a href="{{ route('home') }}" class="logo">
-                        <img src="{{ url('assets/img/logo.png') }}" alt="Kapitalya">
+                        <img src="{{ url('assets/images/kapitalya-wordmark-light.svg') }}" alt="Kapitalya" class="kap-logo-for-dark" style="height:38px;width:auto;">
+                        <img src="{{ url('assets/images/kapitalya-wordmark-dark.svg') }}" alt="Kapitalya" class="kap-logo-for-light" style="height:38px;width:auto;">
                     </a>
                 </div>
             </div>
@@ -98,7 +106,8 @@
                 <div class="container">
                     <nav class="navbar navbar-expand-md">
                         <a class="navbar-brand" href="{{ route('home') }}">
-                            <img src="{{ url('assets/img/logo.png') }}" alt="Kapitalya">
+                            <img src="{{ url('assets/images/kapitalya-wordmark-light.svg') }}" alt="Kapitalya" class="kap-logo-for-dark" style="height:42px;width:auto;">
+                            <img src="{{ url('assets/images/kapitalya-wordmark-dark.svg') }}" alt="Kapitalya" class="kap-logo-for-light" style="height:42px;width:auto;">
                         </a>
 
                         <div class="collapse navbar-collapse mean-menu">
@@ -114,6 +123,11 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('home') }}#servicios" class="nav-link">
+                                        Servicios
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('quote') }}" class="nav-link {{ request()->routeIs('quote') ? 'active' : '' }}">
                                         Cotizaciones
                                     </a>
@@ -125,12 +139,24 @@
                                 </li>
                             </ul>
 
-                            <div class="others-option">
+                            <div class="others-option" style="display:flex;align-items:center;gap:8px;">
                                 <div class="get-quote">
                                     <a href="{{ route('quote') }}" class="default-btn">
                                         <span>Simular Operación</span>
                                     </a>
                                 </div>
+                                <button class="kap-theme-toggle" id="kap-theme-toggle" aria-label="Cambiar tema" title="Modo claro / oscuro">
+                                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                                    </svg>
+                                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="5"/>
+                                        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                     </nav>
@@ -177,11 +203,12 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="single-footer-widget">
                         <div class="kap-footer-brand">
-                            <img src="{{ url('assets/img/logo.png') }}" alt="Kapitalya" style="height:32px;">
+                            <img src="{{ url('assets/images/kapitalya-wordmark-light.svg') }}" alt="Kapitalya" class="kap-logo-for-dark" style="height:44px;width:auto;">
+                            <img src="{{ url('assets/images/kapitalya-wordmark-dark.svg') }}" alt="Kapitalya" class="kap-logo-for-light" style="height:44px;width:auto;">
                         </div>
                         <p class="kap-footer-tagline">
-                            Plataforma de optimización financiera inteligente.<br>
-                            Decisiones basadas en datos, control de capital en tiempo real.
+                            Más de 30 años evolucionando hacia el futuro.<br>
+                            Servicios comerciales, financieros, tecnológicos y administrativos para Bolivia.
                         </p>
                     </div>
                 </div>
@@ -197,7 +224,7 @@
                             </li>
                             <li>
                                 <i class="bx bxs-envelope"></i>
-                                <a href="mailto:contacto@kapitalya.com">contacto@kapitalya.com</a>
+                                <a href="mailto:kapitalyabolivia@gmail.com">kapitalyabolivia@gmail.com</a>
                             </li>
                             <li>
                                 <i class="bx bxs-phone-call"></i>
@@ -223,12 +250,13 @@
                     </div>
                 </div>
 
-                <!-- Resources -->
+                <!-- Navigation -->
                 <div class="col-lg-3 col-md-6">
                     <div class="single-footer-widget">
-                        <h3>Plataforma</h3>
+                        <h3>Navegación</h3>
                         <ul class="import-link">
                             <li><a href="{{ route('about') }}">Acerca de Kapitalya</a></li>
+                            <li><a href="{{ route('home') }}#servicios">Nuestros Servicios</a></li>
                             <li><a href="{{ route('quote') }}">Simulador de Tasas</a></li>
                             <li><a href="{{ route('contact') }}">Contacto</a></li>
                             <li><a href="{{ route('privacy') }}">Política de Privacidad</a></li>
@@ -247,7 +275,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <p>
-                        &copy; {{ date('Y') }} Kapitalya. Plataforma financiera inteligente.
+                        &copy; {{ date('Y') }} Kapitalya Servicios Integrales. La Paz, Bolivia.
                     </p>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -266,10 +294,26 @@
         <i class="bx bx-chevrons-up"></i>
     </div>
 
-    <!-- WhatsApp -->
-    <a href="https://api.whatsapp.com/send?phone=59178939071" class="btn-wsp" target="_blank" rel="noopener noreferrer">
-        <i class="fa fa-whatsapp icono"></i>
-    </a>
+    <!-- Floating contact buttons: WhatsApp + Telegram -->
+    <div class="kap-float-btns">
+        <a href="https://api.whatsapp.com/send?phone=59164082967&text=Hola%20Kapitalya%2C%20necesito%20informaci%C3%B3n"
+           class="kap-float-btn kap-float-wsp"
+           target="_blank" rel="noopener noreferrer"
+           title="WhatsApp · +591 64082967">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.557 4.118 1.531 5.845L.057 23.945l6.272-1.648A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.794 9.794 0 01-5.031-1.388l-.361-.214-3.722.977.995-3.634-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+            </svg>
+        </a>
+        <a href="https://t.me/+59164082967"
+           class="kap-float-btn kap-float-tg"
+           target="_blank" rel="noopener noreferrer"
+           title="Telegram · +591 64082967">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.012 9.483c-.148.664-.543.826-1.099.513l-3.048-2.245-1.47 1.415c-.163.163-.3.3-.614.3l.219-3.103 5.645-5.098c.245-.218-.054-.34-.38-.121L6.67 14.063 3.67 13.13c-.658-.206-.671-.658.138-.974l10.94-4.218c.547-.197 1.027.133.814.31z"/>
+            </svg>
+        </a>
+    </div>
 
     <!-- ================================================================
          SCRIPTS
@@ -288,5 +332,19 @@
     <script src="{{ url('assets/js/custom.js') }}"></script>
     <!-- ⬡ Kapitalya Platform -->
     <script src="{{ url('assets/js/kapitalya.js') }}"></script>
+
+    <!-- ⬡ Theme toggle -->
+    <script>
+    (function(){
+        var btn = document.getElementById('kap-theme-toggle');
+        if (!btn) return;
+        btn.addEventListener('click', function(){
+            var html = document.documentElement;
+            var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('kap-theme', next);
+        });
+    })();
+    </script>
 </body>
 </html>

@@ -9,12 +9,17 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    const ALLOWED_CURRENCIES = ['usd', 'eur', 'clp', 'pen', 'brl', 'ars'];
+
     public function __invoke()
     {
         return view('index', [
-            'cashes'  => Cash::where('status', 1)->orderBy('id')->get(),
+            'cashes'  => Cash::where('status', 1)
+                             ->whereIn('name', self::ALLOWED_CURRENCIES)
+                             ->orderBy('id')
+                             ->get(),
             'latests' => Latest::where('status', 1)->orderByDesc('date_publication')->limit(3)->get(),
-            'dollar'  => Cash::find(1),
+            'dollar'  => Cash::where('name', 'usd')->where('status', 1)->first(),
         ]);
     }
 
@@ -53,16 +58,22 @@ class HomeController extends Controller
     public function quote()
     {
         return view('quote', [
-            'cashes' => Cash::where('status', 1)->orderBy('id')->get(),
-            'dollar' => Cash::find(1),
+            'cashes' => Cash::where('status', 1)
+                             ->whereIn('name', self::ALLOWED_CURRENCIES)
+                             ->orderBy('id')
+                             ->get(),
+            'dollar' => Cash::where('name', 'usd')->where('status', 1)->first(),
         ]);
     }
 
     private function sharedData(): array
     {
         return [
-            'cashes' => Cash::where('status', 1)->orderBy('id')->limit(8)->get(),
-            'dollar' => Cash::find(1),
+            'cashes' => Cash::where('status', 1)
+                             ->whereIn('name', self::ALLOWED_CURRENCIES)
+                             ->orderBy('id')
+                             ->get(),
+            'dollar' => Cash::where('name', 'usd')->where('status', 1)->first(),
         ];
     }
 }

@@ -77,7 +77,11 @@
                         <span style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--kap-text-muted);text-align:right;min-width:80px;">Oficial</span>
                     </div>
 
+                    @php
+                    $qFlagMap=['usd'=>'estados unidos.png','eur'=>'union europea.png','clp'=>'chile.png','pen'=>'peru.png','brl'=>'brazil.png','ars'=>'argentina.png'];
+                    @endphp
                     @forelse($cashes as $cash)
+                    @php $qFlag = $qFlagMap[strtolower($cash->name)] ?? null; @endphp
                     <a href="{{ route('dinero.show', $cash->id) }}"
                        style="display:grid;grid-template-columns:1fr auto auto auto;gap:16px;
                               padding:16px 20px;border-bottom:1px solid var(--kap-border);
@@ -89,10 +93,13 @@
                             <div style="width:36px;height:36px;border-radius:8px;overflow:hidden;
                                         border:1px solid var(--kap-border);background:var(--kap-surface-2);
                                         display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                                <img src="{{ url('assets/img/cash/' . $cash->path) }}"
+                                @if($qFlag)
+                                <img src="{{ url('assets/images/' . $qFlag) }}"
                                      alt="{{ e($cash->name) }}"
-                                     style="width:100%;height:100%;object-fit:cover;"
-                                     onerror="this.style.display='none';this.parentElement.textContent='💱'">
+                                     style="width:100%;height:100%;object-fit:cover;border-radius:6px;">
+                                @else
+                                <span style="font-size:18px;">💱</span>
+                                @endif
                             </div>
                             <span style="font-size:15px;font-weight:700;font-family:var(--font-display);color:var(--kap-text);">
                                 {{ e($cash->name) }}

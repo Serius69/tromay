@@ -7,6 +7,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LatestController;
 use App\Http\Controllers\Api\RatesController;
+use App\Http\Controllers\ExchangeRateController;
 use App\Http\Controllers\Crud\LatestCRUDController;
 use App\Http\Controllers\Crud\CashCRUDController;
 use App\Http\Controllers\Crud\TransactionCRUDController;
@@ -37,8 +38,11 @@ Route::get('noticia/{latest}', [LatestController::class, 'show'])->name('noticia
 |--------------------------------------------------------------------------
 */
 Route::middleware('throttle:60,1')->prefix('api')->name('api.')->group(function () {
-    Route::get('rates',      [RatesController::class, 'index'])->name('rates.index');
-    Route::get('rates/{cash}', [RatesController::class, 'show'])->name('rates.show');
+    Route::get('rates',        [RatesController::class,      'index'])->name('rates.index');
+    Route::get('rates/{cash}', [RatesController::class,      'show'])->name('rates.show');
+    Route::get('ext-rates',    [ExchangeRateController::class,'getRates'])->name('ext-rates.index');
+    Route::get('ext-rates/sources/{currency}', [ExchangeRateController::class,'getSources'])->name('ext-rates.sources');
+    Route::post('ext-rates/calculate', [ExchangeRateController::class,'calculate'])->name('ext-rates.calculate');
 });
 
 /*
