@@ -1,0 +1,141 @@
+# Producción — conectado al gateway central
+# Uso: docker compose up -d
+services:
+  app:
+    build:
+      context: .
+      target: production
+    container_name: tromay_app
+    restart: unless-stopped
+    expose:
+      - "80"
+    ports:
+      - "9111:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY}
+      APP_URL: ${APP_URL:-http://localhost:9111}
+      DB_HOST: tromay_mysql
+      DB_DATABASE: kapitalya
+      DB_USERNAME: kapitalya
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      REDIS_HOST: tromay_redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis_secret}
+      QUEUE_CONNECTION: redis
+      LOG_CHANNEL: stack
+      SENTRY_LARAVEL_DSN: ${SENTRY_LARAVEL_DSN:-}
+      GIT_COMMIT: ${GIT_COMMIT:-unknown}
+      PORTFOLIO_URL: ${PORTFOLIO_URL:-https://cv.kapitalya.com.bo}
+    volumes:
+      - app_storage:/var/www/html/storage
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - tromay_net
+      - kapitalya-net
+
+  mysql:
+    image: mysql:8.0
+    container_name: tromay_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: kapitalya
+      MYSQL_USER: kapitalya
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_secret}
+    command: >
+      --innodb-buffer-pool-size=256M
+      --innodb-log-file-size=64M
+      --max-connections=200
+      --slow-query-log=1
+      --slow-query-log-file=/var/lib/mysql/slow.log
+      --long-query-time=2
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - tromay_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: tromay_redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    command: >
+      redis-server
+      --save 60 1
+      --loglevel warning
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+      --requirepass ${REDIS_PASSWORD:-redis_secret}
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis_secret}", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - tromay_net
+
+  queue_worker:
+    build:
+      context: .
+      target: production
+    container_name: tromay_queue
+    restart: unless-stopped
+    command: php artisan queue:work redis --sleep=3 --tries=3 --max-time=3600
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY}
+      DB_HOST: tromay_mysql
+      DB_DATABASE: kapitalya
+      DB_USERNAME: kapitalya
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      REDIS_HOST: tromay_redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis_secret}
+      QUEUE_CONNECTION: redis
+    volumes:
+      - app_storage:/var/www/html/storage
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "php", "artisan", "--version"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - tromay_net
+
+volumes:
+  app_storage:
+  mysql_data:
+  redis_data:
+
+networks:
+  tromay_net:
+    driver: bridge
+  kapitalya-net:
+    external: true

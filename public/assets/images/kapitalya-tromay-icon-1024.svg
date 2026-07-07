@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="g1" cx="30%" cy="25%" r="80%">
+      <stop offset="0%" stop-color="rgba(91,231,169,0.22)"/>
+      <stop offset="100%" stop-color="rgba(91,231,169,0)"/>
+    </radialGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1024" height="1024" rx="220" fill="#080A0F"/>
+  <rect width="1024" height="1024" rx="220" fill="url(#grid)"/>
+  <rect width="1024" height="1024" rx="220" fill="url(#g1)"/>
+  <g transform="translate(256, 256) scale(21.33)">
+    <path d="M4 9h14l-3-3" stroke="#5BE7A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M20 15H6l3 3" stroke="#5BE7A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <circle cx="880" cy="144" r="36" fill="#5BE7A9" opacity="0.9"/>
+  <text x="880" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="28" font-weight="600" fill="#020f0a">A2</text>
+</svg>

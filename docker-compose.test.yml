@@ -1,0 +1,80 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  ENTORNO: TESTING / STAGING (TEST)
+#  Uso: docker compose -f docker-compose.test.yml up -d
+#       → o simplemente ejecuta scripts\setup-test.bat
+#
+#  Características:
+#  - Base de datos efímera (se limpia en cada ejecución de tests)
+#  - MySQL con tmpfs para mayor velocidad en tests
+#  - Sin puertos expuestos al exterior (aislamiento total)
+#  - APP_DEBUG=false (simula comportamiento cercano a prod)
+#  - Logs detallados en archivos
+# ══════════════════════════════════════════════════════════════════════════
+
+services:
+
+  # ── Aplicación Laravel ─────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      target: production
+    ports:
+      - "8081:80"           # Puerto diferente al DEV para coexistir
+    environment:
+      APP_ENV: testing
+      APP_DEBUG: "false"
+      APP_URL: http://localhost:8081
+      DB_HOST: mysql
+      DB_DATABASE: kapitalya_test
+      DB_USERNAME: kapitalya_test
+      DB_PASSWORD: test_secret
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      REDIS_HOST: redis
+      REDIS_PASSWORD: "null"
+      LOG_CHANNEL: daily
+      LOG_LEVEL: info
+      MAIL_MAILER: log
+    volumes:
+      - test_storage:/var/www/html/storage
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - kapitalya_test
+
+  # ── MySQL — kapitalya_test (tmpfs para velocidad) ──────────────────
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: kapitalya_test
+      MYSQL_USER: kapitalya_test
+      MYSQL_PASSWORD: test_secret
+      MYSQL_ROOT_PASSWORD: root_test_secret
+    tmpfs:
+      - /var/lib/mysql       # En memoria: tests más rápidos, datos no persisten
+    ports:
+      - "33061:3306"         # Puerto diferente al DEV
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kapitalya_test
+
+  # ── Redis ──────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    command: redis-server --save "" --loglevel warning
+    networks:
+      - kapitalya_test
+
+volumes:
+  test_storage:
+
+networks:
+  kapitalya_test:
+    driver: bridge

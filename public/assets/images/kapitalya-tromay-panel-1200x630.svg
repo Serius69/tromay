@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="pGlow" cx="80%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="rgba(91,231,169,0.18)"/>
+      <stop offset="100%" stop-color="rgba(91,231,169,0)"/>
+    </radialGradient>
+    <pattern id="pGrid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M 56 0 L 0 0 0 56" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="pBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5BE7A9"/>
+      <stop offset="100%" stop-color="rgba(91,231,169,0)"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#080A0F"/>
+  <rect width="1200" height="630" fill="url(#pGrid)"/>
+  <rect width="1200" height="630" fill="url(#pGlow)"/>
+  <rect x="0" y="0" width="1200" height="4" fill="url(#pBar)"/>
+
+  <!-- Header: Kapitalya wordmark -->
+  <g>
+    <g transform="translate(60,56) scale(0.8)">
+    <rect width="40" height="40" rx="9" fill="#0E1829"/>
+    <line x1="10" y1="8" x2="10" y2="32" stroke="#00C896" stroke-width="3.5" stroke-linecap="round"/>
+    <polyline points="10,20 22,9 30,9" stroke="#00C896" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <line x1="10" y1="20" x2="30" y2="32" stroke="rgba(255,255,255,0.5)" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="30" cy="9" r="3" fill="#00C896"/>
+  </g>
+    <text x="102" y="79" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" letter-spacing="-0.45" fill="#ffffff">KAPITAL<tspan fill="#00C896">YA</tspan></text>
+    <text x="102" y="94" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2.4" fill="rgba(255,255,255,0.3)">SERVICIOS INTEGRALES</text>
+  </g>
+
+  <!-- group tag right -->
+  <rect x="950" y="60" width="190" height="34" rx="17" fill="rgba(91,231,169,0.12)" stroke="rgba(91,231,169,0.35)"/>
+  <circle cx="970" cy="77" r="4" fill="#5BE7A9"/>
+  <text x="985" y="82" font-family="JetBrains Mono, monospace" font-size="11" font-weight="600" letter-spacing="1.5" fill="#5BE7A9">GRUPO A — PRODUCCIÓN</text>
+
+  <!-- Main: icon huge + content -->
+  <g transform="translate(80, 200)">
+    <rect x="0" y="0" width="220" height="220" rx="44" fill="#0E1829" stroke="rgba(91,231,169,0.3)" stroke-width="2"/>
+    <g transform="translate(30, 30) scale(6.67)">
+      <path d="M4 9h14l-3-3" stroke="#5BE7A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M20 15H6l3 3" stroke="#5BE7A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+
+    <g transform="translate(280, 30)">
+      <text x="0" y="0" font-family="JetBrains Mono, monospace" font-size="14" letter-spacing="2" fill="#5BE7A9">— A2</text>
+      <text x="0" y="60" font-family="Space Grotesk, sans-serif" font-size="64" font-weight="700" letter-spacing="-1.5" fill="#ffffff">Tromay</text>
+      
+      <line x1="0" y1="90" x2="60" y2="90" stroke="#5BE7A9" stroke-width="3" stroke-linecap="round"/>
+      <text x="0" y="132" font-family="Inter, sans-serif" font-size="22" fill="rgba(255,255,255,0.7)">Casa de cambio · sitio público</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <line x1="80" y1="530" x2="1120" y2="530" stroke="rgba(255,255,255,0.08)"/>
+  <text x="80" y="568" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="1.5" fill="rgba(255,255,255,0.55)">tromay.kapitalya.com.bo</text>
+  <text x="1120" y="568" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="1.6" fill="rgba(255,255,255,0.3)">LARAVEL · MYSQL</text>
+</svg>

@@ -1,0 +1,154 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Cash;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+
+class ExchangeRateController extends Controller
+{
+    private const ALLOWED     = ['usd', 'eur', 'clp', 'pen', 'brl', 'ars'];
+    private const CACHE_TTL   = 300; // 5 minutes
+    private const DISCLAIMER  = 'Tasas referenciales y estimadas. No representan cotizaciones oficiales de operación en Kapitalya.';
+
+    private string $baseUrl;
+
+    public function __construct()
+    {
+        $this->baseUrl = rtrim(config('services.exchange_api.url', ''), '/');
+    }
+
+    /**
+     * Primary rates — fetched from external API, falls back to internal DB.
+     */
+    public function getRates(): JsonResponse
+    {
+        $rates = Cache::remember('kap_ext_rates', self::CACHE_TTL, function () {
+            if (! $this->baseUrl) {
+                return null;
+            }
+
+            try {
+                $response = Http::timeout(10)
+                    ->get("{$this->baseUrl}/exchange-rates/primary/");
+
+                if ($response->successful()) {
+                    return $response->json();
+                }
+            } catch (\Throwable $e) {
+                Log::warning('ExchangeRateController: API unavailable', ['error' => $e->getMessage()]);
+            }
+
+            return null;
+        });
+
+        // Fallback to internal Cash model data
+        if (! $rates) {
+            $rates = Cash::where('status', 1)
+                ->whereIn('name', self::ALLOWED)
+                ->select('id', 'name', 'buy', 'sell', 'oficial')
+                ->orderBy('id')
+                ->get()
+                ->toArray();
+        }
+
+        return response()->json([
+            'data'       => $rates,
+            'source'     => $this->baseUrl ? 'external' : 'internal',
+            'disclaimer' => self::DISCLAIMER,
+            'cached_at'  => now()->toIso8601String(),
+        ]);
+    }
+
+    /**
+     * Multi-source comparative rates for a single currency.
+     */
+    public function getSources(string $currency = 'USD'): JsonResponse
+    {
+        $currency = strtolower($currency);
+
+        if (! in_array($currency, self::ALLOWED)) {
+            return response()->json(['error' => 'Currency not supported.'], 422);
+        }
+
+        $data = Cache::remember("kap_ext_sources_{$currency}", self::CACHE_TTL, function () use ($currency) {
+            if (! $this->baseUrl) {
+                return null;
+            }
+
+            try {
+                return Http::timeout(15)
+                    ->get("{$this->baseUrl}/exchange-rates/sources-live/", [
+                        'currency' => strtoupper($currency),
+                    ])
+                    ->json();
+            } catch (\Throwable $e) {
+                Log::warning('ExchangeRateController: sources API unavailable', ['error' => $e->getMessage()]);
+                return null;
+            }
+        });
+
+        return response()->json([
+            'data'       => $data,
+            'currency'   => strtoupper($currency),
+            'disclaimer' => self::DISCLAIMER,
+        ]);
+    }
+
+    /**
+     * Calculate conversion using external API.
+     */
+    public function calculate(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'amount'           => ['required', 'numeric', 'min:0.01', 'max:10000000'],
+            'currency_from'    => ['required', 'string', 'size:3'],
+            'currency_to'      => ['nullable', 'string', 'size:3'],
+            'transaction_type' => ['required', 'in:buy,sell'],
+        ]);
+
+        $validated['currency_to'] ??= 'BOB';
+
+        if ($this->baseUrl) {
+            try {
+                $response = Http::timeout(10)
+                    ->post("{$this->baseUrl}/exchange-rates/calculate/", $validated);
+
+                if ($response->successful()) {
+                    $result = $response->json();
+                    $result['disclaimer'] = self::DISCLAIMER;
+                    return response()->json($result);
+                }
+            } catch (\Throwable $e) {
+                Log::warning('ExchangeRateController: calculate API unavailable', ['error' => $e->getMessage()]);
+            }
+        }
+
+        // Fallback: calculate locally from internal DB rates
+        $cash = Cash::where('name', strtolower($validated['currency_from']))
+                    ->where('status', 1)
+                    ->first();
+
+        if (! $cash) {
+            return response()->json(['error' => 'Divisa no disponible.'], 404);
+        }
+
+        $rate   = $validated['transaction_type'] === 'buy' ? $cash->buy : $cash->sell;
+        $result = round($validated['amount'] * $rate, 4);
+
+        return response()->json([
+            'amount'           => $validated['amount'],
+            'currency_from'    => strtoupper($validated['currency_from']),
+            'currency_to'      => $validated['currency_to'],
+            'rate'             => $rate,
+            'result'           => $result,
+            'transaction_type' => $validated['transaction_type'],
+            'source'           => 'internal_fallback',
+            'disclaimer'       => self::DISCLAIMER,
+        ]);
+    }
+}

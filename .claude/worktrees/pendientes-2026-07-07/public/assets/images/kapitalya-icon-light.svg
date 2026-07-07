@@ -1,0 +1,8 @@
+<svg id="logo-mark-light" width="80" height="80" viewBox="0 0 40 40" fill="none" data-om-id="94b1463a:118" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="9" fill="#0E1829" data-om-id="94b1463a:119"/>
+          <line x1="10" y1="8" x2="10" y2="32" stroke="#00C896" stroke-width="3.5" stroke-linecap="round" data-om-id="94b1463a:120"/>
+          <polyline points="10,20 22,9 30,9" stroke="#00C896" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" data-om-id="94b1463a:121"/>
+          <line x1="10" y1="20" x2="30" y2="32" stroke="rgba(255,255,255,0.5)" stroke-width="3.5" stroke-linecap="round" data-om-id="94b1463a:122"/>
+          <circle cx="30" cy="9" r="3" fill="#00C896" data-om-id="94b1463a:123"/>
+          <polyline points="25,6 30,9 27,13" stroke="#00C896" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6" data-om-id="94b1463a:124"/>
+        </svg>

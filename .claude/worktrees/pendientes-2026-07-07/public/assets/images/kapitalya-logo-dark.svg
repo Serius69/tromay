@@ -1,0 +1,10 @@
+<svg id="logo-full-dark" width="260" height="56" viewBox="0 0 260 56" fill="none" xmlns="http://www.w3.org/2000/svg" data-om-id="94b1463a:20">
+          <rect x="2" y="8" width="40" height="40" rx="9" fill="#0E1829" data-om-id="94b1463a:21"/>
+          <line x1="12" y1="16" x2="12" y2="40" stroke="#00C896" stroke-width="3.5" stroke-linecap="round" data-om-id="94b1463a:22"/>
+          <polyline points="12,28 24,17 32,17" stroke="#00C896" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" data-om-id="94b1463a:23"/>
+          <line x1="12" y1="28" x2="32" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="3.5" stroke-linecap="round" data-om-id="94b1463a:24"/>
+          <circle cx="32" cy="17" r="3" fill="#00C896" data-om-id="94b1463a:25"/>
+          <polyline points="27,14 32,17 29,21" stroke="#00C896" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6" data-om-id="94b1463a:26"/>
+          <text x="56" y="30" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700" letter-spacing="-0.6" fill="#FFFFFF" data-om-id="94b1463a:27">KAPITAL<tspan fill="#00C896" data-om-id="94b1463a:28">YA</tspan></text>
+          <text x="56" y="44" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing="2.4" fill="rgba(255,255,255,0.32)" data-om-id="94b1463a:29">SERVICIOS INTEGRALES</text>
+        </svg>
