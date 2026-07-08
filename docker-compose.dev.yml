@@ -22,7 +22,7 @@ services:
       - "8080:80"
     environment:
       APP_ENV: local
-      APP_DEBUG: "true"
+      APP_DEBUG: "${APP_DEBUG:-False}"
       APP_URL: http://localhost:8080
       DB_HOST: mysql
       DB_DATABASE: kapitalya_dev
@@ -58,8 +58,8 @@ services:
     environment:
       MYSQL_DATABASE: kapitalya_dev
       MYSQL_USER: kapitalya_dev
-      MYSQL_PASSWORD: dev_secret
-      MYSQL_ROOT_PASSWORD: root_dev_secret
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?MYSQL_PASSWORD requerido}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD requerido}
     volumes:
       - mysql_dev:/var/lib/mysql
     ports:

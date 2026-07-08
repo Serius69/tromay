@@ -51,8 +51,8 @@ services:
     environment:
       MYSQL_DATABASE: kapitalya_test
       MYSQL_USER: kapitalya_test
-      MYSQL_PASSWORD: test_secret
-      MYSQL_ROOT_PASSWORD: root_test_secret
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?MYSQL_PASSWORD requerido}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD requerido}
     tmpfs:
       - /var/lib/mysql       # En memoria: tests más rápidos, datos no persisten
     ports:
