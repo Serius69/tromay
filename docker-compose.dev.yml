@@ -27,7 +27,7 @@ services:
       DB_HOST: mysql
       DB_DATABASE: kapitalya_dev
       DB_USERNAME: kapitalya_dev
-      DB_PASSWORD: dev_secret
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD requerido}
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
       REDIS_HOST: redis
