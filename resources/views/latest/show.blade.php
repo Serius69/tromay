@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('title', e($latest->name) . ' — Insights Financieros')
+@section('description', e(Str::limit(strip_tags($latest->description ?? ''), 155) ?: 'Análisis y novedades del mercado cambiario boliviano por Tromay, la casa de cambio física #1 de La Paz.'))
 
 @section('body')
 
@@ -31,7 +32,8 @@
                     @if($latest->path)
                     <img src="{{ url('assets/img/latest/' . $latest->path) }}"
                          alt="{{ e($latest->name) }}"
-                         class="kap-article-img">
+                         class="kap-article-img"
+                         onerror="this.onerror=null;this.src='{{ url('assets/images/kapitalya-tromay-banner-1500x500.svg') }}'">
                     @endif
 
                     <div class="kap-article-body">

@@ -58,16 +58,6 @@ class Cash extends Model
     // Relations
     // ----------------------------------------------------------------
 
-    public function transactions1()
-    {
-        return $this->hasMany(Transaction::class, 'cash1_id');
-    }
-
-    public function transactions2()
-    {
-        return $this->hasMany(Transaction::class, 'cash2_id');
-    }
-
     public function rateHistory()
     {
         return $this->hasMany(CashRate::class);

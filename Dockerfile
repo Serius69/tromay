@@ -22,7 +22,8 @@ FROM composer:2.7 AS vendor
 WORKDIR /app
 
 COPY composer.json composer.lock ./
-RUN COMPOSER_MEMORY_LIMIT=-1 composer update \
+# `install` (no `update`): build reproducible respetando composer.lock.
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install \
     --no-dev \
     --no-scripts \
     --no-autoloader \
@@ -97,6 +98,6 @@ RUN mkdir -p storage/logs storage/framework/{cache,sessions,views} bootstrap/cac
 EXPOSE 80
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
-    CMD curl -sf http://localhost/api/rates || exit 1
+    CMD curl -sf http://localhost/api/health/live || exit 1
 
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

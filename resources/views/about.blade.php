@@ -1,5 +1,6 @@
 @extends('layout.master')
-@section('title', 'Nosotros — Kapitalya Servicios Integrales')
+@section('title', 'Nosotros — Tromay, la casa de cambio física #1 de Bolivia')
+@section('description', 'Conocé Tromay: más de 30 años como casa de cambio física en La Paz. De Tromay Casa de Cambios al ecosistema fintech Kapitalya — historia, valores y trayectoria.')
 
 @section('body')
 
@@ -31,8 +32,8 @@
             </div>
 
             <p class="kap-about-hero-sub">
-                Más de 30 años evolucionando hacia el futuro.<br>
-                Servicios comerciales, financieros, tecnológicos y administrativos para Bolivia.
+                De <strong>Tromay Casa de Cambios</strong> a un ecosistema fintech.<br>
+                Más de 30 años cambiando divisas en La Paz — hoy, la casa de cambio física líder de Bolivia.
             </p>
         </div>
     </div>
@@ -52,9 +53,9 @@
                     <span class="kap-hl-green">Una solución integral.</span>
                 </h2>
                 <p class="kap-section-body--lg" style="margin-bottom:20px;">
-                    Kapitalya Servicios Integrales es una empresa boliviana enfocada en la prestación
-                    de servicios generales, comerciales, administrativos y tecnológicos orientados
-                    a personas, emprendedores y microempresas.
+                    Tromay es la casa de cambio física líder de La Paz: más de 30 años comprando y
+                    vendiendo divisas con las mejores tasas del mercado y atención cara a cara en sucursal.
+                    Es también el corazón visible del ecosistema <strong>Kapitalya</strong>.
                 </p>
                 <p class="kap-section-body--lg">
                     La empresa nace con el objetivo de integrar soluciones modernas, eficientes y accesibles,

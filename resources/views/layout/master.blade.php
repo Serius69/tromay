@@ -8,11 +8,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Kapitalya Servicios Integrales — Empresa boliviana con más de 30 años de trayectoria. Servicios comerciales, financieros, tecnológicos y administrativos para personas, emprendedores y microempresas en La Paz, Bolivia.">
-    <meta name="keywords" content="Kapitalya, servicios integrales, Bolivia, La Paz, recargas, giros nacionales, consultoría, tecnología, emprendedores, microempresas, casa de cambios, divisas">
-    <meta property="og:title" content="Kapitalya Servicios Integrales — Bolivia">
-    <meta property="og:description" content="Más de 30 años evolucionando hacia el futuro. Servicios comerciales, financieros, tecnológicos y administrativos en La Paz, Bolivia.">
+    <meta name="description" content="@yield('description', 'Tromay Casa de Cambio — la casa de cambio física número uno de Bolivia. Más de 30 años en La Paz con las mejores tasas del mercado, atención en sucursal y tasas de dólar, euro y monedas de la región en tiempo real. Corazón del ecosistema fintech Kapitalya.')">
+    <meta name="keywords" content="Tromay, casa de cambio, casa de cambio La Paz, casa de cambio Bolivia, mejor casa de cambio, tipo de cambio dólar Bolivia, cambio de divisas, dólar hoy Bolivia, euro, Kapitalya, ecosistema fintech, forex Bolivia">
+    <meta property="og:title" content="Tromay — La casa de cambio física #1 de Bolivia">
+    <meta property="og:description" content="@yield('description', 'Más de 30 años cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo y el ecosistema fintech Kapitalya detrás.')">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="Tromay Casa de Cambio">
+    <meta property="og:locale" content="es_BO">
+    <meta property="og:image" content="{{ url('assets/images/index/exchange.jpg') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tromay — La casa de cambio física #1 de Bolivia">
+    <meta name="twitter:description" content="@yield('description', 'Más de 30 años cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo desde forex.')">
+    <meta name="twitter:image" content="{{ url('assets/images/index/exchange.jpg') }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- ⬡ Structured data — JSON-LD para posicionar como casa de cambio física líder --}}
+    @php
+        $kapBase = rtrim(url('/'), '/');
+        $kapLd = [
+            '@context' => 'https://schema.org',
+            '@graph'   => [
+                [
+                    '@type'              => 'FinancialService',
+                    '@id'                => $kapBase . '/#business',
+                    'name'               => 'Tromay Casa de Cambio',
+                    'alternateName'      => 'Kapitalya Servicios Integrales',
+                    'description'        => 'Casa de cambio física líder en La Paz, Bolivia, con más de 30 años de trayectoria. Compra y venta de dólar, euro y monedas de la región a las mejores tasas del mercado, con tasas en vivo desde Forex ERP.',
+                    'url'                => $kapBase,
+                    'telephone'          => '+591-64082967',
+                    'email'              => 'kapitalyabolivia@gmail.com',
+                    'image'              => $kapBase . '/assets/images/index/exchange.jpg',
+                    'currenciesAccepted' => 'USD, EUR, CLP, PEN, BRL, ARS, BOB',
+                    'priceRange'         => '$$',
+                    'slogan'             => 'La casa de cambio física número uno de Bolivia',
+                    'areaServed'         => ['@type' => 'City', 'name' => 'La Paz, Bolivia'],
+                    'address'            => [
+                        '@type'           => 'PostalAddress',
+                        'streetAddress'   => 'Av. Las Delicias Nro. 207-C, Zona Villa Fátima',
+                        'addressLocality' => 'La Paz',
+                        'addressRegion'   => 'La Paz',
+                        'addressCountry'  => 'BO',
+                    ],
+                    'geo' => ['@type' => 'GeoCoordinates', 'latitude' => -16.484, 'longitude' => -68.130],
+                    'openingHoursSpecification' => [
+                        [
+                            '@type'     => 'OpeningHoursSpecification',
+                            'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+                            'opens'     => '08:00', 'closes' => '19:00',
+                        ],
+                        [
+                            '@type'     => 'OpeningHoursSpecification',
+                            'dayOfWeek' => 'Sunday', 'opens' => '08:00', 'closes' => '13:00',
+                        ],
+                    ],
+                    'sameAs' => ['https://kapitalya.com.bo'],
+                ],
+                [
+                    '@type'      => 'WebSite',
+                    '@id'        => $kapBase . '/#website',
+                    'url'        => $kapBase,
+                    'name'       => 'Tromay Casa de Cambio',
+                    'inLanguage' => 'es-BO',
+                    'publisher'  => ['@id' => $kapBase . '/#business'],
+                ],
+            ],
+        ];
+    @endphp
+    <script type="application/ld+json">{!! json_encode($kapLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +104,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ url('assets/images/kapitalya-icon.svg') }}">
 
-    <title>Kapitalya — @yield('title', 'Servicios Integrales | La Paz, Bolivia')</title>
+    <title>Tromay — @yield('title', 'Casa de Cambio | La Paz, Bolivia')</title>
 </head>
 
 <body>
@@ -156,6 +219,11 @@ window.kapToast={
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('home') }}#ecosistema" class="nav-link">
+                                        Ecosistema
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('quote') }}" class="nav-link {{ request()->routeIs('quote') ? 'active' : '' }}">
                                         Cotizaciones
                                     </a>
@@ -224,6 +292,19 @@ window.kapToast={
     <main id="main-content" tabindex="-1">
     @yield('body')
     </main>
+
+    <!-- ⬡ Bloque de anuncio (AdSense) — solo si está configurado y con consentimiento -->
+    @if(config('services.adsense.client') && config('services.adsense.slot'))
+    <div class="container" style="max-width:970px;margin:24px auto 8px;">
+        <div style="text-align:center;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--kap-text-muted,#8a90a6);margin-bottom:6px;">Publicidad</div>
+        <ins class="adsbygoogle kap-ad-slot"
+             style="display:block;min-height:90px;"
+             data-ad-client="{{ config('services.adsense.client') }}"
+             data-ad-slot="{{ config('services.adsense.slot') }}"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+    @endif
 
     <!-- ================================================================
          FOOTER
@@ -395,5 +476,82 @@ window.kapToast={
         });
     })();
     </script>
+
+    {{-- ⬡ Seguimiento de conversiones — no-op salvo que GA esté activo (tras consentimiento) --}}
+    <script>
+    (function(){
+        function track(name, params){ if (typeof window.gtag === 'function'){ try { window.gtag('event', name, params || {}); } catch(e){} } }
+        document.addEventListener('click', function(e){
+            var a = e.target.closest ? e.target.closest('a,button') : null; if (!a) return;
+            var href = (a.getAttribute && a.getAttribute('href')) || '';
+            if (a.classList.contains('kap-float-wsp') || /wa\.me|api\.whatsapp\.com/.test(href)) track('contact_whatsapp', {transport_type:'whatsapp'});
+            else if (a.classList.contains('kap-float-tg') || /t\.me/.test(href)) track('contact_telegram', {transport_type:'telegram'});
+            else if (a.classList.contains('default-btn') || /\/quote\b/.test(href)) track('cta_simular_operacion');
+        }, {passive:true});
+    })();
+    </script>
+
+    {{-- ⬡ Consentimiento de cookies + monetización (anuncios AdSense / analítica Google) --}}
+    @php
+        $kapAdsClient = config('services.adsense.client');
+        $kapGaId      = config('services.analytics.ga_id');
+        $kapMonetize  = $kapAdsClient || $kapGaId;
+    @endphp
+    @if($kapMonetize)
+    <div id="kap-cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies"
+         style="display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:9997;max-width:520px;margin:0 auto;background:#12172e;color:#e6e8f0;border:1px solid rgba(255,255,255,.12);border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.45);padding:18px 20px;font-size:13.5px;line-height:1.55;">
+        <div style="display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;">
+            <span aria-hidden="true">🍪</span> Cookies y privacidad
+        </div>
+        <p style="margin:0 0 12px;color:#b9bed4;">
+            Usamos cookies técnicas para el funcionamiento del sitio y, con tu permiso,
+            cookies de publicidad y medición de Google para mantener este servicio gratuito.
+            Podés cambiar tu elección cuando quieras. Consultá la
+            <a href="{{ route('privacy') }}" style="color:#f59e0b;text-decoration:underline;">Política de Privacidad</a>.
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button id="kap-consent-accept" type="button"
+                    style="flex:1;min-width:130px;cursor:pointer;border:0;border-radius:9px;padding:10px 14px;font-weight:700;font-size:13.5px;color:#0c1024;background:#f59e0b;">Aceptar todo</button>
+            <button id="kap-consent-reject" type="button"
+                    style="flex:1;min-width:130px;cursor:pointer;border:1px solid rgba(255,255,255,.2);border-radius:9px;padding:10px 14px;font-weight:600;font-size:13.5px;color:#e6e8f0;background:transparent;">Solo esenciales</button>
+        </div>
+    </div>
+    <script>
+    (function(){
+        var KEY='kap-consent-v1';
+        var banner=document.getElementById('kap-cookie-banner');
+        var adsClient={!! json_encode($kapAdsClient ?: '') !!};
+        var gaId={!! json_encode($kapGaId ?: '') !!};
+        function get(){try{return localStorage.getItem(KEY)}catch(e){return null}}
+        function set(v){try{localStorage.setItem(KEY,v)}catch(e){}}
+        function loadAds(){
+            if(!adsClient||window.__kapAds)return;window.__kapAds=1;
+            var s=document.createElement('script');s.async=true;s.crossOrigin='anonymous';
+            s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+encodeURIComponent(adsClient);
+            document.head.appendChild(s);
+            document.querySelectorAll('ins.adsbygoogle.kap-ad-slot').forEach(function(){
+                try{(window.adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}
+            });
+        }
+        function loadGa(){
+            if(!gaId||window.__kapGa)return;window.__kapGa=1;
+            var s=document.createElement('script');s.async=true;
+            s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(gaId);
+            document.head.appendChild(s);
+            window.dataLayer=window.dataLayer||[];
+            window.gtag=function(){window.dataLayer.push(arguments)};
+            window.gtag('js',new Date());
+            window.gtag('config',gaId,{anonymize_ip:true});
+        }
+        function enable(){loadAds();loadGa();}
+        var c=get();
+        if(c==='granted'){enable();}
+        else if(c!=='denied'&&banner){banner.style.display='block';}
+        var a=document.getElementById('kap-consent-accept'),r=document.getElementById('kap-consent-reject');
+        if(a)a.onclick=function(){set('granted');if(banner)banner.style.display='none';enable();};
+        if(r)r.onclick=function(){set('denied');if(banner)banner.style.display='none';};
+    })();
+    </script>
+    @endif
 </body>
 </html>

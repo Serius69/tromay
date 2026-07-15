@@ -29,6 +29,11 @@ services:
       SENTRY_LARAVEL_DSN: ${SENTRY_LARAVEL_DSN:-}
       GIT_COMMIT: ${GIT_COMMIT:-unknown}
       PORTFOLIO_URL: ${PORTFOLIO_URL:-https://cv.kapitalya.com.bo}
+      EXCHANGE_API_URL: ${EXCHANGE_API_URL:-https://forex.kapitalya.com.bo/api/rates}
+      EXCHANGE_MIN_SPREAD_PCT: ${EXCHANGE_MIN_SPREAD_PCT:-2.5}
+      ADSENSE_CLIENT: ${ADSENSE_CLIENT:-}
+      ADSENSE_SLOT: ${ADSENSE_SLOT:-}
+      GA_MEASUREMENT_ID: ${GA_MEASUREMENT_ID:-}
     volumes:
       - app_storage:/var/www/html/storage
     depends_on:

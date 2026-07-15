@@ -14,12 +14,14 @@ class RatesController extends Controller
 
     public function index(): JsonResponse
     {
+        // Las tasas se refrescan cada ~300s (RateService cache): permitir que
+        // Cloudflare/edge cacheen 60s absorbe casi todo el tráfico sin servir
+        // datos rancios. Ver auditoría 07, ítem 36.
         return response()->json([
             'data'        => $this->rates->getActiveRates(),
             'disclaimer'  => 'Tasas referenciales. No representan cotizaciones oficiales de operación.',
             'updated_at'  => now()->toIso8601String(),
-        ])->header('Cache-Control', 'no-cache, no-store, must-revalidate')
-          ->header('Pragma', 'no-cache');
+        ])->header('Cache-Control', 'public, max-age=60');
     }
 
     public function show(Cash $cash): JsonResponse
@@ -27,10 +29,14 @@ class RatesController extends Controller
         abort_if($cash->status !== 1, 404);
         abort_if(! in_array($cash->getRawOriginal('name'), RateService::ALLOWED), 404);
 
+        // Servir la tasa CON overlay de forex (la misma que /api/rates), no el
+        // valor crudo/sembrado del route-binding. Fallback al crudo si forex cae.
+        $rate = $this->rates->getFullRateById($cash->id) ?? $cash;
+
         return response()->json([
-            'data'       => $cash->only(['id', 'name', 'buy', 'sell', 'oficial']),
+            'data'       => $rate->only(['id', 'name', 'buy', 'sell', 'oficial']),
             'disclaimer' => 'Tasa referencial. No representa cotización oficial de operación.',
-        ]);
+        ])->header('Cache-Control', 'public, max-age=60');
     }
 
     public function history(Cash $cash): JsonResponse
@@ -47,7 +53,7 @@ class RatesController extends Controller
             'data'       => $history,
             'currency'   => $cash->only(['id', 'name']),
             'disclaimer' => 'Historial de tasas referenciales.',
-        ]);
+        ])->header('Cache-Control', 'public, max-age=60');
     }
 
     public function calculate(Request $request): JsonResponse

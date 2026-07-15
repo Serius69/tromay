@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('title', 'Cotizaciones — Tasas en Tiempo Real')
+@section('description', 'Simulá tu cambio de divisas en Bolivia: calculá cuánto recibís por tus dólares o euros con las tasas en vivo de Tromay antes de operar en sucursal.')
 
 @section('body')
 

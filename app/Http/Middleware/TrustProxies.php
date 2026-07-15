@@ -12,7 +12,9 @@ class TrustProxies extends Middleware
      *
      * @var array<int, string>|string|null
      */
-    protected $proxies;
+    // Cloudflare Tunnel → Nginx: confiamos en el proxy para que X-Forwarded-For
+    // resuelva la IP real del cliente (rate-limit por IP, no bucket global).
+    protected $proxies = '*';
 
     /**
      * The headers that should be used to detect proxies.

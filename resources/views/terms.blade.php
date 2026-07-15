@@ -1,5 +1,6 @@
 @extends('layout.master')
-@section('title', 'Términos y Condiciones — Kapitalya Servicios Integrales')
+@section('title', 'Términos y Condiciones — Tromay Casa de Cambio')
+@section('description', 'Términos y condiciones de uso del sitio de Tromay Casa de Cambio, la casa de cambio física líder de La Paz, Bolivia.')
 
 @section('body')
 

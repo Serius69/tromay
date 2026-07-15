@@ -1,5 +1,6 @@
 @extends('layout.master')
-@section('title', 'Contacto — Kapitalya Servicios Integrales')
+@section('title', 'Contacto — Tromay Casa de Cambio')
+@section('description', 'Contactá a Tromay Casa de Cambio en La Paz: sucursal en Villa Fátima, horarios de atención, teléfono y WhatsApp para tus operaciones de cambio de divisas.')
 
 @section('body')
 

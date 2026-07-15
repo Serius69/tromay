@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('title', e($cash->name) . ' — Tasas de Cambio')
+@section('description', e('Tipo de cambio de ' . strtoupper($cash->name) . ' en Bolivia hoy: compra Bs ' . number_format($cash->buy, 2) . ' y venta Bs ' . number_format($cash->sell, 2) . ' en Tromay, la casa de cambio física #1 de La Paz. Tasas en vivo desde forex.'))
 
 @section('body')
 

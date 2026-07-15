@@ -3,56 +3,60 @@
 namespace Database\Seeders;
 
 use App\Models\Cash;
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DemoDataSeeder extends Seeder
 {
     public function run(): void
     {
-        // ── Tasas referenciales bolivianas (actualizar según mercado) ──────
+        // ── Tasas referenciales bolivianas — SOLO fallback offline ─────────
+        // La fuente autoritativa en producción es forex-erp (vía EXCHANGE_API_URL);
+        // RateService::overlayForex() sobrepone las tasas en vivo sobre estos valores.
+        // Este seed solo se muestra si forex-erp no responde, así que se mantiene
+        // como un snapshot reciente (mercado paralelo, 2026-07-14) para que el
+        // fallback nunca quede grotescamente desactualizado. Valores POR UNIDAD
+        // (ARS/CLP ya divididos por su scale_factor de 1000 en forex-erp).
         $rates = [
             [
                 'name'    => 'usd',
-                'buy'     => 6.92,
-                'sell'    => 7.10,
-                'oficial' => 6.86,
+                'buy'     => 10.2750,
+                'sell'    => 11.1000,
+                'oficial' => 10.6875,
                 'status'  => 1,
             ],
             [
                 'name'    => 'eur',
-                'buy'     => 7.50,
-                'sell'    => 7.72,
-                'oficial' => 7.42,
+                'buy'     => 11.4875,
+                'sell'    => 11.6333,
+                'oficial' => 11.5604,
                 'status'  => 1,
             ],
             [
                 'name'    => 'brl',
-                'buy'     => 1.28,
-                'sell'    => 1.38,
-                'oficial' => 1.25,
+                'buy'     => 1.9688,
+                'sell'    => 1.9728,
+                'oficial' => 1.9708,
                 'status'  => 1,
             ],
             [
                 'name'    => 'ars',
-                'buy'     => 0.0072,
-                'sell'    => 0.0080,
-                'oficial' => 0.0068,
+                'buy'     => 0.006774,
+                'sell'    => 0.006794,
+                'oficial' => 0.006784,
                 'status'  => 1,
             ],
             [
                 'name'    => 'pen',
-                'buy'     => 1.82,
-                'sell'    => 1.95,
-                'oficial' => 1.79,
+                'buy'     => 2.9536,
+                'sell'    => 2.9596,
+                'oficial' => 2.9566,
                 'status'  => 1,
             ],
             [
                 'name'    => 'clp',
-                'buy'     => 0.0072,
-                'sell'    => 0.0082,
-                'oficial' => 0.0070,
+                'buy'     => 0.011023,
+                'sell'    => 0.011056,
+                'oficial' => 0.011040,
                 'status'  => 1,
             ],
         ];
@@ -66,17 +70,8 @@ class DemoDataSeeder extends Seeder
 
         $this->command->info('Tasas demo creadas: ' . count($rates) . ' divisas (USD/EUR/BRL/ARS/PEN/CLP).');
 
-        // ── Usuario administrador demo ─────────────────────────────────────
-        User::updateOrCreate(
-            ['email' => 'admin.demo@kapitalya.com.bo'],
-            [
-                'name'     => 'Administrador Demo — Tromay',
-                'email'    => 'admin.demo@kapitalya.com.bo',
-                'password' => Hash::make('Demo2026!'),
-            ],
-        );
-
-        $this->command->info('Usuario demo: admin.demo@kapitalya.com.bo / Demo2026!');
-        $this->command->warn('IMPORTANTE: Cambiar contraseña del usuario demo antes de dar acceso a clientes reales.');
+        // El usuario administrador demo con password fija se eliminó: la vitrina
+        // pública ya no tiene auth/login (refactor 2026-07-10), así que era una
+        // cuenta muerta con credenciales sembradas. Ver auditoría 07, §otros.
     }
 }

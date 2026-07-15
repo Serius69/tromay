@@ -1,5 +1,6 @@
 @extends('layout.master')
-@section('title', 'Más de 30 años evolucionando hacia el futuro')
+@section('title', 'La casa de cambio física #1 de Bolivia')
+@section('description', 'Tromay, la casa de cambio física número uno de Bolivia. Más de 30 años en La Paz con las mejores tasas de dólar, euro y monedas de la región, en vivo desde forex.')
 
 @section('body')
 
@@ -16,23 +17,24 @@
                     {{-- Left: headline + CTA --}}
                     <div class="col-lg-7">
                         <div class="banner-content wow fadeInDown" data-wow-delay="0.2s">
-                            <span class="top-title">Servicios Integrales · La Paz, Bolivia</span>
+                            <span class="top-title">Casa de Cambio Física · La Paz, Bolivia</span>
                             <h1>
-                                Más de 30 años<br>
-                                <span class="text-green">evolucionando</span>
-                                hacia el futuro
+                                La casa de cambio física<br>
+                                <span class="text-green">número uno</span>
+                                de Bolivia
                             </h1>
                             <p>
-                                De Tromay Casa de Cambios a Kapitalya Servicios Integrales.
-                                Experiencia, modernización y tecnología al servicio de personas,
-                                emprendedores y microempresas bolivianas.
+                                Más de 30 años cambiando divisas en La Paz con las mejores tasas del
+                                mercado y atención personalizada en sucursal. Hoy Tromay impulsa todo
+                                el <strong>ecosistema fintech Kapitalya</strong>: la confianza de siempre,
+                                potenciada por tecnología de punta.
                             </p>
                             <div class="banner-btn">
-                                <a href="{{ route('home') }}#servicios" class="default-btn">
-                                    <span>Nuestros Servicios</span>
+                                <a href="{{ route('quote') }}" class="default-btn">
+                                    <span>Ver cotizaciones</span>
                                 </a>
-                                <a href="{{ route('quote') }}" class="kap-btn-ghost">
-                                    Ver cotizaciones <i class="bx bx-right-arrow-alt"></i>
+                                <a href="{{ route('home') }}#ecosistema" class="kap-btn-ghost">
+                                    Conocé el ecosistema <i class="bx bx-right-arrow-alt"></i>
                                 </a>
                             </div>
                         </div>
@@ -48,8 +50,8 @@
                                 <span class="sl">Clientes atendidos</span>
                             </div>
                             <div class="kap-hero-stat">
-                                <span class="sv">8+</span>
-                                <span class="sl">Áreas de servicio</span>
+                                <span class="sv">6</span>
+                                <span class="sl">Divisas cotizadas en vivo</span>
                             </div>
                         </div>
 
@@ -187,8 +189,8 @@
 <section class="feature-area feature-area-four pb-70 pt-100">
     <div class="container">
         <div class="section-title text-center mb-5">
-            <span>¿Por qué Kapitalya?</span>
-            <h2>Múltiples servicios, una sola empresa</h2>
+            <span>¿Por qué somos la #1?</span>
+            <h2>La casa de cambio física líder de Bolivia</h2>
         </div>
         <div class="row">
 
@@ -199,31 +201,7 @@
                             <i class="flaticon-reliability"></i>
                             <h3>30+ Años de Trayectoria</h3>
                         </div>
-                        <p>Desde los años 90 operando en Bolivia. Décadas de experiencia comercial y financiera que respaldan cada servicio que ofrecemos.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 kap-fade-up" style="transition-delay:.08s;">
-                <div class="single-feature overly-one">
-                    <div class="overly-two">
-                        <div class="title">
-                            <i class="flaticon-testing"></i>
-                            <h3>Servicios Integrales</h3>
-                        </div>
-                        <p>Comercio, recargas, giros nacionales, consultoría y tecnología en un solo lugar. Soluciones completas para tu negocio.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-sm-6 kap-fade-up" style="transition-delay:.16s;">
-                <div class="single-feature overly-one">
-                    <div class="overly-two">
-                        <div class="title">
-                            <i class="flaticon-user"></i>
-                            <h3>Atención Personalizada</h3>
-                        </div>
-                        <p>Sin burocracia innecesaria. Trato directo y cercano adaptado a las necesidades reales de cada cliente.</p>
+                        <p>Desde los años 90 cambiando divisas en La Paz. Tres décadas de reputación que ninguna casa de cambio nueva puede igualar.</p>
                     </div>
                 </div>
             </div>
@@ -233,9 +211,9 @@
                     <div class="overly-two">
                         <div class="title">
                             <i class="flaticon-database"></i>
-                            <h3>Tasas Competitivas</h3>
+                            <h3>Las Mejores Tasas del Mercado</h3>
                         </div>
-                        <p>Mejores tasas del mercado actualizadas en tiempo real. Control total de tus operaciones cambiarias con transparencia total.</p>
+                        <p>Cotizaciones competitivas para dólar, euro y monedas de la región. Comprás y vendés siempre al mejor precio del día.</p>
                     </div>
                 </div>
             </div>
@@ -244,10 +222,34 @@
                 <div class="single-feature overly-one">
                     <div class="overly-two">
                         <div class="title">
-                            <i class="flaticon-application"></i>
-                            <h3>Enfoque Tecnológico</h3>
+                            <i class="flaticon-user"></i>
+                            <h3>Atención en Sucursal</h3>
                         </div>
-                        <p>Herramientas digitales, automatización y plataformas modernas para optimizar cada proceso de tu operación.</p>
+                        <p>Trato directo, cara a cara, en nuestra sucursal de Villa Fátima. La confianza de operar en persona, sin intermediarios ni apps dudosas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 kap-fade-up" style="transition-delay:.08s;">
+                <div class="single-feature overly-one">
+                    <div class="overly-two">
+                        <div class="title">
+                            <i class="flaticon-application"></i>
+                            <h3>Tasas en Vivo con Tecnología Forex</h3>
+                        </div>
+                        <p>Nuestras tasas se actualizan en tiempo real desde <strong>Forex ERP</strong>, con datos multi-fuente del mercado. Transparencia total, sin sorpresas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 kap-fade-up" style="transition-delay:.16s;">
+                <div class="single-feature overly-one">
+                    <div class="overly-two">
+                        <div class="title">
+                            <i class="flaticon-testing"></i>
+                            <h3>Sin Comisiones Ocultas</h3>
+                        </div>
+                        <p>La tasa que ves es la que aplicás. Spread claro y competitivo, sin cargos escondidos ni letra chica en tu operación.</p>
                     </div>
                 </div>
             </div>
@@ -281,6 +283,33 @@
             ⚠ Las tasas publicadas son <strong class="kap-hl-gold">estimadas y referenciales</strong>.
             Las cotizaciones reales se confirman al momento de la operación en sucursal.
         </p>
+        <p class="kap-rates-updated" style="text-align:center;margin:-4px 0 26px;font-size:13px;color:var(--kap-text-muted,#8a90a6);">
+            <span aria-hidden="true" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10b981;margin-right:6px;vertical-align:middle;animation:kap-pulse 1.6s ease-in-out infinite;"></span>
+            <span data-kap-timestamp>Actualizado ahora mismo</span>
+            · en vivo desde Forex ERP
+        </p>
+        <style>@keyframes kap-pulse{0%,100%{opacity:1}50%{opacity:.35}}</style>
+
+        {{-- SEO — tasas de cambio como datos estructurados (schema.org) --}}
+        <script type="application/ld+json">
+        {!! json_encode([
+            '@context' => 'https://schema.org',
+            '@type'    => 'FinancialProduct',
+            'name'     => 'Cambio de divisas — Tromay Casa de Cambio',
+            'category' => 'CurrencyExchange',
+            'url'      => rtrim(url('/'), '/') . '/#tipo-de-cambio',
+            'provider' => ['@type' => 'FinancialService', 'name' => 'Tromay Casa de Cambio', 'url' => rtrim(url('/'), '/')],
+            'offers'   => collect($cashes)->map(fn ($c) => [
+                '@type'         => 'Offer',
+                'itemOffered'   => ['@type' => 'Service', 'name' => 'Compra y venta de ' . strtoupper($c->name)],
+                'priceCurrency' => 'BOB',
+                'priceSpecification' => [
+                    ['@type' => 'UnitPriceSpecification', 'name' => 'Compra ' . strtoupper($c->name), 'price' => number_format((float) $c->buy, 6, '.', ''),  'priceCurrency' => 'BOB'],
+                    ['@type' => 'UnitPriceSpecification', 'name' => 'Venta ' . strtoupper($c->name),  'price' => number_format((float) $c->sell, 6, '.', ''), 'priceCurrency' => 'BOB'],
+                ],
+            ])->values()->all(),
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
 
         @php
         $kapFlagImgMap = [
@@ -349,6 +378,76 @@
 </section>
 
 {{-- ================================================================
+     TRANSPARENCIA — Tasa oficial vs. nuestra tasa
+================================================================ --}}
+<section id="transparencia" style="background:var(--kap-black);padding:100px 0 80px;">
+    <div class="container">
+
+        <div class="text-center mb-5 kap-fade-up">
+            <span class="section-title"><span>Transparencia total</span></span>
+            <h2 class="kap-section-h2" style="margin-top:8px;">
+                Tasa oficial vs. <span class="kap-hl-green">nuestra tasa</span>
+            </h2>
+            <p class="kap-section-body--lg" style="max-width:600px;margin:16px auto 0;">
+                Ponemos la tasa oficial de referencia del BCB al lado de la nuestra. Sin letra chica:
+                la tasa que ves es la que aplicás, actualizada en vivo desde Forex ERP.
+            </p>
+        </div>
+
+        @php
+        $kapCmpFlags = ['usd'=>'estados unidos.png','eur'=>'union europea.png','clp'=>'chile.png','pen'=>'peru.png','brl'=>'brazil.png','ars'=>'argentina.png'];
+        @endphp
+
+        @if($cashes->count())
+        <div class="kap-fade-up" style="max-width:820px;margin:0 auto;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+            <table style="width:100%;border-collapse:collapse;min-width:560px;">
+                <thead>
+                    <tr style="border-bottom:1px solid var(--kap-border);">
+                        <th style="text-align:left;padding:14px 16px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--kap-text-muted);font-weight:700;">Divisa</th>
+                        <th style="text-align:right;padding:14px 16px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--kap-text-muted);font-weight:700;">Oficial <span style="font-weight:400;text-transform:none;">(ref. BCB)</span></th>
+                        <th style="text-align:right;padding:14px 16px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--kap-green);font-weight:700;">Compra</th>
+                        <th style="text-align:right;padding:14px 16px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--kap-gold);font-weight:700;">Venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($cashes as $cash)
+                    @php $cf = $kapCmpFlags[strtolower($cash->name)] ?? null; @endphp
+                    <tr data-kap-id="{{ $cash->id }}" style="border-bottom:1px solid var(--kap-border);">
+                        <td style="padding:16px;">
+                            <span style="display:inline-flex;align-items:center;gap:10px;">
+                                @if($cf)
+                                <img src="{{ url('assets/images/'.$cf) }}" alt="{{ e($cash->name) }}" style="width:22px;height:22px;border-radius:4px;object-fit:cover;flex-shrink:0;">
+                                @endif
+                                <span style="font-weight:700;color:var(--kap-text);">{{ Str::upper(Str::limit($cash->name, 3, '')) }}</span>
+                            </span>
+                        </td>
+                        <td style="text-align:right;padding:16px;font-family:'JetBrains Mono',monospace;color:var(--kap-text-muted);">
+                            {{ $cash->oficial > 0 ? number_format($cash->oficial, 4) : '—' }}
+                        </td>
+                        <td style="text-align:right;padding:16px;font-family:'JetBrains Mono',monospace;color:var(--kap-green);font-weight:600;">
+                            <span data-kap-buy>{{ number_format($cash->buy, 4) }}</span>
+                        </td>
+                        <td style="text-align:right;padding:16px;font-family:'JetBrains Mono',monospace;color:var(--kap-gold);font-weight:600;">
+                            <span data-kap-sell>{{ number_format($cash->sell, 4) }}</span>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <p style="font-size:12px;color:var(--kap-text-muted);text-align:center;max-width:640px;margin:22px auto 0;line-height:1.6;">
+            La <strong>tasa oficial</strong> es referencial del Banco Central de Bolivia. Nuestras tasas de
+            compra y venta se actualizan en vivo desde Forex ERP; la cotización final se confirma en sucursal.
+        </p>
+        @else
+        <p style="color:var(--kap-text-muted);text-align:center;">Sin divisas disponibles en este momento.</p>
+        @endif
+
+    </div>
+</section>
+
+{{-- ================================================================
      SERVICIOS INTEGRALES — Todas las áreas de negocio
 ================================================================ --}}
 <section id="servicios" style="background:var(--kap-surface);padding:100px 0 80px;">
@@ -396,6 +495,107 @@
         <div class="text-center mt-5 kap-fade-up">
             <a href="{{ route('about') }}" class="kap-btn-ghost">
                 Ver más sobre nosotros <i class="bx bx-right-arrow-alt"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+{{-- ================================================================
+     ECOSISTEMA KAPITALYA — Venta cruzada de los demás sistemas
+================================================================ --}}
+<section id="ecosistema" style="background:var(--kap-black);padding:100px 0 80px;position:relative;overflow:hidden;">
+    <div class="kap-hero-gold-glow"></div>
+
+    <div class="container" style="position:relative;z-index:2;">
+
+        <div class="text-center mb-5 kap-fade-up">
+            <span class="section-title"><span>Ecosistema Kapitalya</span></span>
+            <h2 class="kap-section-h2" style="margin-top:8px;">
+                Del mostrador físico a<br>
+                <span class="kap-gradient-text">toda una plataforma fintech</span>
+            </h2>
+            <p class="kap-section-body--lg" style="max-width:640px;margin:16px auto 0;">
+                Las tasas que ves acá provienen en tiempo real de <strong>Forex ERP</strong>, el motor
+                que digitaliza nuestra casa de cambio. Y es solo la punta: Tromay es la cara visible de
+                un ecosistema de productos bolivianos que podés llevar a tu propio negocio.
+            </p>
+        </div>
+
+        @php
+        // URLs configurables por env (patrón env('CLAVE','default')) — apuntan al
+        // Hub del ecosistema por defecto; sobreescribir por subdominio si existe DNS.
+        $ecosistema = [
+            [
+                'icon'=>'bx-line-chart', 'color'=>'green',
+                'title'=>'Forex ERP',
+                'tag'=>'Para casas de cambio',
+                'desc'=>'Digitalizá tu casa de cambio: tasas multi-fuente en vivo, transacciones con antifraude, inventario y cumplimiento ASFI.',
+                'url'=>env('ECO_FOREX_URL', 'https://forex.kapitalya.com.bo'),
+            ],
+            [
+                'icon'=>'bx-wallet', 'color'=>'gold',
+                'title'=>'Kapitalya Pay',
+                'tag'=>'Pagos digitales',
+                'desc'=>'Billetera y cobros digitales para personas y comercios. Enviá, recibí y pagá en segundos dentro del ecosistema.',
+                'url'=>env('ECO_PAY_URL', 'https://pay.kapitalya.com.bo'),
+            ],
+            [
+                'icon'=>'bx-bell', 'color'=>'green',
+                'title'=>'Alerta de Tasas',
+                'tag'=>'Tipo de cambio',
+                'desc'=>'Alertas de tipo de cambio en tiempo real por WhatsApp y correo. Enterate cuando el dólar llega a tu precio objetivo.',
+                'url'=>env('ECO_ALERTAS_URL', 'https://alertas.kapitalya.com.bo'),
+            ],
+            [
+                'icon'=>'bx-receipt', 'color'=>'green',
+                'title'=>'ProformaPro',
+                'tag'=>'PyMEs',
+                'desc'=>'Proformas, facturación e inventario para micro y pequeñas empresas bolivianas. Simple, rápido y en la nube.',
+                'url'=>env('ECO_PROFORMA_URL', 'https://proformapro.kapitalya.com.bo'),
+            ],
+            [
+                'icon'=>'bx-store-alt', 'color'=>'gold',
+                'title'=>'Katálogo',
+                'tag'=>'Comercio digital',
+                'desc'=>'Convertí tu inventario en un catálogo digital con enlace propio para vender por WhatsApp y redes.',
+                'url'=>env('ECO_KATALOGO_URL', 'https://katalogo.kapitalya.com.bo'),
+            ],
+            [
+                'icon'=>'bx-bar-chart-alt-2', 'color'=>'green',
+                'title'=>'Kapitalya Insights',
+                'tag'=>'Datos & análisis',
+                'desc'=>'Análisis del mercado boliviano, tasas históricas e indicadores para decidir con datos, no con corazonadas.',
+                'url'=>env('ECO_INSIGHTS_URL', 'https://insights.kapitalya.com.bo'),
+            ],
+        ];
+        @endphp
+
+        <div class="row g-4">
+            @foreach($ecosistema as $i => $eco)
+            <div class="col-lg-4 col-md-6 kap-fade-up" @if($i > 0) style="transition-delay:{{ ($i % 3) * 0.08 }}s" @endif>
+                <a href="{{ $eco['url'] }}" target="_blank" rel="noopener"
+                   class="kap-svc-card kap-svc-card--{{ $eco['color'] }}"
+                   style="display:block;text-decoration:none;height:100%;">
+                    <div class="kap-svc-icon kap-svc-icon--{{ $eco['color'] }}">
+                        <i class="bx {{ $eco['icon'] }}"></i>
+                    </div>
+                    <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--kap-{{ $eco['color'] }});margin-bottom:6px;">
+                        {{ $eco['tag'] }}
+                    </span>
+                    <h4 class="kap-svc-title" style="display:flex;align-items:center;gap:6px;">
+                        {{ $eco['title'] }}
+                        <i class="bx bx-right-top-arrow-circle" style="font-size:16px;opacity:.6;"></i>
+                    </h4>
+                    <p class="kap-svc-desc">{{ $eco['desc'] }}</p>
+                </a>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="text-center mt-5 kap-fade-up">
+            <a href="{{ env('KAPITALYA_HUB_URL', 'https://kapitalya.com.bo') }}" target="_blank" rel="noopener" class="default-btn">
+                <span>Explorar todo el ecosistema</span>
             </a>
         </div>
 
@@ -708,7 +908,8 @@
                     <div class="blog-img">
                         <a href="{{ route('noticia.show', $latest->id) }}">
                             <img src="{{ url('assets/img/latest/' . $latest->path) }}"
-                                 alt="{{ e($latest->name) }}">
+                                 alt="{{ e($latest->name) }}"
+                                 onerror="this.onerror=null;this.src='{{ url('assets/images/kapitalya-tromay-banner-1500x500.svg') }}'">
                         </a>
                     </div>
                     <div class="blog-content">

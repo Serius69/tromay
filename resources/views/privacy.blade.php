@@ -1,5 +1,6 @@
 @extends('layout.master')
-@section('title', 'Política de Privacidad — Kapitalya Servicios Integrales')
+@section('title', 'Política de Privacidad — Tromay Casa de Cambio')
+@section('description', 'Política de privacidad de Tromay Casa de Cambio: cómo tratamos y protegemos tus datos en nuestro sitio público.')
 
 @section('body')
 
@@ -67,8 +68,13 @@
                          </ul>'],
 
                     ['5. Cookies y tecnologías similares', 'bx-cookie', 'gold',
-                        '<p>Nuestro sitio web puede utilizar cookies técnicas y de sesión para garantizar el correcto funcionamiento de la plataforma. Estas cookies no almacenan información personal identificable y son necesarias para la navegación.</p>
-                         <p>No utilizamos cookies de seguimiento ni publicidad de terceros. Puede configurar su navegador para rechazar cookies, aunque esto puede afectar el funcionamiento de algunas funcionalidades.</p>'],
+                        '<p>Nuestro sitio utiliza dos tipos de cookies:</p>
+                         <ul>
+                             <li><strong>Cookies técnicas y de sesión (siempre activas):</strong> necesarias para el correcto funcionamiento del sitio. No almacenan información personal identificable.</li>
+                             <li><strong>Cookies de publicidad y medición (solo con su consentimiento):</strong> para mantener el sitio gratuito, mostramos publicidad a través de <strong>Google AdSense</strong> y podemos medir el uso del sitio con <strong>Google Analytics</strong>. Estas cookies, gestionadas por Google como tercero, permiten mostrar anuncios y estadísticas de navegación.</li>
+                         </ul>
+                         <p>Al ingresar por primera vez le mostramos un aviso para <strong>aceptar</strong> o usar <strong>solo las cookies esenciales</strong>. La publicidad y la medición no se activan hasta que usted lo autoriza, y puede revocar su consentimiento en cualquier momento borrando las cookies/almacenamiento de su navegador o configurándolo para rechazarlas.</p>
+                         <p>Google puede usar identificadores de cookies conforme a sus propias políticas: consulte <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">cómo Google usa la información</a> y sus <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">políticas de privacidad</a>. Puede además personalizar la publicidad en la <a href="https://adssettings.google.com" target="_blank" rel="noopener">Configuración de anuncios de Google</a>.</p>'],
 
                     ['6. Compartir información con terceros', 'bx-share-alt', 'green',
                         '<p>Kapitalya <strong>no vende, alquila ni transfiere</strong> sus datos personales a terceros con fines comerciales.</p>

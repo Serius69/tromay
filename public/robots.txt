@@ -1,2 +1,4 @@
 User-agent: *
-Disallow:
+Allow: /
+
+Sitemap: https://tromay.kapitalya.com.bo/sitemap.xml

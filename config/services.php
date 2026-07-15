@@ -33,6 +33,23 @@ return [
 
     'exchange_api' => [
         'url' => env('EXCHANGE_API_URL', ''),
+        // Margen comercial mínimo (% entre compra y venta). Si forex devuelve un
+        // spread menor a este, RateService lo ensancha alrededor del punto medio
+        // para que ninguna divisa se muestre con ganancia ~0%. 0 = respetar forex.
+        'min_spread_pct' => (float) env('EXCHANGE_MIN_SPREAD_PCT', 0),
+    ],
+
+    // Monetización — anuncios (Google AdSense) y analítica. Todo desactivado por
+    // defecto: sin IDs configurados no se carga ningún script de terceros y solo
+    // se muestran cookies técnicas. Los scripts se cargan únicamente tras el
+    // consentimiento del visitante (ver banner de cookies en layout/master).
+    'adsense' => [
+        'client' => env('ADSENSE_CLIENT', ''), // ca-pub-XXXXXXXXXXXXXXXX
+        'slot'   => env('ADSENSE_SLOT', ''),   // id de bloque display responsive (opcional)
+    ],
+
+    'analytics' => [
+        'ga_id' => env('GA_MEASUREMENT_ID', ''), // G-XXXXXXXXXX (opcional)
     ],
 
 ];
