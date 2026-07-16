@@ -30,11 +30,13 @@
                                 potenciada por tecnología de punta.
                             </p>
                             <div class="banner-btn">
-                                <a href="{{ route('quote') }}" class="default-btn">
-                                    <span>Ver cotizaciones</span>
+                                <a href="https://api.whatsapp.com/send?phone=59164082967&text=Hola%20Tromay%2C%20quiero%20cotizar%20una%20operaci%C3%B3n%20de%20cambio"
+                                   target="_blank" rel="noopener noreferrer" class="default-btn"
+                                   style="background:#25D366;border-color:#25D366;">
+                                    <span>Cotizar por WhatsApp</span>
                                 </a>
-                                <a href="{{ route('home') }}#ecosistema" class="kap-btn-ghost">
-                                    Conocé el ecosistema <i class="bx bx-right-arrow-alt"></i>
+                                <a href="{{ route('quote') }}" class="kap-btn-ghost">
+                                    Ver cotizaciones <i class="bx bx-right-arrow-alt"></i>
                                 </a>
                             </div>
                         </div>
@@ -311,6 +313,12 @@
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
         </script>
 
+        <div class="text-center kap-fade-up" style="margin:-6px 0 26px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+            <a href="{{ route('dolar-hoy') }}" class="kap-btn-ghost">Ver el dólar hoy en Bolivia <i class="bx bx-right-arrow-alt"></i></a>
+            <a href="{{ route('seo.convertidor', ['par' => 'usd-bob']) }}" class="kap-btn-ghost">Convertidor USD/BOB</a>
+            <a href="{{ route('seo.convertidor', ['par' => 'eur-bob']) }}" class="kap-btn-ghost">Convertidor EUR/BOB</a>
+        </div>
+
         @php
         $kapFlagImgMap = [
             'usd' => ['flag' => 'estados unidos.png', 'label' => 'Dólar Estadounidense'],
@@ -335,7 +343,8 @@
                         <div class="kap-currency-card__flag">
                             @if($meta)
                             <img src="{{ url('assets/images/' . $meta['flag']) }}"
-                                 alt="{{ e($cash->name) }}">
+                                 alt="{{ e($cash->name) }}"
+                                 width="48" height="48" loading="lazy" decoding="async">
                             @else
                             <span style="font-size:22px;">💱</span>
                             @endif
@@ -376,6 +385,8 @@
         </div>
     </div>
 </section>
+
+@include('partials.lead-capture', ['leadSource' => 'home'])
 
 {{-- ================================================================
      TRANSPARENCIA — Tasa oficial vs. nuestra tasa
@@ -447,6 +458,8 @@
     </div>
 </section>
 
+@include('partials.trust')
+
 {{-- ================================================================
      SERVICIOS INTEGRALES — Todas las áreas de negocio
 ================================================================ --}}
@@ -500,6 +513,8 @@
 
     </div>
 </section>
+
+@include('partials.ad', ['maxWidth' => 728])
 
 {{-- ================================================================
      ECOSISTEMA KAPITALYA — Venta cruzada de los demás sistemas
@@ -878,7 +893,7 @@
                                 <div class="overly-two">
                                     <i class="flaticon-money"></i>
                                     <h3>Contacto Directo</h3>
-                                    <p>Consultanos por WhatsApp o teléfono: <strong>+591 64082967</strong>. Respuesta rápida y atención personalizada.</p>
+                                    <p>Consultanos por <a href="https://api.whatsapp.com/send?phone=59164082967&text=Hola%20Tromay%2C%20necesito%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" style="color:var(--kap-green);font-weight:700;">WhatsApp</a> o <a href="tel:+59164082967" style="color:var(--kap-gold);font-weight:700;">teléfono +591 64082967</a>. Respuesta rápida y atención personalizada.</p>
                                 </div>
                             </div>
                         </div>

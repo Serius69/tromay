@@ -18,7 +18,8 @@ class SitemapController extends Controller
 
         // Páginas estáticas públicas (prioridad + frecuencia de cambio)
         $static = [
-            ['home',    '1.0', 'hourly'],   // tasas en vivo
+            ['home',      '1.0', 'hourly'],   // tasas en vivo
+            ['dolar-hoy', '0.9', 'hourly'],   // landing SEO "dólar hoy Bolivia"
             ['about',   '0.7', 'monthly'],
             ['quote',   '0.8', 'daily'],
             ['contact', '0.6', 'monthly'],
@@ -39,6 +40,12 @@ class SitemapController extends Controller
         foreach (Cash::where('status', 1)->orderBy('id')->get() as $cash) {
             $urls[] = [
                 'loc'        => route('dinero.show', $cash->id),
+                'lastmod'    => $today,
+                'changefreq' => 'daily',
+                'priority'   => '0.7',
+            ];
+            $urls[] = [
+                'loc'        => route('seo.convertidor', ['par' => strtolower($cash->name) . '-bob']),
                 'lastmod'    => $today,
                 'changefreq' => 'daily',
                 'priority'   => '0.7',

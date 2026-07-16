@@ -58,17 +58,18 @@ class RatesController extends Controller
 
     public function calculate(Request $request): JsonResponse
     {
-        $currency = strtolower(trim($request->input('currency', '')));
-        $amount   = (float) $request->input('amount', 0);
-        $type     = $request->input('type', 'buy');
+        // Validación alineada con ExchangeRateController::calculate: `numeric` + cota
+        // superior evitan overflow/entradas absurdas (antes un simple (float) sin tope
+        // aceptaba cualquier cosa y "abc" → 0.0). El default de `type` sigue siendo buy.
+        $validated = $request->validate([
+            'amount'   => ['required', 'numeric', 'min:0.01', 'max:10000000'],
+            'currency' => ['required', 'string'],
+            'type'     => ['nullable', 'in:buy,sell'],
+        ]);
 
-        if ($amount <= 0) {
-            return response()->json(['error' => 'El monto debe ser mayor a cero.'], 422);
-        }
-
-        if (! in_array($type, ['buy', 'sell'])) {
-            return response()->json(['error' => 'El tipo debe ser "buy" o "sell".'], 422);
-        }
+        $currency = strtolower(trim($validated['currency']));
+        $amount   = (float) $validated['amount'];
+        $type     = $validated['type'] ?? 'buy';
 
         $result = $this->rates->calculate($amount, $currency, $type);
 

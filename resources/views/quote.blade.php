@@ -156,8 +156,14 @@
 
                     <div class="kap-card-footer">
                         <p style="font-size:12px!important;color:var(--kap-text-muted)!important;margin-bottom:12px!important;">
-                            ¿Querés operar? Acercate a nuestra sucursal.
+                            ¿Querés operar? Escribinos y cerramos tu cambio al instante.
                         </p>
+                        <a href="https://api.whatsapp.com/send?phone=59164082967&text=Hola%20Tromay%2C%20quiero%20cotizar%20una%20operaci%C3%B3n%20de%20cambio"
+                           target="_blank" rel="noopener noreferrer" class="default-btn"
+                           style="display:flex;justify-content:center;align-items:center;gap:8px;background:#25D366;border-color:#25D366;margin-bottom:10px;">
+                            <i class="bx bxl-whatsapp" style="font-size:18px;"></i>
+                            <span>Cotizar por WhatsApp</span>
+                        </a>
                         <a href="{{ route('contact') }}" class="kap-btn-ghost" style="justify-content:center;">
                             <i class="bx bx-map-pin" style="margin-right:4px;"></i>
                             Ver ubicación

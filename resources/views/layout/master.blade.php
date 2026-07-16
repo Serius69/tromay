@@ -86,11 +86,9 @@
 
     <!-- Base template styles -->
     <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/owl.carousel.min.css') }}">
+    {{-- owl.carousel + magnific-popup CSS eliminados: sus clases no se usan en ninguna vista --}}
     <link rel="stylesheet" href="{{ url('assets/css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/boxicons.min.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/magnific-popup.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/meanmenu.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/nice-select.min.css') }}">
@@ -214,6 +212,11 @@ window.kapToast={
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('dolar-hoy') }}" class="nav-link {{ request()->routeIs('dolar-hoy') ? 'active' : '' }}">
+                                        Dólar hoy
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('home') }}#servicios" class="nav-link">
                                         Servicios
                                     </a>
@@ -334,7 +337,7 @@ window.kapToast={
                         <ul class="address">
                             <li class="location">
                                 <i class="bx bxs-location-plus"></i>
-                                137 Av. Las Americas, Zona Villa Fátima, La Paz
+                                Av. Las Delicias Nro. 207-C, Zona Villa Fátima, La Paz
                             </li>
                             <li>
                                 <i class="bx bxs-envelope"></i>
@@ -372,6 +375,8 @@ window.kapToast={
                             <li><a href="{{ route('about') }}">Acerca de Kapitalya</a></li>
                             <li><a href="{{ route('home') }}#servicios">Nuestros Servicios</a></li>
                             <li><a href="{{ route('quote') }}">Simulador de Tasas</a></li>
+                            <li><a href="{{ route('dolar-hoy') }}">Dólar hoy en Bolivia</a></li>
+                            <li><a href="{{ route('seo.convertidor', ['par' => 'usd-bob']) }}">Convertidor USD / BOB</a></li>
                             <li><a href="{{ route('contact') }}">Contacto</a></li>
                             <li><a href="{{ route('privacy') }}">Política de Privacidad</a></li>
                             <li><a href="{{ route('terms') }}">Términos de Uso</a></li>
@@ -433,22 +438,19 @@ window.kapToast={
     <!-- ================================================================
          SCRIPTS
     ================================================================ -->
-    <script src="{{ url('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url('assets/js/meanmenu.min.js') }}"></script>
-    <script src="{{ url('assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ url('assets/js/nice-select.min.js') }}"></script>
-    <script src="{{ url('assets/js/magnific-popup.min.js') }}"></script>
-    <script src="{{ url('assets/js/jarallax.min.js') }}"></script>
-    <script src="{{ url('assets/js/appear.min.js') }}"></script>
-    <script src="{{ url('assets/js/odometer.min.js') }}"></script>
-    <script src="{{ url('assets/js/smoothscroll.min.js') }}"></script>
-    <script src="{{ url('assets/js/wow.min.js') }}"></script>
-    <script src="{{ url('assets/js/form-validator.min.js') }}"></script>
-    <script src="{{ url('assets/js/ajaxchimp.min.js') }}"></script>
-    <script src="{{ url('assets/js/custom.js') }}"></script>
-    <!-- ⬡ Kapitalya Platform -->
-    <script src="{{ url('assets/js/kapitalya.js') }}"></script>
+    <script defer src="{{ url('assets/js/jquery.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/meanmenu.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/nice-select.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/jarallax.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/appear.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/odometer.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/smoothscroll.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/wow.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/form-validator.min.js') }}"></script>
+    <script defer src="{{ url('assets/js/custom.js') }}"></script>
+    <!-- ⬡ Kapitalya Platform (defer: mantiene el orden, no bloquea el parse) -->
+    <script defer src="{{ url('assets/js/kapitalya.js') }}"></script>
 
     @yield('scripts')
 

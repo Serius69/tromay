@@ -27,75 +27,77 @@
 
 	});
 
-	// Testimonials Slider JS
-	$('.testimonials-slider').owlCarousel({
-		items: 1,
-		loop: true,
-		margin: 0,
-		nav: true,
-		dots: false,
-		autoplay: true,
-		smartSpeed: 1000,
-		autoplayHoverPause: true,
-		navText: [
-			"<i class='flaticon-left-arrow'></i>",
-			"<i class='flaticon-right-arrow'></i>",
-		],
-	});
+	// Testimonials Slider JS (guarded: owlCarousel puede no estar cargado)
+	if ($.fn.owlCarousel) {
+		$('.testimonials-slider').owlCarousel({
+			items: 1,
+			loop: true,
+			margin: 0,
+			nav: true,
+			dots: false,
+			autoplay: true,
+			smartSpeed: 1000,
+			autoplayHoverPause: true,
+			navText: [
+				"<i class='flaticon-left-arrow'></i>",
+				"<i class='flaticon-right-arrow'></i>",
+			],
+		});
 
-	// Partner Slider JS
-	$('.partner-slider').owlCarousel({
-		loop: true,
-		margin: 30,
-		nav: false,
-		dots: false,
-		autoplay: true,
-		smartSpeed: 1000,
-		autoplayHoverPause: true,
-		navText: [
-			"<i class='bx bx-chevron-left'></i>",
-			"<i class='bx bx-chevron-right'></i>",
-		],
-		responsive:{
-			0:{
-				items: 2,
-			},
-			576:{
-				items: 3,
-			},
-			768:{
-				items: 4,
-			},
-			1200:{
-				items: 5,
+		// Partner Slider JS
+		$('.partner-slider').owlCarousel({
+			loop: true,
+			margin: 30,
+			nav: false,
+			dots: false,
+			autoplay: true,
+			smartSpeed: 1000,
+			autoplayHoverPause: true,
+			navText: [
+				"<i class='bx bx-chevron-left'></i>",
+				"<i class='bx bx-chevron-right'></i>",
+			],
+			responsive:{
+				0:{
+					items: 2,
+				},
+				576:{
+					items: 3,
+				},
+				768:{
+					items: 4,
+				},
+				1200:{
+					items: 5,
+				}
 			}
-		}
-	});
+		});
 
-	// Related Product JS
-	$('.related-product').owlCarousel({
-		loop: true,
-		margin: 30,
-		nav: false,
-		dots: false,
-		autoplay: true,
-		smartSpeed: 1000,
-		autoplayHoverPause: true,
-		responsive:{
-			0:{
-				items: 1,
-			},
-			576:{
-				items: 2,
-			},
-			768:{
-				items: 3,
-			},
-			1200:{
-				items: 3,
+		// Related Product JS
+		$('.related-product').owlCarousel({
+			loop: true,
+			margin: 30,
+			nav: false,
+			dots: false,
+			autoplay: true,
+			smartSpeed: 1000,
+			autoplayHoverPause: true,
+			responsive:{
+				0:{
+					items: 1,
+				},
+				576:{
+					items: 2,
+				},
+				768:{
+					items: 3,
+				},
+				1200:{
+					items: 3,
+				}
 			}
-		}
-	});
+		});
+	}
 
 	// Click Event JS
 	$('.go-top').on('click', function() {
@@ -193,11 +195,13 @@
 		$("#validator-newsletter, #validator-newsletter-2").removeClass().addClass(msgClasses).text(msg);
 	}
 	
-	// AJAX MailChimp JS
-	$(".newsletter-form").ajaxChimp({
-		url: "https://Envy Theme.us20.list-manage.com/subscribe/post?u=60e1ffe2e8a68ce1204cd39a5&amp;id=42d6d188d9", // Your url MailChimp
-		callback: callbackFunction
-	});
+	// AJAX MailChimp JS (guarded: ajaxChimp puede no estar cargado)
+	if ($.fn.ajaxChimp) {
+		$(".newsletter-form").ajaxChimp({
+			url: "https://Envy Theme.us20.list-manage.com/subscribe/post?u=60e1ffe2e8a68ce1204cd39a5&amp;id=42d6d188d9", // Your url MailChimp
+			callback: callbackFunction
+		});
+	}
 
 	// Input Plus & Minus Number JS
 	$('.input-counter').each(function() {
@@ -252,22 +256,25 @@
 		wow.init();
 	}
 
-	// Popup Video JS
-	$('.popup-youtube, .popup-vimeo').magnificPopup({
-		disableOn: 300,
-		type: 'iframe',
-		mainClass: 'mfp-fade',
-		removalDelay: 160,
-		preloader: false,
-		fixedContentPos: false,
-	});
+	// Popup Video JS (guarded: magnificPopup puede no estar cargado)
+	if ($.fn.magnificPopup) {
+		$('.popup-youtube, .popup-vimeo').magnificPopup({
+			disableOn: 300,
+			type: 'iframe',
+			mainClass: 'mfp-fade',
+			removalDelay: 160,
+			preloader: false,
+			fixedContentPos: false,
+		});
+	}
 
-	// Product View Slider JS
+	// Product View Slider JS (guarded: owlCarousel puede no estar cargado)
+	if ($.fn.owlCarousel) {
 	var bigimage = $("#big");
 	var thumbs = $("#thumbs");
 	// Var Totalslides = 10;
 	var syncedSecondary = true;
-	
+
 	bigimage
 		.owlCarousel({
 		items: 1,
@@ -355,5 +362,6 @@
 		var number = $(this).index();
 		bigimage.data("owl.carousel").to(number, 300, true);
 	});
+	}
 
 })(jQuery);

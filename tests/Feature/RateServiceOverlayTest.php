@@ -31,7 +31,9 @@ class RateServiceOverlayTest extends TestCase
             'ARS' => ['scale_factor' => 1000, 'buy_rate' => '6.80', 'sell_rate' => '6.82', 'official_rate' => '6.81'],
         ]);
 
-        $ars = app(RateService::class)->getActiveRates()->firstWhere('name', 'ars');
+        // OJO: el accessor `name` de Cash capitaliza (ars→Ars), así que
+        // firstWhere('name','ars') devolvería null. Se compara normalizado.
+        $ars = app(RateService::class)->getActiveRates()->first(fn (Cash $c) => strtolower($c->name) === 'ars');
 
         $this->assertEqualsWithDelta(0.00680, (float) $ars->buy, 1e-6);
         $this->assertEqualsWithDelta(0.00682, (float) $ars->sell, 1e-6);
@@ -49,7 +51,7 @@ class RateServiceOverlayTest extends TestCase
             'EUR' => ['scale_factor' => 1, 'buy_rate' => '11.60', 'sell_rate' => '11.62', 'official_rate' => '11.61'],
         ]);
 
-        $eur = app(RateService::class)->getActiveRates()->firstWhere('name', 'eur');
+        $eur = app(RateService::class)->getActiveRates()->first(fn (Cash $c) => strtolower($c->name) === 'eur');
 
         $mid       = ((float) $eur->buy + (float) $eur->sell) / 2;
         $spreadPct = ((float) $eur->sell - (float) $eur->buy) / $mid * 100;
@@ -69,7 +71,7 @@ class RateServiceOverlayTest extends TestCase
             'USD' => ['scale_factor' => 1, 'buy_rate' => '10.00', 'sell_rate' => '11.00', 'official_rate' => '10.50'],
         ]);
 
-        $usd = app(RateService::class)->getActiveRates()->firstWhere('name', 'usd');
+        $usd = app(RateService::class)->getActiveRates()->first(fn (Cash $c) => strtolower($c->name) === 'usd');
 
         $this->assertEqualsWithDelta(10.00, (float) $usd->buy, 1e-6);
         $this->assertEqualsWithDelta(11.00, (float) $usd->sell, 1e-6);

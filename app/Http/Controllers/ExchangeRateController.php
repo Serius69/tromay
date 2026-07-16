@@ -37,7 +37,9 @@ class ExchangeRateController extends Controller
                     ->get("{$this->baseUrl}/exchange-rates/primary/");
 
                 if ($response->successful()) {
-                    return $response->json();
+                    $data = $response->json();
+
+                    return is_array($data) ? $this->normalizeScale($data) : $data;
                 }
             } catch (\Throwable $e) {
                 Log::warning('ExchangeRateController: API unavailable', ['error' => $e->getMessage()]);
@@ -62,6 +64,52 @@ class ExchangeRateController extends Controller
             'disclaimer' => self::DISCLAIMER,
             'cached_at'  => now()->toIso8601String(),
         ]);
+    }
+
+    /**
+     * Normaliza el feed crudo de forex-erp para que /api/ext-rates sea internamente
+     * consistente con /api/rates (RateService): forex cotiza algunas divisas por lote
+     * (ARS/CLP con scale_factor 1000 = "Bs por 1000 unidades"), mientras el resto del
+     * ecosistema espera la tasa POR UNIDAD. Aquí se dividen buy/sell/official_rate entre
+     * el scale_factor y se deja scale_factor=1, de modo que:
+     *   - un consumidor que ignora scale_factor lee ya la tasa por unidad (antes leía ~1000x);
+     *   - un consumidor que dividía por scale_factor sigue obteniendo el mismo valor
+     *     (dividir por 1 es idempotente) → no se rompe a nadie por doble división.
+     * SHAPE PRESERVADO: no se agregan ni quitan claves; solo cambian valores numéricos.
+     *
+     * NO se aplica el margen de spread comercial (EXCHANGE_MIN_SPREAD_PCT) que sí usa
+     * RateService para la vitrina: /api/ext-rates es un feed de referencia que otros
+     * consumidores (serguicv, exchange-alert / exchange-rate-alert-bolivia) esperan lo
+     * más crudo posible (mid/mercado). Ensancharlo aquí distorsionaría esas lecturas de
+     * "tasa de mercado"; el spread comercial es una decisión de presentación de Tromay,
+     * no del feed. El scale_factor sí es una corrección de UNIDAD (no de margen), por eso
+     * ese sí se aplica.
+     */
+    private function normalizeScale(array $rates): array
+    {
+        foreach ($rates as $code => $rate) {
+            if (! is_array($rate)) {
+                continue; // metadatos u otras claves no-divisa: intactas
+            }
+
+            $scale = (float) ($rate['scale_factor'] ?? 1);
+            if ($scale <= 0 || $scale == 1.0) {
+                continue; // sin factor de escala real: se deja crudo (incl. tipos/strings)
+            }
+
+            foreach (['buy_rate', 'sell_rate', 'official_rate'] as $field) {
+                if (isset($rate[$field]) && is_numeric($rate[$field])) {
+                    $rate[$field] = (float) $rate[$field] / $scale;
+                }
+            }
+
+            // Ya aplicado: normalizar a 1 para que sea idempotente aguas abajo.
+            $rate['scale_factor'] = 1;
+
+            $rates[$code] = $rate;
+        }
+
+        return $rates;
     }
 
     /**

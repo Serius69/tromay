@@ -18,17 +18,32 @@ class RateService
 
     public function getActiveRates(): Collection
     {
+        // Deriva el subconjunto de columnas públicas (id/name/buy/sell/oficial) desde
+        // la ÚNICA fuente overlaid: getActiveRatesWithAll(). Antes cada método corría
+        // su propio overlayForex() → un round-trip HTTP a forex por cada cache key
+        // (kap_active_rates y kap_active_rates_full). Ahora hay UN solo fetch + UN solo
+        // persistHistory (los hace getActiveRatesWithAll); esto solo proyecta columnas,
+        // preservando el shape público exacto de /api/rates.
         return Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-            $cashes = Cash::active()
-                ->allowed(self::ALLOWED)
-                ->select('id', 'name', 'buy', 'sell', 'oficial')
-                ->orderBy('id')
-                ->get();
+            return $this->getActiveRatesWithAll()->map(function (Cash $cash) {
+                $subset = new Cash();
+                $subset->setRawAttributes([
+                    'id'      => $cash->id,
+                    'name'    => $cash->getRawOriginal('name'), // crudo minúscula; el accessor lo capitaliza al serializar (igual que antes)
+                    'buy'     => $cash->buy,
+                    'sell'    => $cash->sell,
+                    'oficial' => $cash->oficial,
+                ], true);
 
-            $overlaid = $this->overlayForex($cashes);
-            $this->persistHistory($overlaid);
+                // Conservar la marca rate_source cuando el overlay real de forex la
+                // puso (se serializaba antes en /api/rates si forex respondía).
+                $source = $cash->getAttribute('rate_source');
+                if ($source !== null) {
+                    $subset->setAttribute('rate_source', $source);
+                }
 
-            return $overlaid;
+                return $subset;
+            });
         });
     }
 
@@ -65,7 +80,15 @@ class RateService
 
     public function getRateByName(string $name): ?Cash
     {
-        return $this->getActiveRates()->firstWhere('name', strtolower($name));
+        // OJO: el accessor `name` de Cash capitaliza el valor (ars → "Ars"), así que
+        // un firstWhere('name', 'ars') NUNCA calzaría (compararía "Ars" === "ars") y
+        // la resolución por nombre siempre devolvía null → /api/calculator daba 404
+        // para toda divisa. Se normalizan ambos lados a minúscula para calzar de verdad.
+        $needle = strtolower(trim($name));
+
+        return $this->getActiveRates()->first(
+            fn (Cash $cash) => strtolower((string) $cash->name) === $needle
+        );
     }
 
     public function invalidate(): void
@@ -87,10 +110,13 @@ class RateService
      */
     private function persistHistory(Collection $cashes): void
     {
-        if (Cache::get('kap_rates_snapshot_lock')) {
+        // Cache::add es atómico (add/SETNX): inserta y devuelve true SOLO si la clave
+        // no existía; si ya existe devuelve false sin escribir. Reemplaza al
+        // get()+put() no atómico, que bajo dos cache-miss concurrentes dejaba pasar a
+        // ambos y duplicaba snapshots en cash_rates. Misma semántica de candado y TTL.
+        if (! Cache::add('kap_rates_snapshot_lock', 1, self::CACHE_TTL - 5)) {
             return;
         }
-        Cache::put('kap_rates_snapshot_lock', 1, self::CACHE_TTL - 5);
 
         foreach ($cashes as $cash) {
             if ($cash->getAttribute('rate_source') !== 'forex') {
@@ -170,9 +196,25 @@ class RateService
                 $scale = 1.0;
             }
 
-            if (isset($rate['buy_rate']))       $cash->buy     = (float) $rate['buy_rate'] / $scale;
-            if (isset($rate['sell_rate']))      $cash->sell    = (float) $rate['sell_rate'] / $scale;
-            if (isset($rate['official_rate']))  $cash->oficial = (float) $rate['official_rate'] / $scale;
+            $buy  = isset($rate['buy_rate'])  ? (float) $rate['buy_rate']  / $scale : 0.0;
+            $sell = isset($rate['sell_rate']) ? (float) $rate['sell_rate'] / $scale : 0.0;
+
+            // Guard: si forex devuelve basura (0/negativo/faltante) por un glitch,
+            // NO se sobrepone — se conserva el fallback sembrado en vez de mostrar
+            // 0 al público y grabar un snapshot inválido en `cash_rates`.
+            if ($buy <= 0 || $sell <= 0) {
+                continue;
+            }
+
+            $cash->buy  = $buy;
+            $cash->sell = $sell;
+
+            if (isset($rate['official_rate'])) {
+                $off = (float) $rate['official_rate'] / $scale;
+                if ($off > 0) {
+                    $cash->oficial = $off;
+                }
+            }
 
             $this->applyMinSpread($cash);
 

@@ -4,6 +4,36 @@
 
 @section('body')
 
+{{-- SEO — FinancialProduct + Offer (compra/venta) de esta divisa (complementa el JSON-LD global de master) --}}
+@php
+    $ldCode = strtolower($cash->name);
+    $ldLabels = [
+        'usd' => 'Dólar Estadounidense', 'eur' => 'Euro', 'brl' => 'Real Brasileño',
+        'ars' => 'Peso Argentino', 'pen' => 'Sol Peruano', 'clp' => 'Peso Chileno',
+    ];
+    $ldLabel = $ldLabels[$ldCode] ?? $cash->name;
+    $ldUp    = strtoupper($ldCode);
+    $cashLd = [
+        '@context' => 'https://schema.org',
+        '@type'    => 'FinancialProduct',
+        '@id'      => route('dinero.show', $cash->id) . '#producto',
+        'name'     => 'Tipo de cambio ' . $ldUp . ' — ' . $ldLabel . ' en Bolivia',
+        'category' => 'CurrencyExchange',
+        'url'      => route('dinero.show', $cash->id),
+        'provider' => ['@type' => 'FinancialService', 'name' => 'Tromay Casa de Cambio', 'url' => rtrim(url('/'), '/')],
+        'offers'   => [
+            '@type'         => 'Offer',
+            'itemOffered'   => ['@type' => 'Service', 'name' => 'Compra y venta de ' . $ldLabel . ' (' . $ldUp . ')'],
+            'priceCurrency' => 'BOB',
+            'priceSpecification' => [
+                ['@type' => 'UnitPriceSpecification', 'name' => 'Compra ' . $ldUp, 'price' => number_format((float) $cash->buy, 6, '.', ''),  'priceCurrency' => 'BOB'],
+                ['@type' => 'UnitPriceSpecification', 'name' => 'Venta '  . $ldUp, 'price' => number_format((float) $cash->sell, 6, '.', ''), 'priceCurrency' => 'BOB'],
+            ],
+        ],
+    ];
+@endphp
+<script type="application/ld+json">{!! json_encode($cashLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+
 {{-- Page header --}}
 <div class="kap-detail-header">
     <div class="container">
@@ -78,6 +108,10 @@
 
                     <a href="{{ route('quote') }}" class="kap-sim-btn d-block text-center text-decoration-none mt-4">
                         Simular operación
+                    </a>
+                    <a href="{{ route('seo.convertidor', ['par' => strtolower($cash->name).'-bob']) }}"
+                       class="read-more mt-3 d-inline-flex" style="font-size:13px;">
+                        Convertidor {{ strtoupper(substr($cash->name,0,3)) }} / BOB <i class="flaticon-right-arrow"></i>
                     </a>
                 </div>
             </div>
