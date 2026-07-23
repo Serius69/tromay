@@ -119,6 +119,36 @@ class RateServiceOverlayTest extends TestCase
     }
 
     /** @test */
+    public function non_usd_official_is_null_not_frozen_seed_when_forex_has_no_real_official(): void
+    {
+        config(['services.exchange_api.min_spread_pct' => 0]);
+        Cash::factory()->create(['status' => 1, 'name' => 'eur', 'oficial' => 8.09]);
+        Cash::factory()->create(['status' => 1, 'name' => 'usd', 'oficial' => 6.96]);
+
+        // forex-erp solo refresca el oficial de USD/BOB: /official/ cae (500)
+        // para todas. EUR NO debe mostrar el seed congelado 8.09 como oficial
+        // vigente (→ null; las vistas pintan '—'); USD conserva su fallback.
+        config(['services.exchange_api.url' => 'http://forex.test/api/rates']);
+        Http::fake([
+            '*/exchange-rates/primary/*' => Http::response([
+                'EUR' => ['scale_factor' => 1, 'buy_rate' => '15.50', 'sell_rate' => '15.90', 'official_rate' => '15.70'],
+                'USD' => ['scale_factor' => 1, 'buy_rate' => '13.35', 'sell_rate' => '13.55', 'official_rate' => '13.45'],
+            ], 200),
+            '*/official/*' => Http::response('', 500),
+        ]);
+
+        $rates = app(RateService::class)->getActiveRates();
+        $eur   = $rates->first(fn (Cash $c) => strtolower($c->name) === 'eur');
+        $usd   = $rates->first(fn (Cash $c) => strtolower($c->name) === 'usd');
+
+        $this->assertNull($eur->oficial);
+        $this->assertEqualsWithDelta(6.96, (float) $usd->oficial, 1e-6);
+        // buy/sell del overlay siguen vivos aunque el oficial no exista.
+        $this->assertEqualsWithDelta(15.50, (float) $eur->buy, 1e-6);
+        $this->assertSame('forex', $eur->getAttribute('rate_source'));
+    }
+
+    /** @test */
     public function official_falls_back_to_last_cached_value_when_endpoint_fails_not_hardcode(): void
     {
         config(['services.exchange_api.min_spread_pct' => 0]);

@@ -4,6 +4,21 @@
     <script>
         (function(){var t=localStorage.getItem('kap-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}());
     </script>
+    {{-- ⬡ Google AdSense — loader en el <head> para que el crawler de AdSense VERIFIQUE el sitio
+         y para Auto Ads. Debe ser rastreable (NO gated por consentimiento): si no, el panel marca
+         "Requires review / Not found". Para que el consentimiento NO sea decorativo, mientras el
+         usuario no haya aceptado ('kap-consent-v1' !== 'granted') se piden anuncios NO
+         personalizados (requestNonPersonalizedAds=1 — sin cookies de perfilado); al aceptar, el
+         bloque de consentimiento del footer lo baja a 0. El consentimiento gobierna además
+         Analytics. __kapAds=1 evita que el bloque de consentimiento inyecte un 2º loader. --}}
+    @if(config('services.adsense.client'))
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ config('services.adsense.client') }}" crossorigin="anonymous"></script>
+    <script>
+        window.__kapAds=1;
+        (function(){var g=false;try{g=localStorage.getItem('kap-consent-v1')==='granted';}catch(e){}
+        if(!g){(window.adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=1;}}());
+    </script>
+    @endif
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -545,7 +560,13 @@ window.kapToast={
             window.gtag('js',new Date());
             window.gtag('config',gaId,{anonymize_ip:true});
         }
-        function enable(){loadAds();loadGa();}
+        function enable(){
+            // Consentimiento real: con permiso, los anuncios pueden ser
+            // personalizados (el head arranca en requestNonPersonalizedAds=1
+            // mientras no haya consentimiento; ver loader en <head>).
+            try{(window.adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=0;}catch(e){}
+            loadAds();loadGa();
+        }
         var c=get();
         if(c==='granted'){enable();}
         else if(c!=='denied'&&banner){banner.style.display='block';}
