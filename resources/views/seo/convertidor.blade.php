@@ -121,8 +121,17 @@
                         @endif
                         <div>
                             <h2 style="font-size:22px!important;margin:0 0 2px!important;">{{ $cLabel }} ({{ $up }})</h2>
+                            {{-- Badge honesto según rate_source (ver seo/dolar-hoy). --}}
+                            @if(($cash->rate_source ?? null) === 'forex')
                             <span class="kap-live-badge">En vivo</span>
                             <span data-kap-timestamp class="kap-timestamp">Actualizado ahora mismo</span>
+                            @elseif(($cash->rate_source ?? null) === 'cache')
+                            <span class="kap-live-badge kap-live-badge--cache">Caché</span>
+                            <span class="kap-timestamp">Última tasa real conocida</span>
+                            @else
+                            <span class="kap-live-badge kap-live-badge--cache">Referencial</span>
+                            <span class="kap-timestamp">Confirmá la tasa en sucursal</span>
+                            @endif
                         </div>
                     </div>
 

@@ -15,6 +15,22 @@ class ExchangeRateController extends Controller
     private const CACHE_TTL   = 300; // 5 minutes
     private const DISCLAIMER  = 'Tasas referenciales y estimadas. No representan cotizaciones oficiales de operación en Kapitalya.';
 
+    // Centinela de caída de forex. OJO: cachear `null` NO funciona — Cache::get()
+    // devuelve null tanto para "cacheado null" como para "no existe", así que el
+    // próximo request lo trata como miss y re-pega a forex con timeout de 10-15s;
+    // durante una caída eso cuelga CADA request y agota los workers de PHP-FPM.
+    // El centinela se "recuerda" con TTL corto (se reintenta pronto cuando forex
+    // vuelva) y el consumidor lo detecta para servir last-known-good o fallback
+    // DB sin volver a pegar.
+    private const UNAVAILABLE = ['unavailable' => true];
+    private const FAILURE_TTL = 45; // seconds — reintento rápido tras una caída
+
+    // Last-known-good del feed externo: última respuesta REAL de forex, para
+    // servir durante caídas en vez del seed congelado de `cashes`. Retención
+    // larga (7 días, mismo criterio que el oficial de RateService).
+    private const LKG_CACHE_KEY = 'kap_ext_rates_lkg';
+    private const LKG_CACHE_TTL = 604800; // 7 días
+
     private string $baseUrl;
 
     public function __construct()
@@ -27,26 +43,33 @@ class ExchangeRateController extends Controller
      */
     public function getRates(): JsonResponse
     {
-        $rates = Cache::remember('kap_ext_rates', self::CACHE_TTL, function () {
-            if (! $this->baseUrl) {
-                return null;
+        // No usar Cache::remember: si el closure devuelve null, cada request
+        // posterior lo trata como cache-miss y re-pega a forex (ver UNAVAILABLE).
+        $rates = Cache::get('kap_ext_rates');
+
+        if ($rates === null) {
+            $rates = $this->fetchExternalRates();
+
+            if ($rates === null) {
+                $rates = self::UNAVAILABLE;
+                Cache::put('kap_ext_rates', $rates, self::FAILURE_TTL);
+            } else {
+                Cache::put('kap_ext_rates', $rates, self::CACHE_TTL);
+                Cache::put(self::LKG_CACHE_KEY, $rates, self::LKG_CACHE_TTL);
             }
+        }
 
-            try {
-                $response = Http::timeout(10)
-                    ->get("{$this->baseUrl}/exchange-rates/primary/");
+        // `source` refleja lo que REALMENTE se sirve (antes reportaba 'external'
+        // por el solo hecho de tener baseUrl, aunque sirviera el fallback DB):
+        //   external       → respuesta viva de forex (o su cache de 300s)
+        //   external_cache → forex caído, última respuesta real conocida
+        //   internal       → fallback tabla `cashes` (seed)
+        $source = 'external';
 
-                if ($response->successful()) {
-                    $data = $response->json();
-
-                    return is_array($data) ? $this->normalizeScale($data) : $data;
-                }
-            } catch (\Throwable $e) {
-                Log::warning('ExchangeRateController: API unavailable', ['error' => $e->getMessage()]);
-            }
-
-            return null;
-        });
+        if ($this->isUnavailable($rates)) {
+            $rates  = Cache::get(self::LKG_CACHE_KEY);
+            $source = 'external_cache';
+        }
 
         // Fallback to internal Cash model data
         if (! $rates) {
@@ -56,14 +79,53 @@ class ExchangeRateController extends Controller
                 ->orderBy('id')
                 ->get()
                 ->toArray();
+
+            $source = 'internal';
         }
 
         return response()->json([
             'data'       => $rates,
-            'source'     => $this->baseUrl ? 'external' : 'internal',
+            'source'     => $source,
             'disclaimer' => self::DISCLAIMER,
             'cached_at'  => now()->toIso8601String(),
         ]);
+    }
+
+    /**
+     * Respuesta viva de forex normalizada, o null si forex no está disponible
+     * (sin baseUrl, timeout, 5xx o shape inesperado). El caller decide qué
+     * cachear — este método nunca toca el cache.
+     */
+    private function fetchExternalRates(): ?array
+    {
+        if (! $this->baseUrl) {
+            return null;
+        }
+
+        try {
+            $response = Http::timeout(10)
+                ->get("{$this->baseUrl}/exchange-rates/primary/");
+
+            if ($response->successful()) {
+                $data = $response->json();
+
+                if (is_array($data) && $data !== []) {
+                    return $this->normalizeScale($data);
+                }
+            }
+        } catch (\Throwable $e) {
+            Log::warning('ExchangeRateController: API unavailable', ['error' => $e->getMessage()]);
+        }
+
+        return null;
+    }
+
+    /**
+     * ¿El valor cacheado es el centinela de "forex caído"?
+     */
+    private function isUnavailable(mixed $value): bool
+    {
+        return is_array($value) && ($value['unavailable'] ?? false) === true;
     }
 
     /**
@@ -123,28 +185,59 @@ class ExchangeRateController extends Controller
             return response()->json(['error' => 'Currency not supported.'], 422);
         }
 
-        $data = Cache::remember("kap_ext_sources_{$currency}", self::CACHE_TTL, function () use ($currency) {
-            if (! $this->baseUrl) {
-                return null;
-            }
+        // Mismo patrón anti-estampida que getRates(): un null cacheado se ve
+        // igual que un miss, así que la caída se recuerda con el centinela
+        // (TTL corto) en vez de re-pegar a forex (timeout 15s) en cada request.
+        $data = Cache::get("kap_ext_sources_{$currency}");
 
-            try {
-                return Http::timeout(15)
-                    ->get("{$this->baseUrl}/exchange-rates/sources-live/", [
-                        'currency' => strtoupper($currency),
-                    ])
-                    ->json();
-            } catch (\Throwable $e) {
-                Log::warning('ExchangeRateController: sources API unavailable', ['error' => $e->getMessage()]);
-                return null;
+        if ($data === null) {
+            $data = $this->fetchExternalSources($currency);
+
+            if ($data === null) {
+                $data = self::UNAVAILABLE;
+                Cache::put("kap_ext_sources_{$currency}", $data, self::FAILURE_TTL);
+            } else {
+                Cache::put("kap_ext_sources_{$currency}", $data, self::CACHE_TTL);
             }
-        });
+        }
+
+        if ($this->isUnavailable($data)) {
+            $data = null; // sin fallback multi-fuente: se reporta vacío, sin re-pegar
+        }
 
         return response()->json([
             'data'       => $data,
             'currency'   => strtoupper($currency),
             'disclaimer' => self::DISCLAIMER,
         ]);
+    }
+
+    /**
+     * Comparativa multi-fuente viva de forex, o null si no está disponible.
+     * Nunca toca el cache (el caller decide).
+     */
+    private function fetchExternalSources(string $currency): ?array
+    {
+        if (! $this->baseUrl) {
+            return null;
+        }
+
+        try {
+            $response = Http::timeout(15)
+                ->get("{$this->baseUrl}/exchange-rates/sources-live/", [
+                    'currency' => strtoupper($currency),
+                ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
+
+                return is_array($data) && $data !== [] ? $data : null;
+            }
+        } catch (\Throwable $e) {
+            Log::warning('ExchangeRateController: sources API unavailable', ['error' => $e->getMessage()]);
+        }
+
+        return null;
     }
 
     /**
@@ -163,13 +256,46 @@ class ExchangeRateController extends Controller
 
         if ($this->baseUrl) {
             try {
+                // forex-erp compara transaction_type contra 'BUY'/'SELL' EN
+                // MAYÚSCULA (rates/exchange_rate_service.py): proxear el 'buy'
+                // minúscula que valida Tromay hacía caer TODO al sell_rate.
+                $payload = $validated;
+                $payload['transaction_type'] = strtoupper($validated['transaction_type']);
+
                 $response = Http::timeout(10)
-                    ->post("{$this->baseUrl}/exchange-rates/calculate/", $validated);
+                    ->post("{$this->baseUrl}/exchange-rates/calculate/", $payload);
 
                 if ($response->successful()) {
                     $result = $response->json();
-                    $result['disclaimer'] = self::DISCLAIMER;
-                    return response()->json($result);
+
+                    if (is_array($result) && isset($result['amount_to'], $result['rate'])) {
+                        // forex cotiza ARS/CLP por lote (scale_factor 1000): su
+                        // rate/amount_to vienen en "Bs por lote" → dividir a la
+                        // tasa POR UNIDAD, mismo criterio que normalizeScale().
+                        // Sin esto, ARS 100 "buy" devolvía un monto ~1000x.
+                        $scale = (float) ($result['scale_factor'] ?? 1);
+                        if ($scale <= 0) {
+                            $scale = 1.0;
+                        }
+
+                        $rate = (float) $result['rate'] / $scale;
+
+                        // Shape unificado con el fallback local de abajo
+                        // (`result`, no `amount_to`) para que el consumidor no
+                        // dependa de qué rama respondió.
+                        return response()->json([
+                            'amount'           => (float) $validated['amount'],
+                            'currency_from'    => strtoupper($validated['currency_from']),
+                            'currency_to'      => $validated['currency_to'],
+                            'rate'             => $rate,
+                            'result'           => round((float) $result['amount_to'] / $scale, 4),
+                            'transaction_type' => $validated['transaction_type'],
+                            'source'           => 'external',
+                            'disclaimer'       => self::DISCLAIMER,
+                        ]);
+                    }
+
+                    Log::warning('ExchangeRateController: calculate devolvió shape inesperado, usando fallback local');
                 }
             } catch (\Throwable $e) {
                 Log::warning('ExchangeRateController: calculate API unavailable', ['error' => $e->getMessage()]);

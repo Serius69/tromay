@@ -411,6 +411,10 @@ a { transition: var(--transition); }
   content: ''; width: 6px; height: 6px; border-radius: 50%;
   background: var(--kap-green); animation: kap-blink 1.4s infinite;
 }
+/* Variante honesta: la tasa mostrada NO es en vivo (last-known-good cacheado
+   o seed referencial) — punto ámbar fijo, sin el parpadeo de "live". */
+.kap-live-badge--cache { color: var(--kap-gold); }
+.kap-live-badge--cache::before { background: var(--kap-gold); animation: none; }
 @keyframes kap-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
 
 .kap-rate-row {

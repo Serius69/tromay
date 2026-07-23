@@ -66,7 +66,14 @@
                 <div class="kap-sim-card mb-4">
                     <div class="kap-panel-head mb-3">
                         <h4 style="font-size:13px!important;">Tasas del día</h4>
+                        {{-- Badge honesto según rate_source (ver seo/dolar-hoy). --}}
+                        @if(($dollar->rate_source ?? null) === 'forex')
                         <span class="kap-live-badge">En vivo</span>
+                        @elseif(($dollar->rate_source ?? null) === 'cache')
+                        <span class="kap-live-badge kap-live-badge--cache">Caché</span>
+                        @else
+                        <span class="kap-live-badge kap-live-badge--cache">Referencial</span>
+                        @endif
                     </div>
                     @foreach($cashes->take(4) as $cash)
                     <div class="kap-rate-row" data-kap-id="{{ $cash->id }}">

@@ -134,8 +134,19 @@
                              style="width:54px;height:54px;border-radius:8px;object-fit:cover;">
                         <div>
                             <h2 style="font-size:22px!important;margin:0 0 2px!important;">Dólar Estadounidense (USD)</h2>
+                            {{-- Badge honesto: "En vivo" SOLO si la tasa vino de forex en
+                                 este ciclo (rate_source='forex'); si se sirve el
+                                 last-known-good cacheado o el seed de la DB, decirlo. --}}
+                            @if(($dollar->rate_source ?? null) === 'forex')
                             <span class="kap-live-badge">En vivo</span>
                             <span data-kap-timestamp class="kap-timestamp">Actualizado ahora mismo</span>
+                            @elseif(($dollar->rate_source ?? null) === 'cache')
+                            <span class="kap-live-badge kap-live-badge--cache">Caché</span>
+                            <span class="kap-timestamp">Última tasa real conocida</span>
+                            @else
+                            <span class="kap-live-badge kap-live-badge--cache">Referencial</span>
+                            <span class="kap-timestamp">Confirmá la tasa en sucursal</span>
+                            @endif
                         </div>
                     </div>
 

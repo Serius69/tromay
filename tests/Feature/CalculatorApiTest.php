@@ -15,6 +15,10 @@ class CalculatorApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // Sin forex configurado: el calculador debe usar las tasas sembradas
+        // (si el .env local apunta a un forex real, el overlay contaminaría
+        // los montos esperados).
+        config(['services.exchange_api.url' => '']);
         $this->usd = Cash::factory()->create([
             'name'   => 'usd',
             'buy'    => 6.96,
@@ -30,9 +34,12 @@ class CalculatorApiTest extends TestCase
 
         $response->assertOk()
             ->assertJsonStructure(['data' => ['amount', 'currency', 'transaction_type', 'rate', 'result'], 'disclaimer', 'updated_at'])
-            ->assertJsonPath('data.result', 100 * 6.96)
             ->assertJsonPath('data.currency', 'USD')
             ->assertJsonPath('data.transaction_type', 'buy');
+
+        // OJO: json_encode(696.0) emite "696" (int al decodificar), así que
+        // assertJsonPath(assertSame) con un float esperado nunca calza.
+        $this->assertEqualsWithDelta(100 * 6.96, (float) $response->json('data.result'), 1e-6);
     }
 
     /** @test */
@@ -40,9 +47,9 @@ class CalculatorApiTest extends TestCase
     {
         $response = $this->getJson('/api/calculator?currency=usd&amount=200&type=sell');
 
-        $response->assertOk()
-            ->assertJsonPath('data.result', 200 * 6.97)
-            ->assertJsonPath('data.rate', 6.97);
+        $response->assertOk();
+        $this->assertEqualsWithDelta(200 * 6.97, (float) $response->json('data.result'), 1e-6);
+        $this->assertEqualsWithDelta(6.97, (float) $response->json('data.rate'), 1e-6);
     }
 
     /** @test */
@@ -65,9 +72,11 @@ class CalculatorApiTest extends TestCase
     /** @test */
     public function calculator_returns_422_for_zero_amount(): void
     {
+        // El endpoint valida con el validador de Laravel (shape estándar
+        // errors.amount), ya no con el mensaje custom antiguo.
         $this->getJson('/api/calculator?currency=usd&amount=0&type=buy')
             ->assertStatus(422)
-            ->assertJsonFragment(['error' => 'El monto debe ser mayor a cero.']);
+            ->assertJsonValidationErrors('amount');
     }
 
     /** @test */
@@ -82,6 +91,6 @@ class CalculatorApiTest extends TestCase
     {
         $this->getJson('/api/calculator?currency=usd&amount=100&type=exchange')
             ->assertStatus(422)
-            ->assertJsonFragment(['error' => 'El tipo debe ser "buy" o "sell".']);
+            ->assertJsonValidationErrors('type');
     }
 }

@@ -23,6 +23,14 @@ class RateService
     private const OFFICIAL_CACHE_PREFIX = 'kap_official_live_';
     private const OFFICIAL_CACHE_TTL = 604800; // 7 días
 
+    // Last-known-good de buy/sell del overlay (mismo criterio que el oficial):
+    // ante una caída de forex se sirve la ÚLTIMA tasa REAL conocida en vez del
+    // seed congelado de `cashes`, marcada rate_source='cache' — así las vistas
+    // pueden mostrar un badge honesto ("Caché", no "En vivo") y persistHistory
+    // (que solo graba rate_source='forex') no la re-persiste.
+    private const LKG_CACHE_PREFIX = 'kap_rates_live_';
+    private const LKG_CACHE_TTL = 604800; // 7 días
+
     public function getActiveRates(): Collection
     {
         // Deriva el subconjunto de columnas públicas (id/name/buy/sell/oficial) desde
@@ -188,7 +196,9 @@ class RateService
         $forex = $this->fetchForexPrimary();
 
         if (! $forex) {
-            return $cashes; // fallback: valores de la tabla `cashes`
+            // forex caído: última tasa REAL conocida (rate_source='cache') antes
+            // que el seed congelado; si tampoco hay caché, queda la tabla `cashes`.
+            return $this->applyLastKnownGood($cashes);
         }
 
         foreach ($cashes as $cash) {
@@ -233,6 +243,43 @@ class RateService
             $this->applyMinSpread($cash);
 
             $cash->setAttribute('rate_source', 'forex');
+
+            // Snapshot last-known-good con los valores finales mostrados
+            // (post-spread), para servirlos durante una futura caída de forex.
+            Cache::put(self::LKG_CACHE_PREFIX.$code, [
+                'buy'     => (float) $cash->buy,
+                'sell'    => (float) $cash->sell,
+                'oficial' => (float) $cash->oficial,
+            ], self::LKG_CACHE_TTL);
+        }
+
+        return $cashes;
+    }
+
+    /**
+     * Sobrepone el last-known-good cacheado (última respuesta REAL de forex)
+     * sobre los `Cash` sembrados. Divisas sin caché quedan con el seed y sin
+     * rate_source (las vistas las tratan como "Referencial").
+     */
+    private function applyLastKnownGood(Collection $cashes): Collection
+    {
+        foreach ($cashes as $cash) {
+            $lkg = Cache::get(self::LKG_CACHE_PREFIX.strtoupper($cash->name));
+
+            if (! is_array($lkg) || (float) ($lkg['buy'] ?? 0) <= 0 || (float) ($lkg['sell'] ?? 0) <= 0) {
+                continue; // sin last-known-good válido → fallback sembrado
+            }
+
+            $cash->buy  = (float) $lkg['buy'];
+            $cash->sell = (float) $lkg['sell'];
+
+            if ((float) ($lkg['oficial'] ?? 0) > 0) {
+                $cash->oficial = (float) $lkg['oficial'];
+            }
+
+            // 'cache': tasa real pero NO en vivo — nunca 'forex' (badge honesto
+            // y persistHistory no graba snapshots repetidos de la misma tasa).
+            $cash->setAttribute('rate_source', 'cache');
         }
 
         return $cashes;
