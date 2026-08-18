@@ -121,8 +121,17 @@
                         @endif
                         <div>
                             <h2 style="font-size:22px!important;margin:0 0 2px!important;">{{ $cLabel }} ({{ $up }})</h2>
-                            <span class="kap-live-badge">En vivo</span>
+                            {{-- Badge honesto según rate_source (ver seo/dolar-hoy). --}}
+                            @if(($cash->rate_source ?? null) === 'forex')
+                            <span class="kap-live-badge" data-kap-badge="{{ $cash->id }}">En vivo</span>
                             <span data-kap-timestamp class="kap-timestamp">Actualizado ahora mismo</span>
+                            @elseif(($cash->rate_source ?? null) === 'cache')
+                            <span class="kap-live-badge kap-live-badge--cache" data-kap-badge="{{ $cash->id }}">Caché</span>
+                            <span class="kap-timestamp">Última tasa real conocida</span>
+                            @else
+                            <span class="kap-live-badge kap-live-badge--cache" data-kap-badge="{{ $cash->id }}">Referencial</span>
+                            <span class="kap-timestamp">Confirmá la tasa en sucursal</span>
+                            @endif
                         </div>
                     </div>
 
@@ -278,7 +287,7 @@
                 esta página. Como el mercado se mueve durante el día, la cotización definitiva se confirma al momento en
                 la sucursal de Tromay, en <strong>Av. Las Delicias Nro. 207-C, Zona Villa Fátima, La Paz</strong>.
                 Atendemos de lunes a sábado de 08:00 a 19:00 y domingos de 08:00 a 13:00. Somos una casa de cambio física
-                con más de 30 años de trayectoria, registrada en SEPREC (matrícula 670400030).
+                con décadas de trayectoria, registrada en SEPREC (matrícula 670400030).
             </p>
 
             <p style="margin-top:24px;">

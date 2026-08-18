@@ -73,8 +73,17 @@
                         <div class="kap-currency-flag-lg--placeholder">💱</div>
                         @endif
                         <h3 style="font-size:22px!important;margin-bottom:4px!important;">{{ e($cash->name) }}</h3>
-                        <span class="kap-live-badge">En vivo</span>
+                        {{-- Badge honesto según rate_source (ver seo/dolar-hoy). --}}
+                        @if(($cash->rate_source ?? null) === 'forex')
+                        <span class="kap-live-badge" data-kap-badge="{{ $cash->id }}">En vivo</span>
                         <span data-kap-timestamp class="kap-timestamp">Actualizado ahora mismo</span>
+                        @elseif(($cash->rate_source ?? null) === 'cache')
+                        <span class="kap-live-badge kap-live-badge--cache" data-kap-badge="{{ $cash->id }}">Caché</span>
+                        <span class="kap-timestamp">Última tasa real conocida</span>
+                        @else
+                        <span class="kap-live-badge kap-live-badge--cache" data-kap-badge="{{ $cash->id }}">Referencial</span>
+                        <span class="kap-timestamp">Confirmá la tasa en sucursal</span>
+                        @endif
                     </div>
 
                     <div class="row g-3 mt-1">

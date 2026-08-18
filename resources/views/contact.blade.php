@@ -14,10 +14,11 @@
         <div class="text-center">
             <span class="kap-about-label">Estamos aquí para ayudarte</span>
             <h1 class="kap-about-h2" style="font-size:clamp(32px,4vw,52px)!important;margin-top:12px;">
-                Contactá con <span class="kap-hl-green">Kapitalya</span>
+                Contactá con <span class="kap-hl-green">Tromay</span>
             </h1>
             <p class="kap-about-hero-sub" style="margin-top:12px!important;">
-                Atención personalizada para personas, emprendedores y microempresas bolivianas.
+                Tromay Casa de Cambio — Kapitalya Servicios Integrales. Atención presencial en
+                Villa Fátima para personas, emprendedores y microempresas bolivianas.
             </p>
         </div>
     </div>
@@ -58,7 +59,7 @@
                 </div>
 
                 {{-- WhatsApp --}}
-                <a href="https://api.whatsapp.com/send?phone=59164082967&text=Hola%20Kapitalya%2C%20necesito%20informaci%C3%B3n"
+                <a href="https://api.whatsapp.com/send?phone=59164082967&text=Hola%20Tromay%2C%20necesito%20informaci%C3%B3n%20sobre%20el%20tipo%20de%20cambio"
                    target="_blank" rel="noopener noreferrer"
                    class="kap-contact-link kap-contact-link--wsp">
                     <div class="kap-contact-row">
@@ -149,14 +150,14 @@
                         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d239.12006877689288!2d-68.1210681488008!3d-16.479532316606306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sbo!4v1668611773954!5m2!1ses!2sbo"
                         width="100%" height="480" style="border:0;"
                         loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-                        title="Ubicación Kapitalya Servicios Integrales">
+                        title="Ubicación de Tromay Casa de Cambio — Av. Las Delicias 207-C, Villa Fátima, La Paz">
                     </iframe>
                 </div>
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap;gap:8px;">
                     <p style="font-size:12px;color:var(--kap-text-muted);margin:0;">
                         Av. Las Delicias Nro. 207-C · Zona Villa Fátima · La Paz, Bolivia
                     </p>
-                    <a href="https://maps.google.com/?q=Kapitalya+Servicios+Integrales+La+Paz+Bolivia"
+                    <a href="https://maps.google.com/?q=Tromay+Casa+de+Cambio+Av+Las+Delicias+207-C+Villa+Fatima+La+Paz+Bolivia"
                        target="_blank" rel="noopener noreferrer"
                        class="kap-map-directions-btn" style="margin-top:0;font-size:12px;padding:8px 16px;">
                         <i class="bx bx-navigation"></i> Cómo llegar

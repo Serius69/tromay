@@ -14,12 +14,12 @@
     <div class="d-table">
         <div class="d-table-cell">
             <div class="error-content">
-                <h1>
+                <p class="error-code" aria-hidden="true">
                     <span class="a">5</span>
                     <span class="red">0</span>
                     <span class="b">3</span>
-                </h1>
-                <h3>Actualización en curso</h3>
+                </p>
+                <h1>Actualización en curso</h1>
                 <p>
                     Kapitalya está realizando una actualización programada para mejorar
                     tu experiencia. Estaremos de vuelta en pocos minutos.

@@ -1,5 +1,11 @@
 {{-- ================================================================
-     LEAD CAPTURE — Alertas de tasas (venta cruzada a alertas.kapitalya.com.bo)
+     LEAD CAPTURE — Lista de espera de alertas + derivación a Paralelo.
+
+     OJO (honestidad del funnel): Tromay NO envía correos hoy — no hay SMTP y
+     el servicio de alertas fue dado de baja. Este bloque NO puede prometer
+     "te avisaremos" ni una baja de suscripción que no existe. Registra el
+     interés y manda al usuario a Paralelo, que muestra el dólar en vivo YA.
+     Ver la nota en App\Http\Controllers\LeadController antes de cambiar el copy.
      Uso:  @include('partials.lead-capture')
            @include('partials.lead-capture', ['source' => 'quote'])
      Persiste el email en la tabla `leads` vía POST /leads (fetch + CSRF).
@@ -11,13 +17,14 @@
         <div class="kap-lead-card" style="max-width:640px;margin:0 auto;background:var(--kap-black);border:1px solid var(--kap-border);border-radius:16px;padding:40px 32px;text-align:center;">
 
             <div class="text-center mb-3">
-                <span class="section-title"><span>Alertas de tasas</span></span>
+                <span class="section-title"><span>Lista de espera</span></span>
                 <h2 class="kap-section-h2" style="margin-top:8px;font-size:26px;">
-                    🔔 Avisame cuando el dólar <span class="kap-hl-green">llegue a mi precio</span>
+                    🔔 Anotate para las <span class="kap-hl-green">alertas de tasas</span>
                 </h2>
-                <p class="kap-section-body--lg" style="max-width:460px;margin:12px auto 0;color:var(--kap-text-muted);">
-                    Dejanos tu email y te avisamos apenas la tasa toque el valor que buscás.
-                    Gratis, sin spam, cancelás cuando quieras.
+                <p class="kap-section-body--lg" style="max-width:480px;margin:12px auto 0;color:var(--kap-text-muted);">
+                    Todavía no enviamos avisos por correo. Dejanos tu email y te sumamos a la
+                    lista de espera para cuando habilitemos las alertas.
+                    <strong style="color:var(--kap-text);">Mientras tanto, seguí el dólar en vivo en Paralelo.</strong>
                 </p>
             </div>
 
@@ -64,7 +71,7 @@
                     <div style="flex:0 0 auto;">
                         <button type="submit" class="default-btn" id="kap-lead-submit"
                                 style="white-space:nowrap;">
-                            <span>Avisarme</span>
+                            <span>Anotarme</span>
                         </button>
                     </div>
                 </div>
@@ -74,7 +81,11 @@
                    style="display:none;margin:18px 0 0;font-size:14px;"></p>
 
                 <p style="font-size:11px;color:var(--kap-text-muted);margin:16px 0 0;line-height:1.5;">
-                    Al enviar aceptás recibir avisos de tasas de Kapitalya. Podés darte de baja cuando quieras.
+                    Guardamos únicamente tu email (y la divisa que elijas) para avisarte si habilitamos
+                    las alertas. No enviamos publicidad ni compartimos tus datos.
+                    Para borrarlo, escribinos a
+                    <a href="mailto:kapitalyabolivia@gmail.com" style="color:var(--kap-text-muted);text-decoration:underline;">kapitalyabolivia@gmail.com</a>.
+                    Ver la <a href="{{ route('privacy') }}" style="color:var(--kap-text-muted);text-decoration:underline;">política de privacidad</a>.
                 </p>
             </form>
 
@@ -101,7 +112,7 @@
             a.href = continueUrl;
             a.target = '_blank';
             a.rel = 'noopener noreferrer';
-            a.textContent = ' Completar mi alerta →';
+            a.textContent = ' Ver el dólar en vivo en Paralelo →';
             a.style.color = 'var(--kap-green)';
             a.style.fontWeight = '700';
             a.style.textDecoration = 'underline';
@@ -138,7 +149,7 @@
         })
         .then(function (d) {
             form.reset();
-            showMsg(d.message || '¡Listo! Te avisaremos.', true, d.continue_url);
+            showMsg(d.message || 'Listo, anotamos tu email.', true, d.continue_url);
         })
         .catch(function (err) {
             showMsg(err.message || 'Ocurrió un error. Intentá de nuevo.', false, null);

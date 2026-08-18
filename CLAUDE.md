@@ -30,7 +30,7 @@ Kapitalya. Expone además una API pública de tasas (`/api/rates`) consumida por
 
 | Entorno | URL |
 |---------|-----|
-| Producción | https://tromay.kapitalya.com.bo — Docker Compose + Cloudflare Tunnel (K8s ns `private`, cluster Ubuntu pendiente) |
+| Producción | https://public.kapitalya.com.bo — Docker Compose + Cloudflare Tunnel (K8s ns `private`, cluster Ubuntu pendiente) |
 | Dev (Docker) | http://localhost:8080 · MySQL 33060 (`kapitalya_dev`) · Redis 6379 |
 
 ## Rutas (todas públicas)

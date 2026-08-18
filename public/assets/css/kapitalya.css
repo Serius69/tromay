@@ -4,45 +4,18 @@
    ================================================================ */
 
 /* ----------------------------------------------------------------
-   1. VARIABLES / DESIGN TOKENS
+   1. LOCAL ALIASES (canonical values: tromay-tokens.css)
    ---------------------------------------------------------------- */
 :root {
-  /* Color system */
-  --kap-black:        #0A0A0F;
-  --kap-surface:      #12121A;
-  --kap-surface-2:    #1A1A26;
-  --kap-surface-3:    #1E2235;
-  --kap-border:       rgba(255, 255, 255, 0.07);
-  --kap-border-s:     rgba(255, 255, 255, 0.12);
-
-  /* Brand */
-  --kap-green:        #00C896;
-  --kap-green-dim:    rgba(0, 200, 150, 0.10);
-  --kap-green-glow:   rgba(0, 200, 150, 0.20);
-  --kap-gold:         #F5A623;
-  --kap-gold-dim:     rgba(245, 166, 35, 0.10);
-  --kap-red:          #FF4757;
-  --kap-red-dim:      rgba(255, 71, 87, 0.10);
-  --kap-blue:         #3B82F6;
-  --kap-blue-dim:     rgba(59, 130, 246, 0.10);
-
-  /* Text */
-  --kap-text:         #F0F2F5;
-  --kap-text-sec:     #8892A4;
-  --kap-text-muted:   #4A5568;
-
-  /* Typography */
-  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
-  --font-body:    'Inter', 'Segoe UI', sans-serif;
-  --font-mono:    'JetBrains Mono', 'Consolas', monospace;
-
-  /* Misc */
-  --radius:    12px;
-  --radius-lg: 20px;
-  --shadow:    0 4px 24px rgba(0,0,0,0.45);
-  --glow:      0 0 40px rgba(0, 200, 150, 0.15);
-  --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  --section-v: 100px;
+  --font-display: var(--kap-font-display);
+  --font-body: var(--kap-font-body);
+  --font-mono: var(--kap-font-mono);
+  --radius: var(--kap-radius);
+  --radius-lg: var(--kap-radius-lg);
+  --shadow: var(--kap-shadow);
+  --glow: var(--kap-glow);
+  --transition: var(--kap-transition);
+  --section-v: var(--kap-section-v);
 }
 
 /* ----------------------------------------------------------------
@@ -411,6 +384,10 @@ a { transition: var(--transition); }
   content: ''; width: 6px; height: 6px; border-radius: 50%;
   background: var(--kap-green); animation: kap-blink 1.4s infinite;
 }
+/* Variante honesta: la tasa mostrada NO es en vivo (last-known-good cacheado
+   o seed referencial) — punto ámbar fijo, sin el parpadeo de "live". */
+.kap-live-badge--cache { color: var(--kap-gold); }
+.kap-live-badge--cache::before { background: var(--kap-gold); animation: none; }
 @keyframes kap-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
 
 .kap-rate-row {
@@ -1107,7 +1084,7 @@ a { transition: var(--transition); }
 /* Rate value flash animation */
 @keyframes flashGreen {
   0%,100% { color: inherit; }
-  40% { color: var(--kap-green); }
+  40% { color: var(--kap-green-ink, var(--kap-green)); }
 }
 @keyframes flashRed {
   0%,100% { color: inherit; }
@@ -1912,20 +1889,59 @@ a { transition: var(--transition); }
 }
 
 /* ----------------------------------------------------------------
-   24. LIGHT THEME — tokens & structural overrides
+   24. LIGHT THEME — structural overrides
+   Canonical theme tokens are supplied by tromay-tokens.css.
    ---------------------------------------------------------------- */
-[data-theme="light"] {
-  --kap-black:      #F4F6F8;
-  --kap-surface:    #FFFFFF;
-  --kap-surface-2:  #EEF0F4;
-  --kap-surface-3:  #E3E6EC;
-  --kap-border:     rgba(0, 0, 0, 0.07);
-  --kap-border-s:   rgba(0, 0, 0, 0.13);
-  --kap-text:       #0D1117;
-  --kap-text-sec:   #4A5568;
-  --kap-text-muted: #9BA3AF;
-  --shadow:         0 4px 24px rgba(0,0,0,0.10);
-  --glow:           0 0 40px rgba(0,200,150,0.12);
+
+/* Accessible green ink for text on light surfaces; icons keep brand green. */
+[data-theme="light"] .top-header a:hover,
+[data-theme="light"] .banner-content .top-title,
+[data-theme="light"] .kap-rate-pill .pill-buy,
+[data-theme="light"] .mean-nav ul li a:hover,
+[data-theme="light"] .kap-hero-stat .sv.green,
+[data-theme="light"] .kap-live-badge,
+[data-theme="light"] .kap-rv-item .val.buy,
+[data-theme="light"] .kap-ticker-item .t-buy,
+[data-theme="light"] .section-title span,
+[data-theme="light"] .solution-title span,
+[data-theme="light"] .protect-title span,
+[data-theme="light"] .services-content h3 a:hover,
+[data-theme="light"] .services-content .read-more,
+[data-theme="light"] .kap-hl-green,
+[data-theme="light"] .kap-legal-val--green,
+[data-theme="light"] .kap-sim-result-value.total,
+[data-theme="light"] .single-solution span,
+[data-theme="light"] .blog-content span,
+[data-theme="light"] .blog-content h3 a:hover,
+[data-theme="light"] .blog-content .read-more,
+[data-theme="light"] .single-footer-widget .address li a:hover,
+[data-theme="light"] .single-footer-widget .import-link li a:hover,
+[data-theme="light"] .copy-right-area a,
+[data-theme="light"] .footer-menu li a:hover,
+[data-theme="light"] .kap-footer-brand .green,
+[data-theme="light"] .kap-trend.up,
+[data-theme="light"] .kap-about-pill--green,
+[data-theme="light"] .kap-about-label,
+[data-theme="light"] .kap-brand-word:hover,
+[data-theme="light"] .kap-hours-time--green,
+[data-theme="light"] .kap-status-badge--open,
+[data-theme="light"] .kap-page-label,
+[data-theme="light"] .kap-rate-col--green,
+[data-theme="light"] .kap-rate-val--green,
+[data-theme="light"] .kap-currency-card:hover .kap-currency-card__name,
+[data-theme="light"] .kap-currency-card__rate--buy .kap-currency-card__rate-value,
+[data-theme="light"] .kap-breadcrumb a:hover,
+[data-theme="light"] .kap-detail-label,
+[data-theme="light"] .kap-rate-box__value--green,
+[data-theme="light"] .kap-tl-tag--green,
+[data-theme="light"] .kap-tl-year--green,
+[data-theme="light"] .kap-tl-pill--green,
+[data-theme="light"] .kap-service-letter--green,
+[data-theme="light"] .kap-mv-tag--green,
+[data-theme="light"] .kap-roadmap-num--green,
+[data-theme="light"] .kap-article-back:hover,
+[data-theme="light"] .kap-related-link:hover {
+  color: var(--kap-green-ink) !important;
 }
 
 /* Hardcoded dark backgrounds that need explicit overrides */
@@ -2797,4 +2813,69 @@ a { transition: var(--transition); }
 .kap-legal-footer {
   font-size: 12px; color: var(--kap-text-muted) !important;
   text-align: center; margin-top: 24px; line-height: 1.6;
+}
+
+/* ================================================================
+   36. RATE TABLE — semántica de tabla real conservando el grid
+   ----------------------------------------------------------------
+   /quote pasó de un grid de divs a <table>. Para que la maqueta no
+   cambie, se neutraliza el layout tabular y las filas siguen siendo
+   CSS grid (reglas .kap-rate-table-head/.kap-rate-table-row de arriba).
+   ================================================================ */
+
+table.kap-rate-table-wrap { width: 100%; border-collapse: collapse; }
+table.kap-rate-table-wrap > thead,
+table.kap-rate-table-wrap > tbody { display: block; }
+
+/* Las celdas heredan el color/peso del diseño original, no el de <th>/<td>. */
+.kap-rate-table-head > th { font-weight: inherit; text-align: inherit; }
+.kap-rate-table-row > th,
+.kap-rate-table-row > td { font-weight: inherit; text-align: inherit; padding: 0; border: 0; }
+.kap-rate-col--right { text-align: right; }
+.kap-rate-table-row > .kap-rate-val { text-align: right; }
+
+/* Enlace estirado: mantiene toda la fila clicable como antes, pero el
+   nombre accesible y el foco viven en un solo <a> real. */
+.kap-rate-table-row { position: relative; }
+.kap-rate-row-link { text-decoration: none; color: inherit; }
+.kap-rate-row-link::after { content: ""; position: absolute; inset: 0; }
+.kap-rate-row-link:focus-visible { outline: none; }
+.kap-rate-table-row:focus-within { background: rgba(255, 255, 255, 0.045); }
+.kap-rate-table-row:focus-within { outline: 2px solid var(--kap-green); outline-offset: -2px; }
+[data-theme="light"] .kap-rate-table-row:focus-within { background: rgba(0, 0, 0, 0.045); }
+
+/* ================================================================
+   37. ERROR PAGES — la cifra grande deja de ser un <h1>
+   ----------------------------------------------------------------
+   El "404"/"429"/"500" decorativo ocupaba el <h1> de la página: el
+   encabezado principal no tenía texto legible y el título real iba en
+   <h3>. Ahora la cifra es un <p class="error-code" aria-hidden> y el
+   <h1> lleva la frase. Estas reglas replican el estilo original.
+   ================================================================ */
+
+.error-area .error-content .error-code {
+  font-size: 300px;
+  line-height: 1;
+  font-weight: 700;
+  color: #e21f36;
+  margin: -48px 0 0;
+}
+.error-area .error-content .error-code .a,
+.error-area .error-content .error-code .b { display: inline-block; }
+.error-area .error-content .error-code .red {
+  color: #ff0000;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+/* El h1 hereda el tamaño que antes tenía el h3 del template. */
+.error-area .error-content h1 {
+  font-size: 40px;
+  line-height: 1.2;
+  margin: 30px 0 0;
+  color: inherit;
+}
+@media (max-width: 767px) {
+  .error-area .error-content .error-code { font-size: 130px; margin-top: 0; }
+  .error-area .error-content h1 { font-size: 26px; }
 }

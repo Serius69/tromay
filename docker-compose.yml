@@ -14,16 +14,17 @@ services:
     environment:
       APP_ENV: production
       APP_DEBUG: "false"
-      APP_KEY: ${APP_KEY}
-      APP_URL: ${APP_URL:-http://localhost:9111}
+      APP_KEY: ${APP_KEY:?APP_KEY requerido (definir en .env)}
+      APP_URL: ${APP_URL:-https://public.kapitalya.com.bo}
+      TRUSTED_HOSTS: ${TRUSTED_HOSTS:-public.kapitalya.com.bo}
       DB_HOST: tromay_mysql
       DB_DATABASE: kapitalya
       DB_USERNAME: kapitalya
-      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD requerido (definir en .env)}
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
       REDIS_HOST: tromay_redis
-      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis_secret}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD requerido (definir en .env)}
       QUEUE_CONNECTION: redis
       LOG_CHANNEL: stack
       SENTRY_LARAVEL_DSN: ${SENTRY_LARAVEL_DSN:-}
@@ -58,8 +59,8 @@ services:
     environment:
       MYSQL_DATABASE: kapitalya
       MYSQL_USER: kapitalya
-      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_secret}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD requerido (definir en .env)}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD requerido (definir en .env)}
     command: >
       --innodb-buffer-pool-size=256M
       --innodb-log-file-size=64M
@@ -89,9 +90,9 @@ services:
       --loglevel warning
       --maxmemory 128mb
       --maxmemory-policy allkeys-lru
-      --requirepass ${REDIS_PASSWORD:-redis_secret}
+      --requirepass ${REDIS_PASSWORD:?REDIS_PASSWORD requerido (definir en .env)}
     healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-redis_secret}", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:?REDIS_PASSWORD requerido (definir en .env)}", "ping"]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -108,15 +109,15 @@ services:
     environment:
       APP_ENV: production
       APP_DEBUG: "false"
-      APP_KEY: ${APP_KEY}
+      APP_KEY: ${APP_KEY:?APP_KEY requerido (definir en .env)}
       DB_HOST: tromay_mysql
       DB_DATABASE: kapitalya
       DB_USERNAME: kapitalya
-      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD requerido (definir en .env)}
       CACHE_DRIVER: redis
       SESSION_DRIVER: redis
       REDIS_HOST: tromay_redis
-      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis_secret}
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD requerido (definir en .env)}
       QUEUE_CONNECTION: redis
     volumes:
       - app_storage:/var/www/html/storage

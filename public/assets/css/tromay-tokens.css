@@ -1,0 +1,62 @@
+/* GENERADO por build/build-tokens.mjs desde tokens/*.json — NO EDITAR A MANO */
+
+:root {
+  --kap-black: #0A0A0F;
+  --kap-blue: #3B82F6;
+  --kap-blue-dim: rgba(59, 130, 246, 0.10);
+  --kap-border: rgba(255, 255, 255, 0.07);
+  --kap-border-s: rgba(255, 255, 255, 0.12);
+  --kap-error: #FF4757;
+  --kap-font-body: 'Inter', 'Segoe UI', sans-serif;
+  --kap-font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --kap-font-mono: 'JetBrains Mono', 'Consolas', monospace;
+  --kap-glow: 0 0 40px rgba(0,200,150,0.15);
+  --kap-gold: #F5A623;
+  --kap-gold-dim: rgba(245, 166, 35, 0.10);
+  --kap-green: #00C896;
+  --kap-green-dim: rgba(0, 200, 150, 0.10);
+  --kap-green-glow: rgba(0, 200, 150, 0.20);
+  --kap-info: #3B82F6;
+  --kap-radius: 12px;
+  --kap-radius-lg: 20px;
+  --kap-red: #FF4757;
+  --kap-red-dim: rgba(255, 71, 87, 0.10);
+  --kap-section-v: 100px;
+  --kap-shadow: 0 4px 24px rgba(0,0,0,0.45);
+  --kap-success: #00C896;
+  --kap-surface: #12121A;
+  --kap-surface-2: #1A1A26;
+  --kap-surface-3: #1E2235;
+  --kap-text: #F0F2F5;
+  /* WCAG 2.1 AA: #4A5568 daba 2.6:1 sobre --kap-black y 2.3:1 sobre
+     --kap-surface-2 — reprobaba incluso el piso de 3:1 de texto grande, y es el
+     color de los timestamps, los descargos ("Tasas referenciales…") y los pies
+     de foto, con el tema oscuro por defecto. #8A93A6 deja 5.1:1 como mínimo
+     sobre las cuatro superficies oscuras y coincide con el #8a90a6 que las
+     vistas ya usaban como fallback inline. */
+  --kap-text-muted: #8A93A6;
+  --kap-text-sec: #8892A4;
+  --kap-transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  --kap-warning: #F5A623;
+}
+
+[data-theme="light"] {
+  --kap-black: #F4F6F8;
+  --kap-border: rgba(0, 0, 0, 0.07);
+  --kap-border-s: rgba(0, 0, 0, 0.13);
+  --kap-glow: 0 0 40px rgba(0,200,150,0.12);
+  --kap-green-ink: #00795B;
+  --kap-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  --kap-surface: #FFFFFF;
+  --kap-surface-2: #EEF0F4;
+  --kap-surface-3: #E3E6EC;
+  --kap-text: #0D1117;
+  --kap-text-muted: #5F6B7A;
+  --kap-text-sec: #4A5568;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --kap-transition: none;
+  }
+}

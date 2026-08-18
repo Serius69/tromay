@@ -92,6 +92,22 @@ const Kapitalya = (() => {
         }
     }
 
+    // Estados honestos del badge, alineados con RateService::rate_source.
+    const BADGE_STATE = {
+        forex: { text: 'En vivo',     cache: false },
+        cache: { text: 'Caché',       cache: true  },
+        seed:  { text: 'Referencial', cache: true  },
+    };
+
+    function applyBadge(id, source) {
+        const state = BADGE_STATE[source] || BADGE_STATE.seed;
+
+        document.querySelectorAll(`[data-kap-badge="${id}"]`).forEach(el => {
+            if (el.textContent.trim() !== state.text) el.textContent = state.text;
+            el.classList.toggle('kap-live-badge--cache', state.cache);
+        });
+    }
+
     function applyRatesToDOM(payload) {
         const rates = payload?.data ?? payload; // handle {data:[...]} wrapper or raw array
         if (!Array.isArray(rates)) return;
@@ -115,6 +131,12 @@ const Kapitalya = (() => {
             const ts = document.querySelector(`[data-tick-sell="${id}"]`);
             if (tb) tb.textContent = fmt.rate(rate.buy);
             if (ts) ts.textContent = fmt.rate(rate.sell);
+
+            // El badge de frescura tiene que seguir a la tasa. Antes solo se
+            // pintaba en el servidor: si forex se caía a mitad de sesión, los
+            // números cambiaban al último-conocido pero el badge seguía diciendo
+            // "En vivo" — justo la afirmación que el backend se cuida de no hacer.
+            applyBadge(id, rate.rate_source);
 
             ratesCache[id] = rate;
         });

@@ -13,7 +13,7 @@
         <div class="section-title text-center" style="margin-bottom:40px;">
             <span class="section-title"><span>Por qué confiar en Tromay</span></span>
             <h2 id="kap-trust-title" style="color:var(--kap-text,#e6e8f0);margin-top:10px;">
-                30 años cambiando divisas <span class="kap-hl-gold">en persona</span>, en La Paz
+                Décadas cambiando divisas <span class="kap-hl-gold">en persona</span>, en La Paz
             </h2>
             <p style="max-width:640px;margin:14px auto 0;color:var(--kap-text-muted,#8a90a6);">
                 Somos una casa de cambio física, registrada y con atención presencial. Estos son
@@ -28,9 +28,9 @@
                 <div aria-hidden="true" style="font-size:24px;color:var(--kap-hl-gold,#f59e0b);margin-bottom:10px;">
                     <i class="bx bx-time-five"></i>
                 </div>
-                <h3 style="font-size:17px;margin:0 0 6px;color:var(--kap-text,#e6e8f0);">Más de 30 años</h3>
+                <h3 style="font-size:17px;margin:0 0 6px;color:var(--kap-text,#e6e8f0);">Trayectoria de décadas</h3>
                 <p style="margin:0;font-size:14px;color:var(--kap-text-muted,#8a90a6);">
-                    Tres décadas de trayectoria cambiando divisas en La Paz.
+                    Décadas cambiando divisas en La Paz, con atención presencial.
                 </p>
             </li>
 

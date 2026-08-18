@@ -45,6 +45,9 @@
                              <li>Información de contacto proporcionada voluntariamente</li>
                              <li>Datos de navegación (páginas visitadas, tiempo de sesión, dirección IP)</li>
                              <li>Información relacionada con operaciones o consultas realizadas</li>
+                             <li><strong>Lista de espera de alertas de tasas:</strong> si completa el formulario
+                                 de la vitrina, guardamos únicamente su correo electrónico, la divisa de interés
+                                 que elija y la dirección IP desde la que envió el formulario.</li>
                          </ul>
                          <p>No recopilamos información financiera sensible (números de tarjeta, cuentas bancarias) a través de este sitio web.</p>'],
 
@@ -56,7 +59,11 @@
                              <li>Mejorar la experiencia del usuario en nuestra plataforma</li>
                              <li>Cumplir con obligaciones legales y regulatorias en Bolivia</li>
                              <li>Enviar información relevante sobre nuestros servicios (solo con consentimiento)</li>
-                         </ul>'],
+                         </ul>
+                         <p><strong>Sobre la lista de espera de alertas:</strong> hoy Tromay <em>no</em> envía
+                            alertas de tipo de cambio por correo. El formulario únicamente registra su interés
+                            para poder avisarle si habilitamos ese servicio. No usamos esa dirección para
+                            publicidad ni la cedemos a terceros.</p>'],
 
                     ['4. Base legal del tratamiento', 'bx-shield-check', 'green',
                         '<p>El tratamiento de sus datos se basa en:</p>
@@ -105,7 +112,12 @@
 
                     ['9. Retención de datos', 'bx-time', 'green',
                         '<p>Conservamos sus datos personales durante el tiempo necesario para cumplir con las finalidades descritas en esta política, o durante el período exigido por la legislación boliviana vigente.</p>
-                         <p>Una vez transcurrido dicho período, los datos serán eliminados o anonimizados de forma segura.</p>'],
+                         <p>Una vez transcurrido dicho período, los datos serán eliminados o anonimizados de forma segura.</p>
+                         <p>Los correos de la <strong>lista de espera de alertas</strong> se conservan hasta que
+                            habilitemos el servicio o hasta que usted pida su baja, lo que ocurra primero. Puede
+                            solicitar su eliminación en cualquier momento escribiendo a
+                            <a href="mailto:kapitalyabolivia@gmail.com">kapitalyabolivia@gmail.com</a> y la
+                            procesamos sin condiciones.</p>'],
 
                     ['10. Modificaciones a esta política', 'bx-edit', 'gold',
                         '<p>Kapitalya se reserva el derecho de actualizar esta Política de Privacidad en cualquier momento. Cualquier cambio será publicado en esta página con la fecha de actualización correspondiente.</p>

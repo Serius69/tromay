@@ -134,8 +134,19 @@
                              style="width:54px;height:54px;border-radius:8px;object-fit:cover;">
                         <div>
                             <h2 style="font-size:22px!important;margin:0 0 2px!important;">Dólar Estadounidense (USD)</h2>
-                            <span class="kap-live-badge">En vivo</span>
+                            {{-- Badge honesto: "En vivo" SOLO si la tasa vino de forex en
+                                 este ciclo (rate_source='forex'); si se sirve el
+                                 last-known-good cacheado o el seed de la DB, decirlo. --}}
+                            @if(($dollar->rate_source ?? null) === 'forex')
+                            <span class="kap-live-badge" data-kap-badge="{{ $dollar->id }}">En vivo</span>
                             <span data-kap-timestamp class="kap-timestamp">Actualizado ahora mismo</span>
+                            @elseif(($dollar->rate_source ?? null) === 'cache')
+                            <span class="kap-live-badge kap-live-badge--cache" data-kap-badge="{{ $dollar->id }}">Caché</span>
+                            <span class="kap-timestamp">Última tasa real conocida</span>
+                            @else
+                            <span class="kap-live-badge kap-live-badge--cache" data-kap-badge="{{ $dollar->id }}">Referencial</span>
+                            <span class="kap-timestamp">Confirmá la tasa en sucursal</span>
+                            @endif
                         </div>
                     </div>
 
@@ -326,7 +337,7 @@
 
             <h3>¿Dónde cambiar dólares en La Paz?</h3>
             <p>
-                En Tromay Casa de Cambio, la casa de cambio física con más de <strong>30 años</strong> de trayectoria en
+                En Tromay Casa de Cambio, la casa de cambio física con <strong>décadas</strong> de trayectoria en
                 La Paz. Nos encontrás en <strong>Av. Las Delicias Nro. 207-C, Zona Villa Fátima</strong>, con atención de
                 lunes a sábado de 08:00 a 19:00 y domingos de 08:00 a 13:00. Somos una empresa registrada en SEPREC
                 (matrícula 670400030). Podés acercarte a la sucursal o escribirnos por

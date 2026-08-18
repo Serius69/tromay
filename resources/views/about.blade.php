@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title', 'Nosotros — Tromay, la casa de cambio física #1 de Bolivia')
-@section('description', 'Conocé Tromay: más de 30 años como casa de cambio física en La Paz. De Tromay Casa de Cambios al ecosistema fintech Kapitalya — historia, valores y trayectoria.')
+@section('description', 'Conocé Tromay: décadas como casa de cambio física en La Paz. De Tromay Casa de Cambios al ecosistema fintech Kapitalya — historia, valores y trayectoria.')
 
 @section('body')
 
@@ -31,10 +31,12 @@
                 </span>
             </div>
 
-            <p class="kap-about-hero-sub">
+            {{-- /about no tenía ningún <h1>: el hero era imagen + párrafo y saltaba
+                 directo a <h2>, dejando la página sin encabezado de nivel superior. --}}
+            <h1 class="kap-about-hero-sub">
                 De <strong>Tromay Casa de Cambios</strong> a un ecosistema fintech.<br>
-                Más de 30 años cambiando divisas en La Paz — hoy, la casa de cambio física líder de Bolivia.
-            </p>
+                Décadas cambiando divisas en La Paz — hoy, la casa de cambio física líder de Bolivia.
+            </h1>
         </div>
     </div>
 </div>
@@ -53,7 +55,7 @@
                     <span class="kap-hl-green">Una solución integral.</span>
                 </h2>
                 <p class="kap-section-body--lg" style="margin-bottom:20px;">
-                    Tromay es la casa de cambio física líder de La Paz: más de 30 años comprando y
+                    Tromay es la casa de cambio física líder de La Paz: décadas comprando y
                     vendiendo divisas con las mejores tasas del mercado y atención cara a cara en sucursal.
                     Es también el corazón visible del ecosistema <strong>Kapitalya</strong>.
                 </p>
@@ -157,7 +159,7 @@
             <div class="col-lg-4 kap-fade-up" style="position:sticky;top:100px;">
                 <span class="kap-about-label">Trayectoria</span>
                 <h2 class="kap-about-h2">
-                    Tres décadas de<br>
+                    Décadas de<br>
                     <span class="kap-hl-green">evolución empresarial</span>
                 </h2>
                 <p class="kap-section-body">

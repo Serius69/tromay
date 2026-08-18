@@ -4,14 +4,29 @@
     <script>
         (function(){var t=localStorage.getItem('kap-theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');}());
     </script>
+    {{-- ⬡ Google AdSense — loader en el <head> para que el crawler de AdSense VERIFIQUE el sitio
+         y para Auto Ads. Debe ser rastreable (NO gated por consentimiento): si no, el panel marca
+         "Requires review / Not found". Para que el consentimiento NO sea decorativo, mientras el
+         usuario no haya aceptado ('kap-consent-v1' !== 'granted') se piden anuncios NO
+         personalizados (requestNonPersonalizedAds=1 — sin cookies de perfilado); al aceptar, el
+         bloque de consentimiento del footer lo baja a 0. El consentimiento gobierna además
+         Analytics. __kapAds=1 evita que el bloque de consentimiento inyecte un 2º loader. --}}
+    @if(config('services.adsense.client'))
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ config('services.adsense.client') }}" crossorigin="anonymous"></script>
+    <script>
+        window.__kapAds=1;
+        (function(){var g=false;try{g=localStorage.getItem('kap-consent-v1')==='granted';}catch(e){}
+        if(!g){(window.adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=1;}}());
+    </script>
+    @endif
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="@yield('description', 'Tromay Casa de Cambio — la casa de cambio física número uno de Bolivia. Más de 30 años en La Paz con las mejores tasas del mercado, atención en sucursal y tasas de dólar, euro y monedas de la región en tiempo real. Corazón del ecosistema fintech Kapitalya.')">
+    <meta name="description" content="@yield('description', 'Tromay Casa de Cambio — la casa de cambio física número uno de Bolivia. Décadas de trayectoria en La Paz con las mejores tasas del mercado, atención en sucursal y tasas de dólar, euro y monedas de la región en tiempo real. Corazón del ecosistema fintech Kapitalya.')">
     <meta name="keywords" content="Tromay, casa de cambio, casa de cambio La Paz, casa de cambio Bolivia, mejor casa de cambio, tipo de cambio dólar Bolivia, cambio de divisas, dólar hoy Bolivia, euro, Kapitalya, ecosistema fintech, forex Bolivia">
     <meta property="og:title" content="Tromay — La casa de cambio física #1 de Bolivia">
-    <meta property="og:description" content="@yield('description', 'Más de 30 años cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo y el ecosistema fintech Kapitalya detrás.')">
+    <meta property="og:description" content="@yield('description', 'Décadas cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo y el ecosistema fintech Kapitalya detrás.')">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="Tromay Casa de Cambio">
@@ -19,7 +34,7 @@
     <meta property="og:image" content="{{ url('assets/images/index/exchange.jpg') }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tromay — La casa de cambio física #1 de Bolivia">
-    <meta name="twitter:description" content="@yield('description', 'Más de 30 años cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo desde forex.')">
+    <meta name="twitter:description" content="@yield('description', 'Décadas cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo desde forex.')">
     <meta name="twitter:image" content="{{ url('assets/images/index/exchange.jpg') }}">
     <link rel="canonical" href="{{ url()->current() }}">
 
@@ -34,7 +49,7 @@
                     '@id'                => $kapBase . '/#business',
                     'name'               => 'Tromay Casa de Cambio',
                     'alternateName'      => 'Kapitalya Servicios Integrales',
-                    'description'        => 'Casa de cambio física líder en La Paz, Bolivia, con más de 30 años de trayectoria. Compra y venta de dólar, euro y monedas de la región a las mejores tasas del mercado, con tasas en vivo desde Forex ERP.',
+                    'description'        => 'Casa de cambio física en La Paz, Bolivia. Compra y venta de dólar, euro y monedas de la región a las mejores tasas del mercado, con tasas en vivo desde Forex ERP.',
                     'url'                => $kapBase,
                     'telephone'          => '+591-64082967',
                     'email'              => 'kapitalyabolivia@gmail.com',
@@ -96,7 +111,8 @@
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/responsive.css') }}">
 
-    <!-- ⬡ Kapitalya Brand System — always last to override -->
+    <!-- ⬡ Tromay canonical tokens, then Kapitalya component overrides -->
+    <link rel="stylesheet" href="{{ url('assets/css/tromay-tokens.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/kapitalya.css') }}">
 
     <!-- Favicon -->
@@ -324,7 +340,7 @@ window.kapToast={
                             <img src="{{ url('assets/images/kapitalya-wordmark-dark.svg') }}" alt="Kapitalya" class="kap-logo-for-light" style="height:44px;width:auto;">
                         </div>
                         <p class="kap-footer-tagline">
-                            Más de 30 años evolucionando hacia el futuro.<br>
+                            Décadas evolucionando hacia el futuro.<br>
                             Servicios comerciales, financieros, tecnológicos y administrativos para Bolivia.
                         </p>
                     </div>
@@ -545,7 +561,13 @@ window.kapToast={
             window.gtag('js',new Date());
             window.gtag('config',gaId,{anonymize_ip:true});
         }
-        function enable(){loadAds();loadGa();}
+        function enable(){
+            // Consentimiento real: con permiso, los anuncios pueden ser
+            // personalizados (el head arranca en requestNonPersonalizedAds=1
+            // mientras no haya consentimiento; ver loader en <head>).
+            try{(window.adsbygoogle=window.adsbygoogle||[]).requestNonPersonalizedAds=0;}catch(e){}
+            loadAds();loadGa();
+        }
         var c=get();
         if(c==='granted'){enable();}
         else if(c!=='denied'&&banner){banner.style.display='block';}

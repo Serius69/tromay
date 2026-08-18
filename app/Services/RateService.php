@@ -4,6 +4,11 @@ namespace App\Services;
 
 use App\Models\Cash;
 use App\Models\CashRate;
+use Illuminate\Contracts\Cache\Lock;
+use Illuminate\Contracts\Cache\LockProvider;
+use Illuminate\Contracts\Cache\LockTimeoutException;
+use Illuminate\Http\Client\Pool;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
@@ -15,6 +20,21 @@ class RateService
 
     private const CACHE_KEY = 'kap_active_rates';
     private const CACHE_TTL = 300; // seconds — tasas cambian cada hora, 5min es suficiente
+
+    // Fallback del oficial REAL cuando forex-erp /official/ no responde: se sirve
+    // el ÚLTIMO valor conocido (nunca un hardcode). Retención larga (7 días) para
+    // aguantar una caída extendida sin perder el dato; el fetch en sí sigue
+    // corriendo cada CACHE_TTL (300s) como el resto del overlay.
+    private const OFFICIAL_CACHE_PREFIX = 'kap_official_live_';
+    private const OFFICIAL_CACHE_TTL = 604800; // 7 días
+
+    // Last-known-good de buy/sell del overlay (mismo criterio que el oficial):
+    // ante una caída de forex se sirve la ÚLTIMA tasa REAL conocida en vez del
+    // seed congelado de `cashes`, marcada rate_source='cache' — así las vistas
+    // pueden mostrar un badge honesto ("Caché", no "En vivo") y persistHistory
+    // (que solo graba rate_source='forex') no la re-persiste.
+    private const LKG_CACHE_PREFIX = 'kap_rates_live_';
+    private const LKG_CACHE_TTL = 604800; // 7 días
 
     public function getActiveRates(): Collection
     {
@@ -49,17 +69,60 @@ class RateService
 
     public function getActiveRatesWithAll(): Collection
     {
-        return Cache::remember('kap_active_rates_full', self::CACHE_TTL, function () {
-            $cashes = Cash::active()
-                ->allowed(self::ALLOWED)
-                ->orderBy('id')
-                ->get();
+        $cached = Cache::get('kap_active_rates_full');
+        if ($cached !== null) {
+            return $cached;
+        }
 
-            $overlaid = $this->overlayForex($cashes);
-            $this->persistHistory($overlaid);
+        // Anti-estampida: bajo N cache-miss concurrentes (workers PHP-FPM), solo
+        // UN worker refresca contra forex; el resto espera brevemente (block 3s)
+        // a que el resultado quede cacheado. Si el refresco tarda más que la
+        // espera, se degrada a last-known-good/seed SIN pegar a forex — nunca
+        // N× (1 primary + pool de oficiales) en paralelo contra forex-erp.
+        $lock = $this->refreshLock();
 
-            return $overlaid;
-        });
+        if ($lock === null) {
+            // Store sin soporte de locks: comportamiento previo (sin candado).
+            return Cache::remember('kap_active_rates_full', self::CACHE_TTL, fn () => $this->buildRates());
+        }
+
+        try {
+            return $lock->block(3, function () {
+                // Double-check bajo el candado: otro worker pudo haber poblado
+                // el cache mientras esperábamos — remember lo detecta sin HTTP.
+                return Cache::remember('kap_active_rates_full', self::CACHE_TTL, fn () => $this->buildRates());
+            });
+        } catch (LockTimeoutException) {
+            return $this->applyLastKnownGood($this->activeCashes());
+        }
+    }
+
+    /**
+     * Candado del refresco de tasas, o null si el cache store activo no
+     * implementa locks (p.ej. `file` en Laravel 9) — en ese caso se degrada
+     * al comportamiento sin candado en vez de reventar el request.
+     */
+    private function refreshLock(): ?Lock
+    {
+        return Cache::getStore() instanceof LockProvider
+            ? Cache::lock('kap_rates_full_refresh_lock', 15)
+            : null;
+    }
+
+    private function buildRates(): Collection
+    {
+        $overlaid = $this->overlayForex($this->activeCashes());
+        $this->persistHistory($overlaid);
+
+        return $overlaid;
+    }
+
+    private function activeCashes(): Collection
+    {
+        return Cash::active()
+            ->allowed(self::ALLOWED)
+            ->orderBy('id')
+            ->get();
     }
 
     /**
@@ -170,6 +233,10 @@ class RateService
     // forex-erp (EXCHANGE_API_URL). La tabla `cashes` sembrada actúa solo
     // como fallback offline cuando forex no responde. Se conserva el id/ruta
     // de cada divisa (dinero.show) y solo se sobreponen buy/sell/oficial.
+    //
+    // buy/sell salen de /exchange-rates/primary/ (mid del paralelo); oficial
+    // sale de /official/ (TCO/BCB real) — son DOS endpoints distintos de
+    // forex-erp, nunca el mismo campo.
     // ------------------------------------------------------------------
 
     private function overlayForex(Collection $cashes): Collection
@@ -177,11 +244,27 @@ class RateService
         $forex = $this->fetchForexPrimary();
 
         if (! $forex) {
-            return $cashes; // fallback: valores de la tabla `cashes`
+            // forex caído: última tasa REAL conocida (rate_source='cache') antes
+            // que el seed congelado; si tampoco hay caché, queda la tabla `cashes`.
+            return $this->applyLastKnownGood($cashes);
         }
 
+        // Oficiales EN PARALELO (Http::pool) solo para las divisas con fila
+        // válida en forex. Antes eran hasta 6 GETs secuenciales (uno por divisa)
+        // tras el GET primario: hasta 7 round-trips en SERIE por cache-miss.
+        $codes = [];
         foreach ($cashes as $cash) {
-            $rate = $forex[strtoupper($cash->name)] ?? null;
+            $code = strtoupper($cash->name);
+            if (is_array($forex[$code] ?? null)) {
+                $codes[] = $code;
+            }
+        }
+
+        $officials = $this->fetchForexOfficialBatch($codes);
+
+        foreach ($cashes as $cash) {
+            $code = strtoupper($cash->name);
+            $rate = $forex[$code] ?? null;
 
             if (! is_array($rate)) {
                 continue;
@@ -206,19 +289,69 @@ class RateService
                 continue;
             }
 
-            $cash->buy  = $buy;
-            $cash->sell = $sell;
+            $cash->buy  = self::money($buy);
+            $cash->sell = self::money($sell);
 
-            if (isset($rate['official_rate'])) {
-                $off = (float) $rate['official_rate'] / $scale;
-                if ($off > 0) {
-                    $cash->oficial = $off;
-                }
+            // FIX oficial mal etiquetado: `$rate['official_rate']` aquí es el MID
+            // del paralelo (misma fila /exchange-rates/primary/ que buy/sell), no
+            // el TCO/BCB, a pesar del nombre. El oficial REAL se pide al endpoint
+            // dedicado /api/rates/official/ de forex-erp (pool de arriba).
+            $off = $officials[$code] ?? null;
+            if ($off !== null && $off > 0) {
+                $cash->oficial = self::money($off);
+            } elseif ($code !== 'USD') {
+                // forex-erp solo refresca el oficial de USD/BOB: para el resto de
+                // divisas el "oficial" sembrado en `cashes` es un número congelado
+                // que NO debe mostrarse como oficial vigente. Sin dato real →
+                // null (las vistas pintan '—' y la API emite null; nunca un
+                // valor inventado). USD conserva su fallback intacto.
+                $cash->oficial = null;
             }
 
             $this->applyMinSpread($cash);
 
             $cash->setAttribute('rate_source', 'forex');
+
+            // Snapshot last-known-good con los valores finales mostrados
+            // (post-spread), para servirlos durante una futura caída de forex.
+            Cache::put(self::LKG_CACHE_PREFIX.$code, [
+                'buy'     => (float) $cash->buy,
+                'sell'    => (float) $cash->sell,
+                'oficial' => $cash->oficial !== null ? (float) $cash->oficial : null,
+            ], self::LKG_CACHE_TTL);
+        }
+
+        return $cashes;
+    }
+
+    /**
+     * Sobrepone el last-known-good cacheado (última respuesta REAL de forex)
+     * sobre los `Cash` sembrados. Divisas sin caché quedan con el seed y sin
+     * rate_source (las vistas las tratan como "Referencial").
+     */
+    private function applyLastKnownGood(Collection $cashes): Collection
+    {
+        foreach ($cashes as $cash) {
+            $lkg = Cache::get(self::LKG_CACHE_PREFIX.strtoupper($cash->name));
+
+            if (! is_array($lkg) || (float) ($lkg['buy'] ?? 0) <= 0 || (float) ($lkg['sell'] ?? 0) <= 0) {
+                continue; // sin last-known-good válido → fallback sembrado
+            }
+
+            $cash->buy  = self::money((float) $lkg['buy']);
+            $cash->sell = self::money((float) $lkg['sell']);
+
+            if ((float) ($lkg['oficial'] ?? 0) > 0) {
+                $cash->oficial = self::money((float) $lkg['oficial']);
+            } elseif (strtoupper($cash->name) !== 'USD') {
+                // Mismo criterio que el overlay: sin oficial REAL conocido para
+                // una divisa no-USD, no mostrar el seed congelado como oficial.
+                $cash->oficial = null;
+            }
+
+            // 'cache': tasa real pero NO en vivo — nunca 'forex' (badge honesto
+            // y persistHistory no graba snapshots repetidos de la misma tasa).
+            $cash->setAttribute('rate_source', 'cache');
         }
 
         return $cashes;
@@ -254,13 +387,30 @@ class RateService
         }
 
         $half = ($minPct / 100) / 2;
-        $cash->buy  = $mid * (1 - $half);
-        $cash->sell = $mid * (1 + $half);
+        $cash->buy  = self::money($mid * (1 - $half));
+        $cash->sell = self::money($mid * (1 + $half));
+    }
+
+    /**
+     * Normaliza un importe a la precisión de la columna (`decimal(15,6)`).
+     *
+     * El ensanchado de spread y la división por `scale_factor` producen floats
+     * como 0.012103999999999998, que se colaban tal cual a /api/rates y a la
+     * vitrina. Redondear aquí — y no al pintar — mantiene una sola verdad entre
+     * la API, las vistas y los snapshots de `cash_rates`.
+     */
+    private static function money(float $value): float
+    {
+        return round($value, 6);
     }
 
     /**
      * Tasas primarias de forex-erp: dict por código de divisa
      * (USD/EUR/…) con buy_rate/sell_rate/official_rate. Base BOB.
+     *
+     * OJO: `official_rate` en esta respuesta es el MID del paralelo (misma
+     * fila primaria que buy/sell), NO el TCO/BCB — para el oficial real usar
+     * `fetchForexOfficial()`.
      */
     private function fetchForexPrimary(): ?array
     {
@@ -271,7 +421,9 @@ class RateService
         }
 
         try {
-            $response = Http::timeout(8)->get("{$baseUrl}/exchange-rates/primary/");
+            // Timeout corto: este fetch corre dentro del request de página (en el
+            // cache-miss); 3s acota el peor caso sin agotar los workers de FPM.
+            $response = Http::timeout(3)->get("{$baseUrl}/exchange-rates/primary/");
 
             if ($response->successful()) {
                 $data = $response->json();
@@ -284,5 +436,99 @@ class RateService
         }
 
         return null;
+    }
+
+    /**
+     * Oficial REAL (BCB/TCO) por divisa, EN PARALELO (Http::pool) contra el
+     * endpoint dedicado y estable de forex-erp `/api/rates/official/?currency=...`
+     * — distinto de `/exchange-rates/primary/`, cuyo campo homónimo es el mid
+     * del paralelo. Un solo round-trip de latencia para todas las divisas
+     * (antes: un GET secuencial por divisa), timeout corto por request.
+     *
+     * Semántica por divisa idéntica al fetch individual previo: si forex-erp no
+     * responde (timeout/5xx) o devuelve un shape inesperado o una divisa
+     * distinta a la pedida, degrada al ÚLTIMO valor cacheado (`cachedOfficial()`)
+     * — NUNCA a un hardcode viejo. Si tampoco hay caché, null.
+     *
+     * @param  array<int, string>  $codes
+     * @return array<string, float|null>
+     */
+    private function fetchForexOfficialBatch(array $codes): array
+    {
+        if ($codes === []) {
+            return [];
+        }
+
+        $baseUrl = rtrim((string) config('services.exchange_api.url', ''), '/');
+
+        if ($baseUrl === '') {
+            return array_combine($codes, array_map(fn (string $c) => $this->cachedOfficial($c), $codes));
+        }
+
+        try {
+            $responses = Http::pool(fn (Pool $pool) => array_map(
+                fn (string $code) => $pool->as($code)
+                    ->timeout(3)
+                    ->get("{$baseUrl}/official/", ['currency' => $code]),
+                $codes
+            ));
+        } catch (\Throwable $e) {
+            Log::warning('RateService: pool de oficiales de forex falló, usando últimos valores cacheados', [
+                'error' => $e->getMessage(),
+            ]);
+            $responses = [];
+        }
+
+        $officials = [];
+        foreach ($codes as $code) {
+            $officials[$code] = $this->parseOfficial($code, $responses[$code] ?? null);
+        }
+
+        return $officials;
+    }
+
+    /**
+     * Interpreta la respuesta del pool para una divisa (Response, excepción de
+     * conexión, o null si el pool entero falló) con la misma degradación que
+     * el fetch individual histórico: éxito → cachea 7 días y devuelve; fallo →
+     * último valor cacheado o null.
+     */
+    private function parseOfficial(string $currency, mixed $response): ?float
+    {
+        if ($response instanceof Response && $response->successful()) {
+            $data = $response->json();
+
+            $currencyMatches = ! isset($data['currency']) || $data['currency'] === $currency;
+
+            if (is_array($data) && isset($data['official_rate']) && $currencyMatches) {
+                $rate = (float) $data['official_rate'];
+
+                if ($rate > 0) {
+                    Cache::put(self::OFFICIAL_CACHE_PREFIX.$currency, $rate, self::OFFICIAL_CACHE_TTL);
+
+                    return $rate;
+                }
+            }
+
+            Log::warning('RateService: forex official devolvió shape inesperado, usando último valor cacheado', [
+                'currency' => $currency,
+            ]);
+        } elseif ($response instanceof \Throwable) {
+            Log::warning('RateService: forex official no disponible, usando último valor cacheado', [
+                'currency' => $currency,
+                'error'    => $response->getMessage(),
+            ]);
+        }
+
+        return $this->cachedOfficial($currency);
+    }
+
+    /**
+     * Último oficial REAL conocido para `$currency` (cache de larga duración,
+     * ver OFFICIAL_CACHE_TTL). Nunca el histórico sembrado de `cashes`.
+     */
+    private function cachedOfficial(string $currency): ?float
+    {
+        return Cache::get(self::OFFICIAL_CACHE_PREFIX.$currency);
     }
 }
