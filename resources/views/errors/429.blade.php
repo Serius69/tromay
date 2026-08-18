@@ -18,12 +18,12 @@
     <div class="d-table">
         <div class="d-table-cell">
             <div class="error-content">
-                <h1>
+                <p class="error-code" aria-hidden="true">
                     <span class="a">4</span>
                     <span class="red">2</span>
                     <span class="b">9</span>
-                </h1>
-                <h3>Calma, llegaste al límite</h3>
+                </p>
+                <h1>Calma, llegaste al límite</h1>
                 <p>
                     Has realizado demasiadas solicitudes en poco tiempo.
                     @if(isset($retryAfter))

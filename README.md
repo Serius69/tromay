@@ -2,7 +2,7 @@
 
 > Sitio Laravel **100% público** que posiciona a Tromay como la mejor casa de cambio física de Bolivia: muestra tasas FX en vivo (fuente: forex-erp), hace venta cruzada del ecosistema fintech Kapitalya y expone una API pública de tasas consumida por todo el ecosistema. Sin login ni registro de transacciones (ese módulo se retiró el 2026-07-10).
 
-**Stack:** Laravel 9 · PHP 8.2 · MySQL 8.0 · Redis 7 · **URL:** tromay.kapitalya.com.bo · **Estado:** en producción vía Docker Compose / Cloudflare Tunnel; cluster K8s Docker Desktop abandonado el 2026-07-08 → cluster Ubuntu pendiente
+**Stack:** Laravel 9 · PHP 8.2 · MySQL 8.0 · Redis 7 · **URL:** public.kapitalya.com.bo · **Estado:** en producción vía Docker Compose / Cloudflare Tunnel; cluster K8s Docker Desktop abandonado el 2026-07-08 → cluster Ubuntu pendiente
 
 ---
 
@@ -203,7 +203,7 @@ tromay/
 
 - **Namespace:** `private` (según el CLAUDE.md raíz del monorepo: exchange-alert, forex-erp, findemproai, findemprolareos, serguicv, tromay)
 - **Cluster:** en migración — el K8s de Docker Desktop/Windows (workers `desktop-workerN`) se abandonó el 2026-07-08; el cluster nuevo en Ubuntu Server (k3s/kubeadm) está pendiente de instalar. Hoy corre vía Docker Compose detrás del Cloudflare Tunnel.
-- **URL producción:** https://tromay.kapitalya.com.bo
+- **URL producción:** https://public.kapitalya.com.bo
 - **Imagen:** `kapitalya/tromay:vYYYYMMDD` (imagePullPolicy: IfNotPresent)
 - **Health checks:** `/api/health/live` (liveness) · `/api/health/ready` (readiness — verifica DB + Cache)
 

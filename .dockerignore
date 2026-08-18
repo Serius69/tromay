@@ -1,5 +1,11 @@
 .git
 .github
+# Copia obsoleta de un worktree (incluye el panel admin ya eliminado): 8.595
+# archivos de código muerto que se estaban horneando en la imagen de producción.
+.claude
+# CKEditor5 vendido para el CMS del admin: sin una sola referencia en las vistas
+# públicas, pero servido en /assets/libs/@ckeditor (766 KB alcanzables).
+public/assets/libs/@ckeditor
 node_modules
 vendor
 storage/logs/*

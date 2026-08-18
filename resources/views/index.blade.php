@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title', 'La casa de cambio física #1 de Bolivia')
-@section('description', 'Tromay, la casa de cambio física número uno de Bolivia. Más de 30 años en La Paz con las mejores tasas de dólar, euro y monedas de la región, en vivo desde forex.')
+@section('description', 'Tromay, la casa de cambio física número uno de Bolivia. Décadas de trayectoria en La Paz con las mejores tasas de dólar, euro y monedas de la región, en vivo desde forex.')
 
 @section('body')
 
@@ -24,7 +24,7 @@
                                 de Bolivia
                             </h1>
                             <p>
-                                Más de 30 años cambiando divisas en La Paz con las mejores tasas del
+                                Décadas cambiando divisas en La Paz con las mejores tasas del
                                 mercado y atención personalizada en sucursal. Hoy Tromay impulsa todo
                                 el <strong>ecosistema fintech Kapitalya</strong>: la confianza de siempre,
                                 potenciada por tecnología de punta.
@@ -69,7 +69,7 @@
                             </div>
                             <div class="kap-trust-item">
                                 <i class="bx bx-buildings"></i>
-                                <span>Desde los <strong>años 90</strong></span>
+                                <span>Trayectoria de <strong>décadas</strong></span>
                             </div>
                             <div class="kap-trust-item">
                                 <i class="bx bx-map-pin"></i>
@@ -180,7 +180,7 @@
          alt="Kapitalya — Casa de Cambios La Paz">
     <div class="kap-photo-strip-overlay">
         <p class="kap-photo-strip-text">
-            Más de 30 años cambiando divisas en <span class="kap-hl-green">La Paz, Bolivia</span>
+            Décadas cambiando divisas en <span class="kap-hl-green">La Paz, Bolivia</span>
         </p>
     </div>
 </div>
@@ -203,7 +203,7 @@
                             <i class="flaticon-reliability"></i>
                             <h3>30+ Años de Trayectoria</h3>
                         </div>
-                        <p>Desde los años 90 cambiando divisas en La Paz. Tres décadas de reputación que ninguna casa de cambio nueva puede igualar.</p>
+                        <p>Décadas cambiando divisas en La Paz. Una reputación que ninguna casa de cambio nueva puede igualar.</p>
                     </div>
                 </div>
             </div>
@@ -538,8 +538,12 @@
         </div>
 
         @php
-        // URLs configurables por env (patrón env('CLAVE','default')) — apuntan al
-        // Hub del ecosistema por defecto; sobreescribir por subdominio si existe DNS.
+        // URLs configurables por env (patrón env('CLAVE','default')).
+        // REGLA: el default SOLO puede ser un host que responda hoy. Verificado
+        // 2026-08-18: forex/pay/insights/paralelo/kapitalya.com.bo -> 200;
+        // proformapro y katalogo NO tienen DNS publicado (por eso apuntan al Hub)
+        // y alertas fue dado de baja (redirige a Paralelo). Al publicar un
+        // subdominio nuevo, sobreescribir por env ECO_*_URL.
         $ecosistema = [
             [
                 'icon'=>'bx-line-chart', 'color'=>'green',
@@ -557,24 +561,24 @@
             ],
             [
                 'icon'=>'bx-bell', 'color'=>'green',
-                'title'=>'Alerta de Tasas',
+                'title'=>'Paralelo',
                 'tag'=>'Tipo de cambio',
-                'desc'=>'Alertas de tipo de cambio en tiempo real por WhatsApp y correo. Enterate cuando el dólar llega a tu precio objetivo.',
-                'url'=>env('ECO_ALERTAS_URL', 'https://alertas.kapitalya.com.bo'),
+                'desc'=>'Seguí el dólar paralelo, el USDT y el Bitcoin en Bolivia en tiempo real, con la evolución del mercado al minuto.',
+                'url'=>env('ECO_PARALELO_URL', 'https://paralelo.kapitalya.com.bo'),
             ],
             [
                 'icon'=>'bx-receipt', 'color'=>'green',
                 'title'=>'ProformaPro',
                 'tag'=>'PyMEs',
                 'desc'=>'Proformas, facturación e inventario para micro y pequeñas empresas bolivianas. Simple, rápido y en la nube.',
-                'url'=>env('ECO_PROFORMA_URL', 'https://proformapro.kapitalya.com.bo'),
+                'url'=>env('ECO_PROFORMA_URL', 'https://kapitalya.com.bo'),
             ],
             [
                 'icon'=>'bx-store-alt', 'color'=>'gold',
                 'title'=>'Katálogo',
                 'tag'=>'Comercio digital',
                 'desc'=>'Convertí tu inventario en un catálogo digital con enlace propio para vender por WhatsApp y redes.',
-                'url'=>env('ECO_KATALOGO_URL', 'https://katalogo.kapitalya.com.bo'),
+                'url'=>env('ECO_KATALOGO_URL', 'https://kapitalya.com.bo'),
             ],
             [
                 'icon'=>'bx-bar-chart-alt-2', 'color'=>'green',
@@ -721,7 +725,7 @@
                 <div class="solution-content">
                     <div class="solution-title">
                         <span>Nuestra historia</span>
-                        <h2>Más que un servicio.<br>Una evolución de 30 años.</h2>
+                        <h2>Más que un servicio.<br>Una evolución de décadas.</h2>
                     </div>
 
                     <div class="row">
@@ -729,8 +733,8 @@
                             <div class="single-solution overly-one">
                                 <div class="overly-two">
                                     <h3><a href="{{ route('about') }}">De Tromay a Kapitalya</a></h3>
-                                    <p>Desde los años 90 bajo el nombre "Tromay Casa de Cambios", evolucionamos durante tres décadas hasta convertirnos en Kapitalya Servicios Integrales — registrada en SEPREC en junio 2025.</p>
-                                    <span>Desde los años 90</span>
+                                    <p>Nacimos como "Tromay Casa de Cambios" y evolucionamos durante décadas hasta convertirnos en Kapitalya Servicios Integrales — registrada en SEPREC en junio 2025.</p>
+                                    <span>Trayectoria de décadas</span>
                                 </div>
                             </div>
                         </div>
@@ -956,7 +960,7 @@
     <div class="container">
         <div class="kap-brand-message kap-fade-up">
             <div class="kap-brand-message-text">
-                "Más de 30 años evolucionando hacia el futuro."
+                "Décadas evolucionando hacia el futuro."
             </div>
             <p class="kap-brand-message-sub">
                 De Tromay Casa de Cambios a Kapitalya Servicios Integrales.

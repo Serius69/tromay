@@ -2814,3 +2814,68 @@ a { transition: var(--transition); }
   font-size: 12px; color: var(--kap-text-muted) !important;
   text-align: center; margin-top: 24px; line-height: 1.6;
 }
+
+/* ================================================================
+   36. RATE TABLE — semántica de tabla real conservando el grid
+   ----------------------------------------------------------------
+   /quote pasó de un grid de divs a <table>. Para que la maqueta no
+   cambie, se neutraliza el layout tabular y las filas siguen siendo
+   CSS grid (reglas .kap-rate-table-head/.kap-rate-table-row de arriba).
+   ================================================================ */
+
+table.kap-rate-table-wrap { width: 100%; border-collapse: collapse; }
+table.kap-rate-table-wrap > thead,
+table.kap-rate-table-wrap > tbody { display: block; }
+
+/* Las celdas heredan el color/peso del diseño original, no el de <th>/<td>. */
+.kap-rate-table-head > th { font-weight: inherit; text-align: inherit; }
+.kap-rate-table-row > th,
+.kap-rate-table-row > td { font-weight: inherit; text-align: inherit; padding: 0; border: 0; }
+.kap-rate-col--right { text-align: right; }
+.kap-rate-table-row > .kap-rate-val { text-align: right; }
+
+/* Enlace estirado: mantiene toda la fila clicable como antes, pero el
+   nombre accesible y el foco viven en un solo <a> real. */
+.kap-rate-table-row { position: relative; }
+.kap-rate-row-link { text-decoration: none; color: inherit; }
+.kap-rate-row-link::after { content: ""; position: absolute; inset: 0; }
+.kap-rate-row-link:focus-visible { outline: none; }
+.kap-rate-table-row:focus-within { background: rgba(255, 255, 255, 0.045); }
+.kap-rate-table-row:focus-within { outline: 2px solid var(--kap-green); outline-offset: -2px; }
+[data-theme="light"] .kap-rate-table-row:focus-within { background: rgba(0, 0, 0, 0.045); }
+
+/* ================================================================
+   37. ERROR PAGES — la cifra grande deja de ser un <h1>
+   ----------------------------------------------------------------
+   El "404"/"429"/"500" decorativo ocupaba el <h1> de la página: el
+   encabezado principal no tenía texto legible y el título real iba en
+   <h3>. Ahora la cifra es un <p class="error-code" aria-hidden> y el
+   <h1> lleva la frase. Estas reglas replican el estilo original.
+   ================================================================ */
+
+.error-area .error-content .error-code {
+  font-size: 300px;
+  line-height: 1;
+  font-weight: 700;
+  color: #e21f36;
+  margin: -48px 0 0;
+}
+.error-area .error-content .error-code .a,
+.error-area .error-content .error-code .b { display: inline-block; }
+.error-area .error-content .error-code .red {
+  color: #ff0000;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+/* El h1 hereda el tamaño que antes tenía el h3 del template. */
+.error-area .error-content h1 {
+  font-size: 40px;
+  line-height: 1.2;
+  margin: 30px 0 0;
+  color: inherit;
+}
+@media (max-width: 767px) {
+  .error-area .error-content .error-code { font-size: 130px; margin-top: 0; }
+  .error-area .error-content h1 { font-size: 26px; }
+}

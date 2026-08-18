@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Restringido a dominios específicos. Configura CORS_ALLOWED_ORIGINS en .env.
-    | Ejemplo: CORS_ALLOWED_ORIGINS=https://tromay.kapitalya.com.bo,https://kapitalya.com.bo
+    | Ejemplo: CORS_ALLOWED_ORIGINS=https://public.kapitalya.com.bo,https://kapitalya.com.bo
     |
     */
 

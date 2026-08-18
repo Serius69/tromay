@@ -23,10 +23,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="@yield('description', 'Tromay Casa de Cambio — la casa de cambio física número uno de Bolivia. Más de 30 años en La Paz con las mejores tasas del mercado, atención en sucursal y tasas de dólar, euro y monedas de la región en tiempo real. Corazón del ecosistema fintech Kapitalya.')">
+    <meta name="description" content="@yield('description', 'Tromay Casa de Cambio — la casa de cambio física número uno de Bolivia. Décadas de trayectoria en La Paz con las mejores tasas del mercado, atención en sucursal y tasas de dólar, euro y monedas de la región en tiempo real. Corazón del ecosistema fintech Kapitalya.')">
     <meta name="keywords" content="Tromay, casa de cambio, casa de cambio La Paz, casa de cambio Bolivia, mejor casa de cambio, tipo de cambio dólar Bolivia, cambio de divisas, dólar hoy Bolivia, euro, Kapitalya, ecosistema fintech, forex Bolivia">
     <meta property="og:title" content="Tromay — La casa de cambio física #1 de Bolivia">
-    <meta property="og:description" content="@yield('description', 'Más de 30 años cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo y el ecosistema fintech Kapitalya detrás.')">
+    <meta property="og:description" content="@yield('description', 'Décadas cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo y el ecosistema fintech Kapitalya detrás.')">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="Tromay Casa de Cambio">
@@ -34,7 +34,7 @@
     <meta property="og:image" content="{{ url('assets/images/index/exchange.jpg') }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Tromay — La casa de cambio física #1 de Bolivia">
-    <meta name="twitter:description" content="@yield('description', 'Más de 30 años cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo desde forex.')">
+    <meta name="twitter:description" content="@yield('description', 'Décadas cambiando divisas en La Paz con las mejores tasas del mercado. Tasas en vivo desde forex.')">
     <meta name="twitter:image" content="{{ url('assets/images/index/exchange.jpg') }}">
     <link rel="canonical" href="{{ url()->current() }}">
 
@@ -49,7 +49,7 @@
                     '@id'                => $kapBase . '/#business',
                     'name'               => 'Tromay Casa de Cambio',
                     'alternateName'      => 'Kapitalya Servicios Integrales',
-                    'description'        => 'Casa de cambio física líder en La Paz, Bolivia, con más de 30 años de trayectoria. Compra y venta de dólar, euro y monedas de la región a las mejores tasas del mercado, con tasas en vivo desde Forex ERP.',
+                    'description'        => 'Casa de cambio física en La Paz, Bolivia. Compra y venta de dólar, euro y monedas de la región a las mejores tasas del mercado, con tasas en vivo desde Forex ERP.',
                     'url'                => $kapBase,
                     'telephone'          => '+591-64082967',
                     'email'              => 'kapitalyabolivia@gmail.com',
@@ -340,7 +340,7 @@ window.kapToast={
                             <img src="{{ url('assets/images/kapitalya-wordmark-dark.svg') }}" alt="Kapitalya" class="kap-logo-for-light" style="height:44px;width:auto;">
                         </div>
                         <p class="kap-footer-tagline">
-                            Más de 30 años evolucionando hacia el futuro.<br>
+                            Décadas evolucionando hacia el futuro.<br>
                             Servicios comerciales, financieros, tecnológicos y administrativos para Bolivia.
                         </p>
                     </div>

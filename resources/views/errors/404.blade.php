@@ -1,14 +1,15 @@
 @extends('layout.master')
-@section('title', 'Error del servidor')
+@section('title', 'Página no encontrada')
+@section('description', 'La página que buscás no existe. Consultá las tasas de cambio de hoy de Tromay Casa de Cambio o volvé al inicio.')
 
 @section('body')
 <div class="page-title-area page-title-style-two">
     <div class="container">
         <div class="page-title-content">
-            <h2>Error del servidor</h2>
+            <h2>Página no encontrada</h2>
             <ul>
                 <li><a href="{{ url('/') }}"><i class="bx bx-home"></i> Inicio</a></li>
-                <li class="active">Error 500</li>
+                <li class="active">Error 404</li>
             </ul>
         </div>
     </div>
@@ -18,16 +19,17 @@
     <div class="d-table">
         <div class="d-table-cell">
             <div class="error-content">
+                {{-- Cifra decorativa: el encabezado real de la página es el <h1> de abajo. --}}
                 <p class="error-code" aria-hidden="true">
-                    <span class="a">5</span>
+                    <span class="a">4</span>
                     <span class="red">0</span>
-                    <span class="b">0</span>
+                    <span class="b">4</span>
                 </p>
-                <h1>Error interno del servidor</h1>
+                <h1>No encontramos esta página</h1>
                 <p>
-                    Algo falló de nuestro lado. Nuestro equipo ya fue notificado
-                    y estamos trabajando en solucionarlo. Por favor intenta de nuevo
-                    en unos minutos.
+                    El enlace puede estar roto o la página pudo haberse movido.
+                    Podés volver al inicio o mirar
+                    <a href="{{ route('quote') }}">las tasas de cambio de hoy</a>.
                 </p>
                 <a href="{{ url('/') }}" class="default-btn two">
                     <span>Volver al inicio</span>

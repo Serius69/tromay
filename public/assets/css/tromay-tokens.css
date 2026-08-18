@@ -28,7 +28,13 @@
   --kap-surface-2: #1A1A26;
   --kap-surface-3: #1E2235;
   --kap-text: #F0F2F5;
-  --kap-text-muted: #4A5568;
+  /* WCAG 2.1 AA: #4A5568 daba 2.6:1 sobre --kap-black y 2.3:1 sobre
+     --kap-surface-2 — reprobaba incluso el piso de 3:1 de texto grande, y es el
+     color de los timestamps, los descargos ("Tasas referenciales…") y los pies
+     de foto, con el tema oscuro por defecto. #8A93A6 deja 5.1:1 como mínimo
+     sobre las cuatro superficies oscuras y coincide con el #8a90a6 que las
+     vistas ya usaban como fallback inline. */
+  --kap-text-muted: #8A93A6;
   --kap-text-sec: #8892A4;
   --kap-transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   --kap-warning: #F5A623;

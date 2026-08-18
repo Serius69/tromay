@@ -66,51 +66,68 @@
                     </span>
                 </div>
 
-                {{-- Rate table --}}
-                <div class="kap-rate-table-wrap">
-                    {{-- Table header --}}
-                    <div class="kap-rate-table-head">
-                        <span class="kap-rate-col">Divisa</span>
-                        <span class="kap-rate-col kap-rate-col--right kap-rate-col--green">Compra</span>
-                        <span class="kap-rate-col kap-rate-col--right kap-rate-col--gold">Venta</span>
-                        <span class="kap-rate-col kap-rate-col--right">Oficial</span>
-                    </div>
+                {{-- Rate table — tabla REAL (no un grid de divs): es la tabla de
+                     tasas de la página de conversión, y con lectores de pantalla
+                     un div-grid no permite asociar "6,91" con su fila ni con su
+                     columna. Las filas siguen siendo CSS grid (ver kapitalya.css),
+                     así que la maqueta no cambia. --}}
+                <table class="kap-rate-table-wrap">
+                    <caption class="visually-hidden">
+                        Tasas de cambio de hoy, expresadas en bolivianos (BOB) por unidad de divisa.
+                    </caption>
+                    <thead>
+                        <tr class="kap-rate-table-head">
+                            <th scope="col" class="kap-rate-col">Divisa</th>
+                            <th scope="col" class="kap-rate-col kap-rate-col--right kap-rate-col--green">Compra</th>
+                            <th scope="col" class="kap-rate-col kap-rate-col--right kap-rate-col--gold">Venta</th>
+                            <th scope="col" class="kap-rate-col kap-rate-col--right">Oficial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
                     @php
                     $qFlagMap=['usd'=>'estados unidos.png','eur'=>'union europea.png','clp'=>'chile.png','pen'=>'peru.png','brl'=>'brazil.png','ars'=>'argentina.png'];
                     @endphp
                     @forelse($cashes as $cash)
                     @php $qFlag = $qFlagMap[strtolower($cash->name)] ?? null; @endphp
-                    <a href="{{ route('dinero.show', $cash->id) }}"
-                       class="kap-rate-table-row"
-                       data-kap-id="{{ $cash->id }}">
-                        <div class="kap-flag-cell">
+                    <tr class="kap-rate-table-row" data-kap-id="{{ $cash->id }}">
+                        <th scope="row" class="kap-flag-cell">
                             <div class="kap-flag-box">
                                 @if($qFlag)
                                 <img src="{{ url('assets/images/' . $qFlag) }}"
-                                     alt="{{ e($cash->name) }}">
+                                     alt="" width="36" height="36" loading="lazy" decoding="async">
                                 @else
-                                <span style="font-size:18px;">💱</span>
+                                <span style="font-size:18px;" aria-hidden="true">💱</span>
                                 @endif
                             </div>
-                            <span class="kap-flag-name">{{ e($cash->name) }}</span>
-                        </div>
-                        <span class="kap-rate-val kap-rate-val--green" data-kap-buy>
+                            {{-- El enlace se estira sobre toda la fila (::after) para
+                                 conservar el clic completo del diseño original, pero
+                                 el foco de teclado recae en un único enlace con
+                                 nombre accesible propio. --}}
+                            <a href="{{ route('dinero.show', $cash->id) }}" class="kap-rate-row-link">
+                                <span class="kap-flag-name">{{ e($cash->name) }}</span>
+                                <span class="visually-hidden">— ver detalle y evolución</span>
+                            </a>
+                        </th>
+                        <td class="kap-rate-val kap-rate-val--green" data-kap-buy>
                             {{ number_format($cash->buy, 4) }}
-                        </span>
-                        <span class="kap-rate-val kap-rate-val--gold" data-kap-sell>
+                        </td>
+                        <td class="kap-rate-val kap-rate-val--gold" data-kap-sell>
                             {{ number_format($cash->sell, 4) }}
-                        </span>
-                        <span class="kap-rate-val kap-rate-val--muted">
+                        </td>
+                        <td class="kap-rate-val kap-rate-val--muted">
                             {{ $cash->oficial ? number_format($cash->oficial, 4) : '—' }}
-                        </span>
-                    </a>
+                        </td>
+                    </tr>
                     @empty
-                    <div style="padding:40px;text-align:center;color:var(--kap-text-muted);">
-                        No hay divisas disponibles en este momento.
-                    </div>
+                    <tr>
+                        <td colspan="4" style="padding:40px;text-align:center;color:var(--kap-text-muted);">
+                            No hay divisas disponibles en este momento.
+                        </td>
+                    </tr>
                     @endforelse
-                </div>
+                    </tbody>
+                </table>
 
                 <p style="font-size:12px;color:var(--kap-text-muted);margin-top:12px;">
                     * Las tasas mostradas son referenciales y pueden variar al momento de la operación.

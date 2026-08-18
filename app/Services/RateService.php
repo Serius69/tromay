@@ -289,8 +289,8 @@ class RateService
                 continue;
             }
 
-            $cash->buy  = $buy;
-            $cash->sell = $sell;
+            $cash->buy  = self::money($buy);
+            $cash->sell = self::money($sell);
 
             // FIX oficial mal etiquetado: `$rate['official_rate']` aquí es el MID
             // del paralelo (misma fila /exchange-rates/primary/ que buy/sell), no
@@ -298,7 +298,7 @@ class RateService
             // dedicado /api/rates/official/ de forex-erp (pool de arriba).
             $off = $officials[$code] ?? null;
             if ($off !== null && $off > 0) {
-                $cash->oficial = $off;
+                $cash->oficial = self::money($off);
             } elseif ($code !== 'USD') {
                 // forex-erp solo refresca el oficial de USD/BOB: para el resto de
                 // divisas el "oficial" sembrado en `cashes` es un número congelado
@@ -338,11 +338,11 @@ class RateService
                 continue; // sin last-known-good válido → fallback sembrado
             }
 
-            $cash->buy  = (float) $lkg['buy'];
-            $cash->sell = (float) $lkg['sell'];
+            $cash->buy  = self::money((float) $lkg['buy']);
+            $cash->sell = self::money((float) $lkg['sell']);
 
             if ((float) ($lkg['oficial'] ?? 0) > 0) {
-                $cash->oficial = (float) $lkg['oficial'];
+                $cash->oficial = self::money((float) $lkg['oficial']);
             } elseif (strtoupper($cash->name) !== 'USD') {
                 // Mismo criterio que el overlay: sin oficial REAL conocido para
                 // una divisa no-USD, no mostrar el seed congelado como oficial.
@@ -387,8 +387,21 @@ class RateService
         }
 
         $half = ($minPct / 100) / 2;
-        $cash->buy  = $mid * (1 - $half);
-        $cash->sell = $mid * (1 + $half);
+        $cash->buy  = self::money($mid * (1 - $half));
+        $cash->sell = self::money($mid * (1 + $half));
+    }
+
+    /**
+     * Normaliza un importe a la precisión de la columna (`decimal(15,6)`).
+     *
+     * El ensanchado de spread y la división por `scale_factor` producen floats
+     * como 0.012103999999999998, que se colaban tal cual a /api/rates y a la
+     * vitrina. Redondear aquí — y no al pintar — mantiene una sola verdad entre
+     * la API, las vistas y los snapshots de `cash_rates`.
+     */
+    private static function money(float $value): float
+    {
+        return round($value, 6);
     }
 
     /**
