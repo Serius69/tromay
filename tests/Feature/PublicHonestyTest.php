@@ -115,6 +115,26 @@ class PublicHonestyTest extends TestCase
             ->assertSee('No encontramos esta página');
     }
 
+    /**
+     * Los assets propios se sirven con `max-age=604800` y nombre fijo: sin huella,
+     * Cloudflare seguía entregando el CSS/JS anterior después de un despliegue
+     * (se verificó en producción). La huella es lo que invalida el borde.
+     *
+     * @test
+     */
+    public function own_assets_are_fingerprinted_so_a_deploy_invalidates_the_edge(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        foreach (['assets/css/kapitalya.css', 'assets/js/kapitalya.js'] as $asset) {
+            $this->assertMatchesRegularExpression(
+                '#' . preg_quote($asset, '#') . '\?v=\d+#',
+                $html,
+                "El asset {$asset} se enlaza sin huella: un despliegue no invalidaría el borde."
+            );
+        }
+    }
+
     /** @test */
     public function the_public_api_carries_the_same_security_headers_as_the_site(): void
     {

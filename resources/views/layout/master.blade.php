@@ -100,20 +100,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Base template styles -->
-    <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/bootstrap.min.css') }}">
     {{-- owl.carousel + magnific-popup CSS eliminados: sus clases no se usan en ninguna vista --}}
-    <link rel="stylesheet" href="{{ url('assets/css/animate.min.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/boxicons.min.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/meanmenu.min.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/nice-select.min.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/odometer.min.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/boxicons.min.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/meanmenu.min.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/nice-select.min.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/odometer.min.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/responsive.css') }}">
 
     <!-- ⬡ Tromay canonical tokens, then Kapitalya component overrides -->
-    <link rel="stylesheet" href="{{ url('assets/css/tromay-tokens.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/kapitalya.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/tromay-tokens.css') }}">
+    <link rel="stylesheet" href="{{ kap_asset('assets/css/kapitalya.css') }}">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ url('assets/images/kapitalya-icon.svg') }}">
@@ -454,19 +454,19 @@ window.kapToast={
     <!-- ================================================================
          SCRIPTS
     ================================================================ -->
-    <script defer src="{{ url('assets/js/jquery.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/meanmenu.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/nice-select.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/jarallax.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/appear.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/odometer.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/smoothscroll.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/wow.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/form-validator.min.js') }}"></script>
-    <script defer src="{{ url('assets/js/custom.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/jquery.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/meanmenu.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/nice-select.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/jarallax.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/appear.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/odometer.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/smoothscroll.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/wow.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/form-validator.min.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/custom.js') }}"></script>
     <!-- ⬡ Kapitalya Platform (defer: mantiene el orden, no bloquea el parse) -->
-    <script defer src="{{ url('assets/js/kapitalya.js') }}"></script>
+    <script defer src="{{ kap_asset('assets/js/kapitalya.js') }}"></script>
 
     @yield('scripts')
 
