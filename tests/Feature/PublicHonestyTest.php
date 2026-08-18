@@ -135,6 +135,26 @@ class PublicHonestyTest extends TestCase
         }
     }
 
+    /**
+     * El accessor `name` de Cash capitaliza (usd -> "Usd"), y el título de
+     * /dinero/{cash} lo usaba crudo: "Tromay — Usd — Tasas de Cambio". Además
+     * competía con /convertidor/{par} por la misma búsqueda.
+     *
+     * @test
+     */
+    public function the_currency_detail_page_has_a_readable_differentiated_title(): void
+    {
+        Cash::factory()->create(['id' => 1, 'status' => 1, 'name' => 'usd', 'buy' => 6.90, 'sell' => 7.10]);
+
+        $title = $this->get('/dinero/1')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Dólar Estadounidense (USD)', $title);
+        $this->assertStringNotContainsString('— Usd —', $title);
+
+        // Intención distinta a la del convertidor: histórico, no conversión.
+        $this->assertMatchesRegularExpression('/<title>[^<]*Histórico[^<]*<\/title>/u', $title);
+    }
+
     /** @test */
     public function the_public_api_carries_the_same_security_headers_as_the_site(): void
     {

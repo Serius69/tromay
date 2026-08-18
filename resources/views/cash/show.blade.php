@@ -1,6 +1,15 @@
 @extends('layout.master')
-@section('title', e($cash->name) . ' — Tasas de Cambio')
-@section('description', e('Tipo de cambio de ' . strtoupper($cash->name) . ' en Bolivia hoy: compra Bs ' . number_format($cash->buy, 2) . ' y venta Bs ' . number_format($cash->sell, 2) . ' en Tromay, la casa de cambio física #1 de La Paz. Tasas en vivo desde forex.'))
+@php
+    // El accessor `name` de Cash devuelve ucwords(), así que el título salía como
+    // "Usd". Se usa el nombre editorial y el código en mayúscula.
+    $cCode  = strtoupper($cash->getRawOriginal('name') ?? $cash->name);
+    $cLabel = \App\Http\Controllers\SeoLandingController::CURRENCY_META[strtolower($cCode)]['label'] ?? $cCode;
+@endphp
+{{-- Esta página es el HISTÓRICO de la divisa (evolución + snapshots); el
+     convertidor vive en /convertidor/{par}. Los títulos se diferencian a
+     propósito para que no compitan por la misma búsqueda. --}}
+@section('title', e($cLabel . ' (' . $cCode . ') — Histórico y Evolución de la Tasa'))
+@section('description', e('Evolución del ' . $cLabel . ' (' . $cCode . ') en Bolivia: compra Bs ' . number_format($cash->buy, 2) . ' y venta Bs ' . number_format($cash->sell, 2) . ' hoy, con el historial de la tasa en Tromay Casa de Cambio, La Paz.'))
 
 @section('body')
 
